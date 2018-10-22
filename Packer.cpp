@@ -12,6 +12,8 @@ std::list<queueFeed> bufferAllOne;
 std::list<queueFeed> bufferAllTwo;
 std::list<queueFeed> bufferSelOne;
 std::list<queueFeed> bufferSelTwo;
+std::list<queueFeed> bufferSelThree;
+std::list<queueFeed> bufferSelFour;
 
 
 Packer::Packer (unsigned short quickReSeed) {
@@ -49,7 +51,6 @@ Packer::Packer (unsigned short quickReSeed) {
     state = 3000; // tired
 };
 
-
 //add:
 //Packer (//userchoice) :Sign () {};
 
@@ -62,169 +63,145 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
 
   //102 204 354 454
 
-  if (bufferAllOne.size () < 1000)
+  if (bufferAllOne.size () < 500)
     bufferAllOne.insert (bufferAllOne.begin (), QF);
-  else
+  else {
+    //add: sort iteration for second list (probably all sorting in another function)
     bufferAllTwo.insert (bufferAllTwo.begin (), QF);
 
-  QF.str = "NULL";
-  QF.colour = 0x00;
-  QF.position.X = 0;
-  QF.position.X = 0;
-  QF.mode = 0;
-  bufferAllOne.insert (bufferAllOne.begin (), QF);
-  while (bufferAllOne.size () > 1) {
-    if (bufferAllOne.back ().mode = 102) {
-      bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.back ());
-      bufferAllOne.pop_back ();
+    QF.str = "NULL";
+    QF.colour = 0x00;
+    QF.position.X = 0;
+    QF.position.X = 0;
+    QF.mode = 0;
+    bufferAllOne.insert (bufferAllOne.begin (), QF);
+    while (bufferAllOne.size () > 1) {
+      if (bufferAllOne.front ().mode = 102) {
+        bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.front ());
+        bufferAllOne.pop_front ();
+      }
+      else
+        if (bufferAllOne.front ().mode = 204) {
+          bufferSelTwo.insert (bufferAllTwo.begin (), bufferAllOne.front ());
+          bufferAllOne.pop_front ();
+        }
+        else
+          if (bufferAllOne.front ().mode = 354) {
+            bufferSelThree.insert (bufferSelThree.begin (), bufferAllOne.front ());
+            bufferAllOne.pop_front ();
+          }
+          else
+            if (bufferAllOne.front ().mode = 454) {
+              bufferSelFour.insert (bufferSelFour.begin (), bufferAllOne.front ());
+              bufferAllOne.pop_front ();
+            }
+            else
+              bufferAllOne.emplace_back ();
     }
-    else {
-      bufferAllOne.emplace_front ();
-    }
+
     Packer::PackerP (bufferSelOne, 102);
     bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
-  }
-  while (bufferAllOne.size () > 1) {
-    if (bufferAllOne.back ().mode = 204) {
-      bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.back ());
-      bufferAllOne.pop_back ();
-    }
-    else {
-      bufferAllOne.emplace_front ();
-    }
-    Packer::PackerP (bufferSelOne, 204);
-    bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
-  }
-  while (bufferAllOne.size () > 1) {
-    if (bufferAllOne.back ().mode = 354) {
-      bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.back ());
-      bufferAllOne.pop_back ();
-    }
-    else {
-      bufferAllOne.emplace_front ();
-    }
-    Packer::PackerP (bufferSelOne, 354);
-    bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
-  }
-  while (bufferAllOne.size () > 1) {
-    if (bufferAllOne.back ().mode = 454) {
-      bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.back ());
-      bufferAllOne.pop_back ();
-    }
-    else {
-      bufferAllOne.emplace_front ();
-    }
-    Packer::PackerP (bufferSelOne, 454);
-    bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
-  }
-  //if (nGroupbuffer1.size () < 50)
-  //  nGroupbuffer1.insert (nGroupbuffer1.begin (), QF);
-  //else
-  //  nGroupbuffer2.insert (nGroupbuffer2.begin (), QF);
-  //break;
 
+    Packer::PackerP (bufferSelTwo, 204);
+    bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
 
+    Packer::PackerP (bufferSelThree, 354);
+    bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
 
-  //if (sGroupbuffer1.size () >= 50) {
-  //  if (bQq != true && bQn != true) {
-  //    bQs = true;
-  //    Packer::PackerP (sGroupbuffer1);
-  //    bQs = false;
-  //    sGroupbuffer1.erase (sGroupbuffer1.begin (), sGroupbuffer1.end ());
-  //    sGroupbuffer1 = sGroupbuffer2;
-  //    sGroupbuffer2.erase (sGroupbuffer2.begin (), sGroupbuffer2.end ());
-}
+    Packer::PackerP (bufferSelFour, 454);
+    bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
+  }
+};
 
 void Packer::PackerP (std::list<queueFeed> input, unsigned short delay) {
   QF.str = "NULL";
   QF.colour = 0x00;
   QF.position.X = 0;
   QF.position.X = 0;
-  input.insert (input.begin (), QF);
+  input.insert (input.end (), QF);
   while (input.size () > 1) {
     GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-    SetConsoleCursorPosition (consoleOutput, input.back ().position);
-    SetConsoleTextAttribute (consoleOutput, input.back ().colour);
-    std::cout << input.back ().str;
-    input.pop_back ();
-  }
-  std::this_thread::sleep_for (std::chrono::milliseconds (delay));
-}
-
-
-void Packer::hQuickMovement (std::list<Packer> input, unsigned char mode) {
-  if (input.size () != 0) {
-    short modeToMilliS { 1 };
-    switch (mode) {
-    case 1:
-      modeToMilliS = 500;
-      break;
-    case 2:
-      modeToMilliS = 400;
-      break;
-    case 3:
-      modeToMilliS = 200;
-      break;
-    case 4:
-      modeToMilliS = 1000;
-      break;
-    }
-    for (int i = 0; i < 100; i++) {
-      if (input.front ().RchanceL == true) {
-        if (input.front ().position.X != 87) {
-          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-          input.front ().position.X += 2;
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-          //Area::yellow (position);
-          //Area::green (position);
-          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-          input.emplace_back (input.front ());
-          input.pop_front ();
-          //Area::green (position);
-        }
-        else
-          input.front ().RchanceL = false;
-      }
-      else
-        if (input.front ().position.X != 3) {
-          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-          input.front ().position.X -= 2;
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-          //Area::yellow (position);
-          //Area::green (position);
-          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-          input.emplace_back (input.front ());
-          input.pop_front ();
-          //Area::green (position);
-        }
-        else
-          input.front ().RchanceL = true;
-      std::this_thread::sleep_for (std::chrono::milliseconds (200));
-    }
+    SetConsoleCursorPosition (consoleOutput, input.front ().position);
+    SetConsoleTextAttribute (consoleOutput, input.front ().colour);
+    std::cout << input.front ().str;
+    input.pop_front ();
+    std::this_thread::sleep_for (std::chrono::milliseconds (delay));
   }
 };
+
+
+//void Packer::hQuickMovement (std::list<Packer> input, unsigned char mode) {
+//  if (input.size () != 0) {
+//    short modeToMilliS { 1 };
+//    switch (mode) {
+//    case 1:
+//      modeToMilliS = 500;
+//      break;
+//    case 2:
+//      modeToMilliS = 400;
+//      break;
+//    case 3:
+//      modeToMilliS = 200;
+//      break;
+//    case 4:
+//      modeToMilliS = 1000;
+//      break;
+//    }
+//    for (int i = 0; i < 100; i++) {
+//      if (input.front ().RchanceL == true) {
+//        if (input.front ().position.X != 87) {
+//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
+//          input.front ().position.X += 2;
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
+//          //Area::yellow (position);
+//          //Area::green (position);
+//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
+//          input.emplace_back (input.front ());
+//          input.pop_front ();
+//          //Area::green (position);
+//        }
+//        else
+//          input.front ().RchanceL = false;
+//      }
+//      else
+//        if (input.front ().position.X != 3) {
+//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
+//          input.front ().position.X -= 2;
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
+//          //Area::yellow (position);
+//          //Area::green (position);
+//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
+//          input.emplace_back (input.front ());
+//          input.pop_front ();
+//          //Area::green (position);
+//        }
+//        else
+//          input.front ().RchanceL = true;
+//      std::this_thread::sleep_for (std::chrono::milliseconds (200));
+//    }
+//  }
+//};
 
 
 void Packer::hNormalMovement (std::list<Packer> input, unsigned char mode) {
+  //  short modeToMilliS { 1 };
+  //  switch (mode) {
+  //  case 1:
+  //    modeToMilliS = 500;
+  //    break;
+  //  case 2:
+  //    modeToMilliS = 400;
+  //    break;
+  //  case 3:
+  //    modeToMilliS = 200;
+  //    break;
+  //  case 4:
+  //    modeToMilliS = 1000;
+  //    break;
   if (input.size () != 0) {
-    short modeToMilliS { 1 };
-    switch (mode) {
-    case 1:
-      modeToMilliS = 500;
-      break;
-    case 2:
-      modeToMilliS = 400;
-      break;
-    case 3:
-      modeToMilliS = 200;
-      break;
-    case 4:
-      modeToMilliS = 1000;
-      break;
-    }
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 200; i++) {
       if (input.front ().RchanceL == true) {
         if (input.front ().position.X != 87) {
           Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
@@ -262,56 +239,56 @@ void Packer::hNormalMovement (std::list<Packer> input, unsigned char mode) {
 };
 
 
-void Packer::hSlowMovement (std::list<Packer> input, unsigned char mode) {
-  if (input.size () != 0) {
-    short modeToMilliS { 1 };
-    switch (mode) {
-    case 1:
-      modeToMilliS = 500;
-      break;
-    case 2:
-      modeToMilliS = 400;
-      break;
-    case 3:
-      modeToMilliS = 200;
-      break;
-    case 4:
-      modeToMilliS = 1000;
-      break;
-    }
-    for (int i = 0; i < 100; i++) {
-      if (input.front ().RchanceL == true) {
-        if (input.front ().position.X != 87) {
-          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-          input.front ().position.X += 2;
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-          //Area::yellow (position);
-          //Area::green (position);
-          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-          input.emplace_back (input.front ());
-          input.pop_front ();
-          //Area::green (position);
-        }
-        else
-          input.front ().RchanceL = false;
-      }
-      else
-        if (input.front ().position.X != 3) {
-          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-          input.front ().position.X -= 2;
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-          //Area::yellow (position);
-          //Area::green (position);
-          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-          input.emplace_back (input.front ());
-          input.pop_front ();
-          //Area::green (position);
-        }
-        else
-          input.front ().RchanceL = true;
-      std::this_thread::sleep_for (std::chrono::milliseconds (200));
-    }
-  }
-};
+//void Packer::hSlowMovement (std::list<Packer> input, unsigned char mode) {
+//  if (input.size () != 0) {
+//    short modeToMilliS { 1 };
+//    switch (mode) {
+//    case 1:
+//      modeToMilliS = 500;
+//      break;
+//    case 2:
+//      modeToMilliS = 400;
+//      break;
+//    case 3:
+//      modeToMilliS = 200;
+//      break;
+//    case 4:
+//      modeToMilliS = 1000;
+//      break;
+//    }
+//    for (int i = 0; i < 100; i++) {
+//      if (input.front ().RchanceL == true) {
+//        if (input.front ().position.X != 87) {
+//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
+//          input.front ().position.X += 2;
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
+//          //Area::yellow (position);
+//          //Area::green (position);
+//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
+//          input.emplace_back (input.front ());
+//          input.pop_front ();
+//          //Area::green (position);
+//        }
+//        else
+//          input.front ().RchanceL = false;
+//      }
+//      else
+//        if (input.front ().position.X != 3) {
+//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
+//          input.front ().position.X -= 2;
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
+//          //Area::yellow (position);
+//          //Area::green (position);
+//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
+//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
+//          input.emplace_back (input.front ());
+//          input.pop_front ();
+//          //Area::green (position);
+//        }
+//        else
+//          input.front ().RchanceL = true;
+//      std::this_thread::sleep_for (std::chrono::milliseconds (200));
+//    }
+//  }
+//};
