@@ -57,7 +57,7 @@ Area::Area (unsigned char mode) :rows (19), columns (89) {
         if (y != 1 && y != 19 && y % 2 == 0)
           if (x != 1 && x != 89 && x % 2 == 0)
             //if (j!=11&&j!=99)
-            ColourCout (stuff.pack, 0x0a);
+            ColourCout (stuff.pack, F_bGREEN);
       }
       std::cout << u8"\n";
     }
@@ -73,41 +73,41 @@ void Area::green (COORD position) {
   if (x - 1 != 2) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y - 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y + 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
   }
   if (x + 1 != 88) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y + 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y - 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
   }
   if (y - 1 != 2) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y - 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y - 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
   }
   if (y + 1 != 18) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y + 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y + 1); ColourCout (u8"♣", 0x0a);
+    gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
     protectedSetCursor = false;
   }
 }
@@ -117,41 +117,41 @@ void Area::yellow (COORD position) {
   if (x - 1 != 2) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y - 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y + 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
   }
   if (x + 1 != 88) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y + 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y - 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
   }
   if (y - 1 != 2) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y - 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y - 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
   }
   if (y + 1 != 18) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y + 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y + 1); ColourCout (u8"♣", 0x06);
+    gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_YELLOW);
     protectedSetCursor = false;
   }
 }
@@ -161,41 +161,41 @@ void Area::red (COORD position) {
   if (x - 1 != 2) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y - 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y + 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
   }
   if (x + 1 != 88) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y + 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y - 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
   }
   if (y - 1 != 2) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y - 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y - 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
   }
   if (y + 1 != 18) {
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x - 1, y + 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
     do {} while (protectedSetCursor == true);
     protectedSetCursor = true;
-    gotoXY (x + 1, y + 1); ColourCout (u8"♣", 0x04);
+    gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_RED);
     protectedSetCursor = false;
   }
 }

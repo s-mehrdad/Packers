@@ -9,7 +9,7 @@ struct queueFeed {
   std::string str;
   WORD colour;
   COORD position;
-  unsigned short mode;
+  unsigned short delay;
 };
 //std::list<queueFeed> QQ1;
 //std::list<queueFeed> QQ2;
@@ -21,12 +21,10 @@ public:
   bool RchanceL;
   COORD position;
   unsigned short state;
-  Packer (unsigned short);
-  static void addToQueues (std::string, WORD, COORD, unsigned char);
+  Packer (unsigned char);
+  static void addToQueues (std::string, WORD, COORD, unsigned short);
   static void PackerP (std::list<queueFeed>, unsigned short);
-  static void hQuickMovement (std::list<Packer>, unsigned char);
-  static void hNormalMovement (std::list<Packer>, unsigned char);
-  static void hSlowMovement (std::list<Packer>, unsigned char);
+  static void hMovement (std::list<Packer>);
 };
 
 

@@ -34,13 +34,13 @@ void loading (void) {
   gotoXY (48, y); ColourCout (u8" ", 0x3f);
   gotoXY (49, y); ColourCout (u8" ", 0x3f);
   gotoXY (50, y); ColourCout (u8" ", 0x3f);
-  gotoXY (54, y); ColourCout (u8"━", 0x0d);
+  gotoXY (54, y); ColourCout (u8"━", F_PINK);
   std::this_thread::sleep_for (std::chrono::milliseconds (100));
   gotoXY (48, y); ColourCout (u8"E", 0x3f);
   gotoXY (49, y); ColourCout (u8"D", 0x3f);
   std::this_thread::sleep_for (std::chrono::milliseconds (500));
   for (int x = 53; x >= 40; x--) {
-    gotoXY (x, y); ColourCout (u8"━", 0x0d);
+    gotoXY (x, y); ColourCout (u8"━", F_PINK);
     std::this_thread::sleep_for (std::chrono::milliseconds (50));
   }
 }
@@ -95,7 +95,7 @@ void pressed (unsigned char menu[], bool flag) {
   if (GetAsyncKeyState (VK_RETURN)) {
     if (menu[0] == 1 && flag == false) {
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 21); ColourCout (u8"-> Involve me!", 0x04);
+      gotoXY (64, 21); ColourCout (u8"-> Involve me!", F_RED);
     }
   }
 }

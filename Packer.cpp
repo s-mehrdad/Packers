@@ -6,6 +6,10 @@
 #include "Shared.h"
 #include "Area.h"
 
+#define DELAY_ONE 202
+#define DELAY_TWO 302
+#define DELAY_THREE 502
+#define DELAY_FOUR 602
 
 struct queueFeed QF;
 std::list<queueFeed> bufferAllOne;
@@ -16,7 +20,7 @@ std::list<queueFeed> bufferSelThree;
 std::list<queueFeed> bufferSelFour;
 
 
-Packer::Packer (unsigned short quickReSeed) {
+Packer::Packer (unsigned char quickReSeed) {
   // random first placement
   int y { 0 };
   int x { 0 };
@@ -25,7 +29,7 @@ Packer::Packer (unsigned short quickReSeed) {
     y = rand () % (19 - 3) + 3;
     x = rand () % (89 - 3) + 3;
   } while (y % 2 == 0 || x % 2 == 0);
-  gotoXY (x, y); ColourCout (u8"☻", 0x0f);
+  gotoXY (x, y); ColourCout (u8"☻", F_bWHITE);
   position.X = x;
   position.Y = y;
 
@@ -55,13 +59,11 @@ Packer::Packer (unsigned short quickReSeed) {
 //Packer (//userchoice) :Sign () {};
 
 
-void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned char mode) {
+void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
   QF.str = strCharacter;
   QF.colour = Colour;
   QF.position = position;
-  QF.mode = mode;
-
-  //102 204 354 454
+  QF.delay = mode;
 
   if (bufferAllOne.size () < 500)
     bufferAllOne.insert (bufferAllOne.begin (), QF);
@@ -73,25 +75,25 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
     QF.colour = 0x00;
     QF.position.X = 0;
     QF.position.X = 0;
-    QF.mode = 0;
+    QF.delay = 0;
     bufferAllOne.insert (bufferAllOne.begin (), QF);
     while (bufferAllOne.size () > 1) {
-      if (bufferAllOne.front ().mode = 102) {
+      if (bufferAllOne.front ().delay = DELAY_ONE) {
         bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.front ());
         bufferAllOne.pop_front ();
       }
       else
-        if (bufferAllOne.front ().mode = 204) {
+        if (bufferAllOne.front ().delay = DELAY_TWO) {
           bufferSelTwo.insert (bufferAllTwo.begin (), bufferAllOne.front ());
           bufferAllOne.pop_front ();
         }
         else
-          if (bufferAllOne.front ().mode = 354) {
+          if (bufferAllOne.front ().delay = DELAY_THREE) {
             bufferSelThree.insert (bufferSelThree.begin (), bufferAllOne.front ());
             bufferAllOne.pop_front ();
           }
           else
-            if (bufferAllOne.front ().mode = 454) {
+            if (bufferAllOne.front ().delay = DELAY_FOUR) {
               bufferSelFour.insert (bufferSelFour.begin (), bufferAllOne.front ());
               bufferAllOne.pop_front ();
             }
@@ -99,16 +101,16 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
               bufferAllOne.emplace_back ();
     }
 
-    Packer::PackerP (bufferSelOne, 102);
+    Packer::PackerP (bufferSelOne, DELAY_ONE);
     bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
 
-    Packer::PackerP (bufferSelTwo, 204);
+    Packer::PackerP (bufferSelTwo, DELAY_TWO);
     bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
 
-    Packer::PackerP (bufferSelThree, 354);
+    Packer::PackerP (bufferSelThree, 452);
     bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
 
-    Packer::PackerP (bufferSelFour, 454);
+    Packer::PackerP (bufferSelFour, DELAY_THREE);
     bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
   }
 };
@@ -120,175 +122,56 @@ void Packer::PackerP (std::list<queueFeed> input, unsigned short delay) {
   QF.position.X = 0;
   input.insert (input.end (), QF);
   while (input.size () > 1) {
-    GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-    SetConsoleCursorPosition (consoleOutput, input.front ().position);
-    SetConsoleTextAttribute (consoleOutput, input.front ().colour);
-    std::cout << input.front ().str;
-    input.pop_front ();
+    unsigned char D { 0 };
+    srand ((unsigned int)time (NULL));
+    D = (rand () % (5 - 1) + 1);
+    for (int i = 0; i < D; i++) {
+      if (input.size () != 0) {
+        GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
+        SetConsoleCursorPosition (consoleOutput, input.front ().position);
+        SetConsoleTextAttribute (consoleOutput, input.front ().colour);
+        std::cout << input.front ().str;
+        input.pop_front ();
+      }
+    }
     std::this_thread::sleep_for (std::chrono::milliseconds (delay));
   }
 };
 
 
-//void Packer::hQuickMovement (std::list<Packer> input, unsigned char mode) {
-//  if (input.size () != 0) {
-//    short modeToMilliS { 1 };
-//    switch (mode) {
-//    case 1:
-//      modeToMilliS = 500;
-//      break;
-//    case 2:
-//      modeToMilliS = 400;
-//      break;
-//    case 3:
-//      modeToMilliS = 200;
-//      break;
-//    case 4:
-//      modeToMilliS = 1000;
-//      break;
-//    }
-//    for (int i = 0; i < 100; i++) {
-//      if (input.front ().RchanceL == true) {
-//        if (input.front ().position.X != 87) {
-//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-//          input.front ().position.X += 2;
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-//          //Area::yellow (position);
-//          //Area::green (position);
-//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-//          input.emplace_back (input.front ());
-//          input.pop_front ();
-//          //Area::green (position);
-//        }
-//        else
-//          input.front ().RchanceL = false;
-//      }
-//      else
-//        if (input.front ().position.X != 3) {
-//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-//          input.front ().position.X -= 2;
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-//          //Area::yellow (position);
-//          //Area::green (position);
-//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-//          input.emplace_back (input.front ());
-//          input.pop_front ();
-//          //Area::green (position);
-//        }
-//        else
-//          input.front ().RchanceL = true;
-//      std::this_thread::sleep_for (std::chrono::milliseconds (200));
-//    }
-//  }
-//};
-
-
-void Packer::hNormalMovement (std::list<Packer> input, unsigned char mode) {
-  //  short modeToMilliS { 1 };
-  //  switch (mode) {
-  //  case 1:
-  //    modeToMilliS = 500;
-  //    break;
-  //  case 2:
-  //    modeToMilliS = 400;
-  //    break;
-  //  case 3:
-  //    modeToMilliS = 200;
-  //    break;
-  //  case 4:
-  //    modeToMilliS = 1000;
-  //    break;
-  if (input.size () != 0) {
-    for (int i = 0; i < 200; i++) {
-      if (input.front ().RchanceL == true) {
-        if (input.front ().position.X != 87) {
-          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-          input.front ().position.X += 2;
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-          //Area::yellow (position);
-          //Area::green (position);
-          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-          input.emplace_back (input.front ());
-          input.pop_front ();
-          //Area::green (position);
-        }
-        else
-          input.front ().RchanceL = false;
+void Packer::hMovement (std::list<Packer> input) {
+  for (int i = 0; i < 200; i++) {
+    if (input.front ().RchanceL == true) {
+      if (input.front ().position.X != 87) {
+        Packer::addToQueues (u8" ", F_bWHITE, input.front ().position, DELAY_ONE);
+        input.front ().position.X += 2;
+        Packer::addToQueues (u8"☻", F_bWHITE, input.front ().position, DELAY_TWO);
+        //Area::yellow (position);
+        //Area::green (position);
+        Packer::addToQueues (u8"▪", F_bWHITE, input.front ().position, DELAY_THREE);
+        Packer::addToQueues (u8"☻", F_bWHITE, input.front ().position, DELAY_FOUR);
+        input.emplace_back (input.front ());
+        input.pop_front ();
+        //Area::green (position);
       }
       else
-        if (input.front ().position.X != 3) {
-          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-          input.front ().position.X -= 2;
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-          //Area::yellow (position);
-          //Area::green (position);
-          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-          input.emplace_back (input.front ());
-          input.pop_front ();
-          //Area::green (position);
-        }
-        else
-          input.front ().RchanceL = true;
-      std::this_thread::sleep_for (std::chrono::milliseconds (200));
+        input.front ().RchanceL = false;
     }
+    else
+      if (input.front ().position.X != 3) {
+        Packer::addToQueues (u8" ", F_bWHITE, input.front ().position, DELAY_ONE);
+        input.front ().position.X -= 2;
+        Packer::addToQueues (u8"☻", F_bWHITE, input.front ().position, DELAY_TWO);
+        //Area::yellow (position);
+        //Area::green (position);
+        Packer::addToQueues (u8"▪", F_bWHITE, input.front ().position, DELAY_THREE);
+        Packer::addToQueues (u8"☻", F_bWHITE, input.front ().position, DELAY_FOUR);
+        input.emplace_back (input.front ());
+        input.pop_front ();
+        //Area::green (position);
+      }
+      else
+        input.front ().RchanceL = true;
+    std::this_thread::sleep_for (std::chrono::milliseconds (200));
   }
 };
-
-
-//void Packer::hSlowMovement (std::list<Packer> input, unsigned char mode) {
-//  if (input.size () != 0) {
-//    short modeToMilliS { 1 };
-//    switch (mode) {
-//    case 1:
-//      modeToMilliS = 500;
-//      break;
-//    case 2:
-//      modeToMilliS = 400;
-//      break;
-//    case 3:
-//      modeToMilliS = 200;
-//      break;
-//    case 4:
-//      modeToMilliS = 1000;
-//      break;
-//    }
-//    for (int i = 0; i < 100; i++) {
-//      if (input.front ().RchanceL == true) {
-//        if (input.front ().position.X != 87) {
-//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-//          input.front ().position.X += 2;
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-//          //Area::yellow (position);
-//          //Area::green (position);
-//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-//          input.emplace_back (input.front ());
-//          input.pop_front ();
-//          //Area::green (position);
-//        }
-//        else
-//          input.front ().RchanceL = false;
-//      }
-//      else
-//        if (input.front ().position.X != 3) {
-//          Packer::addToQueues (u8" ", 0x0f, input.front ().position, 102);
-//          input.front ().position.X -= 2;
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 204);
-//          //Area::yellow (position);
-//          //Area::green (position);
-//          Packer::addToQueues (u8"▪", 0x0f, input.front ().position, 354);
-//          Packer::addToQueues (u8"☻", 0x0f, input.front ().position, 454);
-//          input.emplace_back (input.front ());
-//          input.pop_front ();
-//          //Area::green (position);
-//        }
-//        else
-//          input.front ().RchanceL = true;
-//      std::this_thread::sleep_for (std::chrono::milliseconds (200));
-//    }
-//  }
-//};
