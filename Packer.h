@@ -11,8 +11,6 @@ struct queueFeed {
   COORD position;
   unsigned short delay;
 };
-//std::list<queueFeed> QQ1;
-//std::list<queueFeed> QQ2;
 
 
 class Packer {

@@ -50,17 +50,17 @@ void pressed (unsigned char menu[], bool flag) {
   if (GetAsyncKeyState (VK_DOWN)) {
     if (menu[0] == 1 && flag == false) {
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 21); ColourCout (u8"  ", 0x0c);
+      gotoXY (64, 21); ColourCout (u8"  ", F_bRED);
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 22); ColourCout (u8"->", 0x0c);
+      gotoXY (64, 22); ColourCout (u8"->", F_bRED);
       menu[0] = 2;
       flag = true;
     }
     if (menu[0] == 2 && flag == false) {
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 22); ColourCout (u8"  ", 0x0c);
+      gotoXY (64, 22); ColourCout (u8"  ", F_bRED);
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 23); ColourCout (u8"->", 0x0c);
+      gotoXY (64, 23); ColourCout (u8"->", F_bRED);
       menu[0] = 3;
       flag = true;
       //break;
@@ -70,17 +70,17 @@ void pressed (unsigned char menu[], bool flag) {
   if (GetAsyncKeyState (VK_UP)) {
     if (menu[0] == 2 && flag == false) {
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 21); ColourCout (u8"->", 0x0c);
+      gotoXY (64, 21); ColourCout (u8"->", F_bRED);
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 22); ColourCout (u8"  ", 0x0c);
+      gotoXY (64, 22); ColourCout (u8"  ", F_bRED);
       menu[0] = 1;
       flag = true;
     }
     if (menu[0] == 3 && flag == false) {
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 22); ColourCout (u8"->", 0x0c);
+      gotoXY (64, 22); ColourCout (u8"->", F_bRED);
       do {} while (protectedSetCursor == true);
-      gotoXY (64, 23); ColourCout (u8"  ", 0x0c);
+      gotoXY (64, 23); ColourCout (u8"  ", F_bRED);
       menu[0] = 2;
       flag = true;
     }

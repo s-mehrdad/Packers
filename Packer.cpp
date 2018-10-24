@@ -18,6 +18,8 @@ std::list<queueFeed> bufferSelOne;
 std::list<queueFeed> bufferSelTwo;
 std::list<queueFeed> bufferSelThree;
 std::list<queueFeed> bufferSelFour;
+bool bFlag1 { false };
+//bool bFlag2 { false };
 
 
 Packer::Packer (unsigned char quickReSeed) {
@@ -59,62 +61,6 @@ Packer::Packer (unsigned char quickReSeed) {
 //Packer (//userchoice) :Sign () {};
 
 
-void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
-  QF.str = strCharacter;
-  QF.colour = Colour;
-  QF.position = position;
-  QF.delay = mode;
-
-  if (bufferAllOne.size () < 500)
-    bufferAllOne.insert (bufferAllOne.begin (), QF);
-  else {
-    //add: sort iteration for second list (probably all sorting in another function)
-    bufferAllTwo.insert (bufferAllTwo.begin (), QF);
-
-    QF.str = "NULL";
-    QF.colour = 0x00;
-    QF.position.X = 0;
-    QF.position.X = 0;
-    QF.delay = 0;
-    bufferAllOne.insert (bufferAllOne.begin (), QF);
-    while (bufferAllOne.size () > 1) {
-      if (bufferAllOne.front ().delay = DELAY_ONE) {
-        bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.front ());
-        bufferAllOne.pop_front ();
-      }
-      else
-        if (bufferAllOne.front ().delay = DELAY_TWO) {
-          bufferSelTwo.insert (bufferAllTwo.begin (), bufferAllOne.front ());
-          bufferAllOne.pop_front ();
-        }
-        else
-          if (bufferAllOne.front ().delay = DELAY_THREE) {
-            bufferSelThree.insert (bufferSelThree.begin (), bufferAllOne.front ());
-            bufferAllOne.pop_front ();
-          }
-          else
-            if (bufferAllOne.front ().delay = DELAY_FOUR) {
-              bufferSelFour.insert (bufferSelFour.begin (), bufferAllOne.front ());
-              bufferAllOne.pop_front ();
-            }
-            else
-              bufferAllOne.emplace_back ();
-    }
-
-    Packer::PackerP (bufferSelOne, DELAY_ONE);
-    bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
-
-    Packer::PackerP (bufferSelTwo, DELAY_TWO);
-    bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
-
-    Packer::PackerP (bufferSelThree, 452);
-    bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
-
-    Packer::PackerP (bufferSelFour, DELAY_THREE);
-    bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
-  }
-};
-
 void Packer::PackerP (std::list<queueFeed> input, unsigned short delay) {
   QF.str = "NULL";
   QF.colour = 0x00;
@@ -135,6 +81,86 @@ void Packer::PackerP (std::list<queueFeed> input, unsigned short delay) {
       }
     }
     std::this_thread::sleep_for (std::chrono::milliseconds (delay));
+  }
+};
+
+
+void Packer::sortToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
+  //add:
+  // 1. already suspended constant running thread
+  // 2. for 8 packer in a 200 i-loop and currently 4 move each: 6400 movement
+  // small to big delay consideration
+  //while (size) {
+  //  for (size_t i = 1; i <= 8; i++) {
+
+  //    if (i == 8 && size > 1) {
+  //      i = 1;
+  //    }
+  //  }
+  //}
+  while (bufferAllOne.size () > 1) {
+    if (bufferAllOne.front ().delay == DELAY_ONE) {
+      bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.front ());
+      bufferAllOne.pop_front ();
+    }
+    else
+      if (bufferAllOne.front ().delay == DELAY_TWO) {
+        bufferSelTwo.insert (bufferAllTwo.begin (), bufferAllOne.front ());
+        bufferAllOne.pop_front ();
+      }
+      else
+        if (bufferAllOne.front ().delay == DELAY_THREE) {
+          bufferSelThree.insert (bufferSelThree.begin (), bufferAllOne.front ());
+          bufferAllOne.pop_front ();
+        }
+        else
+          if (bufferAllOne.front ().delay == DELAY_FOUR) {
+            bufferSelFour.insert (bufferSelFour.begin (), bufferAllOne.front ());
+            bufferAllOne.pop_front ();
+          }
+          else
+            bufferAllOne.emplace_back ();
+  }
+
+  Packer::PackerP (bufferSelOne, DELAY_ONE);
+  bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
+
+  Packer::PackerP (bufferSelTwo, DELAY_TWO);
+  bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
+
+  Packer::PackerP (bufferSelThree, 452);
+  bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
+
+  Packer::PackerP (bufferSelFour, DELAY_THREE);
+  bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
+
+  //add: suspending the thread
+}
+
+
+void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
+  QF.str = strCharacter;
+  QF.colour = Colour;
+  QF.position = position;
+  QF.delay = mode;
+
+  if (bufferAllOne.size () < 500 && bFlag1 == false)
+    bufferAllOne.insert (bufferAllOne.begin (), QF);
+  else {
+    bufferAllTwo.insert (bufferAllTwo.begin (), QF);
+
+    if (bufferAllOne.size () == 500) {
+      bFlag1 = true;
+      QF.str = "NULL";
+      QF.colour = 0x00;
+      QF.position.X = 0;
+      QF.position.X = 0;
+      QF.delay = 0;
+      bufferAllOne.insert (bufferAllOne.end (), QF);
+
+    }
+
+    //add: awakening the constant running thread
   }
 };
 
