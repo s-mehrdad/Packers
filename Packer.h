@@ -20,8 +20,9 @@ public:
   COORD position;
   unsigned short state;
   Packer (unsigned char);
+  static void movementColourCout (std::list<queueFeed>, unsigned short);
+  static void sortToQueues (void);
   static void addToQueues (std::string, WORD, COORD, unsigned short);
-  static void PackerP (std::list<queueFeed>, unsigned short);
   static void hMovement (std::list<Packer>);
 };
 

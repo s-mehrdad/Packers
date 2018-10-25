@@ -11,6 +11,11 @@
 #define DELAY_THREE 502
 #define DELAY_FOUR 602
 
+std::mutex m;
+std::condition_variable cv;
+bool ready1 { false };
+bool ready2 { true };
+
 struct queueFeed QF;
 std::list<queueFeed> bufferAllOne;
 std::list<queueFeed> bufferAllTwo;
@@ -18,8 +23,6 @@ std::list<queueFeed> bufferSelOne;
 std::list<queueFeed> bufferSelTwo;
 std::list<queueFeed> bufferSelThree;
 std::list<queueFeed> bufferSelFour;
-bool bFlag1 { false };
-//bool bFlag2 { false };
 
 
 Packer::Packer (unsigned char quickReSeed) {
@@ -57,11 +60,12 @@ Packer::Packer (unsigned char quickReSeed) {
     state = 3000; // tired
 };
 
+
 //add:
 //Packer (//userchoice) :Sign () {};
 
 
-void Packer::PackerP (std::list<queueFeed> input, unsigned short delay) {
+void Packer::movementColourCout (std::list<queueFeed> input, unsigned short delay) {
   QF.str = "NULL";
   QF.colour = 0x00;
   QF.position.X = 0;
@@ -85,10 +89,13 @@ void Packer::PackerP (std::list<queueFeed> input, unsigned short delay) {
 };
 
 
-void Packer::sortToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
+void Packer::sortToQueues (void) {
+  //added:
+  //-- already suspended constant running thread
+
   //add:
-  // 1. already suspended constant running thread
-  // 2. for 8 packer in a 200 i-loop and currently 4 move each: 6400 movement
+  // 1. for 8 packer in a 200 i-loop and currently 4 move each: 6400 movement
+  // 2. the i of the i-loop is also needed
   // small to big delay consideration
   //while (size) {
   //  for (size_t i = 1; i <= 8; i++) {
@@ -98,44 +105,69 @@ void Packer::sortToQueues (std::string strCharacter, WORD Colour, COORD position
   //    }
   //  }
   //}
-  while (bufferAllOne.size () > 1) {
-    if (bufferAllOne.front ().delay == DELAY_ONE) {
-      bufferSelOne.insert (bufferSelOne.begin (), bufferAllOne.front ());
-      bufferAllOne.pop_front ();
-    }
-    else
-      if (bufferAllOne.front ().delay == DELAY_TWO) {
-        bufferSelTwo.insert (bufferAllTwo.begin (), bufferAllOne.front ());
-        bufferAllOne.pop_front ();
-      }
-      else
-        if (bufferAllOne.front ().delay == DELAY_THREE) {
-          bufferSelThree.insert (bufferSelThree.begin (), bufferAllOne.front ());
-          bufferAllOne.pop_front ();
+
+
+  do {
+    // next expression: so it don't go through without a good reason:
+    if (ready1 == true) {
+      ready2 = false;
+
+      while (bufferAllTwo.size () > 1) {
+        if (bufferAllTwo.front ().delay == DELAY_ONE) {
+          bufferSelOne.insert (bufferSelOne.begin (), bufferAllTwo.front ());
+          bufferAllTwo.pop_front ();
         }
         else
-          if (bufferAllOne.front ().delay == DELAY_FOUR) {
-            bufferSelFour.insert (bufferSelFour.begin (), bufferAllOne.front ());
-            bufferAllOne.pop_front ();
+          if (bufferAllTwo.front ().delay == DELAY_TWO) {
+            bufferSelTwo.insert (bufferSelTwo.begin (), bufferAllTwo.front ());
+            bufferAllTwo.pop_front ();
           }
           else
-            bufferAllOne.emplace_back ();
-  }
+            if (bufferAllTwo.front ().delay == DELAY_THREE) {
+              bufferSelThree.insert (bufferSelThree.begin (), bufferAllTwo.front ());
+              bufferAllTwo.pop_front ();
+            }
+            else
+              if (bufferAllTwo.front ().delay == DELAY_FOUR) {
+                bufferSelFour.insert (bufferSelFour.begin (), bufferAllTwo.front ());
+                bufferAllTwo.pop_front ();
+              }
+              else
+                bufferAllTwo.emplace_back ();
+      }
 
-  Packer::PackerP (bufferSelOne, DELAY_ONE);
-  bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
+      Packer::movementColourCout (bufferSelOne, DELAY_ONE);
+      bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
 
-  Packer::PackerP (bufferSelTwo, DELAY_TWO);
-  bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
+      Packer::movementColourCout (bufferSelTwo, DELAY_TWO);
+      bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
 
-  Packer::PackerP (bufferSelThree, 452);
-  bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
+      Packer::movementColourCout (bufferSelThree, DELAY_THREE);
+      bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
 
-  Packer::PackerP (bufferSelFour, DELAY_THREE);
-  bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
+      Packer::movementColourCout (bufferSelFour, DELAY_FOUR);
+      bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
 
-  //add: suspending the thread
-}
+      ready2 = true;
+    }
+
+    // wait for the awakening signal
+    {
+      std::unique_lock<std::mutex> lk (m);
+      cv.wait (lk, [] { return ready1; });
+    }
+
+    //add: condition (user involvement choice)
+  } while (true);
+
+  // send back data (maybe for good wishes in the end of the program! :) )
+  //{
+  //  std::lock_guard<std::mutex> lk (m);
+  //  //processed = true;
+  //}
+  //cv.notify_one ();
+
+};
 
 
 void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
@@ -144,23 +176,32 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
   QF.position = position;
   QF.delay = mode;
 
-  if (bufferAllOne.size () < 500 && bFlag1 == false)
+  if (bufferAllOne.size () < 500)
     bufferAllOne.insert (bufferAllOne.begin (), QF);
   else {
-    bufferAllTwo.insert (bufferAllTwo.begin (), QF);
 
-    if (bufferAllOne.size () == 500) {
-      bFlag1 = true;
+    // next expression: for the one lost movement in case that the condition is true:
+    bufferAllOne.insert (bufferAllOne.begin (), QF);
+    bufferAllTwo = bufferAllOne;
+    if (bufferAllTwo.size () == 501 && ready2 == true) {
       QF.str = "NULL";
       QF.colour = 0x00;
       QF.position.X = 0;
       QF.position.X = 0;
       QF.delay = 0;
-      bufferAllOne.insert (bufferAllOne.end (), QF);
-
+      bufferAllTwo.insert (bufferAllTwo.end (), QF);
     }
 
-    //add: awakening the constant running thread
+    // awakening signal to constant running thread
+    {
+      std::lock_guard<std::mutex> lk (m);
+      ready1 = true;
+    }
+    cv.notify_one ();
+
+    std::this_thread::sleep_for (std::chrono::milliseconds (50));
+    bufferAllOne.erase (bufferAllOne.begin (), bufferAllOne.end ());
+    ready1 = false;
   }
 };
 
