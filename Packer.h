@@ -6,10 +6,13 @@
 
 
 struct queueFeed {
+  unsigned short delay;
   std::string str;
   WORD colour;
   COORD position;
-  unsigned short delay;
+  bool operator< (const queueFeed &a) const {
+    return (delay < a.delay);
+  };
 };
 
 
@@ -20,7 +23,7 @@ public:
   COORD position;
   unsigned short state;
   Packer (unsigned char);
-  static void movementColourCout (void);
+  static void movementCout (void);
   static void sortToQueues (void);
   static void addToQueues (std::string, WORD, COORD, unsigned short);
   static void hMovement (std::list<Packer>);

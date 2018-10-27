@@ -30,7 +30,6 @@ std::list<queueFeed> bufferSelThree;
 std::list<queueFeed> bufferSelFour;
 
 
-
 Packer::Packer (unsigned char quickReSeed) {
   // random first placement
   int y { 0 };
@@ -71,7 +70,7 @@ Packer::Packer (unsigned char quickReSeed) {
 //Packer (//userchoice) :Sign () {};
 
 
-void Packer::movementColourCout (void) {
+void Packer::movementCout (void) {
   //possible bug: there may be adding to the list which is already being inserted to the terminal.
 
   do {
@@ -80,16 +79,21 @@ void Packer::movementColourCout (void) {
       std::unique_lock<std::mutex> lk (m);
       cv.wait (lk, [] { return sorted; });
     }
+    bufferSelPtr = &bufferAllTwo;
     for (int i = 0; i < bufferSelPtr->size (); i++) {
-      GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-      SetConsoleCursorPosition (consoleOutput, bufferSelPtr->front ().position);
-      SetConsoleTextAttribute (consoleOutput, bufferSelPtr->front ().colour);
-      std::cout << bufferSelPtr->front ().str;
-      bufferSelPtr->emplace_back ();
+      if (bufferSelPtr->size () > 1) {
+
+        GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
+        SetConsoleCursorPosition (consoleOutput, bufferSelPtr->front ().position);
+        SetConsoleTextAttribute (consoleOutput, bufferSelPtr->front ().colour);
+        std::cout << bufferSelPtr->front ().str;
+        bufferSelPtr->pop_front ();
+      }
+
+      std::this_thread::sleep_for (std::chrono::milliseconds (50));
     }
-    bufferSelPtr->erase (bufferSelPtr->begin (), bufferSelPtr->end ());
+    bufferSelPtr->pop_front ();
     sorted = false;
-    std::this_thread::sleep_for (std::chrono::milliseconds (bufferSelPtr->front ().delay));
   } while (true);
 
   //while (bufferSelPtr->size () > 1) {
@@ -110,98 +114,98 @@ void Packer::sortToQueues (void) {
   //// the i of the i-loop is also needed
   //// small to big delay consideration
 
-  do {
-    // next expression: so it don't go through without a good reason:
-    if (readyOne == true) {
-      readyTwo = false;
+  //do {
+  //  // next expression: so it don't go through without a good reason:
+  //  if (readyOne == true) {
+  //    readyTwo = false;
 
-      for (int i = 0; i < bufferAllTwo.size (); i++) {
-        if (bufferAllTwo.front ().delay == DELAY_ONE) {
-          bufferSelOne.insert (bufferSelOne.begin (), bufferAllTwo.front ());
-          bufferAllTwo.pop_front ();
-          if (bufferSelOne.size () == 8 && sorted == false) {
-            bufferSelPtr = &bufferSelOne;
+  //    for (int i = 0; i < bufferAllTwo.size (); i++) {
+  //      if (bufferAllTwo.front ().delay == DELAY_ONE) {
+  //        bufferSelOne.insert (bufferSelOne.begin (), bufferAllTwo.front ());
+  //        bufferAllTwo.pop_front ();
+  //        if (bufferSelOne.size () == 8 && sorted == false) {
+  //          bufferSelPtr = &bufferSelOne;
 
-            // awakening signal to constant running thread
-            {
-              std::lock_guard<std::mutex> lk (m);
-              sorted = true;
-            }
-            cv.notify_one ();
-          }
-        }
-        else
-          if (bufferAllTwo.front ().delay == DELAY_TWO) {
-            bufferSelTwo.insert (bufferSelTwo.begin (), bufferAllTwo.front ());
-            bufferAllTwo.pop_front ();
-            if (bufferSelTwo.size () == 8 && sorted == false) {
-              bufferSelPtr = &bufferSelTwo;
+  //          // awakening signal to constant running thread
+  //          {
+  //            std::lock_guard<std::mutex> lk2 (m);
+  //            sorted = true;
+  //          }
+  //          cv.notify_one ();
+  //        }
+  //      }
+  //      else
+  //        if (bufferAllTwo.front ().delay == DELAY_TWO) {
+  //          bufferSelTwo.insert (bufferSelTwo.begin (), bufferAllTwo.front ());
+  //          bufferAllTwo.pop_front ();
+  //          if (bufferSelTwo.size () == 8 && sorted == false) {
+  //            bufferSelPtr = &bufferSelTwo;
 
-              // awakening signal to constant running thread
-              {
-                std::lock_guard<std::mutex> lk (m);
-                sorted = true;
-              }
-              cv.notify_one ();
-            }
-          }
-          else
-            if (bufferAllTwo.front ().delay == DELAY_THREE) {
-              bufferSelThree.insert (bufferSelThree.begin (), bufferAllTwo.front ());
-              bufferAllTwo.pop_front ();
-              if (bufferSelThree.size () == 8 && sorted == false) {
-                bufferSelPtr = &bufferSelThree;
+  //            // awakening signal to constant running thread
+  //            {
+  //              std::lock_guard<std::mutex> lk2 (m);
+  //              sorted = true;
+  //            }
+  //            cv.notify_one ();
+  //          }
+  //        }
+  //        else
+  //          if (bufferAllTwo.front ().delay == DELAY_THREE) {
+  //            bufferSelThree.insert (bufferSelThree.begin (), bufferAllTwo.front ());
+  //            bufferAllTwo.pop_front ();
+  //            if (bufferSelThree.size () == 8 && sorted == false) {
+  //              bufferSelPtr = &bufferSelThree;
 
-                // awakening signal to constant running thread
-                {
-                  std::lock_guard<std::mutex> lk (m);
-                  sorted = true;
-                }
-                cv.notify_one ();
-              }
-            }
-            else
-              if (bufferAllTwo.front ().delay == DELAY_FOUR) {
-                bufferSelFour.insert (bufferSelFour.begin (), bufferAllTwo.front ());
-                bufferAllTwo.pop_front ();
-                if (bufferSelFour.size () == 8 && sorted == false) {
-                  bufferSelPtr = &bufferSelFour;
+  //              // awakening signal to constant running thread
+  //              {
+  //                std::lock_guard<std::mutex> lk2 (m);
+  //                sorted = true;
+  //              }
+  //              cv.notify_one ();
+  //            }
+  //          }
+  //          else
+  //            if (bufferAllTwo.front ().delay == DELAY_FOUR) {
+  //              bufferSelFour.insert (bufferSelFour.begin (), bufferAllTwo.front ());
+  //              bufferAllTwo.pop_front ();
+  //              if (bufferSelFour.size () == 8 && sorted == false) {
+  //                bufferSelPtr = &bufferSelFour;
 
-                  // awakening signal to constant running thread
-                  {
-                    std::lock_guard<std::mutex> lk (m);
-                    sorted = true;
-                  }
-                  cv.notify_one ();
-                }
-              }
-      }
-      bufferAllTwo.erase (bufferAllTwo.begin (), bufferAllTwo.end ());
-      readyTwo = true;
-      readyOne = false;
+  //                // awakening signal to constant running thread
+  //                {
+  //                  std::lock_guard<std::mutex> lk2 (m);
+  //                  sorted = true;
+  //                }
+  //                cv.notify_one ();
+  //              }
+  //            }
+  //    }
+  //    bufferAllTwo.erase (bufferAllTwo.begin (), bufferAllTwo.end ());
+  //    readyTwo = true;
+  //    readyOne = false;
 
-      //Packer::movementColourCout (bufferSelOne, DELAY_ONE);
-      //bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
+  //    //Packer::movementColourCout (bufferSelOne, DELAY_ONE);
+  //    //bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
 
-      //Packer::movementColourCout (bufferSelTwo, DELAY_TWO);
-      //bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
+  //    //Packer::movementColourCout (bufferSelTwo, DELAY_TWO);
+  //    //bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
 
-      //Packer::movementColourCout (bufferSelThree, DELAY_THREE);
-      //bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
+  //    //Packer::movementColourCout (bufferSelThree, DELAY_THREE);
+  //    //bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
 
-      //Packer::movementColourCout (bufferSelFour, DELAY_FOUR);
-      //bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
+  //    //Packer::movementColourCout (bufferSelFour, DELAY_FOUR);
+  //    //bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
 
-    }
+  //  }
 
-    // wait for the awakening signal
-    {
-      std::unique_lock<std::mutex> lk (m);
-      cv.wait (lk, [] { return readyOne; });
-    }
+  //  // wait for the awakening signal
+  //  {
+  //    std::unique_lock<std::mutex> lk (m);
+  //    cv.wait (lk, [] { return readyOne; });
+  //  }
 
-    //add: condition (user involvement choice)
-  } while (true);
+  //  //add: condition (user involvement choice)
+  //} while (true);
 
   // send back data (maybe for good wishes in the end of the program! :) )
   //{
@@ -214,10 +218,10 @@ void Packer::sortToQueues (void) {
 
 
 void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position, unsigned short mode) {
+  QF.delay = mode;
   QF.str = strCharacter;
   QF.colour = Colour;
   QF.position = position;
-  QF.delay = mode;
 
   if (bufferAllOne.size () < 31)
     bufferAllOne.insert (bufferAllOne.begin (), QF);
@@ -228,20 +232,24 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
     bufferAllTwo = bufferAllOne;
     bufferAllOne.erase (bufferAllOne.begin (), bufferAllOne.end ());
 
+    QF.delay = 2000;
     QF.str = "NULL";
     QF.colour = 0x00;
     QF.position.X = 0;
     QF.position.X = 0;
-    QF.delay = 0;
     bufferAllTwo.insert (bufferAllTwo.end (), QF);
 
-    if (readyTwo == true) {
+    bufferAllTwo.sort ();
 
-      // awakening signal to constant running thread
+    //if (readyTwo == true) {
+
+    // awakening signal to constant running thread
+    {
       std::lock_guard<std::mutex> lk (m);
-      readyOne = true;
+      sorted = true;
       cv.notify_one ();
     }
+    //}
     //std::this_thread::sleep_for (std::chrono::milliseconds (50));
   }
 };
