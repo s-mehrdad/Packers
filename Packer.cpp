@@ -6,28 +6,22 @@
 #include "Shared.h"
 #include "Area.h"
 
+
 #define DELAY_ONE 202
 #define DELAY_TWO 302
 #define DELAY_THREE 502
 #define DELAY_FOUR 602
 
+
 std::mutex m;
 std::condition_variable cv;
 bool sorted { false };
-
-bool readyOne { false };
-bool readyTwo { true };
-
+bool needFeed { true };
 
 struct queueFeed QF;
 std::list<queueFeed> bufferAllOne;
 std::list<queueFeed> bufferAllTwo;
-
-std::list<queueFeed>* bufferSelPtr;
-std::list<queueFeed> bufferSelOne;
-std::list<queueFeed> bufferSelTwo;
-std::list<queueFeed> bufferSelThree;
-std::list<queueFeed> bufferSelFour;
+std::list<queueFeed>* bufferPtr { &bufferAllTwo };
 
 
 Packer::Packer (unsigned char quickReSeed) {
@@ -71,7 +65,7 @@ Packer::Packer (unsigned char quickReSeed) {
 
 
 void Packer::movementCout (void) {
-  //possible bug: there may be adding to the list which is already being inserted to the terminal.
+  size_t size { 0 };
 
   do {
     // wait for the awakening signal
@@ -79,141 +73,23 @@ void Packer::movementCout (void) {
       std::unique_lock<std::mutex> lk (m);
       cv.wait (lk, [] { return sorted; });
     }
-    bufferSelPtr = &bufferAllTwo;
-    for (int i = 0; i < bufferSelPtr->size (); i++) {
-      if (bufferSelPtr->size () > 1) {
-
+    needFeed = false;
+    size = bufferPtr->size ();
+    for (int i = 0; i < size; i++) {
+      if (bufferPtr->size () > 1) {
         GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-        SetConsoleCursorPosition (consoleOutput, bufferSelPtr->front ().position);
-        SetConsoleTextAttribute (consoleOutput, bufferSelPtr->front ().colour);
-        std::cout << bufferSelPtr->front ().str;
-        bufferSelPtr->pop_front ();
+        SetConsoleCursorPosition (consoleOutput, bufferPtr->front ().position);
+        SetConsoleTextAttribute (consoleOutput, bufferPtr->front ().colour);
+        std::cout << bufferPtr->front ().str;
+        if (((i + 1) % 8) == 0)
+          std::this_thread::sleep_for (std::chrono::milliseconds (bufferPtr->front ().delay));
+        bufferPtr->pop_front ();
       }
-
-      std::this_thread::sleep_for (std::chrono::milliseconds (50));
     }
-    bufferSelPtr->pop_front ();
+    bufferPtr->pop_front ();
     sorted = false;
+    needFeed = true;
   } while (true);
-
-  //while (bufferSelPtr->size () > 1) {
-  //unsigned char D { 0 };
-  //srand ((unsigned int)time (NULL));
-  //D = (rand () % (5 - 1) + 1);
-  //for (int i = 0; i < D; i++) {
-  //}
-};
-
-
-void Packer::sortToQueues (void) {
-  //added:
-  //-- already suspended constant running thread
-
-  //added:
-  //-- new approach, 8 packers, currently 4 movements each, that is currently 32 movements to be sorted and printed (delay based)
-  //// the i of the i-loop is also needed
-  //// small to big delay consideration
-
-  //do {
-  //  // next expression: so it don't go through without a good reason:
-  //  if (readyOne == true) {
-  //    readyTwo = false;
-
-  //    for (int i = 0; i < bufferAllTwo.size (); i++) {
-  //      if (bufferAllTwo.front ().delay == DELAY_ONE) {
-  //        bufferSelOne.insert (bufferSelOne.begin (), bufferAllTwo.front ());
-  //        bufferAllTwo.pop_front ();
-  //        if (bufferSelOne.size () == 8 && sorted == false) {
-  //          bufferSelPtr = &bufferSelOne;
-
-  //          // awakening signal to constant running thread
-  //          {
-  //            std::lock_guard<std::mutex> lk2 (m);
-  //            sorted = true;
-  //          }
-  //          cv.notify_one ();
-  //        }
-  //      }
-  //      else
-  //        if (bufferAllTwo.front ().delay == DELAY_TWO) {
-  //          bufferSelTwo.insert (bufferSelTwo.begin (), bufferAllTwo.front ());
-  //          bufferAllTwo.pop_front ();
-  //          if (bufferSelTwo.size () == 8 && sorted == false) {
-  //            bufferSelPtr = &bufferSelTwo;
-
-  //            // awakening signal to constant running thread
-  //            {
-  //              std::lock_guard<std::mutex> lk2 (m);
-  //              sorted = true;
-  //            }
-  //            cv.notify_one ();
-  //          }
-  //        }
-  //        else
-  //          if (bufferAllTwo.front ().delay == DELAY_THREE) {
-  //            bufferSelThree.insert (bufferSelThree.begin (), bufferAllTwo.front ());
-  //            bufferAllTwo.pop_front ();
-  //            if (bufferSelThree.size () == 8 && sorted == false) {
-  //              bufferSelPtr = &bufferSelThree;
-
-  //              // awakening signal to constant running thread
-  //              {
-  //                std::lock_guard<std::mutex> lk2 (m);
-  //                sorted = true;
-  //              }
-  //              cv.notify_one ();
-  //            }
-  //          }
-  //          else
-  //            if (bufferAllTwo.front ().delay == DELAY_FOUR) {
-  //              bufferSelFour.insert (bufferSelFour.begin (), bufferAllTwo.front ());
-  //              bufferAllTwo.pop_front ();
-  //              if (bufferSelFour.size () == 8 && sorted == false) {
-  //                bufferSelPtr = &bufferSelFour;
-
-  //                // awakening signal to constant running thread
-  //                {
-  //                  std::lock_guard<std::mutex> lk2 (m);
-  //                  sorted = true;
-  //                }
-  //                cv.notify_one ();
-  //              }
-  //            }
-  //    }
-  //    bufferAllTwo.erase (bufferAllTwo.begin (), bufferAllTwo.end ());
-  //    readyTwo = true;
-  //    readyOne = false;
-
-  //    //Packer::movementColourCout (bufferSelOne, DELAY_ONE);
-  //    //bufferSelOne.erase (bufferSelOne.begin (), bufferSelOne.end ());
-
-  //    //Packer::movementColourCout (bufferSelTwo, DELAY_TWO);
-  //    //bufferSelTwo.erase (bufferSelTwo.begin (), bufferSelTwo.end ());
-
-  //    //Packer::movementColourCout (bufferSelThree, DELAY_THREE);
-  //    //bufferSelThree.erase (bufferSelThree.begin (), bufferSelThree.end ());
-
-  //    //Packer::movementColourCout (bufferSelFour, DELAY_FOUR);
-  //    //bufferSelFour.erase (bufferSelFour.begin (), bufferSelFour.end ());
-
-  //  }
-
-  //  // wait for the awakening signal
-  //  {
-  //    std::unique_lock<std::mutex> lk (m);
-  //    cv.wait (lk, [] { return readyOne; });
-  //  }
-
-  //  //add: condition (user involvement choice)
-  //} while (true);
-
-  // send back data (maybe for good wishes in the end of the program! :) )
-  //{
-  //  std::lock_guard<std::mutex> lk (m);
-  //  //processed = true;
-  //}
-  //cv.notify_one ();
-
 };
 
 
@@ -223,12 +99,10 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
   QF.colour = Colour;
   QF.position = position;
 
-  if (bufferAllOne.size () < 31)
-    bufferAllOne.insert (bufferAllOne.begin (), QF);
-  else {
+  bufferAllOne.insert (bufferAllOne.begin (), QF);
 
-    // next expression: for the one lost movement in case that the condition is true:
-    bufferAllOne.insert (bufferAllOne.begin (), QF);
+  if (bufferAllOne.size () >= 31 && ((bufferAllOne.size () + 1) % 8) == 0 && needFeed == true) {
+
     bufferAllTwo = bufferAllOne;
     bufferAllOne.erase (bufferAllOne.begin (), bufferAllOne.end ());
 
@@ -241,16 +115,12 @@ void Packer::addToQueues (std::string strCharacter, WORD Colour, COORD position,
 
     bufferAllTwo.sort ();
 
-    //if (readyTwo == true) {
-
     // awakening signal to constant running thread
     {
       std::lock_guard<std::mutex> lk (m);
       sorted = true;
       cv.notify_one ();
     }
-    //}
-    //std::this_thread::sleep_for (std::chrono::milliseconds (50));
   }
 };
 
@@ -269,8 +139,6 @@ void Packer::hMovement (std::list<Packer> input) {
         input.emplace_back (input.front ());
         input.pop_front ();
         //Area::green (position);
-        std::this_thread::sleep_for (std::chrono::milliseconds (200));
-
       }
       else
         input.front ().RchanceL = false;
@@ -287,7 +155,6 @@ void Packer::hMovement (std::list<Packer> input) {
         input.emplace_back (input.front ());
         input.pop_front ();
         //Area::green (position);
-        std::this_thread::sleep_for (std::chrono::milliseconds (200));
       }
       else
         input.front ().RchanceL = true;

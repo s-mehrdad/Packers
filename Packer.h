@@ -24,7 +24,6 @@ public:
   unsigned short state;
   Packer (unsigned char);
   static void movementCout (void);
-  static void sortToQueues (void);
   static void addToQueues (std::string, WORD, COORD, unsigned short);
   static void hMovement (std::list<Packer>);
 };
