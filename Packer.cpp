@@ -18,6 +18,8 @@ std::condition_variable cv;
 bool sorted { false };
 bool needFeed { true };
 
+bool readyFlag { false };
+
 struct queueFeed QF, blinkA, blinkB, packed, ready, NuLL;
 std::list<queueFeed> bufferAllOne;
 std::list<queueFeed> bufferAllTwo;
@@ -27,6 +29,7 @@ std::list<queueFeed>* bufferPtr { &bufferAllOne };
 
 Packer::Packer (unsigned char quickReSeed) {
   // random first placement
+  id = quickReSeed;
   int y { 0 };
   int x { 0 };
   srand ((unsigned int)time (NULL) + quickReSeed);
@@ -65,58 +68,128 @@ Packer::Packer (unsigned char quickReSeed) {
 //Packer (//userchoice) :Sign () {};
 
 
+void Packer::moveCout () {
+  //added: making packers independent
+  //add: mode and age and other things so they seems more smart
+  do {
+    if (RchanceL == true) {
+      if (position.X != 87) {
+        blinkA.set (DELAY_ONE, u8" ", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), blinkA);
+        position.X += 2;
+        blinkB.set (DELAY_TWO, u8"☻", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), blinkB);
+        //Area::yellow (position);
+        //Area::green (position);
+        packed.set (DELAY_THREE, u8"▪", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), packed);
+        ready.set (DELAY_FOUR, u8"☻", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), ready);
+        //Area::green (position);
+      }
+      else
+        RchanceL = false;
+    }
+    else
+      if (position.X != 3) {
+        blinkA.set (DELAY_ONE, u8" ", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), blinkA);
+        position.X -= 2;
+        blinkB.set (DELAY_TWO, u8"☻", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), blinkB);
+        //Area::yellow (position);
+        //Area::green (position);
+        packed.set (DELAY_THREE, u8"▪", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), packed);
+        ready.set (DELAY_FOUR, u8"☻", F_bWHITE, position);
+        bufferAllOne.insert (bufferAllOne.begin (), ready);
+        //Area::green (position);
+      }
+      else
+        RchanceL = true;
+
+
+    //wait for the awakening signal
+    {
+      std::unique_lock<std::mutex> lk (m);
+      cv.wait (lk, [] { return readyFlag; });
+    }
+    readyFlag = false;
+
+  } while (true);
+};
+
+
 void Packer::movementCout (void) {
 
-  bufferAllOne.insert (bufferAllOne.begin (), NuLL);
 
   size_t size { 0 };
+  unsigned short d { 0 };
+
+
+  size = bufferPtr->size ();
+  bufferAllOne.insert (bufferAllOne.begin (), NuLL);
 
   do {
-    // wait for the awakening signal
-    //{
-    //  std::unique_lock<std::mutex> lk (m);
-    //  cv.wait (lk, [] { return sorted; });
+    //for (int i = 0; i < size; i++) {
+    //  if (bufferPtr->size () >= 32) {
+    //    for (int j = 0; j < 31; j++) {
+    //      bufferTemp.insert (bufferTemp.begin (), bufferPtr->back ());
+    //      bufferPtr->pop_back ();
+    //    }
+    //    bufferTemp.sort ();
+    //    bufferAllTwo.insert (bufferAllTwo.end (), bufferTemp.begin (), bufferTemp.end ());
+    //    bufferTemp.erase (bufferTemp.begin (), bufferTemp.end ());
+    //  }
     //}
-    //needFeed = false;
-    size = bufferPtr->size ();
-    for (int i = 0; i < size; i++) {
-      if (bufferPtr->size () >= 32) {
-        for (int j = 0; j < 31; j++) {
-          bufferTemp.insert (bufferTemp.begin (), bufferPtr->back ());
-          bufferPtr->pop_back ();
-        }
-        bufferTemp.sort ();
-        bufferAllTwo.insert (bufferAllTwo.end (), bufferTemp.begin (), bufferTemp.end ());
-        bufferTemp.erase (bufferTemp.begin (), bufferTemp.end ());
-      }
-    }
-    bufferPtr = &bufferAllTwo;
-    bufferAllOne = bufferAllTwo;
+    //bufferPtr = &bufferAllTwo;
+    //bufferAllOne = bufferAllTwo;
+
+    bufferAllOne.sort ();
+
     while (bufferPtr->size () > 1) {
-      for (int i = 0; i < 31; i++) {
+      d = bufferPtr->front ().delay;
+      for (int i = 0; i < 4; i++) {
         GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
         SetConsoleCursorPosition (consoleOutput, bufferPtr->front ().position);
         SetConsoleTextAttribute (consoleOutput, bufferPtr->front ().colour);
         std::cout << bufferPtr->front ().str;
-        if (((i + 1) % 8) == 0)
-          std::this_thread::sleep_for (std::chrono::milliseconds (bufferPtr->front ().delay));
         bufferPtr->pop_front ();
       }
-    }
-    bufferPtr = &bufferAllOne;
-    bufferAllTwo = bufferAllOne;
-    while (bufferPtr->size () > 1) {
-      for (int i = 0; i < 31; i++) {
-        GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-        SetConsoleCursorPosition (consoleOutput, bufferPtr->back ().position);
-        SetConsoleTextAttribute (consoleOutput, bufferPtr->back ().colour);
-        std::cout << bufferPtr->back ().str;
-        if (((i + 1) % 8) == 0)
-          std::this_thread::sleep_for (std::chrono::milliseconds (bufferPtr->back ().delay));
-        bufferPtr->pop_back ();
-      }
+      std::this_thread::sleep_for (std::chrono::milliseconds (d));
     }
 
+    // awakening signal to constant running thread
+    {
+      std::lock_guard<std::mutex> lk (m);
+      readyFlag = true;
+      cv.notify_all ();
+    }
+    std::this_thread::sleep_for (std::chrono::milliseconds (200));
+
+
+    //  // wait for the awakening signal
+    //  //{
+    //  //  std::unique_lock<std::mutex> lk (m);
+    //  //  cv.wait (lk, [] { return sorted; });
+    //  //}
+    //  //needFeed = false;
+    //  size = bufferPtr->size ();
+    //  for (int i = 0; i < size; i++) {
+    //    if (bufferPtr->size () >= 32) {
+    //      for (int j = 0; j < 31; j++) {
+    //        bufferTemp.insert (bufferTemp.begin (), bufferPtr->back ());
+    //        bufferPtr->pop_back ();
+    //      }
+    //      bufferTemp.sort ();
+    //      bufferAllTwo.insert (bufferAllTwo.end (), bufferTemp.begin (), bufferTemp.end ());
+    //      bufferTemp.erase (bufferTemp.begin (), bufferTemp.end ());
+    //    }
+    //  }
+    //  bufferPtr = &bufferAllTwo;
+    //  bufferAllOne = bufferAllTwo;
+    //  while (bufferPtr->size () > 1) {
+    //    for (int i = 0; i < 31; i++) {
     //      GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
     //      SetConsoleCursorPosition (consoleOutput, bufferPtr->front ().position);
     //      SetConsoleTextAttribute (consoleOutput, bufferPtr->front ().colour);
@@ -125,10 +198,29 @@ void Packer::movementCout (void) {
     //        std::this_thread::sleep_for (std::chrono::milliseconds (bufferPtr->front ().delay));
     //      bufferPtr->pop_front ();
     //    }
-    //}
-  //  bufferPtr->pop_front ();
-  //  sorted = false;
-  //  needFeed = true;
+    //  }
+
+
+
+      //bufferPtr = &bufferAllOne;
+      //bufferAllTwo = bufferAllOne;
+      //while (bufferPtr->size () > 1) {
+      //  for (int i = 0; i < 31; i++) {
+      //    GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
+      //    SetConsoleCursorPosition (consoleOutput, bufferPtr->back ().position);
+      //    SetConsoleTextAttribute (consoleOutput, bufferPtr->back ().colour);
+      //    std::cout << bufferPtr->back ().str;
+      //    if (((i + 1) % 8) == 0)
+      //      std::this_thread::sleep_for (std::chrono::milliseconds (bufferPtr->back ().delay));
+      //    bufferPtr->pop_back ();
+      //  }
+      //}
+
+
+
+    //  bufferPtr->pop_front ();
+    //  sorted = false;
+    //  needFeed = true;
   } while (true);
 };
 
@@ -211,6 +303,5 @@ void Packer::hMovement (std::list<Packer> input) {
       }
       else
         input.front ().RchanceL = true;
-    //std::this_thread::sleep_for (std::chrono::milliseconds (200));
   }
 };

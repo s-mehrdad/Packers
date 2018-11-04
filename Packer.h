@@ -34,8 +34,10 @@ class Packer {
 public:
   bool RchanceL;
   COORD position;
+  unsigned char id;
   unsigned short state;
   Packer (unsigned char);
+  void moveCout (void);
   static void movementCout (void);
   static void addToQueues (unsigned short, std::string, WORD, COORD);
   static void hMovement (std::list<Packer>);
