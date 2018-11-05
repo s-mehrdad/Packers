@@ -23,6 +23,11 @@ struct queueFeed {
     colour = Colour;
     position = pos;
   }
+  void set2 (unsigned short mode, std::string strCharacter, WORD Colour) {
+    delay = mode;
+    str = strCharacter;
+    colour = Colour;
+  }
   bool operator< (const queueFeed &a) const {
     return (delay < a.delay);
   };
@@ -35,9 +40,12 @@ public:
   bool RchanceL;
   COORD position;
   unsigned char id;
+  Packer *address;
+  queueFeed moves[4];
   unsigned short state;
   Packer (unsigned char);
   void moveCout (void);
+  static unsigned char count;
   static void movementCout (void);
   static void addToQueues (unsigned short, std::string, WORD, COORD);
   static void hMovement (std::list<Packer>);
