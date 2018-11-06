@@ -5,6 +5,7 @@
 #include "ConsoleAdjustments.h"
 #include "Shared.h"
 #include "Area.h"
+#include "Surround.h"
 
 
 #define DELAY_ONE 202

@@ -30,19 +30,19 @@ struct queueFeed {
   }
   bool operator< (const queueFeed &a) const {
     return (delay < a.delay);
-  };
+  }
 };
 
 
 class Packer {
   char Sign;
-public:
   bool RchanceL;
   COORD position;
   unsigned char id;
   Packer *address;
   queueFeed moves[4];
   unsigned short state;
+public:
   Packer (unsigned char);
   void moveCout (void);
   static unsigned char count;

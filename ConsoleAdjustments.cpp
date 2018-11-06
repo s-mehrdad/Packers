@@ -3,8 +3,6 @@
 #include "pch.h"
 #include "ConsoleAdjustments.h"
 #include "Shared.h"
-#include "Packer.h"
-#include "Area.h"
 
 
 HANDLE consoleOutput = GetStdHandle (STD_OUTPUT_HANDLE);

@@ -5,6 +5,7 @@
 #include "ConsoleAdjustments.h"
 #include "Shared.h"
 #include "Packer.h"
+#include "Surround.h"
 
 
 struct Area::materials {

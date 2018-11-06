@@ -5,6 +5,7 @@
 #include "ConsoleAdjustments.h"
 #include "Area.h"
 #include "Packer.h"
+#include "Surround.h"
 
 
 bool running { true };
