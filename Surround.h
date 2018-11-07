@@ -6,13 +6,16 @@
 
 class Surround {
   struct titelBar;
+  struct menus;
   struct guideBar;
   struct statusBar;
   //struct infoBar;
-  struct menus;
   //bool running;
 public:
-  Surround () {};
+  Surround ();
+  void allCouter (void);
+  void colourInserter (std::string, WORD, COORD);
+  void newSetter (void);
 };
 
 

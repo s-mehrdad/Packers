@@ -36,13 +36,13 @@ struct queueFeed {
 
 class Packer {
   char Sign;
-  bool RchanceL;
-  COORD position;
   unsigned char id;
-  Packer *address;
-  queueFeed moves[4];
   unsigned short state;
 public:
+  Packer *address;
+  COORD position;
+  bool RchanceL;
+  queueFeed moves[4];
   Packer (unsigned char);
   void moveCout (void);
   static unsigned char count;
