@@ -12,10 +12,10 @@ class Surround {
   //struct infoBar;
   //bool running;
 public:
-  Surround ();
+  Surround (unsigned char);
   void allCouter (void);
-  void colourInserter (std::string, WORD, COORD);
   void newSetter (void);
+  void colourInserter (std::string, WORD, COORD);
 };
 
 

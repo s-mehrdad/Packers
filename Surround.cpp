@@ -10,13 +10,12 @@
 
 struct Surround::titelBar {
   std::string titelSentence { u8"Feel free to way in as a packer toward becoming an advanced packer ♥♥♥♥♥ :)" };
-  DWORD colour { F_bBLUE };
+  WORD colour { F_bBLUE };
   COORD startPoint { 7,0 };
 } _titleBar;
 
 
 struct Surround::menus {
-
   struct agesChoices {
     std::string title { u8"Packing speed:" };
     std::string options[5] {
@@ -25,12 +24,12 @@ struct Surround::menus {
       u8"  Advanced age........." ,
       u8"  Hollow age.      . .            ." ,
       u8"  Dirty age (packers of packers contest!)" };
-    DWORD colour { F_bWHITE };
+    WORD colour { F_bWHITE };
     COORD startPoint { 3,20 };
     unsigned char selected { 0 };
     struct selectionSign {
       std::string sign { u8"->" };
-      DWORD colour { F_bRED };
+      WORD colour { F_bRED };
       COORD startPoint { 2,21 };
     } _selectionSign;
   } _ageChoices;
@@ -40,12 +39,12 @@ struct Surround::menus {
     std::string options[2] {
       u8"  ☺  " ,
       u8"    ☻" };
-    DWORD colour { F_bWHITE };
+    WORD colour { F_bWHITE };
     COORD startPoint { 35,20 };
     unsigned char selected { 0 };
     struct selectionSign {
       std::string sign { u8"->" };
-      DWORD colour { F_bRED };
+      WORD colour { F_bRED };
       COORD startPoint { 40,21 };
     } _selectionSign;
   } _characterChoices;
@@ -56,125 +55,126 @@ struct Surround::menus {
       u8"  Involve me!",
       u8"  Let me furnish! :)",
       u8"  Let's hit the road!" };
-    DWORD colour { F_bWHITE };
-    COORD startPoint { 65,21 };
+    WORD colour { F_bWHITE };
+    COORD startPoint { 65,20 };
     unsigned char selected { 0 };
     struct selectionSign {
       std::string sign { u8"->" };
-      DWORD colour { F_bRED };
+      WORD colour { F_bRED };
       COORD startPoint { 64,22 };
     } _selectionSign;
   } _dangerAreaChoices;
-
 }_menus;
 
 
 struct Surround::guideBar {
-
-  COORD startPoint { 6,27 };
-
+  COORD startPoint { 3,27 };
   struct signs {
     std::string parts[3] {
       u8"♣:",
       u8"☻:",
       u8"▪:" };
-    DWORD colourOne { F_bGREEN };
-    DWORD colourTwo { F_bWHITE };
+    WORD colourOne { F_bGREEN };
+    WORD colourTwo { F_bWHITE };
   } _signs;
-
   struct guides {
     std::string parts[3] {
       u8" healthy resources",
       u8" beloved packers",
       u8" already packed",
     };
-    DWORD colour { F_bBLUE };
+    WORD colour { F_bBLUE };
   } _guides;
-
 } _GuideBar;
 
 
 struct Surround::statusBar {
-
   std::string title { u8"status->>" };
-  DWORD colour { F_bWHITE };
+  WORD colour { F_bWHITE };
   COORD startPoint { 91,3 };
 
   struct packers {
     std::string str { u8"packers: " };
-    DWORD colourOne { F_PINK };
+    WORD colourOne { F_PINK };
     //add: count setter for new packers
     unsigned char count { 0 };
-    DWORD colourTwo { F_bBLUE };
-    COORD startPoint { 91,5 };
+    WORD colourTwo { F_bBLUE };
+    COORD point { 91,5 };
   } _packers;
 
   struct age {
     std::string str { u8"age: " };
-    DWORD colourOne { F_bWHITE };
+    WORD colourOne { F_PINK };
     //add: age setter + user choice for start age
-    unsigned char id { 0 }; //Stone age
-    DWORD colourTwo { F_bBLUE };
-    COORD startPoint { 91,7 };
+    unsigned char id { 0 };
+    std::string ages[5] {
+      u8"Stone age" ,
+      u8"Middle age" ,
+      u8"Advanced age" ,
+      u8"Hollow age" ,
+      u8"Dirty age" };
+    WORD colourTwo { F_bBLUE };
+    COORD point { 91,7 };
   } _age;
 
   struct resources {
     std::string str { u8"resources>" };
-    DWORD colour { F_PINK };
+    WORD colour { F_PINK };
     COORD startPoint { 91,10 };
     struct healthy {
       std::string str { u8"healthy: " };
-      DWORD colourOne { F_bGREEN };
-      //add: default count in different ages (constructor)
+      WORD colourOne { F_bGREEN };
+      //add: default count setter in different ages (constructor)
       unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD Point { 91,12 };
+      WORD colourTwo { F_bBLUE };
+      COORD point { 91,12 };
     } _healthy;
     struct renewed {
       std::string str { u8"renewed: " };
-      DWORD colourOne { F_YELLOW };
-      //add: default count in different ages (constructor)
+      WORD colourOne { F_YELLOW };
+      //add: default count setter in different ages (constructor)
       unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD Point { 91,15 };
+      WORD colourTwo { F_bBLUE };
+      COORD point { 91,14 };
     } _renewed;
     struct vanished {
       std::string str { u8"vanished: " };
-      DWORD colourOne { F_RED };
-      //add: default count in different ages (constructor)
+      WORD colourOne { F_RED };
+      //add: default count setter in different ages (constructor)
       unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD Point { 91,18 };
+      WORD colourTwo { F_bBLUE };
+      COORD point { 91,16 };
     } _vanished;
   } _resources;
 
   struct packages {
     std::string str { u8"packages> " };
-    DWORD colourOne { F_bWHITE };
-    COORD startPoint { 91,21 };
+    WORD colour { F_PINK };
+    COORD startPoint { 91,18 };
     struct have {
       std::string str { u8"have: " };
-      DWORD colourOne { F_PINK };
-      //add: default count in different ages (constructor)
+      WORD colourOne { F_PINK };
+      //add: default count setter in different ages (constructor)
       unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD point { 91,23 };
+      WORD colourTwo { F_bBLUE };
+      COORD point { 91,20 };
     } _have;
     struct need {
       std::string str { u8"need: " };
-      DWORD colourOne { F_PINK };
+      WORD colourOne { F_PINK };
       //add: random need setter in constructor
       unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD point { 91,26 };
+      WORD colourTwo { F_bBLUE };
+      COORD point { 91,23 };
     } _need;
   } _packages;
 } _statusBar;
 
 
-Surround::Surround () {
+Surround::Surround (unsigned char mode) {
   // set
   _statusBar._packers.count = Packer::count;
+  _statusBar._age.id = mode;
 
   // cout
   allCouter ();
@@ -182,94 +182,97 @@ Surround::Surround () {
 
 
 void Surround::allCouter (void) {
-
   COORD position { 0,0 };
 
   // titleBar
   colourInserter (_titleBar.titelSentence, _titleBar.colour, _titleBar.startPoint);
 
   // ageChoicesMenu
-  colourInserter (_menus._ageChoices.title, _menus._ageChoices.colour, _menus._ageChoices.startPoint);
   position = _menus._ageChoices.startPoint;
+  colourInserter (_menus._ageChoices.title, _menus._ageChoices.colour, position);
+  position.Y += 1;
   for (char i = 0; i < 5; i++) {
     colourInserter (_menus._ageChoices.options[i], _menus._ageChoices.colour, position);
-    position.X += 1;
+    position.Y += 1;
   }
   colourInserter (_menus._ageChoices._selectionSign.sign, _menus._ageChoices._selectionSign.colour, _menus._ageChoices._selectionSign.startPoint);
 
   // characterCoicesMenu
   colourInserter (_menus._characterChoices.title, _menus._characterChoices.colour, _menus._characterChoices.startPoint);
   position = _menus._characterChoices.startPoint;
-  position.X = _menus._characterChoices.startPoint.X + 1;
+  position.Y += 1;
   colourInserter (_menus._characterChoices.options[0], _menus._characterChoices.colour, position);
-  position.Y = _menus._characterChoices.startPoint.Y + 5;
+  position.X += 5;
   colourInserter (_menus._characterChoices.options[1], _menus._characterChoices.colour, position);
   colourInserter (_menus._characterChoices._selectionSign.sign, _menus._characterChoices._selectionSign.colour, _menus._characterChoices._selectionSign.startPoint);
 
   // dangerAreaChoicesMenu
-  colourInserter (_menus._dangerAreaChoices.title, _menus._dangerAreaChoices.colour, _menus._dangerAreaChoices.startPoint);
   position = _menus._dangerAreaChoices.startPoint;
+  colourInserter (_menus._dangerAreaChoices.title, _menus._dangerAreaChoices.colour, position);
+  position.Y += 1;
   for (char i = 0; i < 3; i++) {
     colourInserter (_menus._dangerAreaChoices.options[i], _menus._dangerAreaChoices.colour, position);
-    position.X += 1;
+    position.Y += 1;
   }
   colourInserter (_menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, _menus._dangerAreaChoices._selectionSign.startPoint);
 
   // guideBar
   position = _GuideBar.startPoint;
   for (char i = 0; i < 3; i++) {
-    position.Y += (pow (6, i) + 30);
-    if (i = 0)
+    if (i == 0)
       colourInserter (_GuideBar._signs.parts[i], _GuideBar._signs.colourOne, position);
-    else
+    else {
+      position.X += static_cast<int>((pow (6, i) + 30));
+      if (i == 1) position.X -= 3;
       colourInserter (_GuideBar._signs.parts[i], _GuideBar._signs.colourTwo, position);
-    position.Y = _menus._characterChoices.startPoint.Y + 2;
+    }
+    position.X += 2;
     colourInserter (_GuideBar._guides.parts[i], _GuideBar._guides.colour, position);
+    position = _GuideBar.startPoint;
   }
 
   // statusBar
   colourInserter (_statusBar.title, _statusBar.colour, _statusBar.startPoint);
-  position = _statusBar._packers.startPoint;
+
+  position = _statusBar._packers.point;
   colourInserter (_statusBar._packers.str, _statusBar._packers.colourOne, position);
-  position.Y += 9;
-  colourInserter (std::to_string(_statusBar._packers.count), _statusBar._packers.colourTwo, position);
-  position = _statusBar._age.startPoint;
+  position.X += 9;
+  colourInserter (std::to_string (_statusBar._packers.count), _statusBar._packers.colourTwo, position);
+
+  position = _statusBar._age.point;
   colourInserter (_statusBar._age.str, _statusBar._age.colourOne, position);
-  position.X += 1;
-  colourInserter (_statusBar._age.str, _statusBar._age.colourTwo, position);
+  position.Y += 1;
+  colourInserter (_statusBar._age.ages[_statusBar._age.id], _statusBar._age.colourTwo, position);
+
+  colourInserter (_statusBar._resources.str, _statusBar._resources.colour, _statusBar._resources.startPoint);
+  position = _statusBar._resources._healthy.point;
+  colourInserter (_statusBar._resources._healthy.str, _statusBar._resources._healthy.colourOne, position);
+  position.X += 9;
+  colourInserter (std::to_string (_statusBar._resources._healthy.count), _statusBar._resources._healthy.colourTwo, position);
+  position = _statusBar._resources._renewed.point;
+  colourInserter (_statusBar._resources._renewed.str, _statusBar._resources._renewed.colourOne, position);
+  position.X += 9;
+  colourInserter (std::to_string (_statusBar._resources._renewed.count), _statusBar._resources._renewed.colourTwo, position);
+  position = _statusBar._resources._vanished.point;
+  colourInserter (_statusBar._resources._vanished.str, _statusBar._resources._vanished.colourOne, position);
+  position.X += 10;
+  colourInserter (std::to_string (_statusBar._resources._vanished.count), _statusBar._resources._vanished.colourTwo, position);
+
+  colourInserter (_statusBar._packages.str, _statusBar._packages.colour, _statusBar._packages.startPoint);
+  position = _statusBar._packages._have.point;
+  colourInserter (_statusBar._packages._have.str, _statusBar._packages._have.colourOne, position);
+  position.Y += 1;
+  colourInserter (std::to_string (_statusBar._packages._have.count), _statusBar._packages._have.colourTwo, position);
+  position = _statusBar._packages._need.point;
+  colourInserter (_statusBar._packages._need.str, _statusBar._packages._need.colourOne, position);
+  position.Y += 1;
+  colourInserter (std::to_string (_statusBar._packages._need.count), _statusBar._packages._need.colourTwo, position);
+};
 
 
-
-  struct resources {
-    std::string str { u8"resources>" };
-    DWORD colour { F_PINK };
-    COORD startPoint { 91,10 };
-    struct healthy {
-      std::string str { u8"healthy: " };
-      DWORD colourOne { F_bGREEN };
-      //add: default count in different ages (constructor)
-      unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD Point { 91,12 };
-    } _healthy;
-    struct renewed {
-      std::string str { u8"renewed: " };
-      DWORD colourOne { F_YELLOW };
-      //add: default count in different ages (constructor)
-      unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD Point { 91,15 };
-    } _renewed;
-    struct vanished {
-      std::string str { u8"vanished: " };
-      DWORD colourOne { F_RED };
-      //add: default count in different ages (constructor)
-      unsigned int count { 0 };
-      DWORD colourTwo { F_bBLUE };
-      COORD Point { 91,18 };
-    } _vanished;
-  } _resources;
-
+void Surround::newSetter (void) {
+  //add: new setter
+  //add: new couter
 };
 
 
@@ -278,10 +281,4 @@ void Surround::colourInserter (std::string str, WORD colour, COORD pos) {
   SetConsoleCursorPosition (consoleOutput, pos);
   SetConsoleTextAttribute (consoleOutput, colour);
   std::cout << str;
-};
-
-
-void Surround::newSetter (void) {
-  //add: new setter
-  //add: new couter
 };

@@ -53,7 +53,7 @@ Area::Area (unsigned char mode) :rows (19), columns (89) {
             if (y != 1)
               ColourCout (stuff.vWalls, F_PINK);
 
-      if (mode == 1) {
+      if (mode == 0) {
         // packs
         if (y != 1 && y != 19 && y % 2 == 0)
           if (x != 1 && x != 89 && x % 2 == 0)
