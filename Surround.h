@@ -13,9 +13,10 @@ class Surround {
   //bool running;
 public:
   Surround (unsigned char);
-  void allCouter (void);
   void newSetter (void);
-  void colourInserter (std::string, WORD, COORD);
+  static void colourInserter (std::string, WORD, COORD);
+  static void allCouter (void);
+  static void menusSetter (unsigned short, bool);
 };
 
 

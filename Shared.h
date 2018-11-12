@@ -6,6 +6,9 @@
 
 
 extern bool running;
+extern unsigned char menusSelection;
+extern bool MenusFlag;
+
 extern bool protectedSetCursor;
 
 extern std::mutex m;
@@ -13,9 +16,8 @@ extern std::condition_variable cv;
 extern bool bereitOne;
 extern bool bereitTwo;
 
-
 void loading (void);
-void pressed (unsigned char[], bool);
+//void pressed (unsigned char[], bool);
 
 
 #endif // !SHARED_H

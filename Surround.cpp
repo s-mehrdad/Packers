@@ -26,11 +26,11 @@ struct Surround::menus {
       u8"  Dirty age (packers of packers contest!)" };
     WORD colour { F_bWHITE };
     COORD startPoint { 3,20 };
-    unsigned char selected { 0 };
+    unsigned short selected { 300 };
     struct selectionSign {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { 2,21 };
+      COORD startPoint { 1,21 };
     } _selectionSign;
   } _ageChoices;
 
@@ -41,11 +41,11 @@ struct Surround::menus {
       u8"    ☻" };
     WORD colour { F_bWHITE };
     COORD startPoint { 35,20 };
-    unsigned char selected { 0 };
+    unsigned short selected { 200 };
     struct selectionSign {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { 40,21 };
+      COORD startPoint { 39,21 };
     } _selectionSign;
   } _characterChoices;
 
@@ -57,11 +57,11 @@ struct Surround::menus {
       u8"  Let's hit the road!" };
     WORD colour { F_bWHITE };
     COORD startPoint { 65,20 };
-    unsigned char selected { 0 };
+    unsigned short selected { 100 };
     struct selectionSign {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { 64,22 };
+      COORD startPoint { 63,21 };
     } _selectionSign;
   } _dangerAreaChoices;
 }_menus;
@@ -181,6 +181,49 @@ Surround::Surround (unsigned char mode) {
 };
 
 
+void Surround::newSetter (void) {
+  //add: new setter
+  //add: new couter
+};
+
+
+void Surround::menusSetter (unsigned short choice, bool confirm) {
+  COORD pos;
+  unsigned short find { static_cast<unsigned short>(choice / 100) };
+  unsigned short direction { static_cast<unsigned short>(choice % 2) };
+  if (find == 1) {
+    _menus._dangerAreaChoices.selected = choice;
+    pos = _menus._dangerAreaChoices._selectionSign.startPoint;
+    if (confirm != true) {
+      for (unsigned char i = 0; i < 3; i++) {
+        colourInserter (u8"  ", _menus._dangerAreaChoices._selectionSign.colour, pos);
+        pos.Y += i;
+      }
+      pos = _menus._dangerAreaChoices._selectionSign.startPoint;
+      if (direction == 0)
+        pos.Y += ((choice % 100) / 10);
+      else
+        pos.Y -= ((choice % 100) / 10);
+      colourInserter (_menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, pos);
+    }
+    else
+      if (choice == 110) {
+        pos.X += 2;
+        colourInserter (_menus._dangerAreaChoices.options[0], F_bRED, pos);
+      }
+  }
+  //std::this_thread::sleep_for (std::chrono::milliseconds (100));
+};
+
+
+void Surround::colourInserter (std::string str, WORD colour, COORD pos) {
+  GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
+  SetConsoleCursorPosition (consoleOutput, pos);
+  SetConsoleTextAttribute (consoleOutput, colour);
+  std::cout << str;
+};
+
+
 void Surround::allCouter (void) {
   COORD position { 0,0 };
 
@@ -267,18 +310,4 @@ void Surround::allCouter (void) {
   colourInserter (_statusBar._packages._need.str, _statusBar._packages._need.colourOne, position);
   position.Y += 1;
   colourInserter (std::to_string (_statusBar._packages._need.count), _statusBar._packages._need.colourTwo, position);
-};
-
-
-void Surround::newSetter (void) {
-  //add: new setter
-  //add: new couter
-};
-
-
-void Surround::colourInserter (std::string str, WORD colour, COORD pos) {
-  GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-  SetConsoleCursorPosition (consoleOutput, pos);
-  SetConsoleTextAttribute (consoleOutput, colour);
-  std::cout << str;
 };
