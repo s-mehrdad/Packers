@@ -1,4 +1,10 @@
-﻿
+﻿// ********************************************************************************
+/// <summary>
+/// 
+/// </summary>
+/// <created>ʆϒʅ,13.10.2018</created>
+/// <changed>ʆϒʅ,13.11.2018</changed>
+// ********************************************************************************
 
 #include "pch.h"
 #include "Shared.h"
@@ -15,7 +21,6 @@ bool MenusFlag { false };
 bool protectedSetCursor { false };
 bool bereitOne { false };
 bool bereitTwo { false };
-
 
 
 void loading (void) {
@@ -53,83 +58,81 @@ void loading (void) {
 }
 
 
-//void pressed (unsigned char menu[], bool flag) {
-//  do {
-//    if (GetAsyncKeyState (VK_DOWN)) {
-//      if (menu[0] == 1 && flag == false) {
-//        surroundo
-//
-//          do {} while (protectedSetCursor == true);
-//        gotoXY (64, 21); ColourCout (u8"  ", F_bRED);
-//        do {} while (protectedSetCursor == true);
-//        gotoXY (64, 22); ColourCout (u8"->", F_bRED);
-//        menu[0] = 2;
-//        flag = true;
-//      }
-//      else
-//        if (menu[0] == 2 && flag == false) {
-//          do {} while (protectedSetCursor == true);
-//          gotoXY (64, 22); ColourCout (u8"  ", F_bRED);
-//          do {} while (protectedSetCursor == true);
-//          gotoXY (64, 23); ColourCout (u8"->", F_bRED);
-//          menu[0] = 3;
-//          flag = true;
-//        }
-//      flag = false;
-//    }
-//    if (GetAsyncKeyState (VK_UP)) {
-//      if (menu[0] == 2 && flag == false) {
-//        do {} while (protectedSetCursor == true);
-//        gotoXY (64, 21); ColourCout (u8"->", F_bRED);
-//        do {} while (protectedSetCursor == true);
-//        gotoXY (64, 22); ColourCout (u8"  ", F_bRED);
-//        menu[0] = 1;
-//        flag = true;
-//      }
-//      else
-//        if (menu[0] == 3 && flag == false) {
-//          do {} while (protectedSetCursor == true);
-//          gotoXY (64, 22); ColourCout (u8"->", F_bRED);
-//          do {} while (protectedSetCursor == true);
-//          gotoXY (64, 23); ColourCout (u8"  ", F_bRED);
-//          menu[0] = 2;
-//          flag = true;
-//        }
-//      flag = false;
-//    }
-//    if (GetAsyncKeyState (VK_LEFT)) {
-//
-//    }
-//    if (GetAsyncKeyState (VK_RIGHT)) {
-//
-//    }
-//    if (GetAsyncKeyState (VK_RETURN)) {
-//      if (menu[0] == 1 && flag == false) {
-//        do {} while (protectedSetCursor == true);
-//        gotoXY (64, 21); ColourCout (u8"-> Involve me!", F_RED);
-//        break;
-//      }
-//      else
-//        if (menu[0] == 3 && flag == false) {
-//          running = false;
-//        }
-//    }
-//    std::this_thread::sleep_for (std::chrono::milliseconds (200));
-//
-//    //bereitOne = false;
-//
-//    //// awakening signal to continue
-//    //  {
-//    //    std::lock_guard<std::mutex> lk (m);
-//    //    bereitTwo = true;
-//    //    cv.notify_one ();
-//    //  }
-//
-//    //// wait for awakening signal
-//    //{
-//    //  std::unique_lock < std::mutex >lk (m);
-//    //  cv.wait (lk, [] {return bereitOne; });
-//    //}
-//
-//  } while (running);
-//}
+void pressed (unsigned char menu[], bool flag) {
+  //do {
+  //  if (GetAsyncKeyState (VK_DOWN)) {
+  //    if (menu[0] == 1 && flag == false) {
+  //      do {} while (protectedSetCursor == true);
+  //      gotoXY (64, 21); ColourCout (u8"  ", F_bRED);
+  //      do {} while (protectedSetCursor == true);
+  //      gotoXY (64, 22); ColourCout (u8"->", F_bRED);
+  //      menu[0] = 2;
+  //      flag = true;
+  //    }
+  //    else
+  //      if (menu[0] == 2 && flag == false) {
+  //        do {} while (protectedSetCursor == true);
+  //        gotoXY (64, 22); ColourCout (u8"  ", F_bRED);
+  //        do {} while (protectedSetCursor == true);
+  //        gotoXY (64, 23); ColourCout (u8"->", F_bRED);
+  //        menu[0] = 3;
+  //        flag = true;
+  //      }
+  //    flag = false;
+  //  }
+  //  if (GetAsyncKeyState (VK_UP)) {
+  //    if (menu[0] == 2 && flag == false) {
+  //      do {} while (protectedSetCursor == true);
+  //      gotoXY (64, 21); ColourCout (u8"->", F_bRED);
+  //      do {} while (protectedSetCursor == true);
+  //      gotoXY (64, 22); ColourCout (u8"  ", F_bRED);
+  //      menu[0] = 1;
+  //      flag = true;
+  //    }
+  //    else
+  //      if (menu[0] == 3 && flag == false) {
+  //        do {} while (protectedSetCursor == true);
+  //        gotoXY (64, 22); ColourCout (u8"->", F_bRED);
+  //        do {} while (protectedSetCursor == true);
+  //        gotoXY (64, 23); ColourCout (u8"  ", F_bRED);
+  //        menu[0] = 2;
+  //        flag = true;
+  //      }
+  //    flag = false;
+  //  }
+  //  if (GetAsyncKeyState (VK_LEFT)) {
+
+  //  }
+  //  if (GetAsyncKeyState (VK_RIGHT)) {
+
+  //  }
+  //  if (GetAsyncKeyState (VK_RETURN)) {
+  //    if (menu[0] == 1 && flag == false) {
+  //      do {} while (protectedSetCursor == true);
+  //      gotoXY (64, 21); ColourCout (u8"-> Involve me!", F_RED);
+  //      break;
+  //    }
+  //    else
+  //      if (menu[0] == 3 && flag == false) {
+  //        running = false;
+  //      }
+  //  }
+  //  std::this_thread::sleep_for (std::chrono::milliseconds (200));
+
+  //  //bereitOne = false;
+
+  //  //// awakening signal to continue
+  //  //  {
+  //  //    std::lock_guard<std::mutex> lk (m);
+  //  //    bereitTwo = true;
+  //  //    cv.notify_one ();
+  //  //  }
+
+  //  //// wait for awakening signal
+  //  //{
+  //  //  std::unique_lock < std::mutex >lk (m);
+  //  //  cv.wait (lk, [] {return bereitOne; });
+  //  //}
+
+  //} while (running);
+}

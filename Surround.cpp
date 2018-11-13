@@ -1,4 +1,10 @@
-﻿
+﻿// ********************************************************************************
+/// <summary>
+/// 
+/// </summary>
+/// <created>ʆϒʅ,06.11.2018</created>
+/// <changed>ʆϒʅ,13.11.2018</changed>
+// ********************************************************************************
 
 #include "pch.h"
 #include "Surround.h"
@@ -197,13 +203,14 @@ void Surround::menusSetter (unsigned short choice, bool confirm) {
     if (confirm != true) {
       for (unsigned char i = 0; i < 3; i++) {
         colourInserter (u8"  ", _menus._dangerAreaChoices._selectionSign.colour, pos);
-        pos.Y += i;
+        pos.Y++;
       }
       pos = _menus._dangerAreaChoices._selectionSign.startPoint;
       if (direction == 0)
         pos.Y += ((choice % 100) / 10);
       else
-        pos.Y -= ((choice % 100) / 10);
+        if (((choice % 100) % 10) == 1)
+          pos.Y += ((choice % 100) / 10);
       colourInserter (_menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, pos);
     }
     else

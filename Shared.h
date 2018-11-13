@@ -1,3 +1,11 @@
+﻿// ********************************************************************************
+/// <summary>
+/// 
+/// </summary>
+/// <created>ʆϒʅ,13.10.2018</created>
+/// <changed>ʆϒʅ,13.11.2018</changed>
+// ********************************************************************************
+
 #pragma once
 
 
@@ -17,7 +25,7 @@ extern bool bereitOne;
 extern bool bereitTwo;
 
 void loading (void);
-//void pressed (unsigned char[], bool);
+void pressed (unsigned char[], bool);
 
 
 #endif // !SHARED_H
