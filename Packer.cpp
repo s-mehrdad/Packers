@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.11.2018</changed>
+/// <changed>ʆϒʅ,14.11.2018</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -20,8 +20,8 @@
 #define DELAY_FOUR 602
 
 
-std::mutex m;
-std::condition_variable cv;
+//std::mutex m;
+//std::condition_variable cv;
 struct queueFeed QF, blinkA, blinkB, packed, ready, NuLL;
 
 //bool sorted { false };

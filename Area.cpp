@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.11.2018</changed>
+/// <changed>ʆϒʅ,14.11.2018</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -33,31 +33,31 @@ Area::Area (unsigned char mode) :rows (19), columns (89) {
 
         // left top edge
         if (y == 1 && x == 1)
-          ColourCout (stuff.edges[0], F_PINK);
-        ColourCout (stuff.hWalls, F_PINK);
+          ColourCout (stuff.edges[0], F_bPURPLE);
+        ColourCout (stuff.hWalls, F_bPURPLE);
       }
 
       // right top edge
       if (y == 1 && x == 89)
-        ColourCout (stuff.edges[3], F_PINK);
+        ColourCout (stuff.edges[3], F_bPURPLE);
 
       // left bottom edge
       if (y == 19 && x == 1)
-        ColourCout (stuff.edges[1], F_PINK);
+        ColourCout (stuff.edges[1], F_bPURPLE);
 
       // second horizontal wall
       if (y == 19 && x != 89)
-        ColourCout (stuff.hWalls, F_PINK);
+        ColourCout (stuff.hWalls, F_bPURPLE);
       else
         // right bottom edge
         if (y == 19 && x == 89)
-          ColourCout (stuff.edges[2], F_PINK);
+          ColourCout (stuff.edges[2], F_bPURPLE);
         else
 
           // vertical walls
           if (x == 1 || x == 89)
             if (y != 1)
-              ColourCout (stuff.vWalls, F_PINK);
+              ColourCout (stuff.vWalls, F_bPURPLE);
 
       if (mode == 0) {
         // packs

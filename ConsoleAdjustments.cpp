@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,07.10.2018</created>
-/// <changed>ʆϒʅ,13.11.2018</changed>
+/// <changed>ʆϒʅ,14.11.2018</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -68,7 +68,5 @@ void gotoXY (int x, int y) {
   COORD Position;
   Position.X = x;
   Position.Y = y;
-  protectedSetCursor = true;
   SetConsoleCursorPosition (consoleOutput, Position);
-  protectedSetCursor = false;
 }

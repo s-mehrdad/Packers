@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,13.11.2018</changed>
+/// <changed>ʆϒʅ,14.11.2018</changed>
 // ********************************************************************************
 
 #pragma once
@@ -23,8 +23,13 @@ class Surround {
 public:
   Surround (unsigned char);
   void newSetter (void);
+
+  void guidesCouter (void);
+  void dangerMenuCouter (void);
+  void otherMenusCouter (void);
+  void statusCouter (void);
+
   static void colourInserter (std::string, WORD, COORD);
-  static void allCouter (void);
   static void menusSetter (unsigned short, bool);
 };
 
