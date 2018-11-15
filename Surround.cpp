@@ -31,12 +31,12 @@ struct Surround::menus {
       u8"  Hollow age.      . .            ." ,
       u8"  Dirty age (packers of packers contest!)" };
     WORD colour { F_bWHITE };
-    COORD startPoint { 3,20 };
+    COORD startPoint { 5,20 };
     unsigned short selected { 300 };
     struct selectionSign {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { 1,21 };
+      COORD startPoint { 3,21 };
     } _selectionSign;
   } _ageChoices;
 
@@ -177,6 +177,16 @@ struct Surround::statusBar {
 } _statusBar;
 
 
+struct Surround::loadingBar {
+  std::string characters[9] { u8"L", u8"O", u8"A", u8"D", u8"I", u8"N", u8"G", u8"#", u8" " };
+  std::string copywrite { u8"  ©: ʆϒʅ" };
+  WORD colourOne { B_bBLUE | F_bWHITE };
+  WORD colourTwo { B_BLACK | F_bGREEN };
+  WORD colourThree { B_BLACK | F_bWHITE };
+  COORD startPoint { SCREEN_W - 10, SCREEN_H - 1 };
+} _loadingBar;
+
+
 Surround::Surround (unsigned char mode) {
   // set
   _statusBar._packers.count = Packer::count;
@@ -187,6 +197,7 @@ Surround::Surround (unsigned char mode) {
   dangerMenuCouter ();
   otherMenusCouter ();
   statusCouter ();
+  loadingCouter ();
 };
 
 
@@ -297,6 +308,54 @@ void Surround::statusCouter (void) {
   colourInserter (_statusBar._packages._need.str, _statusBar._packages._need.colourOne, position);
   position.Y += 1;
   colourInserter (std::to_string (_statusBar._packages._need.count), _statusBar._packages._need.colourTwo, position);
+}
+
+
+void Surround::loadingCouter (void) {
+  COORD position { _loadingBar.startPoint };
+  for (unsigned char i = 0; i < 7; i++) {
+    colourInserter (_loadingBar.characters[i], _loadingBar.colourOne, position);
+    std::this_thread::sleep_for (std::chrono::milliseconds (100));
+    position.X += 1;
+  }
+  for (unsigned char i = 1; i <= 3; i++) {
+    colourInserter (_loadingBar.characters[7], _loadingBar.colourTwo, position);
+    std::this_thread::sleep_for (std::chrono::milliseconds (150));
+    colourInserter (_loadingBar.characters[8], _loadingBar.colourTwo, position);
+    std::this_thread::sleep_for (std::chrono::milliseconds (200));
+  }
+  std::this_thread::sleep_for (std::chrono::milliseconds (200));
+  colourInserter (_loadingBar.copywrite, _loadingBar.colourThree, _loadingBar.startPoint);
+
+
+
+
+  //gotoXY (44, y); ColourCout (u8"L", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
+  //gotoXY (45, y); ColourCout (u8"O", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
+  //gotoXY (46, y); ColourCout (u8"A", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
+  //gotoXY (47, y); ColourCout (u8"D", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
+  //gotoXY (48, y); ColourCout (u8"I", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
+  //gotoXY (49, y); ColourCout (u8"N", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
+  //gotoXY (50, y); ColourCout (u8"G", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (500));
+  //gotoXY (48, y); ColourCout (u8" ", 0x3f);
+  //gotoXY (49, y); ColourCout (u8" ", 0x3f);
+  //gotoXY (50, y); ColourCout (u8" ", 0x3f);
+  //gotoXY (54, y); ColourCout (u8"━", F_bPURPLE);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (100));
+  //gotoXY (48, y); ColourCout (u8"E", 0x3f);
+  //gotoXY (49, y); ColourCout (u8"D", 0x3f);
+  //std::this_thread::sleep_for (std::chrono::milliseconds (500));
+  //for (int x = 53; x >= 40; x--) {
+  //  gotoXY (x, y); ColourCout (u8"━", F_bPURPLE);
+  //  std::this_thread::sleep_for (std::chrono::milliseconds (50));
+  //}
 };
 
 

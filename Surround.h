@@ -19,7 +19,7 @@ class Surround {
   struct guideBar;
   struct statusBar;
   //struct infoBar;
-  //bool running;
+  struct loadingBar;
 public:
   Surround (unsigned char);
   void newSetter (void);
@@ -28,6 +28,7 @@ public:
   void dangerMenuCouter (void);
   void otherMenusCouter (void);
   void statusCouter (void);
+  void loadingCouter (void);
 
   static void colourInserter (std::string, WORD, COORD);
   static void menusSetter (unsigned short, bool);
