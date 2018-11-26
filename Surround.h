@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,14.11.2018</changed>
+/// <changed>ʆϒʅ,15.11.2018</changed>
 // ********************************************************************************
 
 #pragma once
@@ -14,7 +14,7 @@
 
 
 class Surround {
-  struct titelBar;
+  struct titleBar;
   struct menus;
   struct guideBar;
   struct statusBar;

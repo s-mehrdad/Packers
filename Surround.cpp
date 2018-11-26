@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,14.11.2018</changed>
+/// <changed>ʆϒʅ,15.11.2018</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -14,14 +14,20 @@
 #include "Packer.h"
 
 
-struct Surround::titelBar {
-  std::string titelSentence { u8"Feel free to way in as a packer toward becoming an advanced packer ♥♥♥♥♥ :)" };
+struct Surround::titleBar {
+  std::string titleSentence { u8"Feel free to way in as a packer toward becoming an advanced packer! ♥♥♥♥♥ :)" };
   WORD colour { F_bBLUE };
   COORD startPoint { 7,0 };
 } _titleBar;
 
 
 struct Surround::menus {
+  struct wayInDecision {
+    std::string titleSentence { u8"Press that enter key ._." };
+    WORD colour { F_bWHITE };
+    COORD startPoint { 33,22 };
+  } _wayInDecision;
+
   struct agesChoices {
     std::string title { u8"Packing speed:" };
     std::string options[5] {
@@ -196,6 +202,7 @@ Surround::Surround (unsigned char mode) {
   guidesCouter ();
   dangerMenuCouter ();
   otherMenusCouter ();
+  //colourInserter (_menus._wayInDecision.titleSentence, _menus._wayInDecision.colour, _menus._wayInDecision.startPoint);
   statusCouter ();
   loadingCouter ();
 };
@@ -211,7 +218,7 @@ void Surround::guidesCouter (void) {
   COORD position { 0,0 };
 
   // titleBar
-  colourInserter (_titleBar.titelSentence, _titleBar.colour, _titleBar.startPoint);
+  colourInserter (_titleBar.titleSentence, _titleBar.colour, _titleBar.startPoint);
 
   // guideBar
   position = _GuideBar.startPoint;
@@ -326,36 +333,6 @@ void Surround::loadingCouter (void) {
   }
   std::this_thread::sleep_for (std::chrono::milliseconds (200));
   colourInserter (_loadingBar.copywrite, _loadingBar.colourThree, _loadingBar.startPoint);
-
-
-
-
-  //gotoXY (44, y); ColourCout (u8"L", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
-  //gotoXY (45, y); ColourCout (u8"O", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
-  //gotoXY (46, y); ColourCout (u8"A", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
-  //gotoXY (47, y); ColourCout (u8"D", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
-  //gotoXY (48, y); ColourCout (u8"I", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
-  //gotoXY (49, y); ColourCout (u8"N", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (60));
-  //gotoXY (50, y); ColourCout (u8"G", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (500));
-  //gotoXY (48, y); ColourCout (u8" ", 0x3f);
-  //gotoXY (49, y); ColourCout (u8" ", 0x3f);
-  //gotoXY (50, y); ColourCout (u8" ", 0x3f);
-  //gotoXY (54, y); ColourCout (u8"━", F_bPURPLE);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (100));
-  //gotoXY (48, y); ColourCout (u8"E", 0x3f);
-  //gotoXY (49, y); ColourCout (u8"D", 0x3f);
-  //std::this_thread::sleep_for (std::chrono::milliseconds (500));
-  //for (int x = 53; x >= 40; x--) {
-  //  gotoXY (x, y); ColourCout (u8"━", F_bPURPLE);
-  //  std::this_thread::sleep_for (std::chrono::milliseconds (50));
-  //}
 };
 
 

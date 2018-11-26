@@ -14,12 +14,6 @@
 #include "Surround.h"
 
 
-#define DELAY_ONE 202
-#define DELAY_TWO 302
-#define DELAY_THREE 502
-#define DELAY_FOUR 602
-
-
 //std::mutex m;
 //std::condition_variable cv;
 struct queueFeed QF, blinkA, blinkB, packed, ready, NuLL;
