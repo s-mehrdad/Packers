@@ -26,6 +26,17 @@ struct Surround::menus {
     std::string titleSentence { u8"Press that enter key ._." };
     WORD colour { F_bWHITE };
     COORD startPoint { 33,22 };
+    bool set { false };
+    void inserter () {
+      if (set == true) {
+        colourInserter (u8"                        ", _menus._wayInDecision.colour, _menus._wayInDecision.startPoint);
+        set = false;
+      }
+      else {
+        colourInserter (_menus._wayInDecision.titleSentence, _menus._wayInDecision.colour, _menus._wayInDecision.startPoint);
+        set = true;
+      }
+    };
   } _wayInDecision;
 
   struct agesChoices {
@@ -44,6 +55,19 @@ struct Surround::menus {
       WORD colour { F_bRED };
       COORD startPoint { 3,21 };
     } _selectionSign;
+    void inserter () {
+      COORD position { 0,0 };
+
+      // ageChoicesMenu
+      position = startPoint;
+      colourInserter (title, colour, position);
+      position.Y += 1;
+      for (char i = 0; i < 5; i++) {
+        colourInserter (options[i], colour, position);
+        position.Y += 1;
+      }
+      colourInserter (_selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint);
+    }
   } _ageChoices;
 
   struct characterChoices {
@@ -57,8 +81,21 @@ struct Surround::menus {
     struct selectionSign {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { 39,21 };
+      COORD startPoint { 43,21 };
     } _selectionSign;
+    void inserter () {
+      COORD position { 0,0 };
+
+      // characterCoicesMenu
+      position = startPoint;
+      colourInserter (title, colour, position);
+      position.X += 3;
+      position.Y += 1;
+      colourInserter (options[0], colour, position);
+      position.X += 5;
+      colourInserter (options[1], colour, position);
+      colourInserter (_selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint);
+    }
   } _characterChoices;
 
   struct dangerAreaChoices {
@@ -75,6 +112,19 @@ struct Surround::menus {
       WORD colour { F_bRED };
       COORD startPoint { 63,21 };
     } _selectionSign;
+    void inserter () {
+      COORD position { 0,0 };
+
+      // dangerAreaChoicesMenu
+      position = startPoint;
+      colourInserter (title, colour, position);
+      position.Y += 1;
+      for (char i = 0; i < 3; i++) {
+        colourInserter (options[i], colour, position);
+        position.Y += 1;
+      }
+      colourInserter (_selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint);
+    }
   } _dangerAreaChoices;
 }_menus;
 
@@ -193,6 +243,12 @@ struct Surround::loadingBar {
 } _loadingBar;
 
 
+//to be added: funny literature of the game
+struct Surround::storyLine {
+
+} _storyLine;
+
+
 Surround::Surround (unsigned char mode) {
   // set
   _statusBar._packers.count = Packer::count;
@@ -200,9 +256,7 @@ Surround::Surround (unsigned char mode) {
 
   // cout
   guidesCouter ();
-  dangerMenuCouter ();
-  otherMenusCouter ();
-  //colourInserter (_menus._wayInDecision.titleSentence, _menus._wayInDecision.colour, _menus._wayInDecision.startPoint);
+  _menus._wayInDecision.inserter ();
   statusCouter ();
   loadingCouter ();
 };
@@ -234,45 +288,6 @@ void Surround::guidesCouter (void) {
     colourInserter (_GuideBar._guides.parts[i], _GuideBar._guides.colour, position);
     position = _GuideBar.startPoint;
   }
-};
-
-
-void Surround::dangerMenuCouter () {
-  COORD position { 0,0 };
-
-  // dangerAreaChoicesMenu
-  position = _menus._dangerAreaChoices.startPoint;
-  colourInserter (_menus._dangerAreaChoices.title, _menus._dangerAreaChoices.colour, position);
-  position.Y += 1;
-  for (char i = 0; i < 3; i++) {
-    colourInserter (_menus._dangerAreaChoices.options[i], _menus._dangerAreaChoices.colour, position);
-    position.Y += 1;
-  }
-  colourInserter (_menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, _menus._dangerAreaChoices._selectionSign.startPoint);
-};
-
-
-void Surround::otherMenusCouter (void) {
-  COORD position { 0,0 };
-
-  // ageChoicesMenu
-  position = _menus._ageChoices.startPoint;
-  colourInserter (_menus._ageChoices.title, _menus._ageChoices.colour, position);
-  position.Y += 1;
-  for (char i = 0; i < 5; i++) {
-    colourInserter (_menus._ageChoices.options[i], _menus._ageChoices.colour, position);
-    position.Y += 1;
-  }
-  colourInserter (_menus._ageChoices._selectionSign.sign, _menus._ageChoices._selectionSign.colour, _menus._ageChoices._selectionSign.startPoint);
-
-  // characterCoicesMenu
-  colourInserter (_menus._characterChoices.title, _menus._characterChoices.colour, _menus._characterChoices.startPoint);
-  position = _menus._characterChoices.startPoint;
-  position.Y += 1;
-  colourInserter (_menus._characterChoices.options[0], _menus._characterChoices.colour, position);
-  position.X += 5;
-  colourInserter (_menus._characterChoices.options[1], _menus._characterChoices.colour, position);
-  colourInserter (_menus._characterChoices._selectionSign.sign, _menus._characterChoices._selectionSign.colour, _menus._characterChoices._selectionSign.startPoint);
 };
 
 
@@ -345,27 +360,37 @@ void Surround::colourInserter (std::string str, WORD colour, COORD pos) {
 
 
 void Surround::menusSetter (unsigned short choice, bool confirm) {
-  COORD pos;
-  unsigned short find { static_cast<unsigned short>(choice / 100) };
-  unsigned short direction { static_cast<unsigned short>(choice % 2) };
-  pos = _menus._dangerAreaChoices._selectionSign.startPoint;
-  if (find == 1) {
-    if (confirm != true) {
-      pos.Y += (_menus._dangerAreaChoices.selected % 100) / 10;
-      colourInserter (u8"  ", _menus._dangerAreaChoices._selectionSign.colour, pos);
-      _menus._dangerAreaChoices.selected = choice;
-      pos = _menus._dangerAreaChoices._selectionSign.startPoint;
-      if (direction == 0)
-        pos.Y += (choice % 100) / 10;
-      else
-        if (((choice % 100) % 10) == 1)
-          pos.Y += (choice % 100) / 10;
-      colourInserter (_menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, pos);
+  if (choice == 000) {
+    if (_menus._wayInDecision.set == true) {
+      _menus._wayInDecision.inserter ();
+      _menus._ageChoices.inserter ();
+      _menus._characterChoices.inserter ();
+      _menus._dangerAreaChoices.inserter ();
     }
-    else
-      if (choice == 100) {
-        pos.X += 2;
-        colourInserter (_menus._dangerAreaChoices.options[0], F_bRED, pos);
+  }
+  else {
+    COORD pos;
+    unsigned short find { static_cast<unsigned short>(choice / 100) };
+    unsigned short direction { static_cast<unsigned short>(choice % 2) };
+    pos = _menus._dangerAreaChoices._selectionSign.startPoint;
+    if (find == 1) {
+      if (confirm != true) {
+        pos.Y += (_menus._dangerAreaChoices.selected % 100) / 10;
+        colourInserter (u8"  ", _menus._dangerAreaChoices._selectionSign.colour, pos);
+        _menus._dangerAreaChoices.selected = choice;
+        pos = _menus._dangerAreaChoices._selectionSign.startPoint;
+        if (direction == 0)
+          pos.Y += (choice % 100) / 10;
+        else
+          if (((choice % 100) % 10) == 1)
+            pos.Y += (choice % 100) / 10;
+        colourInserter (_menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, pos);
       }
+      else
+        if (choice == 100) {
+          pos.X += 2;
+          colourInserter (_menus._dangerAreaChoices.options[0], F_bRED, pos);
+        }
+    }
   }
 };

@@ -18,8 +18,8 @@ class Surround {
   struct menus;
   struct guideBar;
   struct statusBar;
-  //struct infoBar;
   struct loadingBar;
+  struct storyLine;
 public:
   Surround (unsigned char);
   void newSetter (void);
