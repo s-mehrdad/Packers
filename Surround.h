@@ -24,12 +24,6 @@ public:
   Surround (unsigned char);
   void newSetter (void);
 
-  void guidesCouter (void);
-  void dangerMenuCouter (void);
-  void otherMenusCouter (void);
-  void statusCouter (void);
-  void loadingCouter (void);
-
   static void colourInserter (std::string, WORD, COORD);
   static void menusSetter (unsigned short, bool);
 };

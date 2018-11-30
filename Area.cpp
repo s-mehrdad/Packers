@@ -31,58 +31,73 @@ struct Area::materials {
 } _materials;
 
 
-Area::Area (unsigned char mode, unsigned char height, unsigned char width) :rows (height), columns (width) {
-
-  COORD position;
-  for (int y = 1; y <= rows; y++) {
-    for (int x = 1; x <= columns; x++) {
-      position.X = x;
-      position.Y = y;
-      colourInserter (position);
-
-      // first horizontal wall
-      if (y == 1 && x != columns) {
-
-        // left top edge
-        if (y == 1 && x == 1)
-          colourInserter (_materials._walls.edges[0], _materials._walls.colour);
-        colourInserter (_materials._walls.hWalls, _materials._walls.colour);
-      }
-
-      // right top edge
-      if (y == 1 && x == columns)
-        colourInserter (_materials._walls.edges[3], _materials._walls.colour);
-
-      // left bottom edge
-      if (y == rows && x == 1)
-        colourInserter (_materials._walls.edges[1], _materials._walls.colour);
-
-      // second horizontal wall
-      if (y == rows && x != columns)
-        colourInserter (_materials._walls.hWalls, _materials._walls.colour);
-      else
-        // right bottom edge
-        if (y == rows && x == columns)
-          colourInserter (_materials._walls.edges[2], _materials._walls.colour);
-        else
-
-          // vertical walls
-          if (x == 1 || x == columns)
-            if (y != 1)
-              colourInserter (_materials._walls.vWalls, _materials._walls.colour);
-
-      if (mode == 0) {
-        // packs
-        if (y != 1 && y != rows && y % 2 == 0)
-          if (x != 1 && x != columns && x % 2 == 0)
-            //if (j!=11&&j!=99)
-            colourInserter (_materials._resources.pack, _materials._resources.colourOne);
-      }
-      std::cout << '\n';
-    }
-  }
+Area::Area (unsigned char mode, unsigned char height, unsigned char width) :rows (height), columns (width), age (mode) {
+  inserter ();
 };
-//Area(//userchoice) :rows (),columns() {};
+
+
+void Area::inserter () {
+    COORD position;
+    for (int y = 1; y <= rows; y++) {
+      for (int x = 1; x <= columns; x++) {
+        position.X = x;
+        position.Y = y;
+        colourInserter (position);
+
+        // first horizontal wall
+        if (y == 1 && x != columns) {
+
+          // left top edge
+          if (y == 1 && x == 1)
+            colourInserter (_materials._walls.edges[0], _materials._walls.colour);
+          colourInserter (_materials._walls.hWalls, _materials._walls.colour);
+        }
+
+        // right top edge
+        if (y == 1 && x == columns)
+          colourInserter (_materials._walls.edges[3], _materials._walls.colour);
+
+        // left bottom edge
+        if (y == rows && x == 1)
+          colourInserter (_materials._walls.edges[1], _materials._walls.colour);
+
+        // second horizontal wall
+        if (y == rows && x != columns)
+          colourInserter (_materials._walls.hWalls, _materials._walls.colour);
+        else
+          // right bottom edge
+          if (y == rows && x == columns)
+            colourInserter (_materials._walls.edges[2], _materials._walls.colour);
+          else
+
+            // vertical walls
+            if (x == 1 || x == columns)
+              if (y != 1)
+                colourInserter (_materials._walls.vWalls, _materials._walls.colour);
+
+        if (age == 0) {
+          // packs
+          if (y != 1 && y != rows && y % 2 == 0)
+            if (x != 1 && x != columns && x % 2 == 0)
+              //if (j!=11&&j!=99)
+              colourInserter (_materials._resources.pack, _materials._resources.colourOne);
+        }
+        std::cout << '\n';
+      }
+    }
+};
+
+
+void Area::colourInserter (COORD pos) {
+  SetConsoleCursorPosition (consoleOutput, pos);
+};
+
+
+void Area::colourInserter (std::string str, WORD colour) {
+  GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
+  SetConsoleTextAttribute (consoleOutput, colour);
+  std::cout << str;
+};
 
 
 void Area::green (COORD position) {
@@ -132,15 +147,3 @@ void Area::green (COORD position) {
 void Area::yellow (COORD position) {}
 void Area::red (COORD position) {}
 void Area::fullPacked () {}
-
-
-void Area::colourInserter (COORD pos) {
-  SetConsoleCursorPosition (consoleOutput, pos);
-};
-
-
-void Area::colourInserter (std::string str, WORD colour) {
-  GetConsoleScreenBufferInfoEx (consoleOutput, &screenBinfoEX);
-  SetConsoleTextAttribute (consoleOutput, colour);
-  std::cout << str;
-};

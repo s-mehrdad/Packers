@@ -18,6 +18,12 @@ struct Surround::titleBar {
   std::string titleSentence { u8"Feel free to way in as a packer toward becoming an advanced packer! ♥♥♥♥♥ :)" };
   WORD colour { F_bBLUE };
   COORD startPoint { 7,0 };
+  void inserter () {
+    COORD position { 0,0 };
+
+    // titleBar
+    colourInserter (titleSentence, colour, startPoint);
+  }
 } _titleBar;
 
 
@@ -25,15 +31,15 @@ struct Surround::menus {
   struct wayInDecision {
     std::string titleSentence { u8"Press that enter key ._." };
     WORD colour { F_bWHITE };
-    COORD startPoint { 33,22 };
+    COORD startPoint { 33,25 };
     bool set { false };
     void inserter () {
       if (set == true) {
-        colourInserter (u8"                        ", _menus._wayInDecision.colour, _menus._wayInDecision.startPoint);
+        colourInserter (u8"                        ", colour, startPoint);
         set = false;
       }
       else {
-        colourInserter (_menus._wayInDecision.titleSentence, _menus._wayInDecision.colour, _menus._wayInDecision.startPoint);
+        colourInserter (titleSentence, colour, startPoint);
         set = true;
       }
     };
@@ -147,6 +153,24 @@ struct Surround::guideBar {
     };
     WORD colour { F_bBLUE };
   } _guides;
+  void inserter () {
+    COORD position { 0,0 };
+
+    // guideBar
+    position = startPoint;
+    for (char i = 0; i < 3; i++) {
+      if (i == 0)
+        colourInserter (_signs.parts[i], _signs.colourOne, position);
+      else {
+        position.X += static_cast<int>((pow (6, i) + 30));
+        if (i == 1) position.X -= 3;
+        colourInserter (_signs.parts[i], _signs.colourTwo, position);
+      }
+      position.X += 2;
+      colourInserter (_guides.parts[i], _guides.colour, position);
+      position = startPoint;
+    }
+  }
 } _GuideBar;
 
 
@@ -230,6 +254,46 @@ struct Surround::statusBar {
       COORD point { 91,23 };
     } _need;
   } _packages;
+  void inserter () {
+    COORD position { 0,0 };
+
+    // statusBar
+    colourInserter (title, colour, startPoint);
+
+    position = _packers.point;
+    colourInserter (_packers.str, _packers.colourOne, position);
+    position.X += 9;
+    colourInserter (std::to_string (_packers.count), _packers.colourTwo, position);
+
+    position = _age.point;
+    colourInserter (_age.str, _age.colourOne, position);
+    position.Y += 1;
+    colourInserter (_age.ages[_age.id], _age.colourTwo, position);
+
+    colourInserter (_resources.str, _resources.colour, _resources.startPoint);
+    position = _resources._healthy.point;
+    colourInserter (_resources._healthy.str, _resources._healthy.colourOne, position);
+    position.X += 9;
+    colourInserter (std::to_string (_resources._healthy.count), _resources._healthy.colourTwo, position);
+    position = _resources._renewed.point;
+    colourInserter (_resources._renewed.str, _resources._renewed.colourOne, position);
+    position.X += 9;
+    colourInserter (std::to_string (_resources._renewed.count), _resources._renewed.colourTwo, position);
+    position = _resources._vanished.point;
+    colourInserter (_resources._vanished.str, _resources._vanished.colourOne, position);
+    position.X += 10;
+    colourInserter (std::to_string (_resources._vanished.count), _resources._vanished.colourTwo, position);
+
+    colourInserter (_packages.str, _packages.colour, _packages.startPoint);
+    position = _packages._have.point;
+    colourInserter (_packages._have.str, _packages._have.colourOne, position);
+    position.Y += 1;
+    colourInserter (std::to_string (_packages._have.count), _packages._have.colourTwo, position);
+    position = _packages._need.point;
+    colourInserter (_packages._need.str, _packages._need.colourOne, position);
+    position.Y += 1;
+    colourInserter (std::to_string (_packages._need.count), _packages._need.colourTwo, position);
+  }
 } _statusBar;
 
 
@@ -240,6 +304,22 @@ struct Surround::loadingBar {
   WORD colourTwo { B_BLACK | F_bGREEN };
   WORD colourThree { B_BLACK | F_bWHITE };
   COORD startPoint { SCREEN_W - 10, SCREEN_H - 1 };
+  void inserter () {
+    COORD position { startPoint };
+    for (unsigned char i = 0; i < 7; i++) {
+      colourInserter (characters[i], colourOne, position);
+      std::this_thread::sleep_for (std::chrono::milliseconds (100));
+      position.X += 1;
+    }
+    for (unsigned char i = 1; i <= 3; i++) {
+      colourInserter (characters[7], colourTwo, position);
+      std::this_thread::sleep_for (std::chrono::milliseconds (150));
+      colourInserter (characters[8], colourTwo, position);
+      std::this_thread::sleep_for (std::chrono::milliseconds (200));
+    }
+    std::this_thread::sleep_for (std::chrono::milliseconds (200));
+    colourInserter (copywrite, colourThree, startPoint);
+  }
 } _loadingBar;
 
 
@@ -255,99 +335,17 @@ Surround::Surround (unsigned char mode) {
   _statusBar._age.id = mode;
 
   // cout
-  guidesCouter ();
+  _titleBar.inserter ();
+  _GuideBar.inserter ();
   _menus._wayInDecision.inserter ();
-  statusCouter ();
-  loadingCouter ();
+  _statusBar.inserter ();
+  _loadingBar.inserter ();
 };
 
 
 void Surround::newSetter (void) {
   //add: new setter
   //add: new couter
-};
-
-
-void Surround::guidesCouter (void) {
-  COORD position { 0,0 };
-
-  // titleBar
-  colourInserter (_titleBar.titleSentence, _titleBar.colour, _titleBar.startPoint);
-
-  // guideBar
-  position = _GuideBar.startPoint;
-  for (char i = 0; i < 3; i++) {
-    if (i == 0)
-      colourInserter (_GuideBar._signs.parts[i], _GuideBar._signs.colourOne, position);
-    else {
-      position.X += static_cast<int>((pow (6, i) + 30));
-      if (i == 1) position.X -= 3;
-      colourInserter (_GuideBar._signs.parts[i], _GuideBar._signs.colourTwo, position);
-    }
-    position.X += 2;
-    colourInserter (_GuideBar._guides.parts[i], _GuideBar._guides.colour, position);
-    position = _GuideBar.startPoint;
-  }
-};
-
-
-void Surround::statusCouter (void) {
-  COORD position { 0,0 };
-
-  // statusBar
-  colourInserter (_statusBar.title, _statusBar.colour, _statusBar.startPoint);
-
-  position = _statusBar._packers.point;
-  colourInserter (_statusBar._packers.str, _statusBar._packers.colourOne, position);
-  position.X += 9;
-  colourInserter (std::to_string (_statusBar._packers.count), _statusBar._packers.colourTwo, position);
-
-  position = _statusBar._age.point;
-  colourInserter (_statusBar._age.str, _statusBar._age.colourOne, position);
-  position.Y += 1;
-  colourInserter (_statusBar._age.ages[_statusBar._age.id], _statusBar._age.colourTwo, position);
-
-  colourInserter (_statusBar._resources.str, _statusBar._resources.colour, _statusBar._resources.startPoint);
-  position = _statusBar._resources._healthy.point;
-  colourInserter (_statusBar._resources._healthy.str, _statusBar._resources._healthy.colourOne, position);
-  position.X += 9;
-  colourInserter (std::to_string (_statusBar._resources._healthy.count), _statusBar._resources._healthy.colourTwo, position);
-  position = _statusBar._resources._renewed.point;
-  colourInserter (_statusBar._resources._renewed.str, _statusBar._resources._renewed.colourOne, position);
-  position.X += 9;
-  colourInserter (std::to_string (_statusBar._resources._renewed.count), _statusBar._resources._renewed.colourTwo, position);
-  position = _statusBar._resources._vanished.point;
-  colourInserter (_statusBar._resources._vanished.str, _statusBar._resources._vanished.colourOne, position);
-  position.X += 10;
-  colourInserter (std::to_string (_statusBar._resources._vanished.count), _statusBar._resources._vanished.colourTwo, position);
-
-  colourInserter (_statusBar._packages.str, _statusBar._packages.colour, _statusBar._packages.startPoint);
-  position = _statusBar._packages._have.point;
-  colourInserter (_statusBar._packages._have.str, _statusBar._packages._have.colourOne, position);
-  position.Y += 1;
-  colourInserter (std::to_string (_statusBar._packages._have.count), _statusBar._packages._have.colourTwo, position);
-  position = _statusBar._packages._need.point;
-  colourInserter (_statusBar._packages._need.str, _statusBar._packages._need.colourOne, position);
-  position.Y += 1;
-  colourInserter (std::to_string (_statusBar._packages._need.count), _statusBar._packages._need.colourTwo, position);
-}
-
-
-void Surround::loadingCouter (void) {
-  COORD position { _loadingBar.startPoint };
-  for (unsigned char i = 0; i < 7; i++) {
-    colourInserter (_loadingBar.characters[i], _loadingBar.colourOne, position);
-    std::this_thread::sleep_for (std::chrono::milliseconds (100));
-    position.X += 1;
-  }
-  for (unsigned char i = 1; i <= 3; i++) {
-    colourInserter (_loadingBar.characters[7], _loadingBar.colourTwo, position);
-    std::this_thread::sleep_for (std::chrono::milliseconds (150));
-    colourInserter (_loadingBar.characters[8], _loadingBar.colourTwo, position);
-    std::this_thread::sleep_for (std::chrono::milliseconds (200));
-  }
-  std::this_thread::sleep_for (std::chrono::milliseconds (200));
-  colourInserter (_loadingBar.copywrite, _loadingBar.colourThree, _loadingBar.startPoint);
 };
 
 
