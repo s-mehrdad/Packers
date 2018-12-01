@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,26.11.2018</changed>
+/// <changed>ʆϒʅ,30.11.2018</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -100,50 +100,50 @@ void Area::colourInserter (std::string str, WORD colour) {
 };
 
 
-void Area::green (COORD position) {
-  //int y = position.Y;
-  //int x = position.X;
-  //if (x - 1 != 2) {
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //}
-  //if (x + 1 != 88) {
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //}
-  //if (y - 1 != 2) {
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //}
-  //if (y + 1 != 18) {
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //  do {} while (protectedSetCursor == true);
-  //  protectedSetCursor = true;
-  //  gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-  //  protectedSetCursor = false;
-  //}
-}
-void Area::yellow (COORD position) {}
-void Area::red (COORD position) {}
-void Area::fullPacked () {}
+//void Area::green (COORD position) {
+//  //int y = position.Y;
+//  //int x = position.X;
+//  //if (x - 1 != 2) {
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //}
+//  //if (x + 1 != 88) {
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //}
+//  //if (y - 1 != 2) {
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //}
+//  //if (y + 1 != 18) {
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //  do {} while (protectedSetCursor == true);
+//  //  protectedSetCursor = true;
+//  //  gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
+//  //  protectedSetCursor = false;
+//  //}
+//}
+//void Area::yellow (COORD position) {}
+//void Area::red (COORD position) {}
+//void Area::fullPacked () {}

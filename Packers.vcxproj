@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="ConsoleAdjustments.cpp" />
+    <ClCompile Include="Z.OldCodes.cpp" />
     <ClCompile Include="Packer.cpp" />
     <ClCompile Include="Packers.cpp" />
     <ClCompile Include="pch.cpp">

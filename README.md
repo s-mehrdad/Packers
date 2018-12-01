@@ -1,20 +1,23 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Packers is a funny game that is intended to make people more aware of environment while laughing.
+The inspiration behind it comes from looking at what people do and old packman game.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
+1.	Installation process:
+Just a simple console game written in C++. If you are a user without any knowledge about programming and want to see what is what, just open the .exe application file (it is not a virus :p ) and see your full. If you don't have that knowledge eider, just do let it go without checking anything and wait for the release version.
+
+2.	Software dependencies:
+For simple user probably a machine which runs on windows.
+Advanced users?! Well they can find their ways around themselves. :p
+
+3.	Latest releases:
+Still no release, just coding and debugging
+
 4.	API references
+Windows
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Do use Visual Studio or know what you are doing before doing anything.
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+I appreciate any contribution from anyone, who sees that the project deserves his precious time.
