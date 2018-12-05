@@ -13,19 +13,20 @@
 #define PACKER_H
 
 
-class Packer {
-  char Sign;
-  unsigned char id;
-  unsigned short state;
+class Packer
+{
+    char Sign;
+    unsigned char id;
+    unsigned short state;
 public:
-  Packer *address;
-  COORD position;
-  bool RchanceL;
-  eventFeed moves[4];
-  Packer (unsigned char);
+    Packer *address;
+    COORD position;
+    bool RchanceL;
+    eventFeed moves [4];
+    Packer ( unsigned char );
 
-  static unsigned char count;
-  static void colourInserter (std::string, WORD, COORD);
+    static unsigned char count;
+    static void colourInserter ( std::string, WORD, COORD );
 };
 
 

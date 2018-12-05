@@ -13,19 +13,20 @@
 #define SURROUND_H
 
 
-class Surround {
-  struct titleBar;
-  struct menus;
-  struct guideBar;
-  struct statusBar;
-  struct loadingBar;
-  struct storyLine;
+class Surround
+{
+    struct titleBar;
+    struct menus;
+    struct guideBar;
+    struct statusBar;
+    struct loadingBar;
+    struct storyLine;
 public:
-  Surround (unsigned char);
-  void newSetter (void);
+    Surround ( unsigned char );
+    void newSetter ( void );
 
-  static void colourInserter (std::string, WORD, COORD);
-  static void menusSetter (unsigned short, bool);
+    static void colourInserter ( std::string, WORD, COORD );
+    static void menusSetter ( unsigned short, bool );
 };
 
 
