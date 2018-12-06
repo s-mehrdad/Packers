@@ -15,21 +15,17 @@
 
 class Area
 {
-    int rows;
-    int columns;
+    static const int rows { SCREEN_H - 9 };
+    static const int columns { SCREEN_W - 18 };
     unsigned char age;
     struct materials;
 public:
-    Area ( unsigned char, unsigned char, unsigned char );
+    Area ( unsigned char );
     void inserter ();
-
-    //static void green (COORD);
-    //static void yellow (COORD);
-    //static void red (COORD);
-    //void fullPacked ();
 
     static void colourInserter ( COORD );
     static void colourInserter ( std::string, WORD );
+    static void resourceSetter ( unsigned char, COORD );
 };
 
 

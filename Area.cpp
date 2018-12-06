@@ -27,21 +27,21 @@ struct Area::materials
     struct resources
     {
         std::string pack { u8"♣" };
+        unsigned char state [rows] [columns] { 100 };
         WORD colourOne { F_bGREEN };
         WORD colourTwo { F_YELLOW };
         WORD colourTree { F_bRED };
+        void inserter ()
+        {
+
+        }
     } _resources;
 } _materials;
 
 
-Area::Area ( unsigned char mode, unsigned char height, unsigned char width ) :rows ( height ), columns ( width ), age ( mode )
+Area::Area ( unsigned char mode ) : age ( mode )
 {
-    inserter ();
-};
 
-
-void Area::inserter ()
-{
     COORD position;
     for ( int y = 1; y <= rows; y++ )
     {
@@ -83,18 +83,18 @@ void Area::inserter ()
                         if ( y != 1 )
                             colourInserter ( _materials._walls.vWalls, _materials._walls.colour );
 
-            if ( age == 0 )
-            {
-                // packs
-                if ( y != 1 && y != rows && y % 2 == 0 )
-                    if ( x != 1 && x != columns && x % 2 == 0 )
-                        //if (j!=11&&j!=99)
-                        colourInserter ( _materials._resources.pack, _materials._resources.colourOne );
-            }
+            // packs
+            if ( y != 1 && y != rows && y % 2 == 0 )
+                if ( x != 1 && x != columns && x % 2 == 0 )
+                    colourInserter ( _materials._resources.pack, _materials._resources.colourOne );
             std::cout << '\n';
         }
     }
 };
+
+
+void Area::inserter ()
+{};
 
 
 void Area::colourInserter ( COORD pos )
@@ -111,50 +111,26 @@ void Area::colourInserter ( std::string str, WORD colour )
 };
 
 
-//void Area::green (COORD position) {
-//  //int y = position.Y;
-//  //int x = position.X;
-//  //if (x - 1 != 2) {
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //}
-//  //if (x + 1 != 88) {
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //}
-//  //if (y - 1 != 2) {
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x - 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x + 1, y - 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //}
-//  //if (y + 1 != 18) {
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x - 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //  do {} while (protectedSetCursor == true);
-//  //  protectedSetCursor = true;
-//  //  gotoXY (x + 1, y + 1); ColourCout (u8"♣", F_bGREEN);
-//  //  protectedSetCursor = false;
-//  //}
-//}
-//void Area::yellow (COORD position) {}
-//void Area::red (COORD position) {}
-//void Area::fullPacked () {}
+void Area::resourceSetter ( unsigned char state, COORD position )
+{
+    if ( position.X - 1 != 2 )
+    {
+        colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
+        colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
+    }
+    if ( position.X + 1 != 88 )
+    {
+        colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
+        colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
+    }
+    if ( position.Y - 1 != 2 )
+    {
+        colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
+        colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
+    }
+    if ( position.Y + 1 != 18 )
+    {
+        colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
+        colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
+    }
+}
