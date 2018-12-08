@@ -89,6 +89,7 @@ struct Surround::menus
     struct characterChoices
     {
         std::string title { u8"Character Choices:" };
+        // two character re-presenter for the ambitious packers should be enough! :)
         std::string options [2] {
           u8"  ☺  " ,
           u8"    ☻" };
@@ -207,7 +208,6 @@ struct Surround::statusBar
     {
         std::string str { u8"packers: " };
         WORD colourOne { F_bPURPLE };
-        //add: count setter for new packers
         unsigned char count { 0 };
         WORD colourTwo { F_bBLUE };
         COORD point { 91,5 };
@@ -217,7 +217,7 @@ struct Surround::statusBar
     {
         std::string str { u8"age: " };
         WORD colourOne { F_bPURPLE };
-        //add: age setter + user choice for start age
+        //TODO add: age setter + user choice for start age
         unsigned char id { 0 };
         std::string ages [5] {
           u8"Stone age" ,
@@ -238,7 +238,7 @@ struct Surround::statusBar
         {
             std::string str { u8"healthy: " };
             WORD colourOne { F_bGREEN };
-            //add: default count setter in different ages (constructor)
+            //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
             COORD point { 91,12 };
@@ -247,7 +247,7 @@ struct Surround::statusBar
         {
             std::string str { u8"renewed: " };
             WORD colourOne { F_YELLOW };
-            //add: default count setter in different ages (constructor)
+            //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
             COORD point { 91,14 };
@@ -256,7 +256,7 @@ struct Surround::statusBar
         {
             std::string str { u8"vanished: " };
             WORD colourOne { F_RED };
-            //add: default count setter in different ages (constructor)
+            //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
             COORD point { 91,16 };
@@ -272,7 +272,7 @@ struct Surround::statusBar
         {
             std::string str { u8"have: " };
             WORD colourOne { F_bPURPLE };
-            //add: default count setter in different ages (constructor)
+            //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
             COORD point { 91,20 };
@@ -281,7 +281,7 @@ struct Surround::statusBar
         {
             std::string str { u8"need: " };
             WORD colourOne { F_bPURPLE };
-            //add: random need setter in constructor
+            //TODO add: random need setter in constructor
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
             COORD point { 91,23 };
@@ -361,7 +361,7 @@ struct Surround::loadingBar
 } _loadingBar;
 
 
-//to be added: funny literature of the game
+//TODO to be added: funny literature of the game! :)
 struct Surround::storyLine
 {
 
@@ -385,8 +385,8 @@ Surround::Surround ( unsigned char mode )
 
 void Surround::newSetter ( void )
 {
-    //add: new setter
-    //add: new couter
+    //TODO add: new setter
+    //TODO add: new couter
 };
 
 

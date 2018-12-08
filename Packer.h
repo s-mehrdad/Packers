@@ -16,17 +16,21 @@
 class Packer
 {
     char Sign;
-    unsigned char id;
     unsigned short state;
 public:
+    unsigned char id;
     Packer *address;
     COORD position;
     bool RchanceL;
+    unsigned short lastAspiration;
     eventFeed moves [4];
     Packer ( unsigned char );
 
     static unsigned char count;
+    static unsigned char aspirationsSeeds[32];
+    static unsigned char aspirations[32];
     static void colourInserter ( std::string, WORD, COORD );
+    static void aspirationsSetter (void);
 };
 
 

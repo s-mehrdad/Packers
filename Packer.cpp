@@ -14,7 +14,7 @@
 #include "Surround.h"
 
 
-// different packer types can be added
+//TODO different packer types can be added
 struct eventFeed blinkA ( DELAY_ONE, u8" ", F_bWHITE );
 struct eventFeed blinkB ( DELAY_TWO, u8"☻", F_bWHITE );
 struct eventFeed packed ( DELAY_THREE, u8"▪", F_bWHITE );
@@ -25,12 +25,13 @@ Packer::Packer ( unsigned char quickReSeed )
 {
     id = quickReSeed;
     address = this;
+    aspirationsSeeds [count] = quickReSeed;
     count++;
 
     //rand function seed provider + quick reseeding
-    srand ( (unsigned int) time ( NULL ) + quickReSeed );
+    srand ( (unsigned int) time ( NULL ) + id );
 
-    //add: change made by packers in their surround
+    //TODO add: change made by packers in their surround
     moves [0] = blinkA;
     moves [1] = blinkB;
     moves [2] = packed;
@@ -56,7 +57,7 @@ Packer::Packer ( unsigned char quickReSeed )
     }
 
     // random state
-    //can be omitted (going to far for a console game?! :) )
+    //TODO can be omitted (going to far for a console game?! :) )
     int s { 0 };
     s = ( rand () % 3 + 1 );
     if ( s == 1 )
@@ -65,14 +66,15 @@ Packer::Packer ( unsigned char quickReSeed )
         state = 2000; // not in the mood
     if ( s == 3 )
         state = 3000; // tired
+
+    // making packer's aspirations ready... :)
+    lastAspiration = id * 100;
 };
 
 
-//add:
-//Packer (//userchoice) :Sign () {};
-
-
 unsigned char Packer::count { 0 };
+unsigned char Packer::aspirationsSeeds [32] { 0 };
+unsigned char Packer::aspirations [32] { 10 };
 
 
 void Packer::colourInserter ( std::string str, WORD colour, COORD pos )
@@ -82,3 +84,29 @@ void Packer::colourInserter ( std::string str, WORD colour, COORD pos )
     SetConsoleTextAttribute ( consoleOutput, colour );
     std::cout << str;
 };
+
+
+void Packer::aspirationsSetter (void)
+{
+    unsigned char randomNumber { 0 };
+    for ( unsigned char i = 0; i < count; i++ )
+    {
+        srand ( (unsigned int) time ( NULL ) + aspirationsSeeds [i] );
+        randomNumber = rand () % ( 4 - 1 ) + 1;
+        switch ( randomNumber )
+        {
+            case 1:
+                aspirations [i] = 10;
+                break;
+            case 2:
+                aspirations [i] = 20;
+                break;
+            case 3:
+                aspirations [i] = 30;
+                break;
+            case 4:
+                aspirations [i] = 40;
+                break;
+        }
+    }
+}

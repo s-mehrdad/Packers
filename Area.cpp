@@ -27,7 +27,6 @@ struct Area::materials
     struct resources
     {
         std::string pack { u8"♣" };
-        unsigned char state [rows] [columns] { 100 };
         WORD colourOne { F_bGREEN };
         WORD colourTwo { F_YELLOW };
         WORD colourTree { F_bRED };
@@ -93,6 +92,9 @@ Area::Area ( unsigned char mode ) : age ( mode )
 };
 
 
+unsigned char Area::stateArray [rows] [columns] { 1 };
+
+
 void Area::inserter ()
 {};
 
@@ -111,26 +113,65 @@ void Area::colourInserter ( std::string str, WORD colour )
 };
 
 
-void Area::resourceSetter ( unsigned char state, COORD position )
+void Area::resourceSetter ( unsigned short state, COORD position )
 {
-    if ( position.X - 1 != 2 )
+    //TODO a possible aspiration renew-er could be added :)
+    int wisherId { state / 100 };
+    int wishedResource { ( state % 100 ) };
+    wishedResource /= 10;
+    int currentState { state % 10 };
+
+    switch ( wishedResource )
     {
-        colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
-        colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
+        case 1:
+            if ( position.X - 1 != 2 )
+            {
+                colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y - 1] [position.X - 1] = currentState;
+            }
+            if ( position.X + 1 != 88 )
+            {
+                colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y - 1] [position.X + 1] = currentState;
+            }
+            break;
+        case 2:
+            if ( position.Y - 1 != 2 )
+            {
+                colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y - 1] [position.X - 1] = currentState;
+            }
+            if ( position.Y + 1 != 18 )
+            {
+                colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y + 1] [position.X - 1] = currentState;
+            }
+            break;
+        case 3:
+            if ( position.X - 1 != 2 )
+            {
+                colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y + 1] [position.X - 1] = currentState;
+            }
+            if ( position.X + 1 != 88 )
+            {
+                colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y + 1] [position.X + 1] = currentState;
+            }
+            break;
+        case 4:
+            if ( position.Y - 1 != 2 )
+            {
+                colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y - 1] [position.X + 1] = currentState;
+            }
+            if ( position.Y + 1 != 18 )
+            {
+                colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                stateArray [position.Y + 1] [position.X + 1] = currentState;
+            }
+            break;
     }
-    if ( position.X + 1 != 88 )
-    {
-        colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
-        colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
-    }
-    if ( position.Y - 1 != 2 )
-    {
-        colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
-        colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_bGREEN );
-    }
-    if ( position.Y + 1 != 18 )
-    {
-        colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
-        colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_bGREEN );
-    }
+
+
 }

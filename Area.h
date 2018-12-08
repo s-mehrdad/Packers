@@ -23,9 +23,10 @@ public:
     Area ( unsigned char );
     void inserter ();
 
+    static unsigned char stateArray [rows] [columns];
     static void colourInserter ( COORD );
     static void colourInserter ( std::string, WORD );
-    static void resourceSetter ( unsigned char, COORD );
+    static void resourceSetter ( unsigned short, COORD );
 };
 
 
