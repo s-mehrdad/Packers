@@ -31,3 +31,6 @@ Do use Visual Studio or know what you are doing before doing anything.
 
 # Contribute
 I appreciate any contribution from anyone, who sees that the project deserves his precious time.
+
+# Copyright
+This is not a freeware and the source code is copyrighted. The project was originally uploaded in GitHub, since the creator didn't have any access to Microsoft Azure. The Source code can just be used for teaching purposes. For any other uses the written acknowledgement and permission is needed.
