@@ -157,11 +157,12 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Shared.h" />
     <ClInclude Include="Surround.h" />
+    <ClInclude Include="Z_OldCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="ConsoleAdjustments.cpp" />
-    <ClCompile Include="Z.OldCodes.cpp" />
+    <ClCompile Include="Z_OldCodes.cpp" />
     <ClCompile Include="Packer.cpp" />
     <ClCompile Include="Packers.cpp" />
     <ClCompile Include="pch.cpp">
