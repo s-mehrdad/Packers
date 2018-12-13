@@ -231,6 +231,8 @@ struct Surround::statusBar
 
     struct resources
     {
+        //TODO add a possible aspiration renew-er for packers (bc of performance here)
+
         std::string str { u8"resources>" };
         WORD colour { F_bPURPLE };
         COORD startPoint { 91,10 };

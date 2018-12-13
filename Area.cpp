@@ -115,7 +115,7 @@ void Area::colourInserter ( std::string str, WORD colour )
 
 void Area::resourceSetter ( unsigned short state, COORD position )
 {
-    //TODO a possible aspiration renew-er could be added :)
+    //TODO to be added: other resource colours
     int wisherId { state / 100 };
     int wishedResource { ( state % 100 ) };
     wishedResource /= 10;
@@ -128,48 +128,48 @@ void Area::resourceSetter ( unsigned short state, COORD position )
             {
                 colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y - 1] [position.X - 1] = currentState;
-            }
-            if ( position.X + 1 != 88 )
-            {
-                colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
-                stateArray [position.Y - 1] [position.X + 1] = currentState;
-            }
+            } else
+                if ( position.X + 1 != 88 )
+                {
+                    colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    stateArray [position.Y - 1] [position.X + 1] = currentState;
+                }
             break;
         case 2:
             if ( position.Y - 1 != 2 )
             {
                 colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y - 1] [position.X - 1] = currentState;
-            }
-            if ( position.Y + 1 != 18 )
-            {
-                colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
-                stateArray [position.Y + 1] [position.X - 1] = currentState;
-            }
+            } else
+                if ( position.Y + 1 != 18 )
+                {
+                    colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    stateArray [position.Y + 1] [position.X - 1] = currentState;
+                }
             break;
         case 3:
             if ( position.X - 1 != 2 )
             {
                 colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y + 1] [position.X - 1] = currentState;
-            }
-            if ( position.X + 1 != 88 )
-            {
-                colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
-                stateArray [position.Y + 1] [position.X + 1] = currentState;
-            }
+            } else
+                if ( position.X + 1 != 88 )
+                {
+                    colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    stateArray [position.Y + 1] [position.X + 1] = currentState;
+                }
             break;
         case 4:
             if ( position.Y - 1 != 2 )
             {
                 colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y - 1] [position.X + 1] = currentState;
-            }
-            if ( position.Y + 1 != 18 )
-            {
-                colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
-                stateArray [position.Y + 1] [position.X + 1] = currentState;
-            }
+            } else
+                if ( position.Y + 1 != 18 )
+                {
+                    colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    stateArray [position.Y + 1] [position.X + 1] = currentState;
+                }
             break;
     }
 

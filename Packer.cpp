@@ -23,7 +23,7 @@ struct eventFeed ready ( DELAY_FOUR, u8"☻", F_bWHITE );
 
 Packer::Packer ( unsigned char quickReSeed )
 {
-    id = quickReSeed;
+    id = quickReSeed - 1;
     address = this;
     aspirationsSeeds [count] = quickReSeed;
     count++;
@@ -40,14 +40,14 @@ Packer::Packer ( unsigned char quickReSeed )
     // random beginning position
     do
     {
-        position.X = rand () % ( 89 - 3 ) + 3;
-        position.Y = rand () % ( 19 - 3 ) + 3;
+        position.X = rand () % ( ( SCREEN_W - 18 ) - 3 ) + 3;
+        position.Y = rand () % ( ( SCREEN_H - 9 ) - 3 ) + 3;
     } while ( position.X % 2 == 0 || position.Y % 2 == 0 );
     colourInserter ( u8"☻", F_bWHITE, position );
 
     // random direction
     int d { 0 };
-    d = ( rand () % ( 1111 - 20 ) + 20 );
+    d = ( rand () % 499 + 1 );
     if ( d % 2 == 0 )
     {
         RchanceL = true;
@@ -86,13 +86,13 @@ void Packer::colourInserter ( std::string str, WORD colour, COORD pos )
 };
 
 
-void Packer::aspirationsSetter (void)
+void Packer::aspirationsSetter ( void )
 {
     unsigned char randomNumber { 0 };
     for ( unsigned char i = 0; i < count; i++ )
     {
         srand ( (unsigned int) time ( NULL ) + aspirationsSeeds [i] );
-        randomNumber = rand () % ( 4 - 1 ) + 1;
+        randomNumber = rand () % 4 + 1;
         switch ( randomNumber )
         {
             case 1:
