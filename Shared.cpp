@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,14.11.2018</changed>
+/// <changed>ʆϒʅ,12.12.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -12,5 +12,3 @@
 #include "Area.h"
 #include "Packer.h"
 #include "Surround.h"
-
-

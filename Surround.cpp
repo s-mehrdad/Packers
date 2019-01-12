@@ -155,7 +155,7 @@ struct Surround::menus
 
 struct Surround::guideBar
 {
-    COORD startPoint { 3,27 };
+    COORD startPoint { 3,28 };
     struct signs
     {
         std::string parts [3] {
@@ -340,7 +340,7 @@ struct Surround::loadingBar
     WORD colourOne { B_bBLUE | F_bWHITE };
     WORD colourTwo { B_BLACK | F_bGREEN };
     WORD colourThree { B_BLACK | F_bWHITE };
-    COORD startPoint { SCREEN_W - 10, SCREEN_H - 1 };
+    COORD startPoint { SCREEN_W - 13, SCREEN_H - 2 };
     void inserter ()
     {
         COORD position { startPoint };

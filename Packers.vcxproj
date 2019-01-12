@@ -91,11 +91,20 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\DLLs\ConsoleAdjustments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\DLLs\ConsoleAdjustments\$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ConsoleAdjustments.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.dll" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xdc" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xml" "$(OutDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -106,11 +115,20 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\DLLs\ConsoleAdjustments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\DLLs\ConsoleAdjustments\$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ConsoleAdjustments.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.dll" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xdc" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xml" "$(OutDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -123,13 +141,22 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\DLLs\ConsoleAdjustments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\DLLs\ConsoleAdjustments\$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ConsoleAdjustments.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.dll" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xdc" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xml" "$(OutDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,26 +169,34 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\DLLs\ConsoleAdjustments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\DLLs\ConsoleAdjustments\$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ConsoleAdjustments.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.dll" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xdc" "$(OutDir)"
+xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xml" "$(OutDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Area.h" />
-    <ClInclude Include="ConsoleAdjustments.h" />
     <ClInclude Include="Packer.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Shared.h" />
     <ClInclude Include="Surround.h" />
     <ClInclude Include="Z_OldCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
-    <ClCompile Include="ConsoleAdjustments.cpp" />
     <ClCompile Include="Z_OldCodes.cpp" />
     <ClCompile Include="Packer.cpp" />
     <ClCompile Include="Packers.cpp" />
@@ -173,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="Shared.cpp" />
     <ClCompile Include="Surround.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Packers.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
