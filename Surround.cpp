@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,08.12.2018</changed>
+/// <changed>ʆϒʅ,26.01.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -18,7 +18,7 @@ struct Surround::titleBar
 {
     std::string titleSentence { u8"Feel free to way in as a packer toward becoming an advanced packer! ♥♥♥♥♥ :)" };
     WORD colour { F_bBLUE };
-    COORD startPoint { 7,0 };
+    COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 76 / 2 )  ,0 };
     void inserter ()
     {
         COORD position { 0,0 };
@@ -34,23 +34,32 @@ struct Surround::menus
     struct wayInDecision
     {
         std::string titleSentence { u8"Press that enter key ._." };
+        std::string secondSentence { u8"++: This is a demo ^.^ :++" };
         WORD colour { F_bWHITE };
-        COORD startPoint { 33,25 };
+        COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 24 / 2 ) ,Area::rows + 3 };
         bool set { false };
         void inserter ()
         {
+            COORD temp ( startPoint );
             if ( set == true )
             {
-                colourInserter ( u8"                        ", colour, startPoint );
+                colourInserter ( u8"                        ", colour, temp );
+                temp.X -= 1;
+                temp.Y += 1;
+                colourInserter ( u8"                          ", colour, temp );
                 set = false;
             } else
             {
-                colourInserter ( titleSentence, colour, startPoint );
+                colourInserter ( titleSentence, colour, temp );
+                temp.X -= 1;
+                temp.Y += 1;
+                colourInserter ( secondSentence, colour, temp );
                 set = true;
             }
         };
     } _wayInDecision;
 
+    // todo: auto adjustments of ageChoices menu based on the screen size
     struct agesChoices
     {
         std::string title { u8"Packing speed:" };
@@ -86,6 +95,7 @@ struct Surround::menus
         }
     } _ageChoices;
 
+    // todo: auto adjustments of ageChoices menu based on the screen size
     struct characterChoices
     {
         std::string title { u8"Character Choices:" };
@@ -118,6 +128,7 @@ struct Surround::menus
         }
     } _characterChoices;
 
+    // todo: auto adjustments of ageChoices menu based on the screen size
     struct dangerAreaChoices
     {
         std::string title { u8"  Danger area:" };
@@ -153,15 +164,17 @@ struct Surround::menus
 }_menus;
 
 
+// todo: auto adjustments of guideBar based on the screen size
+// new approach is needed (3 to 99)
 struct Surround::guideBar
 {
-    COORD startPoint { 3,28 };
+    COORD startPoint { 3, SCREEN_H - 2 };
     struct signs
     {
         std::string parts [3] {
           u8"♣:",
           u8"☻:",
-          u8"▪:" };
+          u8"▪:" }; //( ( SCREEN_W -18 ) 102 - ( 24 / 2 )
         WORD colourOne { F_bGREEN };
         WORD colourTwo { F_bWHITE };
     } _signs;
@@ -198,11 +211,12 @@ struct Surround::guideBar
 } _GuideBar;
 
 
+// todo: auto adjustments of satusBar based on the screen size
 struct Surround::statusBar
 {
     std::string title { u8"status->>" };
     WORD colour { F_bWHITE };
-    COORD startPoint { 91,3 };
+    COORD startPoint { 105,3 };
 
     struct packers
     {
@@ -210,7 +224,7 @@ struct Surround::statusBar
         WORD colourOne { F_bPURPLE };
         unsigned char count { 0 };
         WORD colourTwo { F_bBLUE };
-        COORD point { 91,5 };
+        COORD point { 105,5 };
     } _packers;
 
     struct age
@@ -226,7 +240,7 @@ struct Surround::statusBar
           u8"Hollow age" ,
           u8"Dirty age" };
         WORD colourTwo { F_bBLUE };
-        COORD point { 91,7 };
+        COORD point { 105,7 };
     } _age;
 
     struct resources
@@ -235,7 +249,7 @@ struct Surround::statusBar
 
         std::string str { u8"resources>" };
         WORD colour { F_bPURPLE };
-        COORD startPoint { 91,10 };
+        COORD startPoint { 105,10 };
         struct healthy
         {
             std::string str { u8"healthy: " };
@@ -243,7 +257,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 91,12 };
+            COORD point { 105,12 };
         } _healthy;
         struct renewed
         {
@@ -252,7 +266,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 91,14 };
+            COORD point { 105,14 };
         } _renewed;
         struct vanished
         {
@@ -261,7 +275,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 91,16 };
+            COORD point { 105,16 };
         } _vanished;
     } _resources;
 
@@ -269,7 +283,7 @@ struct Surround::statusBar
     {
         std::string str { u8"packages> " };
         WORD colour { F_bPURPLE };
-        COORD startPoint { 91,18 };
+        COORD startPoint { 105,18 };
         struct have
         {
             std::string str { u8"have: " };
@@ -277,7 +291,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 91,20 };
+            COORD point { 105,20 };
         } _have;
         struct need
         {
@@ -286,7 +300,7 @@ struct Surround::statusBar
             //TODO add: random need setter in constructor
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 91,23 };
+            COORD point { 105,23 };
         } _need;
     } _packages;
     void inserter ()

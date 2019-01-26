@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,08.12.2018</changed>
+/// <changed>ʆϒʅ,26.01.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -21,7 +21,7 @@ struct Area::materials
         std::string hWalls { u8"━" };
         std::string vWalls { u8"┃" };
         std::string edges [4] { u8"┏",u8"┗",u8"┛",u8"┓" };
-        WORD colour { F_bPURPLE };
+        WORD colour { F_bBLUE };
     } _walls;
 
     struct resources
@@ -40,7 +40,6 @@ struct Area::materials
 
 Area::Area ( unsigned char mode ) : age ( mode )
 {
-
     COORD position;
     for ( int y = 1; y <= rows; y++ )
     {
