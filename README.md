@@ -23,8 +23,8 @@ The project was originally just uploaded into the GitHub account of the creator,
 <table>
 <tr>
 <td><b>Creator's Emails:</b></td>
-<td><a mailto="s.mehrdad.47@gamil.com">s.mehrdad.47@gamil.com</a></td>
-<td><a mailto="s.mehrdad.47@outlook.com">s.mehrdad.47@outlook.com</a></td>
+<td><a href="mailto:s.mehrdad.47@gamil.com">s.mehrdad.47@gamil.com</a></td>
+<td><a href="mailto:s.mehrdad.47@outlook.com">s.mehrdad.47@outlook.com</a></td>
 </tr>
 </table>
 
