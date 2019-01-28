@@ -2,7 +2,7 @@
 Packers is a funny game that is intended to make people more aware of environment while laughing.
 The inspiration behind it comes from looking at what people do and the old packman game.
 
-The project was originally just uploaded into the GitHub account of the creator, then the decision was made to move to Azure to experience a better all-around access, therefore the most commitments to the project are authored in Azure environments. The most commitments are going to be authored in Azure, which is private and a time to time public upload is going to come in GitHub.
+The project was originally just uploaded into the GitHub account of the creator, the process of learning git and committing in the right way to the online repository has happened after, in the same time the decision was made to move to Azure to experience a better all-around access, therefore the most commitments to the project are authored in Azure environments. The most commitments are going to be authored in Azure, which is private and a time to time public upload is going to come in GitHub.
 
 <table>
 <tr>

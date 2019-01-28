@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,08.12.2018</changed>
+/// <changed>ʆϒʅ,28.01.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -41,7 +41,7 @@ Packer::Packer ( unsigned char quickReSeed )
     do
     {
         position.X = rand () % ( ( SCREEN_W - 18 ) - 3 ) + 3;
-        position.Y = rand () % ( ( SCREEN_H - 9 ) - 3 ) + 3;
+        position.Y = rand () % ( ( SCREEN_H - 11 ) - 3 ) + 3;
     } while ( position.X % 2 == 0 || position.Y % 2 == 0 );
     colourInserter ( u8"☻", F_bWHITE, position );
 
