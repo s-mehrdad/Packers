@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,28.01.2019</changed>
+/// <changed>ʆϒʅ,03.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -208,43 +208,16 @@ struct Surround::guideBar
                 position.X += 2;
                 colourInserter ( _guides.parts [i], _guides.colour, position );
         }
-
-        //( ( SCREEN_W -18 ) 96 32 41 - ( 24 / 2 )
-        //std::string temp { _signs.parts [0] + _guides.parts [0] };
-        //for ( char i = 1; i <= 2; i++ )
-        //{
-        //    for ( char j = 0; j <= ( ( SCREEN_W - 24 - 55 ) / 3 ); j++ )
-        //    {
-        //        temp += u8" ";
-        //    }
-        //    temp += _signs.parts [i] + _guides.parts [i];
-        //}
-        //colourInserter ( temp, _signs.colourOne, position );
-
-        //for ( char i = 0; i < 3; i++ )
-        //{
-        //    if ( i == 0 )
-        //        colourInserter ( _signs.parts [i], _signs.colourOne, position );
-        //    else
-        //    {
-        //        position.X += static_cast<int>( ( pow ( 6, i ) + 30 ) );
-        //        if ( i == 1 ) position.X -= 3;
-        //        colourInserter ( _signs.parts [i], _signs.colourTwo, position );
-        //    }
-        //    position.X += 2;
-        //    colourInserter ( _guides.parts [i], _guides.colour, position );
-        //    position = startPoint;
-        //}
     }
 } _GuideBar;
 
 
-// todo: auto adjustments of satusBar based on the screen size
+// TODO: reconstruction is needed
 struct Surround::statusBar
 {
     std::string title { u8"status->>" };
     WORD colour { F_bWHITE };
-    COORD startPoint { 105,3 };
+    COORD startPoint { SCREEN_W - 15,3 };
 
     struct packers
     {
@@ -252,7 +225,7 @@ struct Surround::statusBar
         WORD colourOne { F_bPURPLE };
         unsigned char count { 0 };
         WORD colourTwo { F_bBLUE };
-        COORD point { 105,5 };
+        COORD point { SCREEN_W - 15,5 };
     } _packers;
 
     struct age
@@ -268,16 +241,14 @@ struct Surround::statusBar
           u8"Hollow age" ,
           u8"Dirty age" };
         WORD colourTwo { F_bBLUE };
-        COORD point { 105,7 };
+        COORD point { SCREEN_W - 15,7 };
     } _age;
 
     struct resources
     {
-        //TODO add a possible aspiration renew-er for packers (bc of performance here)
-
         std::string str { u8"resources>" };
         WORD colour { F_bPURPLE };
-        COORD startPoint { 105,10 };
+        COORD startPoint { SCREEN_W - 15,10 };
         struct healthy
         {
             std::string str { u8"healthy: " };
@@ -285,7 +256,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 105,12 };
+            COORD point { SCREEN_W - 15,12 };
         } _healthy;
         struct renewed
         {
@@ -294,7 +265,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 105,14 };
+            COORD point { SCREEN_W - 15,14 };
         } _renewed;
         struct vanished
         {
@@ -303,7 +274,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 105,16 };
+            COORD point { SCREEN_W - 15,16 };
         } _vanished;
     } _resources;
 
@@ -311,7 +282,7 @@ struct Surround::statusBar
     {
         std::string str { u8"packages> " };
         WORD colour { F_bPURPLE };
-        COORD startPoint { 105,18 };
+        COORD startPoint { SCREEN_W - 15,18 };
         struct have
         {
             std::string str { u8"have: " };
@@ -319,7 +290,7 @@ struct Surround::statusBar
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 105,20 };
+            COORD point { SCREEN_W - 15,20 };
         } _have;
         struct need
         {
@@ -328,7 +299,7 @@ struct Surround::statusBar
             //TODO add: random need setter in constructor
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { 105,23 };
+            COORD point { SCREEN_W - 15,23 };
         } _need;
     } _packages;
     void inserter ()

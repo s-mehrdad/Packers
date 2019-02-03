@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,26.01.2019</changed>
+/// <changed>ʆϒʅ,03.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -114,7 +114,7 @@ void Area::colourInserter ( std::string str, WORD colour )
 
 void Area::resourceSetter ( unsigned short state, COORD position )
 {
-    //TODO to be added: other resource colours
+    //TODO to be added: other resource colours + reconstruction
     int wisherId { state / 100 };
     int wishedResource { ( state % 100 ) };
     wishedResource /= 10;
