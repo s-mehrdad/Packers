@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,03.02.2019</changed>
+/// <changed>ʆϒʅ,11.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -15,10 +15,10 @@
 
 
 //TODO different packer types can be added
-struct eventFeed blinkA ( DELAY_ONE, u8" " );
-struct eventFeed blinkB ( DELAY_TWO, u8"☻" );
-struct eventFeed packed ( DELAY_THREE, u8"▪" );
-struct eventFeed ready ( DELAY_FOUR, u8"☻" );
+//struct eventFeed blinkA ( DELAY_ONE, u8" " );
+//struct eventFeed blinkB ( DELAY_TWO, u8"☻" );
+//struct eventFeed packed ( DELAY_THREE, u8"▪" );
+//struct eventFeed ready ( DELAY_FOUR, u8"☻" );
 
 
 Packer::Packer ( unsigned char quickReSeed )
@@ -28,14 +28,40 @@ Packer::Packer ( unsigned char quickReSeed )
     aspirationsSeeds [count] = quickReSeed;
     count++;
 
-    //rand function seed provider + quick reseeding
-    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 50.5 ) );
 
     //TODO add: change made by packers in their surround
-    moves [0] = blinkA;
-    moves [1] = blinkB;
-    moves [2] = packed;
-    moves [3] = ready;
+    //moves [0] = blinkA;
+    //moves [1] = blinkB;
+    //moves [2] = packed;
+    //moves [3] = ready;
+
+
+    //rand function seed provider + quick reseeding
+    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 50.5 ) );
+    // random character
+    int c { 0 };
+    c = ( rand () % 2 + 1 );
+    if ( c == 1 )
+        character = u8"☻";
+    else
+        character = u8"☺";
+
+    if ( character == u8"☻" )
+    {
+        _action [0] = { DELAY_ONE, 0 };
+        _action [1] = { DELAY_ONE, 1 };
+        _action [2] = { DELAY_ONE, 3 };
+        _action [3] = { DELAY_ONE, 0 };
+    } else
+    {
+        _action [0] = { DELAY_ONE, 0 };
+        _action [1] = { DELAY_ONE, 2 };
+        _action [2] = { DELAY_ONE, 3 };
+        _action [3] = { DELAY_ONE, 0 };
+    }
+
+    //rand function seed provider + quick reseeding
+    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 55.5 ) );
 
     // random beginning position
     do
@@ -43,10 +69,12 @@ Packer::Packer ( unsigned char quickReSeed )
         position.X = rand () % ( ( SCREEN_W - 18 ) - 3 ) + 3;
         position.Y = rand () % ( ( SCREEN_H - 11 ) - 3 ) + 3;
     } while ( position.X % 2 == 0 || position.Y % 2 == 0 );
-    colourInserter ( u8"☻", baseMotivation, position );
+
+    //TODO next expression needs rethinking:
+    colourInserter ( character, baseMotivation, position );
 
     //rand function seed provider + quick reseeding
-    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 55.5 ) );
+    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 60.5 ) );
 
     // random direction
     int d { 0 };
@@ -60,7 +88,7 @@ Packer::Packer ( unsigned char quickReSeed )
     }
 
     //rand function seed provider + quick reseeding
-    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 60.5 ) );
+    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 65.5 ) );
 
     // random state
     //TODO changed (part of smart pants of packers :) )
@@ -77,7 +105,7 @@ Packer::Packer ( unsigned char quickReSeed )
     lastAspiration = id * 100;
 
     //rand function seed provider + quick reseeding
-    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 65.5 ) );
+    srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 70.5 ) );
 
     // random motivation
     int m { 0 };

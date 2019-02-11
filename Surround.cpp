@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,03.02.2019</changed>
+/// <changed>ʆϒʅ,11.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -212,7 +212,6 @@ struct Surround::guideBar
 } _GuideBar;
 
 
-// TODO: reconstruction is needed
 struct Surround::statusBar
 {
     std::string title { u8"status->>" };

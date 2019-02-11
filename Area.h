@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,28.01.2019</changed>
+/// <changed>ʆϒʅ,11.02.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -15,8 +15,8 @@
 
 class Area
 {
-    unsigned char age;
     struct materials;
+    unsigned char age;
 public:
     Area ( unsigned char );
     void inserter ();
