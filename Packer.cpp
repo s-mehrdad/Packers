@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,11.02.2019</changed>
+/// <changed>ʆϒʅ,12.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -14,13 +14,6 @@
 #include "Surround.h"
 
 
-//TODO different packer types can be added
-//struct eventFeed blinkA ( DELAY_ONE, u8" " );
-//struct eventFeed blinkB ( DELAY_TWO, u8"☻" );
-//struct eventFeed packed ( DELAY_THREE, u8"▪" );
-//struct eventFeed ready ( DELAY_FOUR, u8"☻" );
-
-
 Packer::Packer ( unsigned char quickReSeed )
 {
     id = quickReSeed - 1;
@@ -29,15 +22,10 @@ Packer::Packer ( unsigned char quickReSeed )
     count++;
 
 
-    //TODO add: change made by packers in their surround
-    //moves [0] = blinkA;
-    //moves [1] = blinkB;
-    //moves [2] = packed;
-    //moves [3] = ready;
-
-
     //rand function seed provider + quick reseeding
     srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 50.5 ) );
+
+    //TODO different packer types can be added
     // random character
     int c { 0 };
     c = ( rand () % 2 + 1 );
@@ -49,16 +37,17 @@ Packer::Packer ( unsigned char quickReSeed )
     if ( character == u8"☻" )
     {
         _action [0] = { DELAY_ONE, 0 };
-        _action [1] = { DELAY_ONE, 1 };
-        _action [2] = { DELAY_ONE, 3 };
-        _action [3] = { DELAY_ONE, 0 };
+        _action [1] = { DELAY_TWO, 1 };
+        _action [2] = { DELAY_THREE, 3 };
+        _action [3] = { DELAY_FOUR, 0 };
     } else
     {
         _action [0] = { DELAY_ONE, 0 };
-        _action [1] = { DELAY_ONE, 2 };
-        _action [2] = { DELAY_ONE, 3 };
-        _action [3] = { DELAY_ONE, 0 };
+        _action [1] = { DELAY_TWO, 2 };
+        _action [2] = { DELAY_THREE, 3 };
+        _action [3] = { DELAY_FOUR, 0 };
     }
+
 
     //rand function seed provider + quick reseeding
     srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 55.5 ) );
@@ -70,8 +59,6 @@ Packer::Packer ( unsigned char quickReSeed )
         position.Y = rand () % ( ( SCREEN_H - 11 ) - 3 ) + 3;
     } while ( position.X % 2 == 0 || position.Y % 2 == 0 );
 
-    //TODO next expression needs rethinking:
-    colourInserter ( character, baseMotivation, position );
 
     //rand function seed provider + quick reseeding
     srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 60.5 ) );
@@ -87,6 +74,7 @@ Packer::Packer ( unsigned char quickReSeed )
         RchanceL = false;
     }
 
+
     //rand function seed provider + quick reseeding
     srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 65.5 ) );
 
@@ -101,8 +89,10 @@ Packer::Packer ( unsigned char quickReSeed )
     if ( s == 3 )
         baseState = 3000; // tired
 
+
     // making packer's aspirations ready... :)
     lastAspiration = id * 100;
+
 
     //rand function seed provider + quick reseeding
     srand ( (unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 70.5 ) );
@@ -122,6 +112,9 @@ Packer::Packer ( unsigned char quickReSeed )
         baseMotivation = F_bYELLOW; // free-chewer
     if ( m == 6 )
         baseMotivation = F_WHITE; // neutral-chewer
+
+
+    baseSetter ();
 };
 
 
@@ -130,13 +123,19 @@ unsigned char Packer::aspirationsSeeds [32] { 0 };
 unsigned char Packer::aspirations [32] { 10 };
 
 
-void Packer::colourInserter ( std::string str, WORD colour, COORD pos )
+void Packer::baseSetter ( void )
 {
-    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-    SetConsoleCursorPosition ( consoleOutput, pos );
-    SetConsoleTextAttribute ( consoleOutput, colour );
-    std::cout << str;
+    Inserter::colourInserter ( character, baseMotivation, position );
 };
+
+
+//void Packer::colourInserter ( std::string str, WORD colour, COORD pos )
+//{
+//    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
+//    SetConsoleCursorPosition ( consoleOutput, pos );
+//    SetConsoleTextAttribute ( consoleOutput, colour );
+//    std::cout << str;
+//};
 
 
 void Packer::aspirationsSetter ( void )

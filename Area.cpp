@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,03.02.2019</changed>
+/// <changed>ʆϒʅ,12.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -47,7 +47,7 @@ Area::Area ( unsigned char mode ) : age ( mode )
         {
             position.X = x;
             position.Y = y;
-            colourInserter ( position );
+            Inserter::colourInserter ( position );
 
             // first horizontal wall
             if ( y == 1 && x != columns )
@@ -55,36 +55,36 @@ Area::Area ( unsigned char mode ) : age ( mode )
 
                 // left top edge
                 if ( y == 1 && x == 1 )
-                    colourInserter ( _materials._walls.edges [0], _materials._walls.colour );
-                colourInserter ( _materials._walls.hWalls, _materials._walls.colour );
+                    Inserter::colourInserter ( _materials._walls.edges [0], _materials._walls.colour );
+                Inserter::colourInserter ( _materials._walls.hWalls, _materials._walls.colour );
             }
 
             // right top edge
             if ( y == 1 && x == columns )
-                colourInserter ( _materials._walls.edges [3], _materials._walls.colour );
+                Inserter::colourInserter ( _materials._walls.edges [3], _materials._walls.colour );
 
             // left bottom edge
             if ( y == rows && x == 1 )
-                colourInserter ( _materials._walls.edges [1], _materials._walls.colour );
+                Inserter::colourInserter ( _materials._walls.edges [1], _materials._walls.colour );
 
             // second horizontal wall
             if ( y == rows && x != columns )
-                colourInserter ( _materials._walls.hWalls, _materials._walls.colour );
+                Inserter::colourInserter ( _materials._walls.hWalls, _materials._walls.colour );
             else
                 // right bottom edge
                 if ( y == rows && x == columns )
-                    colourInserter ( _materials._walls.edges [2], _materials._walls.colour );
+                    Inserter::colourInserter ( _materials._walls.edges [2], _materials._walls.colour );
                 else
 
                     // vertical walls
                     if ( x == 1 || x == columns )
                         if ( y != 1 )
-                            colourInserter ( _materials._walls.vWalls, _materials._walls.colour );
+                            Inserter::colourInserter ( _materials._walls.vWalls, _materials._walls.colour );
 
             // packs
             if ( y != 1 && y != rows && y % 2 == 0 )
                 if ( x != 1 && x != columns && x % 2 == 0 )
-                    colourInserter ( _materials._resources.pack, _materials._resources.colourOne );
+                    Inserter::colourInserter ( _materials._resources.pack, _materials._resources.colourOne );
             std::cout << '\n';
         }
     }
@@ -98,18 +98,18 @@ void Area::inserter ()
 {};
 
 
-void Area::colourInserter ( COORD pos )
-{
-    SetConsoleCursorPosition ( consoleOutput, pos );
-};
-
-
-void Area::colourInserter ( std::string str, WORD colour )
-{
-    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-    SetConsoleTextAttribute ( consoleOutput, colour );
-    std::cout << str;
-};
+//void Area::colourInserter ( COORD pos )
+//{
+//    SetConsoleCursorPosition ( consoleOutput, pos );
+//};
+//
+//
+//void Area::colourInserter ( std::string str, WORD colour )
+//{
+//    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
+//    SetConsoleTextAttribute ( consoleOutput, colour );
+//    std::cout << str;
+//};
 
 
 void Area::resourceSetter ( unsigned short state, COORD position )
@@ -125,48 +125,56 @@ void Area::resourceSetter ( unsigned short state, COORD position )
         case 1:
             if ( position.X - 1 != 2 )
             {
-                colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                Inserter::colourInserter ( { position.X - 1, position.Y - 1 } );
+                Inserter::colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y - 1] [position.X - 1] = currentState;
             } else
                 if ( position.X + 1 != 88 )
                 {
-                    colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    Inserter::colourInserter ( { position.X + 1, position.Y - 1 } );
+                    Inserter::colourInserter ( u8"♣", F_YELLOW );
                     stateArray [position.Y - 1] [position.X + 1] = currentState;
                 }
             break;
         case 2:
             if ( position.Y - 1 != 2 )
             {
-                colourInserter ( { position.X - 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                Inserter::colourInserter ( { position.X - 1, position.Y - 1 } );
+                Inserter::colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y - 1] [position.X - 1] = currentState;
             } else
                 if ( position.Y + 1 != 18 )
                 {
-                    colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    Inserter::colourInserter ( { position.X - 1, position.Y + 1 } );
+                    Inserter::colourInserter ( u8"♣", F_YELLOW );
                     stateArray [position.Y + 1] [position.X - 1] = currentState;
                 }
             break;
         case 3:
             if ( position.X - 1 != 2 )
             {
-                colourInserter ( { position.X - 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                Inserter::colourInserter ( { position.X - 1, position.Y + 1 } );
+                Inserter::colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y + 1] [position.X - 1] = currentState;
             } else
                 if ( position.X + 1 != 88 )
                 {
-                    colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    Inserter::colourInserter ( { position.X + 1, position.Y + 1 } );
+                    Inserter::colourInserter ( u8"♣", F_YELLOW );
                     stateArray [position.Y + 1] [position.X + 1] = currentState;
                 }
             break;
         case 4:
             if ( position.Y - 1 != 2 )
             {
-                colourInserter ( { position.X + 1, position.Y - 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                Inserter::colourInserter ( { position.X + 1, position.Y - 1 } );
+                Inserter::colourInserter ( u8"♣", F_YELLOW );
                 stateArray [position.Y - 1] [position.X + 1] = currentState;
             } else
                 if ( position.Y + 1 != 18 )
                 {
-                    colourInserter ( { position.X + 1, position.Y + 1 } ); colourInserter ( u8"♣", F_YELLOW );
+                    Inserter::colourInserter ( { position.X + 1, position.Y + 1 } );
+                    Inserter::colourInserter ( u8"♣", F_YELLOW );
                     stateArray [position.Y + 1] [position.X + 1] = currentState;
                 }
             break;

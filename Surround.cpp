@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,11.02.2019</changed>
+/// <changed>ʆϒʅ,12.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -24,7 +24,7 @@ struct Surround::titleBar
         COORD position { 0,0 };
 
         // titleBar
-        colourInserter ( titleSentence, colour, startPoint );
+        Inserter::colourInserter ( titleSentence, colour, startPoint );
     }
 } _titleBar;
 
@@ -43,17 +43,17 @@ struct Surround::menus
             COORD temp ( startPoint );
             if ( set == true )
             {
-                colourInserter ( u8"                        ", colour, temp );
+                Inserter::colourInserter ( u8"                        ", colour, temp );
                 temp.X -= 1;
                 temp.Y += 1;
-                colourInserter ( u8"                          ", colour, temp );
+                Inserter::colourInserter ( u8"                          ", colour, temp );
                 set = false;
             } else
             {
-                colourInserter ( titleSentence, colour, temp );
+                Inserter::colourInserter ( titleSentence, colour, temp );
                 temp.X -= 1;
                 temp.Y += 1;
-                colourInserter ( secondSentence, colour, temp );
+                Inserter::colourInserter ( secondSentence, colour, temp );
                 set = true;
             }
         };
@@ -83,14 +83,14 @@ struct Surround::menus
 
             // ageChoicesMenu
             position = startPoint;
-            colourInserter ( title, colour, position );
+            Inserter::colourInserter ( title, colour, position );
             position.Y += 1;
             for ( char i = 0; i < 5; i++ )
             {
-                colourInserter ( options [i], colour, position );
+                Inserter::colourInserter ( options [i], colour, position );
                 position.Y += 1;
             }
-            colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
+            Inserter::colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
         }
     } _ageChoices;
 
@@ -118,13 +118,13 @@ struct Surround::menus
 
             // characterCoicesMenu
             position = startPoint;
-            colourInserter ( title, colour, position );
+            Inserter::colourInserter ( title, colour, position );
             position.X += 3;
             position.Y += 1;
-            colourInserter ( options [0], colour, position );
+            Inserter::colourInserter ( options [0], colour, position );
             position.X += 5;
-            colourInserter ( options [1], colour, position );
-            colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
+            Inserter::colourInserter ( options [1], colour, position );
+            Inserter::colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
         }
     } _characterChoices;
 
@@ -150,14 +150,14 @@ struct Surround::menus
 
             // dangerAreaChoicesMenu
             position = startPoint;
-            colourInserter ( title, colour, position );
+            Inserter::colourInserter ( title, colour, position );
             position.Y += 1;
             for ( char i = 0; i < 3; i++ )
             {
-                colourInserter ( options [i], colour, position );
+                Inserter::colourInserter ( options [i], colour, position );
                 position.Y += 1;
             }
-            colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
+            Inserter::colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
         }
     } _dangerAreaChoices;
 }_menus;
@@ -194,19 +194,19 @@ struct Surround::guideBar
         for ( char i = 0; i < 3; i++ )
         {
             if ( i == 0 )
-                colourInserter ( _signs.parts [i], _signs.colourOne, position );
+                Inserter::colourInserter ( _signs.parts [i], _signs.colourOne, position );
             else
                 if ( i == 1 )
                 {
                     position.X = ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2;
-                    colourInserter ( _signs.parts [i], _signs.colourTwo, position );
+                    Inserter::colourInserter ( _signs.parts [i], _signs.colourTwo, position );
                 } else
                 {
                     position.X = ( ( SCREEN_W - 26 ) - 17 );
-                    colourInserter ( _signs.parts [i], _signs.colourTwo, position );
+                    Inserter::colourInserter ( _signs.parts [i], _signs.colourTwo, position );
                 }
                 position.X += 2;
-                colourInserter ( _guides.parts [i], _guides.colour, position );
+                Inserter::colourInserter ( _guides.parts [i], _guides.colour, position );
         }
     }
 } _GuideBar;
@@ -306,41 +306,41 @@ struct Surround::statusBar
         COORD position { 0,0 };
 
         // statusBar
-        colourInserter ( title, colour, startPoint );
+        Inserter::colourInserter ( title, colour, startPoint );
 
         position = _packers.point;
-        colourInserter ( _packers.str, _packers.colourOne, position );
+        Inserter::colourInserter ( _packers.str, _packers.colourOne, position );
         position.X += 9;
-        colourInserter ( std::to_string ( _packers.count ), _packers.colourTwo, position );
+        Inserter::colourInserter ( std::to_string ( _packers.count ), _packers.colourTwo, position );
 
         position = _age.point;
-        colourInserter ( _age.str, _age.colourOne, position );
+        Inserter::colourInserter ( _age.str, _age.colourOne, position );
         position.Y += 1;
-        colourInserter ( _age.ages [_age.id], _age.colourTwo, position );
+        Inserter::colourInserter ( _age.ages [_age.id], _age.colourTwo, position );
 
-        colourInserter ( _resources.str, _resources.colour, _resources.startPoint );
+        Inserter::colourInserter ( _resources.str, _resources.colour, _resources.startPoint );
         position = _resources._healthy.point;
-        colourInserter ( _resources._healthy.str, _resources._healthy.colourOne, position );
+        Inserter::colourInserter ( _resources._healthy.str, _resources._healthy.colourOne, position );
         position.X += 9;
-        colourInserter ( std::to_string ( _resources._healthy.count ), _resources._healthy.colourTwo, position );
+        Inserter::colourInserter ( std::to_string ( _resources._healthy.count ), _resources._healthy.colourTwo, position );
         position = _resources._renewed.point;
-        colourInserter ( _resources._renewed.str, _resources._renewed.colourOne, position );
+        Inserter::colourInserter ( _resources._renewed.str, _resources._renewed.colourOne, position );
         position.X += 9;
-        colourInserter ( std::to_string ( _resources._renewed.count ), _resources._renewed.colourTwo, position );
+        Inserter::colourInserter ( std::to_string ( _resources._renewed.count ), _resources._renewed.colourTwo, position );
         position = _resources._vanished.point;
-        colourInserter ( _resources._vanished.str, _resources._vanished.colourOne, position );
+        Inserter::colourInserter ( _resources._vanished.str, _resources._vanished.colourOne, position );
         position.X += 10;
-        colourInserter ( std::to_string ( _resources._vanished.count ), _resources._vanished.colourTwo, position );
+        Inserter::colourInserter ( std::to_string ( _resources._vanished.count ), _resources._vanished.colourTwo, position );
 
-        colourInserter ( _packages.str, _packages.colour, _packages.startPoint );
+        Inserter::colourInserter ( _packages.str, _packages.colour, _packages.startPoint );
         position = _packages._have.point;
-        colourInserter ( _packages._have.str, _packages._have.colourOne, position );
+        Inserter::colourInserter ( _packages._have.str, _packages._have.colourOne, position );
         position.Y += 1;
-        colourInserter ( std::to_string ( _packages._have.count ), _packages._have.colourTwo, position );
+        Inserter::colourInserter ( std::to_string ( _packages._have.count ), _packages._have.colourTwo, position );
         position = _packages._need.point;
-        colourInserter ( _packages._need.str, _packages._need.colourOne, position );
+        Inserter::colourInserter ( _packages._need.str, _packages._need.colourOne, position );
         position.Y += 1;
-        colourInserter ( std::to_string ( _packages._need.count ), _packages._need.colourTwo, position );
+        Inserter::colourInserter ( std::to_string ( _packages._need.count ), _packages._need.colourTwo, position );
     }
 } _statusBar;
 
@@ -358,19 +358,19 @@ struct Surround::loadingBar
         COORD position { startPoint };
         for ( unsigned char i = 0; i < 7; i++ )
         {
-            colourInserter ( characters [i], colourOne, position );
+            Inserter::colourInserter ( characters [i], colourOne, position );
             std::this_thread::sleep_for ( std::chrono::milliseconds ( 100 ) );
             position.X += 1;
         }
         for ( unsigned char i = 1; i <= 3; i++ )
         {
-            colourInserter ( characters [7], colourTwo, position );
+            Inserter::colourInserter ( characters [7], colourTwo, position );
             std::this_thread::sleep_for ( std::chrono::milliseconds ( 150 ) );
-            colourInserter ( characters [8], colourTwo, position );
+            Inserter::colourInserter ( characters [8], colourTwo, position );
             std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
         }
         std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
-        colourInserter ( copywrite, colourThree, startPoint );
+        Inserter::colourInserter ( copywrite, colourThree, startPoint );
     }
 } _loadingBar;
 
@@ -404,13 +404,13 @@ void Surround::newSetter ( void )
 };
 
 
-void Surround::colourInserter ( std::string str, WORD colour, COORD pos )
-{
-    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-    SetConsoleCursorPosition ( consoleOutput, pos );
-    SetConsoleTextAttribute ( consoleOutput, colour );
-    std::cout << str;
-};
+//void Surround::colourInserter ( std::string str, WORD colour, COORD pos )
+//{
+//    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
+//    SetConsoleCursorPosition ( consoleOutput, pos );
+//    SetConsoleTextAttribute ( consoleOutput, colour );
+//    std::cout << str;
+//};
 
 
 void Surround::menusSetter ( unsigned short choice, bool confirm )
@@ -435,7 +435,7 @@ void Surround::menusSetter ( unsigned short choice, bool confirm )
             if ( confirm != true )
             {
                 pos.Y += ( _menus._dangerAreaChoices.selected % 100 ) / 10;
-                colourInserter ( u8"  ", _menus._dangerAreaChoices._selectionSign.colour, pos );
+                Inserter::colourInserter ( u8"  ", _menus._dangerAreaChoices._selectionSign.colour, pos );
                 _menus._dangerAreaChoices.selected = choice;
                 pos = _menus._dangerAreaChoices._selectionSign.startPoint;
                 if ( direction == 0 )
@@ -443,12 +443,12 @@ void Surround::menusSetter ( unsigned short choice, bool confirm )
                 else
                     if ( ( ( choice % 100 ) % 10 ) == 1 )
                         pos.Y += ( choice % 100 ) / 10;
-                colourInserter ( _menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, pos );
+                Inserter::colourInserter ( _menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, pos );
             } else
                 if ( choice == 100 )
                 {
                     pos.X += 2;
-                    colourInserter ( _menus._dangerAreaChoices.options [0], F_bRED, pos );
+                    Inserter::colourInserter ( _menus._dangerAreaChoices.options [0], F_bRED, pos );
                 }
         }
     }
