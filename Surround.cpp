@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,12.02.2019</changed>
+/// <changed>ʆϒʅ,19.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -171,7 +171,7 @@ struct Surround::guideBar
         std::string parts [3] {
           u8"♣:",
           u8"☻:",
-          u8"▪:" };
+          u8"•:" };
         WORD colourOne { F_bGREEN };
         WORD colourTwo { F_bWHITE };
     } _signs;
@@ -180,7 +180,7 @@ struct Surround::guideBar
         std::string parts [3] {
           u8" healthy resources",
           u8" beloved packers",
-          u8" already packed",
+          u8" ready packages",
         };
         WORD colour { F_bBLUE };
     } _guides;
@@ -214,7 +214,7 @@ struct Surround::guideBar
 
 struct Surround::statusBar
 {
-    std::string title { u8"status->>" };
+    std::string title { u8"status ^,^" };
     WORD colour { F_bWHITE };
     COORD startPoint { SCREEN_W - 15,3 };
 
@@ -229,28 +229,28 @@ struct Surround::statusBar
 
     struct age
     {
-        std::string str { u8"age: " };
+        std::string str { u8"age:" };
         WORD colourOne { F_bPURPLE };
         //TODO add: age setter + user choice for start age
         unsigned char id { 0 };
         std::string ages [5] {
-          u8"Stone age" ,
-          u8"Middle age" ,
-          u8"Advanced age" ,
-          u8"Hollow age" ,
-          u8"Dirty age" };
+          u8"   Stone" ,
+          u8"   Middle" ,
+          u8"   Advanced" ,
+          u8"   Hollow" ,
+          u8"   Dirty" };
         WORD colourTwo { F_bBLUE };
         COORD point { SCREEN_W - 15,7 };
     } _age;
 
     struct resources
     {
-        std::string str { u8"resources>" };
-        WORD colour { F_bPURPLE };
+        std::string str { u8"resources->" };
+        WORD colour { F_bWHITE };
         COORD startPoint { SCREEN_W - 15,10 };
         struct healthy
         {
-            std::string str { u8"healthy: " };
+            std::string str { u8"healthy:" };
             WORD colourOne { F_bGREEN };
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
@@ -259,46 +259,46 @@ struct Surround::statusBar
         } _healthy;
         struct renewed
         {
-            std::string str { u8"renewed: " };
+            std::string str { u8"renewed:" };
             WORD colourOne { F_YELLOW };
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { SCREEN_W - 15,14 };
+            COORD point { SCREEN_W - 15,15 };
         } _renewed;
         struct vanished
         {
-            std::string str { u8"vanished: " };
+            std::string str { u8"vanished:" };
             WORD colourOne { F_RED };
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { SCREEN_W - 15,16 };
+            COORD point { SCREEN_W - 15,18 };
         } _vanished;
     } _resources;
 
     struct packages
     {
-        std::string str { u8"packages> " };
-        WORD colour { F_bPURPLE };
-        COORD startPoint { SCREEN_W - 15,18 };
+        std::string str { u8"packages->" };
+        WORD colour { F_bWHITE };
+        COORD startPoint { SCREEN_W - 15,21 };
         struct have
         {
-            std::string str { u8"have: " };
+            std::string str { u8"have:" };
             WORD colourOne { F_bPURPLE };
             //TODO add: default count setter in different ages (constructor)
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { SCREEN_W - 15,20 };
+            COORD point { SCREEN_W - 15,23 };
         } _have;
         struct need
         {
-            std::string str { u8"need: " };
+            std::string str { u8"need:" };
             WORD colourOne { F_bPURPLE };
             //TODO add: random need setter in constructor
             unsigned int count { 0 };
             WORD colourTwo { F_bBLUE };
-            COORD point { SCREEN_W - 15,23 };
+            COORD point { SCREEN_W - 15,26 };
         } _need;
     } _packages;
     void inserter ()
@@ -321,24 +321,29 @@ struct Surround::statusBar
         Inserter::colourInserter ( _resources.str, _resources.colour, _resources.startPoint );
         position = _resources._healthy.point;
         Inserter::colourInserter ( _resources._healthy.str, _resources._healthy.colourOne, position );
-        position.X += 9;
+        position.X += 3;
+        position.Y += 1;
         Inserter::colourInserter ( std::to_string ( _resources._healthy.count ), _resources._healthy.colourTwo, position );
         position = _resources._renewed.point;
         Inserter::colourInserter ( _resources._renewed.str, _resources._renewed.colourOne, position );
-        position.X += 9;
+        position.X += 3;
+        position.Y += 1;
         Inserter::colourInserter ( std::to_string ( _resources._renewed.count ), _resources._renewed.colourTwo, position );
         position = _resources._vanished.point;
         Inserter::colourInserter ( _resources._vanished.str, _resources._vanished.colourOne, position );
-        position.X += 10;
+        position.X += 3;
+        position.Y += 1;
         Inserter::colourInserter ( std::to_string ( _resources._vanished.count ), _resources._vanished.colourTwo, position );
 
         Inserter::colourInserter ( _packages.str, _packages.colour, _packages.startPoint );
         position = _packages._have.point;
         Inserter::colourInserter ( _packages._have.str, _packages._have.colourOne, position );
+        position.X += 3;
         position.Y += 1;
         Inserter::colourInserter ( std::to_string ( _packages._have.count ), _packages._have.colourTwo, position );
         position = _packages._need.point;
         Inserter::colourInserter ( _packages._need.str, _packages._need.colourOne, position );
+        position.X += 3;
         position.Y += 1;
         Inserter::colourInserter ( std::to_string ( _packages._need.count ), _packages._need.colourTwo, position );
     }
@@ -348,7 +353,8 @@ struct Surround::statusBar
 struct Surround::loadingBar
 {
     std::string characters [9] { u8"L", u8"O", u8"A", u8"D", u8"I", u8"N", u8"G", u8"#", u8" " };
-    std::string copywrite { u8"  ©: ʆϒʅ" };
+    //std::string copywrite { u8"  ©: ʆϒʅ" }; // for fonts with more characters
+    std::string copywrite { u8"  ©: }Y{" };
     WORD colourOne { B_bBLUE | F_bWHITE };
     WORD colourTwo { B_BLACK | F_bGREEN };
     WORD colourThree { B_BLACK | F_bWHITE };

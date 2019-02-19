@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,12.02.2019</changed>
+/// <changed>ʆϒʅ,19.02.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
@@ -18,9 +18,12 @@ struct Area::materials
 {
     struct walls
     {
-        std::string hWalls { u8"━" };
-        std::string vWalls { u8"┃" };
-        std::string edges [4] { u8"┏",u8"┗",u8"┛",u8"┓" };
+        //std::string hWalls { u8"━" };
+        //std::string vWalls { u8"┃" };
+        //std::string edges [4] { u8"┏",u8"┗",u8"┛",u8"┓" };
+        std::string hWalls { u8"═" };
+        std::string vWalls { u8"║" };
+        std::string edges [4] { u8"╔",u8"╚",u8"╝",u8"╗" };
         WORD colour { F_bBLUE };
     } _walls;
 

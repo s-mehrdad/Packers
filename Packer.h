@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,12.02.2019</changed>
+/// <changed>ʆϒʅ,19.02.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -35,7 +35,7 @@ public:
         }
         actions ( unsigned short speed, unsigned char id ) : delay ( speed )
         {
-            std::string signs [4] { u8" ", u8"☻", u8"☺", u8"▪" };
+            std::string signs [4] { u8" ", u8"☻", u8"☺", u8"•" };
             current = signs [id];
         }
         bool operator< ( const actions &a ) const
