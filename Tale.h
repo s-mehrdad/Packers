@@ -2,18 +2,27 @@
 /// <summary>
 /// 
 /// </summary>
-/// <created>ʆϒʅ,11.12.2018</created>
+/// <created>ʆϒʅ,01.04.2019</created>
 /// <changed>ʆϒʅ,01.04.2019</changed>
 // ********************************************************************************
 
 #pragma once
 
 
-#ifndef Z_OLDCODES_H
-#define Z_OLDCODES_H
+#ifndef TALE_H
+#define TALE_H
 
 
-void muTex ();
+class Tale
+{
+  struct storyLine;
+  struct creatures;
+
+public:
+  Tale ( unsigned char );
+  void newSetter ( void );
+
+};
 
 
-#endif // !Z_OLDCODES_H
+#endif // !TALE_H

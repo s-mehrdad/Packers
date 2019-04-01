@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,12.02.2019</changed>
+/// <changed>ʆϒʅ,01.04.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -15,18 +15,17 @@
 
 class Surround
 {
-    struct titleBar;
-    struct menus;
-    struct guideBar;
-    struct statusBar;
-    struct loadingBar;
-    struct storyLine;
-public:
-    Surround ( unsigned char );
-    void newSetter ( void );
+  struct titleBar;
+  struct menus;
+  struct guideBar;
+  struct statusBar;
 
-    //static void colourInserter ( std::string, WORD, COORD );
-    static void menusSetter ( unsigned short, bool );
+public:
+  Surround ( unsigned char );
+  void newSetter ( void );
+
+  //static void colourInserter ( std::string, WORD, COORD );
+  static void menusSetter ( unsigned short, bool );
 };
 
 

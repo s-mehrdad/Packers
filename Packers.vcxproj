@@ -192,11 +192,13 @@ xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xml" "$(OutD
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shared.h" />
+    <ClInclude Include="Tale.h" />
     <ClInclude Include="Surround.h" />
     <ClInclude Include="Z_OldCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
+    <ClCompile Include="Tale.cpp" />
     <ClCompile Include="Z_OldCodes.cpp" />
     <ClCompile Include="Packer.cpp" />
     <ClCompile Include="Packers.cpp" />
