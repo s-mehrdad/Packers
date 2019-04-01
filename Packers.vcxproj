@@ -217,6 +217,13 @@ xcopy /y /d "..\DLLs\ConsoleAdjustments\$(IntDir)ConsoleAdjustments.xml" "$(OutD
   <ItemGroup>
     <Image Include="ScreenShot.jpg" />
     <Image Include="ScreenShot_2.jpg" />
+    <Image Include="ScreenShot_3.jpg" />
+    <Image Include="ScreenShot_4.jpg" />
+    <Image Include="ScreenShot_5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Packers.aps" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

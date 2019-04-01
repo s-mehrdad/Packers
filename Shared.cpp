@@ -53,8 +53,9 @@ Loading::Loading ( unsigned char mode )
   _loadingBar.speed = mode;
 
   // cout
-  std::thread tOne ( inserter );
-  tOne.join ();
+  _loadingBar.inserter ();
+  //std::thread tOne ( inserter );
+  //tOne.join ();
 };
 
 
@@ -65,7 +66,12 @@ void Loading::newSetter ( void )
 };
 
 
-void Loading::inserter ( void )
+void Loading::clear ( unsigned char count )
 {
-  _loadingBar.inserter ();
+  COORD temp { 0,0 };
+  Inserter::colourInserter ( u8"                                                    ", F_WHITE, temp );
+  for ( unsigned char i = 0; i < count; i++ )
+  {
+    Inserter::colourInserter ( u8"                                                    ", F_WHITE );
+  }
 }

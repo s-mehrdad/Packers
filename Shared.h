@@ -21,7 +21,8 @@ public:
   Loading ( unsigned char );
   void newSetter ( void );
 
-  static void inserter ( void );
+  //static void inserter ( void );
+  static void clear ( unsigned char );
 };
 
 
