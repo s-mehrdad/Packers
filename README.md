@@ -1,8 +1,10 @@
 # Introduction 
-Packers is a funny game that is intended to make people more aware of environment while laughing.
+Packers is a funny game, aimed to make people more aware of environment while laughing.
 The inspiration behind it comes from looking at what people do and the old packman game.
 
-The project was originally just uploaded into the GitHub account of the creator, the process of learning git and committing in the right way to the online repository has happened after, in the same time the decision was made to move to Azure to experience a better all-around access, therefore the most commitments to the project are authored in Azure environments. The most commitments are going to be authored in Azure, which is private and a time to time public upload is going to come in GitHub.
+<img href="https://github.com/BirdSofts" src="https://dev.azure.com/BirdSofts/_git/Packers?path=%2FScreenShot_2.jpg&version=GBmaster" width="600" height="400" alt="ScreenShot" style="float:center;border:0">
+
+The project was originally just uploaded on GitHub of the creator, in the same time the decision was made to move to Azure to experience a better all-around access using VisualStudio IDE, the process of learning git, committing and using additionally GitHub in the right way has happened after, therefore the most commitments to the project are authored in Azure environments. The most commitments are still going to be authored in Azure, which is private, additionally a time to time public commit happens to GitHub.
 
 <table>
 <tr>
@@ -30,15 +32,12 @@ The project was originally just uploaded into the GitHub account of the creator,
 
 # Getting Started
 1.	Installation process:
-Just a simple console game written in C++. If you are a user without any knowledge about programming and want to see what is what, just open the .exe application file (it is not a virus :p ) and see your full. If you don't have that knowledge eider, just do let it go without checking anything and wait for the release version.
-
+Just a simple console game written in C++. Platform is Microsoft Windows and compile ability in other platforms isn't available yet.
 2.	Software dependencies:
-For simple user probably a machine which runs on windows.
+Simple users: probably a machine which runs on Microsoft Windows.
 Advanced users?! Well they can find their ways around themselves. :p
-
 3.	Latest releases:
 Still no release, just coding and debugging
-
 4.	API references
 Windows's console
 
