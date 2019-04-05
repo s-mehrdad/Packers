@@ -172,7 +172,7 @@ struct Surround::guideBar
     std::string parts [3] {
       u8"♣:",
       u8"☻:",
-      u8"•:" };
+      u8".:" };
     WORD colourOne { F_bGREEN };
     WORD colourTwo { F_bWHITE };
   } _signs;

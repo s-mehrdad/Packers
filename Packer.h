@@ -35,7 +35,7 @@ public:
     }
     actions ( unsigned short speed, unsigned char id ) : delay ( speed )
     {
-      std::string signs [4] { u8" ", u8"☻", u8"☺", u8"•" };
+      std::string signs [4] { u8" ", u8"☻", u8"☺", u8"." };
       current = signs [id];
     }
     bool operator< ( const actions &a ) const
