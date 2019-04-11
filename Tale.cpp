@@ -3,13 +3,13 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,01.04.2019</changed>
+/// <changed>ʆϒʅ,12.04.2019</changed>
 // ********************************************************************************
 
 #include "pch.h"
 #include "Tale.h"
 #include "Shared.h"
-#include "ConsoleAdjustments.h"
+#include "Console.h"
 #include "Area.h"
 #include "Packer.h"
 #include "Surround.h"
