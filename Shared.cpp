@@ -3,16 +3,51 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,12.04.2019</changed>
+/// <changed>ʆϒʅ,14.04.2019</changed>
 // ********************************************************************************
 
-#include "pch.h"
+//#include "pch.h"
+#include "Packers.h"
 #include "Shared.h"
 #include "Console.h"
 #include "Area.h"
 #include "Packer.h"
 #include "Surround.h"
 #include "Tale.h"
+
+
+Inserter::Inserter ()
+{};
+
+
+COORD Inserter::currentPosition { 0,0 };
+HANDLE Inserter::consoleOutput { GetStdHandle ( STD_OUTPUT_HANDLE ) };
+CONSOLE_SCREEN_BUFFER_INFOEX Inserter::screenBinfoEX {};
+
+
+void Inserter::colourInserter ( const COORD& pos )
+{
+  currentPosition = pos;
+  SetConsoleCursorPosition ( consoleOutput, pos );
+};
+
+
+void Inserter::colourInserter ( const std::string& str, const WORD& colour )
+{
+  GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
+  SetConsoleTextAttribute ( consoleOutput, colour );
+  std::cout << str;
+};
+
+
+void Inserter::colourInserter ( const std::string& str, const WORD& colour, const COORD& pos )
+{
+  currentPosition = pos;
+  GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
+  SetConsoleCursorPosition ( consoleOutput, pos );
+  SetConsoleTextAttribute ( consoleOutput, colour );
+  std::cout << str;
+};
 
 
 struct Loading::loadingBar
@@ -23,7 +58,7 @@ struct Loading::loadingBar
   WORD colourOne { B_bBLUE | F_bWHITE };
   WORD colourTwo { B_BLACK | F_bGREEN };
   WORD colourThree { B_BLACK | F_bWHITE };
-  COORD startPoint { SCREEN_W - 13, SCREEN_H - 2 };
+  COORD startPoint { SCREEN_W - 13, SCREEN_H - 3 };
   unsigned char speed { 1 };
   void inserter ()
   {
@@ -69,9 +104,9 @@ void Loading::newSetter ( void )
 void Loading::clear ( unsigned char count )
 {
   COORD temp { 0,0 };
-  Inserter::colourInserter ( u8"                                                    ", F_WHITE, temp );
+  Inserter::colourInserter ( u8"                                                                     ", F_WHITE, temp );
   for ( unsigned char i = 0; i < count; i++ )
   {
-    Inserter::colourInserter ( u8"                                                    ", F_WHITE );
+    Inserter::colourInserter ( u8"                                                                     ", F_WHITE );
   }
 }

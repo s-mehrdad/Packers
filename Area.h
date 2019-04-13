@@ -21,7 +21,7 @@ public:
   Area ( unsigned char );
   void inserter ();
 
-  static const int rows { SCREEN_H - 11 };
+  static const int rows { SCREEN_H - 12 };
   static const int columns { SCREEN_W - 18 };
   static unsigned char stateArray [rows] [columns];
   //static void colourInserter ( COORD );

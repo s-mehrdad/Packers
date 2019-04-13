@@ -3,10 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,12.04.2019</changed>
+/// <changed>ʆϒʅ,14.04.2019</changed>
 // ********************************************************************************
 
-#include "pch.h"
+//#include "pch.h"
+#include "Packers.h"
 #include "Packer.h"
 #include "Console.h"
 #include "Shared.h"
@@ -57,7 +58,7 @@ Packer::Packer ( unsigned char quickReSeed )
   do
   {
     position.X = rand () % ( ( SCREEN_W - 18 ) - 3 ) + 3;
-    position.Y = rand () % ( ( SCREEN_H - 11 ) - 3 ) + 3;
+    position.Y = rand () % ( ( SCREEN_H - 12 ) - 3 ) + 3;
   } while ( position.X % 2 == 0 || position.Y % 2 == 0 );
 
 

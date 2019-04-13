@@ -3,10 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,12.04.2019</changed>
+/// <changed>ʆϒʅ,14.04.2019</changed>
 // ********************************************************************************
 
-#include "pch.h"
+//#include "pch.h"
+#include "Packers.h"
 #include "Surround.h"
 #include "Shared.h"
 #include "Console.h"
@@ -19,7 +20,7 @@ struct Surround::titleBar
 {
   std::string titleSentence { u8"Feel free to way in as a packer toward becoming an advanced packer! ♥♥♥♥♥ :)" };
   WORD colour { F_bBLUE };
-  COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 76 / 2 ),0 };
+  COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 76 / 2 ), 0 };
   void inserter ()
   {
     COORD position { 0,0 };
@@ -37,7 +38,7 @@ struct Surround::menus
     std::string titleSentence { u8"Press that enter key ._." };
     std::string secondSentence { u8"++: This is a demo ^.^ :++" };
     WORD colour { F_bWHITE };
-    COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 24 / 2 ),Area::rows + 3 };
+    COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 24 / 2 ), SCREEN_H - 7 };
     bool set { false };
     void inserter ()
     {
@@ -70,17 +71,17 @@ struct Surround::menus
       u8"  Hollow age.      . .            ." ,
       u8"  Dirty age (packers of packers contest!)" };
     WORD colour { F_bWHITE };
-    COORD startPoint { 5,Area::rows + 2 };
+    COORD startPoint { 5, SCREEN_H - 10 };
     unsigned short selected { 300 };
     struct selectionSign
     {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { 4,Area::rows + 3 };
+      COORD startPoint { 4, SCREEN_H - 9 };
     } _selectionSign;
     void inserter ()
     {
-      COORD position { 0,0 };
+      COORD position { 0, 0 };
 
       // ageChoicesMenu
       position = startPoint;
@@ -105,17 +106,17 @@ struct Surround::menus
     WORD colour { F_bWHITE };
     //position.X = ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2;
 
-    COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2,Area::rows + 2 };
+    COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2, SCREEN_H - 10 };
     unsigned short selected { 200 };
     struct selectionSign
     {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 11,Area::rows + 3 };
+      COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 11, SCREEN_H - 9 };
     } _selectionSign;
     void inserter ()
     {
-      COORD position { 0,0 };
+      COORD position { 0, 0 };
 
       // characterCoicesMenu
       position = startPoint;
@@ -137,17 +138,17 @@ struct Surround::menus
       u8"  Let me furnish! :)",
       u8"  Let's hit the road!" };
     WORD colour { F_bWHITE };
-    COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ),Area::rows + 2 };
+    COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ), SCREEN_H - 10 };
     unsigned short selected { 100 };
     struct selectionSign
     {
       std::string sign { u8"->" };
       WORD colour { F_bRED };
-      COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ) - 1,Area::rows + 3 };
+      COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ) - 1, SCREEN_H - 9 };
     } _selectionSign;
     void inserter ()
     {
-      COORD position { 0,0 };
+      COORD position { 0, 0 };
 
       // dangerAreaChoicesMenu
       position = startPoint;
@@ -166,7 +167,7 @@ struct Surround::menus
 
 struct Surround::guideBar
 {
-  COORD startPoint { 10, SCREEN_H - 2 };
+  COORD startPoint { 10, SCREEN_H - 3 };
   struct signs
   {
     std::string parts [3] {
@@ -187,7 +188,7 @@ struct Surround::guideBar
   } _guides;
   void inserter ()
   {
-    COORD position { 0,0 };
+    COORD position { 0, 0 };
 
     // guideBar
     position = startPoint;
@@ -217,7 +218,7 @@ struct Surround::statusBar
 {
   std::string title { u8"status ^,^" };
   WORD colour { F_bWHITE };
-  COORD startPoint { SCREEN_W - 15,3 };
+  COORD startPoint { SCREEN_W - 15, 3 };
 
   struct packers
   {
@@ -225,7 +226,7 @@ struct Surround::statusBar
     WORD colourOne { F_bPURPLE };
     unsigned char count { 0 };
     WORD colourTwo { F_bBLUE };
-    COORD point { SCREEN_W - 15,5 };
+    COORD point { SCREEN_W - 15, 5 };
   } _packers;
 
   struct age
@@ -241,14 +242,14 @@ struct Surround::statusBar
       u8"   Hollow" ,
       u8"   Dirty" };
     WORD colourTwo { F_bBLUE };
-    COORD point { SCREEN_W - 15,7 };
+    COORD point { SCREEN_W - 15, 7 };
   } _age;
 
   struct resources
   {
     std::string str { u8"resources->" };
     WORD colour { F_bWHITE };
-    COORD startPoint { SCREEN_W - 15,10 };
+    COORD startPoint { SCREEN_W - 15, 10 };
     struct healthy
     {
       std::string str { u8"healthy:" };
@@ -256,7 +257,7 @@ struct Surround::statusBar
       //TODO add: default count setter in different ages (constructor)
       unsigned int count { 0 };
       WORD colourTwo { F_bBLUE };
-      COORD point { SCREEN_W - 15,12 };
+      COORD point { SCREEN_W - 15, 12 };
     } _healthy;
     struct renewed
     {
@@ -265,7 +266,7 @@ struct Surround::statusBar
       //TODO add: default count setter in different ages (constructor)
       unsigned int count { 0 };
       WORD colourTwo { F_bBLUE };
-      COORD point { SCREEN_W - 15,15 };
+      COORD point { SCREEN_W - 15, 15 };
     } _renewed;
     struct vanished
     {
@@ -274,7 +275,7 @@ struct Surround::statusBar
       //TODO add: default count setter in different ages (constructor)
       unsigned int count { 0 };
       WORD colourTwo { F_bBLUE };
-      COORD point { SCREEN_W - 15,18 };
+      COORD point { SCREEN_W - 15, 18 };
     } _vanished;
   } _resources;
 
@@ -282,7 +283,7 @@ struct Surround::statusBar
   {
     std::string str { u8"packages->" };
     WORD colour { F_bWHITE };
-    COORD startPoint { SCREEN_W - 15,21 };
+    COORD startPoint { SCREEN_W - 15, 21 };
     struct have
     {
       std::string str { u8"have:" };
@@ -290,7 +291,7 @@ struct Surround::statusBar
       //TODO add: default count setter in different ages (constructor)
       unsigned int count { 0 };
       WORD colourTwo { F_bBLUE };
-      COORD point { SCREEN_W - 15,23 };
+      COORD point { SCREEN_W - 15, 23 };
     } _have;
     struct need
     {
@@ -299,12 +300,12 @@ struct Surround::statusBar
       //TODO add: random need setter in constructor
       unsigned int count { 0 };
       WORD colourTwo { F_bBLUE };
-      COORD point { SCREEN_W - 15,26 };
+      COORD point { SCREEN_W - 15, 26 };
     } _need;
   } _packages;
   void inserter ()
   {
-    COORD position { 0,0 };
+    COORD position { 0, 0 };
 
     // statusBar
     Inserter::colourInserter ( title, colour, startPoint );
