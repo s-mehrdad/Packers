@@ -32,17 +32,24 @@ The project was originally just uploaded on GitHub of the creator, in the same t
 
 # Getting Started
 1.	Installation process:
-Just a simple console game written in C++. Platform is Microsoft Windows and compile ability in other platforms isn't available yet.
+Compilable! :)
+
 2.	Software dependencies:
-Simple users: probably a machine which runs on Microsoft Windows.
-Advanced users?! Well they can find their ways around themselves. :p
+Dependent on Windows APIs
+
 3.	Latest releases:
 Still no release, just coding and debugging
+
 4.	API references
-Windows's console
+Windows's console: screen, colour and font manipulations APIs.
 
 # Build and Test
-Do use Visual Studio or know what you are doing before doing anything.
+If you are a beginner, use Visual Studio or know what you are doing before doing anything.
+
+Compilable using CMake.
+```cmake
+cmake --build build-path
+```
 
 # Contribute
 I appreciate any contribution from anyone, who sees that the project deserves his precious time.
