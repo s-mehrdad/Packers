@@ -1,8 +1,11 @@
 # Introduction 
 Packers is a funny game, aimed to make people more aware of environment while laughing.
 The inspiration behind it comes from looking at what people do and the old packman game.
+The game is developed using just characters to represent the humans's character simply and honestly.
 
-<img href="https://github.com/BirdSofts" src="https://dev.azure.com/BirdSofts/_git/Packers?path=%2FScreenShot_5.jpg&version=GBmaster" width="600" height="386" alt="ScreenShot">
+<img href="https://github.com/BirdSofts" src="https://github.com/BirdSofts/Packers/blob/master/ScreenShot_3-3.jpg" width="600" height="386" alt="ScreenShot">
+
+<img href="https://github.com/BirdSofts" src="https://github.com/BirdSofts/Packers/blob/master/ScreenShot_5.jpg" width="600" height="386" alt="ScreenShot">
 
 The project was originally just uploaded on GitHub of the creator, in the same time the decision was made to move to Azure to experience a better all-around access using VisualStudio IDE, the process of learning git, committing and using additionally GitHub in the right way has happened after, therefore the most commitments to the project are authored in Azure environments. The most commitments are still going to be authored in Azure, which is private, additionally a time to time public commit happens to GitHub.
 

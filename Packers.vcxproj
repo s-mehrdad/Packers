@@ -214,6 +214,7 @@
     <Image Include="ScreenShot.jpg" />
     <Image Include="ScreenShot_2.jpg" />
     <Image Include="ScreenShot_3-2.jpg" />
+    <Image Include="ScreenShot_3-3.jpg" />
     <Image Include="ScreenShot_4.jpg" />
     <Image Include="ScreenShot_5.jpg" />
   </ItemGroup>
