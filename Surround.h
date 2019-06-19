@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,01.04.2019</changed>
+/// <changed>ʆϒʅ,19.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -19,13 +19,11 @@ class Surround
   struct menus;
   struct guideBar;
   struct statusBar;
-
 public:
   Surround ( unsigned char );
   void newSetter ( void );
 
-  //static void colourInserter ( std::string, WORD, COORD );
-  static void menusSetter ( unsigned short, bool );
+  static void menusSetter ( const unsigned short&, const bool& );
 };
 
 

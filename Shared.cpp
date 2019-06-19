@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,14.04.2019</changed>
+/// <changed>ʆϒʅ,18.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -31,7 +31,6 @@ void Inserter::colourInserter ( const COORD& pos )
   SetConsoleCursorPosition ( consoleOutput, pos );
 };
 
-
 void Inserter::colourInserter ( const std::string& str, const WORD& colour )
 {
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
@@ -39,6 +38,13 @@ void Inserter::colourInserter ( const std::string& str, const WORD& colour )
   std::cout << str;
 };
 
+void Inserter::colourInserter ( const std::string& str, const COORD& pos )
+{
+  currentPosition = pos;
+  GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
+  SetConsoleCursorPosition ( consoleOutput, pos );
+  std::cout << str;
+};
 
 void Inserter::colourInserter ( const std::string& str, const WORD& colour, const COORD& pos )
 {
@@ -94,19 +100,17 @@ Loading::Loading ( unsigned char mode )
 };
 
 
-void Loading::newSetter ( void )
+void Loading::newSetter ( unsigned char mode )
 {
-  //TODO add: new setter
-  //TODO add: new couter
+  _loadingBar.speed = mode;
+  _loadingBar.inserter ();
 };
 
 
 void Loading::clear ( unsigned char count )
 {
   COORD temp { 0,0 };
-  Inserter::colourInserter ( u8"                                                                     ", F_WHITE, temp );
+  Inserter::colourInserter ( u8"                                                                     ", temp );
   for ( unsigned char i = 0; i < count; i++ )
-  {
-    Inserter::colourInserter ( u8"                                                                     ", F_WHITE );
-  }
+    std::cout << u8"                                                                     ";
 }
