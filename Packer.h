@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,01.04.2019</changed>
+/// <changed>ʆϒʅ,20.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -49,7 +49,6 @@ public:
   static unsigned char count;
   static unsigned char aspirationsSeeds [32];
   static unsigned char aspirations [32];
-  //static void colourInserter ( std::string, WORD, COORD );
   static void aspirationsSetter ( void );
   //TODO add a possible aspiration renew-er for packers (possibly called from surround)
   //TODO add a possible motivation renew-er for packers (possibly called from surround)

@@ -189,10 +189,13 @@
   <ItemGroup>
     <ClInclude Include="Area.h" />
     <ClInclude Include="Console.h" />
+    <ClInclude Include="Infobars.h" />
+    <ClInclude Include="Menus.h" />
     <ClInclude Include="Packer.h" />
     <ClInclude Include="Packers.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shared.h" />
+    <ClInclude Include="Status.h" />
     <ClInclude Include="Tale.h" />
     <ClInclude Include="Surround.h" />
     <ClInclude Include="Z_OldCodes.h" />
@@ -200,6 +203,9 @@
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Infobars.cpp" />
+    <ClCompile Include="Menus.cpp" />
+    <ClCompile Include="Status.cpp" />
     <ClCompile Include="Tale.cpp" />
     <ClCompile Include="Z_OldCodes.cpp" />
     <ClCompile Include="Packer.cpp" />

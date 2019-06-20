@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,18.06.2019</changed>
+/// <changed>ʆϒʅ,20.06.2019</changed>
 // ********************************************************************************
 
 // Packers.h : Include file for standard system include files,
@@ -38,6 +38,14 @@
 //! if you choose the next value less than 100, you are on your own, since the packers don't have enough to chew! :)
 #define SCREEN_W                120 // the same
 #define BACKGROUND_COLOUR       RGB (50,50,50)
+
+
+// clear screen
+#define CLEAR_SCR               77
+
+// loading delay
+#define LOAD_ONE                1
+#define LOAD_TWO                5
 
 
 // used mode: chew-forward going!

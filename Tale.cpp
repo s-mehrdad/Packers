@@ -3,17 +3,20 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,14.04.2019</changed>
+/// <changed>ʆϒʅ,20.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
 #include "Packers.h"
+//#include "Area.h"
+//#include "Infobars.h"
+//#include "Menus.h"
+//#include "Packer.h"
+//#include "Status.h"
+//#include "Surround.h"
 #include "Tale.h"
 #include "Shared.h"
 #include "Console.h"
-#include "Area.h"
-#include "Packer.h"
-#include "Surround.h"
 
 
 //TODO to be added: funny literature of the game! :)
@@ -43,92 +46,92 @@ struct Tale::creatures
   {
     COORD tempOne ( startPointGiant );
     COORD tempTwo ( tempOne );
-    Inserter::colourInserter ( u8"                      ;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"                      ;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                     ;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"                     ;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                     ;;■;;■;;", colourOne, tempOne );
+    colourInserter ( u8"                     ;;■;;■;;", colourOne, tempOne );
     tempTwo.Y = tempOne.Y;
     tempTwo.X = tempOne.X + 23;
-    Inserter::colourInserter ( u8"■", colourTwo, tempTwo );
+    colourInserter ( u8"■", colourTwo, tempTwo );
     tempTwo.X = tempOne.X + 26;
-    Inserter::colourInserter ( u8"■", colourTwo, tempTwo );
+    colourInserter ( u8"■", colourTwo, tempTwo );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                     ;;;▌▐;;;", colourOne, tempOne );
+    colourInserter ( u8"                     ;;;▌▐;;;", colourOne, tempOne );
     tempTwo.Y = tempOne.Y;
     tempTwo.X = tempOne.X + 24;
-    Inserter::colourInserter ( u8"▌▐", colourTwo, tempTwo );
+    colourInserter ( u8"▌▐", colourTwo, tempTwo );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                     ;;▄▄▄▄;;", colourOne, tempOne );
+    colourInserter ( u8"                     ;;▄▄▄▄;;", colourOne, tempOne );
     tempTwo.Y = tempOne.Y;
     tempTwo.X = tempOne.X + 23;
-    Inserter::colourInserter ( u8"▄▄▄▄", colourTwo, tempTwo );
+    colourInserter ( u8"▄▄▄▄", colourTwo, tempTwo );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                      ;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"                      ;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                 ;;;;;;;;;;;;;;;                  ;;", colourOne, tempOne );
+    colourInserter ( u8"                 ;;;;;;;;;;;;;;;                  ;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                 ;;;;;;;;;;;;;;;;          ;;  ;;;;", colourOne, tempOne );
+    colourInserter ( u8"                 ;;;;;;;;;;;;;;;;          ;;  ;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"                ;;;;;;;;;;;;;;;;;;        ;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"                ;;;;;;;;;;;;;;;;;;        ;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8";;             ;;;;;;;;;;;;♥;;;;;;;       ;;;;", colourOne, tempOne );
+    colourInserter ( u8";;             ;;;;;;;;;;;;♥;;;;;;;       ;;;;", colourOne, tempOne );
     tempTwo.Y = tempOne.Y;
     tempTwo.X = tempOne.X + 27;
-    Inserter::colourInserter ( u8"♥", colourThree, tempTwo );
+    colourInserter ( u8"♥", colourThree, tempTwo );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8" ;;           ;;;;;;;;;;;;;;;;;;;;;;    ;;;;", colourOne, tempOne );
+    colourInserter ( u8" ;;           ;;;;;;;;;;;;;;;;;;;;;;    ;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"  ;;         ;;;; ;;;;;;;;;;;;;; ;;;;; ;;;;", colourOne, tempOne );
+    colourInserter ( u8"  ;;         ;;;; ;;;;;;;;;;;;;; ;;;;; ;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"  ;;        ;;;;  ;;;;;;;;;;;;;;   ;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"  ;;        ;;;;  ;;;;;;;;;;;;;;   ;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;      ;;;;   ;;;;;;;;;;;;;;     ;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;      ;;;;   ;;;;;;;;;;;;;;     ;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;     ;;;;    ;;;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;     ;;;;    ;;;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;    ;;;;      ;;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;    ;;;;      ;;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;  ;;;;        ;;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;  ;;;;        ;;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"  ;;; ;;;;         ;;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"  ;;; ;;;;         ;;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"  ;;;;;;           ;;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"  ;;;;;;           ;;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"  ;;;;              ;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"  ;;;;              ;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;               ;;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;               ;;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;               ;;;;; ;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;               ;;;;; ;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;               ;;;;;  ;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;               ;;;;;  ;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;               ;;;;;  ;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;               ;;;;;  ;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;               ;;;;;; ;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;               ;;;;;; ;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                ;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                ;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                 ;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                 ;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                    ;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                    ;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                     ;;;;;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                     ;;;;;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                     ;;;;; ;;;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                     ;;;;; ;;;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                     ;;;;   ;;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                     ;;;;   ;;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                    ;;;;;  ;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                    ;;;;;  ;;;;", colourOne, tempOne );
     tempOne.Y += 1;
-    Inserter::colourInserter ( u8"   ;;                   ;;;;;  ;;;;", colourOne, tempOne );
+    colourInserter ( u8"   ;;                   ;;;;;  ;;;;", colourOne, tempOne );
 
     COORD tempThree ( startPointSentence );
-    Inserter::colourInserter ( title, colourTwo, startPointSentence );
+    colourInserter ( title, colourTwo, startPointSentence );
     tempThree.Y += 2;
     for ( unsigned char i = 0; i <= 7; i++ )
     {
-      Inserter::colourInserter ( sentenceOne [i], colourOne, tempThree );
+      colourInserter ( sentenceOne [i], colourOne, tempThree );
       tempThree.X += static_cast<short> ( sentenceOne [i].length () + 1 );
       std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
     }
@@ -136,13 +139,13 @@ struct Tale::creatures
     tempThree.Y += 3;
     for ( unsigned char i = 0; i <= 6; i++ )
     {
-      Inserter::colourInserter ( sentenceTwo [i], colourOne, tempThree );
+      colourInserter ( sentenceTwo [i], colourOne, tempThree );
       tempThree.X += static_cast<short> ( sentenceTwo [i].length () + 1 );
       std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 ) );
     }
     for ( unsigned char i = 0; i < 3; i++ )
     {
-      Inserter::colourInserter ( narratorSentences [i], colourFour, startPointNarratorSentences );
+      colourInserter ( narratorSentences [i], colourFour, startPointNarratorSentences );
       startPointNarratorSentences.Y += 1;
     }
   };

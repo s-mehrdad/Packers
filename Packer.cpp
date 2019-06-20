@@ -3,17 +3,20 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,14.04.2019</changed>
+/// <changed>ʆϒʅ,20.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
 #include "Packers.h"
+//#include "Area.h"
+//#include "Infobars.h"
+//#include "Menus.h"
 #include "Packer.h"
-#include "Console.h"
+//#include "Status.h"
+//#include "Surround.h"
+//#include "Tale.h"
 #include "Shared.h"
-#include "Area.h"
-#include "Surround.h"
-#include "Tale.h"
+#include "Console.h"
 
 
 Packer::Packer ( unsigned char quickReSeed )
@@ -127,17 +130,8 @@ unsigned char Packer::aspirations [32] { 10 };
 
 void Packer::baseSetter ( void )
 {
-  Inserter::colourInserter ( character, baseMotivation, position );
+  colourInserter ( character, baseMotivation, position );
 };
-
-
-//void Packer::colourInserter ( std::string str, WORD colour, COORD pos )
-//{
-//    GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-//    SetConsoleCursorPosition ( consoleOutput, pos );
-//    SetConsoleTextAttribute ( consoleOutput, colour );
-//    std::cout << str;
-//};
 
 
 void Packer::aspirationsSetter ( void )

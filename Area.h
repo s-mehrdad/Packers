@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,01.04.2019</changed>
+/// <changed>ʆϒʅ,20.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -24,8 +24,6 @@ public:
   static const int rows { SCREEN_H - 12 };
   static const int columns { SCREEN_W - 18 };
   static unsigned char stateArray [rows] [columns];
-  //static void colourInserter ( COORD );
-  //static void colourInserter ( std::string, WORD );
   static void resourceSetter ( unsigned short, COORD );
 };
 
