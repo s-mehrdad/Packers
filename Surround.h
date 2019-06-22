@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,20.06.2019</changed>
+/// <changed>ʆϒʅ,21.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -15,10 +15,10 @@
 
 class Surround
 {
-  struct titleBar;
+  //struct titleBar;
   struct menus;
-  struct guideBar;
-  struct status;
+  //struct guideBar;
+  //struct status;
 public:
   Surround ( const unsigned char& );
   void setter ( void );

@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,20.06.2019</changed>
+/// <changed>ʆϒʅ,21.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -20,7 +20,6 @@ class titleBar :public Inserter
 {
 private:
   std::string titleSentence;
-  WORD colour;
   COORD startPoint;
 public:
   titleBar ();
@@ -30,7 +29,9 @@ public:
 class guideBar
 {
 private:
-
+  std::string signs [3];
+  std::string guides [3];
+  COORD startPoint;
 public:
   guideBar ();
 };
