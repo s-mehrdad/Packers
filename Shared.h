@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,20.06.2019</changed>
+/// <changed>ʆϒʅ,23.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -30,9 +30,9 @@ public:
   void colourInserter ( const std::string&, const WORD& );
   void colourInserter ( const std::string&, const COORD& );
   void colourInserter ( const std::string&, const WORD&, const COORD& );
-  void clear ( const unsigned char& );
+  void clear ();
 
-  static COORD currentPosition;
+  static COORD lastInsertStartPosition;
 };
 
 

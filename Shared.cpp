@@ -3,11 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,20.06.2019</changed>
+/// <changed>ʆϒʅ,23.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
 #include "Packers.h"
+#include "Shared.h"
 //#include "Area.h"
 //#include "Infobars.h"
 //#include "Menus.h"
@@ -15,7 +16,6 @@
 //#include "Status.h"
 //#include "Surround.h"
 //#include "Tale.h"
-#include "Shared.h"
 #include "Console.h"
 
 
@@ -59,7 +59,7 @@ Inserter::Inserter ()
 };
 void Inserter::colourInserter ( const COORD& pos )
 {
-  currentPosition = pos;
+  lastInsertStartPosition = pos;
   SetConsoleCursorPosition ( consoleOutput, pos );
 };
 void Inserter::colourInserter ( const std::string& str, const WORD& colour )
@@ -70,27 +70,32 @@ void Inserter::colourInserter ( const std::string& str, const WORD& colour )
 };
 void Inserter::colourInserter ( const std::string& str, const COORD& pos )
 {
-  currentPosition = pos;
+  lastInsertStartPosition = pos;
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
   SetConsoleCursorPosition ( consoleOutput, pos );
   std::cout << str;
 };
 void Inserter::colourInserter ( const std::string& str, const WORD& colour, const COORD& pos )
 {
-  currentPosition = pos;
+  lastInsertStartPosition = pos;
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
   SetConsoleCursorPosition ( consoleOutput, pos );
   SetConsoleTextAttribute ( consoleOutput, colour );
   std::cout << str;
 };
-void Inserter::clear ( const unsigned char& count )
+void Inserter::clear ()
 {
   COORD temp { 0,0 };
-  colourInserter ( u8"                                                                     ", temp );
-  for ( unsigned char i = 0; i < count; i++ )
-    std::cout << u8"                                                                     ";
+  std::string strTemp { "" };
+  for ( unsigned char i = 0; i < SCREEN_W; i++ )
+  {
+    strTemp += " ";
+  }
+  colourInserter ( strTemp, temp );
+  for ( unsigned char i = 0; i < SCREEN_H; i++ )
+    std::cout << strTemp;
 }
-COORD Inserter::currentPosition { 0,0 };
+COORD Inserter::lastInsertStartPosition { 0,0 };
 #pragma endregion
 
 

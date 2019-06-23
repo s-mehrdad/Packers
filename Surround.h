@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,21.06.2019</changed>
+/// <changed>ʆϒʅ,23.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -13,18 +13,18 @@
 #define SURROUND_H
 
 
-class Surround
-{
+//class Surround
+//{
   //struct titleBar;
-  struct menus;
+  //struct menus;
   //struct guideBar;
   //struct status;
-public:
-  Surround ( const unsigned char& );
-  void setter ( void );
+//public:
+//  Surround ( const unsigned char& );
+//  void setter ( void );
 
-  static void menusSetter ( const unsigned short&, const bool& );
-};
+  //static void menusSetter ( const unsigned short&, const bool& );
+//};
 
 
 #endif // !SURROUND_H

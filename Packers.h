@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,21.06.2019</changed>
+/// <changed>ʆϒʅ,23.06.2019</changed>
 // ********************************************************************************
 
 // Packers.h : Include file for standard system include files,
@@ -39,9 +39,6 @@
 #define SCREEN_W                111 // additionally use odd values
 #define BACKGROUND_COLOUR       RGB (50,50,50)
 
-
-// clear screen
-#define CLEAR_SCR               77
 
 // loading delay
 #define LOAD_ONE                1

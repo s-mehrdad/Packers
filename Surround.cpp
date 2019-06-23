@@ -3,20 +3,20 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,06.11.2018</created>
-/// <changed>ʆϒʅ,21.06.2019</changed>
+/// <changed>ʆϒʅ,23.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
 #include "Packers.h"
+#include "Surround.h"
 //#include "Area.h"
 //#include "Infobars.h"
 //#include "Menus.h"
-#include "Packer.h"
+//#include "Packer.h"
 //#include "Status.h"
-#include "Surround.h"
 //#include "Tale.h"
-#include "Shared.h"
-#include "Console.h"
+//#include "Shared.h"
+//#include "Console.h"
 
 
 //struct Surround::titleBar
@@ -34,191 +34,191 @@
 //} _titleBar;
 
 
-struct Surround::menus
-{
-
-  struct wayInDecision
-  {
-    std::string titleSentence { u8"Press that enter key ._." };
-    std::string secondSentence { u8"++: This is a demo ^.^ :++" };
-    WORD colour { F_bWHITE };
-    COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 24 / 2 ), SCREEN_H - 7 };
-    bool set { false };
-    void inserter ()
-    {
-      COORD coordinate ( startPoint );
-      if ( set == true )
-      {
-        colourInserter ( u8"                        ", colour, coordinate );
-        coordinate.X -= 1;
-        coordinate.Y += 1;
-        colourInserter ( u8"                          ", colour, coordinate );
-        set = false;
-      } else
-      {
-        colourInserter ( titleSentence, colour, coordinate );
-        coordinate.X -= 1;
-        coordinate.Y += 1;
-        colourInserter ( secondSentence, colour, coordinate );
-        set = true;
-      }
-    };
-  } _wayInDecision;
-
-  struct dangerAreaChoices
-  {
-    std::string title { u8"Danger area:" };
-    std::string options [3] {
-      u8"  Involve me!",
-      u8"  Let me furnish! :)",
-      u8"  Let's hit the road!" };
-    WORD colour { F_bWHITE };
-    //COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ), SCREEN_H - 10 };
-    COORD startPoint { 5, SCREEN_H - 10 };
-    unsigned short selected { 0 };
-    bool set { false };
-    struct selectionSign
-    {
-      std::string sign { u8"->" };
-      WORD colour { F_bRED };
-      //COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ) - 1, SCREEN_H - 9 };
-      COORD startPoint { 4, SCREEN_H - 9 };
-    } _selectionSign;
-    void inserter ()
-    {
-      COORD coordinate { startPoint };
-
-      // dangerAreaChoicesMenu
-      if ( set == false )
-      {
-        colourInserter ( title, colour, coordinate );
-        coordinate.Y += 1;
-        for ( char i = 0; i < 3; i++ )
-        {
-          colourInserter ( options [i], colour, coordinate );
-          coordinate.Y += 1;
-        }
-        colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
-        set = true;
-      } else
-      {
-        coordinate.X -= 1;
-        for ( unsigned char i = 0; i <= 3; i++ )
-        {
-          coordinate.Y += 1;
-          colourInserter ( "                       ", coordinate );
-        }
-        set = false;
-      }
-    }
-  } _dangerAreaChoices;
-
-  struct agesChoices
-  {
-    std::string title { u8"Packing speed:" };
-    std::string options [5] {
-      u8"  Stone age." ,
-      u8"  Middle age..." ,
-      u8"  Advanced age........." ,
-      u8"  Hollow age.      . .            ." ,
-      u8"  Dirty age (packers of packers contest!)" };
-    WORD colour { F_bWHITE };
-    COORD startPoint { 5, SCREEN_H - 10 };
-    unsigned short selected { 0 };
-    bool set { false };
-    struct selectionSign
-    {
-      std::string sign { u8"->" };
-      WORD colour { F_bRED };
-      COORD startPoint { 4, SCREEN_H - 9 };
-    } _selectionSign;
-    void inserter ()
-    {
-      COORD coordinate { startPoint };
-
-      // ageChoicesMenu
-      if ( set == false )
-      {
-        colourInserter ( title, colour, coordinate );
-        coordinate.Y += 1;
-        for ( unsigned char i = 0; i < 5; i++ )
-        {
-          WORD tmpColour { colour };
-          if ( i == selected )
-            tmpColour = F_bRED;
-          colourInserter ( options [i], tmpColour, coordinate );
-          coordinate.Y += 1;
-        }
-        selected = 0;
-        coordinate = _selectionSign.startPoint;
-        colourInserter ( _selectionSign.sign, _selectionSign.colour, coordinate );
-        set = true;
-      } else
-      {
-        coordinate.X -= 1;
-        for ( unsigned char i = 0; i <= 5; i++ )
-        {
-          colourInserter ( "                                           ", coordinate );
-          coordinate.Y += 1;
-        }
-        set = false;
-      }
-    }
-  } _ageChoices;
-
-  struct characterChoices
-  {
-    std::string title { u8"Character Choices:" };
-    // two character re-presenter should be enough for the ambitious packers! :)
-    std::string options [2] {
-      u8"☺" ,
-      u8"☻" };
-    WORD colour { F_bWHITE };
-    COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2, SCREEN_H - 10 };
-    unsigned short selected { 0 };
-    bool set { false };
-    struct selectionSign
-    {
-      std::string sign { u8"->" };
-      WORD colour { F_bRED };
-      COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 4, SCREEN_H - 9 };
-    } _selectionSign;
-    void inserter ()
-    {
-      COORD coordinate { startPoint };
-
-      // characterCoicesMenu
-      if ( set == false )
-      {
-        colourInserter ( title, colour, coordinate );
-        coordinate.X += 5;
-        coordinate.Y += 1;
-        for ( unsigned char i = 0; i < 2; i++ )
-        {
-          WORD tmpColour { colour };
-          if ( i == selected )
-            tmpColour = F_bRED;
-          if ( i == 1 )
-            coordinate.X += 7;
-          colourInserter ( options [i], tmpColour, coordinate );
-        }
-        selected = 0;
-        colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
-        set = true;
-      } else
-      {
-        coordinate.X -= 1;
-        for ( unsigned char i = 0; i <= 1; i++ )
-        {
-          colourInserter ( "                    ", coordinate );
-          coordinate.Y += 1;
-        }
-        set = false;
-      }
-    }
-  } _characterChoices;
-
-}_menus;
+//struct Surround::menus
+//{
+//
+//  struct wayInDecision
+//  {
+//    std::string titleSentence { u8"Press that enter key ._." };
+//    std::string secondSentence { u8"++: This is a demo ^.^ :++" };
+//    WORD colour { F_bWHITE };
+//    COORD startPoint { ( ( SCREEN_W / 2 ) - 9 ) - ( 24 / 2 ), SCREEN_H - 7 };
+//    bool set { false };
+//    void inserter ()
+//    {
+//      COORD coordinate ( startPoint );
+//      if ( set == true )
+//      {
+//        colourInserter ( u8"                        ", colour, coordinate );
+//        coordinate.X -= 1;
+//        coordinate.Y += 1;
+//        colourInserter ( u8"                          ", colour, coordinate );
+//        set = false;
+//      } else
+//      {
+//        colourInserter ( titleSentence, colour, coordinate );
+//        coordinate.X -= 1;
+//        coordinate.Y += 1;
+//        colourInserter ( secondSentence, colour, coordinate );
+//        set = true;
+//      }
+//    };
+//  } _wayInDecision;
+//
+//  struct dangerAreaChoices
+//  {
+//    std::string title { u8"Danger area:" };
+//    std::string options [3] {
+//      u8"  Involve me!",
+//      u8"  Let me furnish! :)",
+//      u8"  Let's hit the road!" };
+//    WORD colour { F_bWHITE };
+//    //COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ), SCREEN_H - 10 };
+//    COORD startPoint { 5, SCREEN_H - 10 };
+//    unsigned short selected { 0 };
+//    bool set { false };
+//    struct selectionSign
+//    {
+//      std::string sign { u8"->" };
+//      WORD colour { F_bRED };
+//      //COORD startPoint { ( ( SCREEN_W - 26 ) - 16 ) - 1, SCREEN_H - 9 };
+//      COORD startPoint { 4, SCREEN_H - 9 };
+//    } _selectionSign;
+//    void inserter ()
+//    {
+//      COORD coordinate { startPoint };
+//
+//      // dangerAreaChoicesMenu
+//      if ( set == false )
+//      {
+//        colourInserter ( title, colour, coordinate );
+//        coordinate.Y += 1;
+//        for ( char i = 0; i < 3; i++ )
+//        {
+//          colourInserter ( options [i], colour, coordinate );
+//          coordinate.Y += 1;
+//        }
+//        colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
+//        set = true;
+//      } else
+//      {
+//        coordinate.X -= 1;
+//        for ( unsigned char i = 0; i <= 3; i++ )
+//        {
+//          coordinate.Y += 1;
+//          colourInserter ( "                       ", coordinate );
+//        }
+//        set = false;
+//      }
+//    }
+//  } _dangerAreaChoices;
+//
+//  struct agesChoices
+//  {
+//    std::string title { u8"Packing speed:" };
+//    std::string options [5] {
+//      u8"  Stone age." ,
+//      u8"  Middle age..." ,
+//      u8"  Advanced age........." ,
+//      u8"  Hollow age.      . .            ." ,
+//      u8"  Dirty age (packers of packers contest!)" };
+//    WORD colour { F_bWHITE };
+//    COORD startPoint { 5, SCREEN_H - 10 };
+//    unsigned short selected { 0 };
+//    bool set { false };
+//    struct selectionSign
+//    {
+//      std::string sign { u8"->" };
+//      WORD colour { F_bRED };
+//      COORD startPoint { 4, SCREEN_H - 9 };
+//    } _selectionSign;
+//    void inserter ()
+//    {
+//      COORD coordinate { startPoint };
+//
+//      // ageChoicesMenu
+//      if ( set == false )
+//      {
+//        colourInserter ( title, colour, coordinate );
+//        coordinate.Y += 1;
+//        for ( unsigned char i = 0; i < 5; i++ )
+//        {
+//          WORD tmpColour { colour };
+//          if ( i == selected )
+//            tmpColour = F_bRED;
+//          colourInserter ( options [i], tmpColour, coordinate );
+//          coordinate.Y += 1;
+//        }
+//        selected = 0;
+//        coordinate = _selectionSign.startPoint;
+//        colourInserter ( _selectionSign.sign, _selectionSign.colour, coordinate );
+//        set = true;
+//      } else
+//      {
+//        coordinate.X -= 1;
+//        for ( unsigned char i = 0; i <= 5; i++ )
+//        {
+//          colourInserter ( "                                           ", coordinate );
+//          coordinate.Y += 1;
+//        }
+//        set = false;
+//      }
+//    }
+//  } _ageChoices;
+//
+//  struct characterChoices
+//  {
+//    std::string title { u8"Character Choices:" };
+//    // two character re-presenter should be enough for the ambitious packers! :)
+//    std::string options [2] {
+//      u8"☺" ,
+//      u8"☻" };
+//    WORD colour { F_bWHITE };
+//    COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2, SCREEN_H - 10 };
+//    unsigned short selected { 0 };
+//    bool set { false };
+//    struct selectionSign
+//    {
+//      std::string sign { u8"->" };
+//      WORD colour { F_bRED };
+//      COORD startPoint { ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 4, SCREEN_H - 9 };
+//    } _selectionSign;
+//    void inserter ()
+//    {
+//      COORD coordinate { startPoint };
+//
+//      // characterCoicesMenu
+//      if ( set == false )
+//      {
+//        colourInserter ( title, colour, coordinate );
+//        coordinate.X += 5;
+//        coordinate.Y += 1;
+//        for ( unsigned char i = 0; i < 2; i++ )
+//        {
+//          WORD tmpColour { colour };
+//          if ( i == selected )
+//            tmpColour = F_bRED;
+//          if ( i == 1 )
+//            coordinate.X += 7;
+//          colourInserter ( options [i], tmpColour, coordinate );
+//        }
+//        selected = 0;
+//        colourInserter ( _selectionSign.sign, _selectionSign.colour, _selectionSign.startPoint );
+//        set = true;
+//      } else
+//      {
+//        coordinate.X -= 1;
+//        for ( unsigned char i = 0; i <= 1; i++ )
+//        {
+//          colourInserter ( "                    ", coordinate );
+//          coordinate.Y += 1;
+//        }
+//        set = false;
+//      }
+//    }
+//  } _characterChoices;
+//
+//}_menus;
 
 
 //struct Surround::guideBar
@@ -410,8 +410,8 @@ struct Surround::menus
 //} _statusBar;
 
 
-Surround::Surround ( const unsigned char& mode )
-{
+//Surround::Surround ( const unsigned char& mode )
+//{
   // set
   //_statusBar._packers.count = Packer::count;
   //_statusBar._age.id = mode;
@@ -422,93 +422,93 @@ Surround::Surround ( const unsigned char& mode )
   //_menus._wayInDecision.inserter ();
   //_statusBar.inserter ();
   //_loadingBar.inserter ();
-  _menus._dangerAreaChoices.inserter ();
+  //_menus._dangerAreaChoices.inserter ();
 
-};
+//};
+//
+//
+//void Surround::setter ( void )
+//{
+//  //TODO add: new setter
+//  //TODO add: new couter
+//};
 
 
-void Surround::setter ( void )
-{
-  //TODO add: new setter
-  //TODO add: new couter
-};
-
-
-void Surround::menusSetter ( const unsigned short& choice, const bool& confirm )
-{
-  COORD coordinate { 0, 0 };
-  unsigned short find { static_cast<unsigned short>( choice / 10 ) };
-  unsigned short chosen { static_cast<unsigned short>( choice % 10 ) };
-
-  // events of dangerAreaChoices
-  if ( find == 1 )
-  {
-    coordinate = _menus._dangerAreaChoices._selectionSign.startPoint;
-    coordinate.Y += _menus._dangerAreaChoices.selected;
-    if ( confirm == false )
-    {
-      colourInserter ( u8"  ", _menus._dangerAreaChoices._selectionSign.colour, coordinate );
-      _menus._dangerAreaChoices.selected = chosen;
-      coordinate = _menus._dangerAreaChoices._selectionSign.startPoint;
-      coordinate.Y += chosen;
-      colourInserter ( _menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, coordinate );
-    } else
-      switch ( chosen )
-      {
-        case 0:
-          coordinate.X += 2;
-          colourInserter ( _menus._dangerAreaChoices.options [0], F_bRED, coordinate );
-          break;
-        case 1:
-          _menus._dangerAreaChoices.inserter ();
-          _menus._ageChoices.inserter ();
-          _menus._characterChoices.inserter ();
-          break;
-      }
-  }
-
-  // events of ageChoices
-  if ( find == 2 )
-  {
-    coordinate = _menus._ageChoices._selectionSign.startPoint;
-    coordinate.Y += _menus._ageChoices.selected;
-    if ( confirm == false )
-    {
-      colourInserter ( u8"  ", _menus._ageChoices._selectionSign.colour, coordinate );
-      coordinate = _menus._ageChoices._selectionSign.startPoint;
-      coordinate.Y += chosen;
-      colourInserter ( _menus._ageChoices._selectionSign.sign, _menus._ageChoices._selectionSign.colour, coordinate );
-      _menus._ageChoices.selected = chosen;
-    } else
-    {
-      coordinate.X += 2;
-      colourInserter ( _menus._ageChoices.options [chosen], F_bRED, coordinate );
-    }
-  }
-
-  // events of characterChoices
-  if ( find == 3 )
-  {
-    coordinate = _menus._characterChoices._selectionSign.startPoint;
-    if ( _menus._characterChoices.selected == 1 )
-      coordinate.X += 7;
-    if ( confirm == false )
-    {
-      colourInserter ( u8"  ", _menus._characterChoices._selectionSign.colour, coordinate );
-      coordinate = _menus._characterChoices._selectionSign.startPoint;
-      //coordinate.X += chosen;
-      if ( chosen == 1 )
-        coordinate.X += 7;
-      colourInserter ( _menus._characterChoices._selectionSign.sign, _menus._characterChoices._selectionSign.colour, coordinate );
-      _menus._characterChoices.selected = chosen;
-    } else
-    {
-      coordinate.X += 3;
-      colourInserter ( _menus._characterChoices.options [chosen], F_bRED, coordinate );
-      _menus._ageChoices.inserter ();
-      _menus._characterChoices.inserter ();
-      _menus._dangerAreaChoices.selected = 0;
-      _menus._dangerAreaChoices.inserter ();
-    }
-  }
-};
+//void Surround::menusSetter ( const unsigned short& choice, const bool& confirm )
+//{
+//  COORD coordinate { 0, 0 };
+//  unsigned short find { static_cast<unsigned short>( choice / 10 ) };
+//  unsigned short chosen { static_cast<unsigned short>( choice % 10 ) };
+//
+//  // events of dangerAreaChoices
+//  if ( find == 1 )
+//  {
+//    coordinate = _menus._dangerAreaChoices._selectionSign.startPoint;
+//    coordinate.Y += _menus._dangerAreaChoices.selected;
+//    if ( confirm == false )
+//    {
+//      colourInserter ( u8"  ", _menus._dangerAreaChoices._selectionSign.colour, coordinate );
+//      _menus._dangerAreaChoices.selected = chosen;
+//      coordinate = _menus._dangerAreaChoices._selectionSign.startPoint;
+//      coordinate.Y += chosen;
+//      colourInserter ( _menus._dangerAreaChoices._selectionSign.sign, _menus._dangerAreaChoices._selectionSign.colour, coordinate );
+//    } else
+//      switch ( chosen )
+//      {
+//        case 0:
+//          coordinate.X += 2;
+//          colourInserter ( _menus._dangerAreaChoices.options [0], F_bRED, coordinate );
+//          break;
+//        case 1:
+//          _menus._dangerAreaChoices.inserter ();
+//          _menus._ageChoices.inserter ();
+//          _menus._characterChoices.inserter ();
+//          break;
+//      }
+//  }
+//
+//  // events of ageChoices
+//  if ( find == 2 )
+//  {
+//    coordinate = _menus._ageChoices._selectionSign.startPoint;
+//    coordinate.Y += _menus._ageChoices.selected;
+//    if ( confirm == false )
+//    {
+//      colourInserter ( u8"  ", _menus._ageChoices._selectionSign.colour, coordinate );
+//      coordinate = _menus._ageChoices._selectionSign.startPoint;
+//      coordinate.Y += chosen;
+//      colourInserter ( _menus._ageChoices._selectionSign.sign, _menus._ageChoices._selectionSign.colour, coordinate );
+//      _menus._ageChoices.selected = chosen;
+//    } else
+//    {
+//      coordinate.X += 2;
+//      colourInserter ( _menus._ageChoices.options [chosen], F_bRED, coordinate );
+//    }
+//  }
+//
+//  // events of characterChoices
+//  if ( find == 3 )
+//  {
+//    coordinate = _menus._characterChoices._selectionSign.startPoint;
+//    if ( _menus._characterChoices.selected == 1 )
+//      coordinate.X += 7;
+//    if ( confirm == false )
+//    {
+//      colourInserter ( u8"  ", _menus._characterChoices._selectionSign.colour, coordinate );
+//      coordinate = _menus._characterChoices._selectionSign.startPoint;
+//      //coordinate.X += chosen;
+//      if ( chosen == 1 )
+//        coordinate.X += 7;
+//      colourInserter ( _menus._characterChoices._selectionSign.sign, _menus._characterChoices._selectionSign.colour, coordinate );
+//      _menus._characterChoices.selected = chosen;
+//    } else
+//    {
+//      coordinate.X += 3;
+//      colourInserter ( _menus._characterChoices.options [chosen], F_bRED, coordinate );
+//      _menus._ageChoices.inserter ();
+//      _menus._characterChoices.inserter ();
+//      _menus._dangerAreaChoices.selected = 0;
+//      _menus._dangerAreaChoices.inserter ();
+//    }
+//  }
+//};

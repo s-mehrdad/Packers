@@ -3,13 +3,13 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,21.06.2019</changed>
+/// <changed>ʆϒʅ,23.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
 #include "Packers.h"
-//#include "Area.h"
 #include "Infobars.h"
+//#include "Area.h"
 //#include "Menus.h"
 //#include "Packer.h"
 //#include "Status.h"
