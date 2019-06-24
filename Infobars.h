@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,21.06.2019</changed>
+/// <changed>ʆϒʅ,24.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -26,7 +26,7 @@ public:
 };
 
 
-class guideBar
+class guideBar :public Inserter
 {
 private:
   std::string signs [3];
