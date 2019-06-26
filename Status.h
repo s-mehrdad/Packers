@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,21.06.2019</changed>
+/// <changed>ʆϒʅ,27.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -25,7 +25,7 @@ private:
   COORD pointTitle;
   std::string otherString [9];
   COORD otherPoints [9];
-  unsigned int packersState;
+  unsigned short packersState;
   unsigned char agesIdentifier;
   std::string agesStrings [5];
   unsigned int healthyState;
@@ -35,6 +35,7 @@ private:
   unsigned int needState;
 public:
   Status ( const unsigned char& );
+  void get ( const unsigned short& );
   void setter ();
 };
 

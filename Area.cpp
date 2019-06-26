@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,24.06.2019</changed>
+/// <changed>ʆϒʅ,27.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -92,21 +92,19 @@ Area::Area ( unsigned char mode ) :age ( mode )
 void Area::setter ( const unsigned short& state, const COORD& position )
 {
   //TODO to be added: other resource colours + reconstruction
-  int wisherId { state / 100 };
-  int wishedResource { ( state % 100 ) };
-  wishedResource /= 10;
-  int currentState { state % 10 };
+  int wish { state };
+  wish /= 10;
 
-  switch ( wishedResource )
+  switch ( wish )
   {
     case 1:
-      if ( position.X - 1 != 2 )
+      if ( position.X - 1 > 2 )
       {
         colourInserter ( { position.X - 1, position.Y - 1 } );
         colourInserter ( u8"♣", F_YELLOW );
         //stateArray [position.Y - 1][position.X - 1] = currentState;
       } else
-        if ( position.X + 1 != 88 )
+        if ( position.X + 1 < columns )
         {
           colourInserter ( { position.X + 1, position.Y - 1 } );
           colourInserter ( u8"♣", F_YELLOW );
@@ -114,13 +112,13 @@ void Area::setter ( const unsigned short& state, const COORD& position )
         }
       break;
     case 2:
-      if ( position.Y - 1 != 2 )
+      if ( position.Y - 1 > 2 )
       {
         colourInserter ( { position.X - 1, position.Y - 1 } );
         colourInserter ( u8"♣", F_YELLOW );
         //stateArray [position.Y - 1][position.X - 1] = currentState;
       } else
-        if ( position.Y + 1 != 18 )
+        if ( position.Y + 1 < rows )
         {
           colourInserter ( { position.X - 1, position.Y + 1 } );
           colourInserter ( u8"♣", F_YELLOW );
@@ -128,13 +126,13 @@ void Area::setter ( const unsigned short& state, const COORD& position )
         }
       break;
     case 3:
-      if ( position.X - 1 != 2 )
+      if ( position.X - 1 > 2 )
       {
         colourInserter ( { position.X - 1, position.Y + 1 } );
         colourInserter ( u8"♣", F_YELLOW );
         //stateArray [position.Y + 1][position.X - 1] = currentState;
       } else
-        if ( position.X + 1 != 88 )
+        if ( position.X + 1 < columns )
         {
           colourInserter ( { position.X + 1, position.Y + 1 } );
           colourInserter ( u8"♣", F_YELLOW );
@@ -142,13 +140,13 @@ void Area::setter ( const unsigned short& state, const COORD& position )
         }
       break;
     case 4:
-      if ( position.Y - 1 != 2 )
+      if ( position.Y - 1 > 2 )
       {
         colourInserter ( { position.X + 1, position.Y - 1 } );
         colourInserter ( u8"♣", F_YELLOW );
         //stateArray [position.Y - 1][position.X + 1] = currentState;
       } else
-        if ( position.Y + 1 != 18 )
+        if ( position.Y + 1 < rows )
         {
           colourInserter ( { position.X + 1, position.Y + 1 } );
           colourInserter ( u8"♣", F_YELLOW );

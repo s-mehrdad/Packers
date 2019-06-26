@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,23.06.2019</changed>
+/// <changed>ʆϒʅ,27.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -12,7 +12,7 @@
 //#include "Area.h"
 //#include "Infobars.h"
 //#include "Menus.h"
-#include "Packer.h"
+//#include "Packer.h"
 //#include "Surround.h"
 //#include "Tale.h"
 #include "Shared.h"
@@ -43,7 +43,7 @@ Status::Status ( const unsigned char& mode )
   otherPoints [6] = { SCREEN_W - 15, 21 };
   otherPoints [7] = { SCREEN_W - 15, 23 };
   otherPoints [8] = { SCREEN_W - 15, 26 };
-  packersState = Packer::count;
+  packersState = 0;
   agesIdentifier = mode;
   agesStrings [0] = u8"   Stone";
   agesStrings [1] = u8"   Middle";
@@ -104,6 +104,17 @@ Status::Status ( const unsigned char& mode )
   colourInserter ( std::to_string ( needState ), F_bBLUE, coordinate );
   //TODO add: random need setter
 };
+
+
+void Status::get ( const unsigned short& arg )
+{
+  COORD coordinate { otherPoints [0] };
+  coordinate.X += 9;
+  packersState = arg;
+  colourInserter ( std::to_string ( packersState ), F_bBLUE, coordinate );
+}
+
+
 void Status::setter ()
 {
   //TODO add: a set of state setter

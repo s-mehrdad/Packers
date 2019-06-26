@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,23.06.2019</changed>
+/// <changed>ʆϒʅ,27.06.2019</changed>
 // ********************************************************************************
 
 // Packers.h : Include file for standard system include files,
@@ -47,10 +47,11 @@
 
 // used mode: chew-forward going!
 //? danger: too much quickness gives them the chance chewing the future of this generation too!
-#define DELAY_ONE               52
-#define DELAY_TWO               102
+//!? avoid equal values
+#define DELAY_ONE               101
+#define DELAY_TWO               201
 #define DELAY_THREE             202
-#define DELAY_FOUR              302
+#define DELAY_FOUR              102
 
 
 extern bool runningOne;
