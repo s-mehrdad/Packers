@@ -22,7 +22,9 @@
 Packer::Packer ( unsigned char quickReSeed )
 {
   // rand seed provider + quick reseeding
-  srand ( ( unsigned int) time ( NULL ) + static_cast<long>( quickReSeed * 5.5 ) );
+  std::time_t currentTime { std::chrono::system_clock::to_time_t ( std::chrono::system_clock::now () ) };
+  std::time_t* currentTime_ptr { &currentTime };
+  srand ( static_cast<unsigned int>( time ( currentTime_ptr ) + quickReSeed * 1.123456789 ) );
   int rnd { 0 };
 
 
@@ -121,13 +123,13 @@ Packer::Packer ( unsigned char quickReSeed )
   switch ( rnd )
   {
     case 1:
-      mood = 1000; // normal
+      mood = 10; // normal
       break;
     case 2:
-      mood = 2000; // not in the mood
+      mood = 20; // not in the mood
       break;
     case 3:
-      mood = 3000; // tired
+      mood = 30; // tired
       break;
   }
 

@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,24.06.2019</changed>
+/// <changed>ʆϒʅ,27.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -33,7 +33,7 @@ private:
 public:
   Area ( unsigned char );
   void setter ( const unsigned short&, const COORD& );
-  const COORD& get ( void );
+  const COORD get ( void );
 
   //static unsigned char stateArray [rows][columns]; // dynamic needed
 };

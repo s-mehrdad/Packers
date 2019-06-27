@@ -157,7 +157,7 @@ void Area::setter ( const unsigned short& state, const COORD& position )
 };
 
 
-const COORD& Area::get ()
+const COORD Area::get ()
 {
   COORD frame { columns, rows };
   return frame;

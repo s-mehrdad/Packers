@@ -106,42 +106,37 @@ Giant::Giant ()
       colourInserter ( theGiant [i], colourTwo, tempTwo );
       tempTwo.X = tempOne.X + 26;
       colourInserter ( theGiant [i], colourTwo, tempTwo );
-      goto pass;
-    }
-    if ( i == 6 )
-    {
-      tempOne.Y -= 1;
-      tempTwo.Y = tempOne.Y;
-      tempTwo.X = tempOne.X + 24;
-      colourInserter ( theGiant [i], colourTwo, tempTwo );
-      goto pass;
-    }
-    if ( i == 8 )
-    {
-      tempOne.Y -= 1;
-      tempTwo.Y = tempOne.Y;
-      tempTwo.X = tempOne.X + 23;
-      colourInserter ( theGiant [i], colourTwo, tempTwo );
-      goto pass;
-    }
-    if ( i == 14 )
-    {
-      tempOne.Y -= 1;
-      tempTwo.Y = tempOne.Y;
-      tempTwo.X = tempOne.X + 27;
-      colourInserter ( theGiant [i], colourThree, tempTwo );
-      goto pass;
-    }
-    colourInserter ( theGiant [i], colourOne, tempOne );
-pass:
-    tempOne.Y += 1;
+    } else
+      if ( i == 6 )
+      {
+        tempOne.Y -= 1;
+        tempTwo.Y = tempOne.Y;
+        tempTwo.X = tempOne.X + 24;
+        colourInserter ( theGiant [i], colourTwo, tempTwo );
+      } else
+        if ( i == 8 )
+        {
+          tempOne.Y -= 1;
+          tempTwo.Y = tempOne.Y;
+          tempTwo.X = tempOne.X + 23;
+          colourInserter ( theGiant [i], colourTwo, tempTwo );
+        } else
+          if ( i == 14 )
+          {
+            tempOne.Y -= 1;
+            tempTwo.Y = tempOne.Y;
+            tempTwo.X = tempOne.X + 27;
+            colourInserter ( theGiant [i], colourThree, tempTwo );
+          } else
+            colourInserter ( theGiant [i], colourOne, tempOne );
+          tempOne.Y += 1;
   }
   COORD tempThree ( startPoints [1] );
   colourInserter ( title, colourTwo, tempThree );
   tempThree.Y += 2;
   colourInserter ( tempThree );
   std::string str { "" };
-  for ( char32_t element : sentances [0] )
+  for ( char element : sentances [0] )
   {
     str += element;
     colourInserter ( str, colourOne );
@@ -151,7 +146,7 @@ pass:
   tempThree = startPoints [1];
   tempThree.Y += 3;
   colourInserter ( tempThree );
-  for ( char32_t element : sentances [1] )
+  for ( char element : sentances [1] )
   {
     str += element;
     colourInserter ( str, colourOne );
