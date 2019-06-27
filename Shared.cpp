@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,23.06.2019</changed>
+/// <changed>ʆϒʅ,27.06.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -19,36 +19,36 @@
 #include "Console.h"
 
 
-#pragma region temp
-HANDLE consoleOutput2 { GetStdHandle ( STD_OUTPUT_HANDLE ) };
-CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEX2 {};
-void colourInserter ( const COORD& pos )
-{
-  //currentPosition = pos;
-  SetConsoleCursorPosition ( consoleOutput2, pos );
-};
-void colourInserter ( const std::string& str, const WORD& colour )
-{
-  GetConsoleScreenBufferInfoEx ( consoleOutput2, &screenBinfoEX2 );
-  SetConsoleTextAttribute ( consoleOutput2, colour );
-  std::cout << str;
-};
-void colourInserter ( const std::string& str, const COORD& pos )
-{
-  //currentPosition = pos;
-  GetConsoleScreenBufferInfoEx ( consoleOutput2, &screenBinfoEX2 );
-  SetConsoleCursorPosition ( consoleOutput2, pos );
-  std::cout << str;
-};
-void colourInserter ( const std::string& str, const WORD& colour, const COORD& pos )
-{
-  //currentPosition = pos;
-  GetConsoleScreenBufferInfoEx ( consoleOutput2, &screenBinfoEX2 );
-  SetConsoleCursorPosition ( consoleOutput2, pos );
-  SetConsoleTextAttribute ( consoleOutput2, colour );
-  std::cout << str;
-};
-#pragma endregion
+//#pragma region temp
+//HANDLE consoleOutput2 { GetStdHandle ( STD_OUTPUT_HANDLE ) };
+//CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEX2 {};
+//void colourInserter ( const COORD& pos )
+//{
+//  //currentPosition = pos;
+//  SetConsoleCursorPosition ( consoleOutput2, pos );
+//};
+//void colourInserter ( const std::string& str, const WORD& colour )
+//{
+//  GetConsoleScreenBufferInfoEx ( consoleOutput2, &screenBinfoEX2 );
+//  SetConsoleTextAttribute ( consoleOutput2, colour );
+//  std::cout << str;
+//};
+//void colourInserter ( const std::string& str, const COORD& pos )
+//{
+//  //currentPosition = pos;
+//  GetConsoleScreenBufferInfoEx ( consoleOutput2, &screenBinfoEX2 );
+//  SetConsoleCursorPosition ( consoleOutput2, pos );
+//  std::cout << str;
+//};
+//void colourInserter ( const std::string& str, const WORD& colour, const COORD& pos )
+//{
+//  //currentPosition = pos;
+//  GetConsoleScreenBufferInfoEx ( consoleOutput2, &screenBinfoEX2 );
+//  SetConsoleCursorPosition ( consoleOutput2, pos );
+//  SetConsoleTextAttribute ( consoleOutput2, colour );
+//  std::cout << str;
+//};
+//#pragma endregion
 
 
 #pragma region Inserter_class
@@ -130,6 +130,8 @@ COORD Inserter::lastInsertStartPosition { 0,0 };
 //    Inserter::colourInserter ( copywrite, colourThree, startPoint );
 //  }
 //} _loadingBar;
+
+
 Loading::Loading ( const unsigned char& mode )
 {
   // set
