@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,27.06.2019</changed>
+/// <changed>ʆϒʅ,29.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -51,18 +51,6 @@ private:
 public:
   Giant ();
 };
-
-
-//class Tale
-//{
-//  struct storyLine;
-//  struct creatures;
-//
-//public:
-//  Tale ( unsigned char );
-//  void newSetter ( void );
-//
-//};
 
 
 #endif // !TALE_H

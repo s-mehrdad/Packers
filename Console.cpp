@@ -4,7 +4,7 @@
 /// </summary>
 /// <returns></returns>
 /// <created>ʆϒʅ,02.10.2018</created>
-/// <changed>ʆϒʅ,20.06.2019</changed>
+/// <changed>ʆϒʅ,29.06.2019</changed>
 // ********************************************************************************
 
 
@@ -13,20 +13,21 @@
 #include "Console.h"
 
 
-// console screen properties (DLL internal state variables)
-HANDLE consoleOutput = GetStdHandle ( STD_OUTPUT_HANDLE ); // for simplification (constant calls to the function)
+// console screen properties
+HANDLE consoleOutput = GetStdHandle ( STD_OUTPUT_HANDLE ); // for simplification
 CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEX;
 CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEXstorage;
 CONSOLE_FONT_INFOEX fontInfoEX;
 CONSOLE_CURSOR_INFO cursorInfo;
-HWND consoleWindow = GetConsoleWindow (); // for simplification (constant calls to the function)
+HWND consoleWindow = GetConsoleWindow (); // for simplification
 
 
 void ConsoleFont ( const LPCWSTR& fontName )
 {
   fontInfoEX.cbSize = sizeof ( fontInfoEX ); // getting the right size (important for many structures in the windows API)
   GetCurrentConsoleFontEx ( consoleOutput, false, &fontInfoEX );
-  lstrcpyW ( fontInfoEX.FaceName, fontName ); // copies a specific number of characters from a source string to a buffer (the properties of wished font to the suitable field)
+  lstrcpyW ( fontInfoEX.FaceName, fontName ); // copies a specific number of characters from a source string to a buffer
+                                              // in this case the properties of the wished font to the suitable field
   SetCurrentConsoleFontEx ( consoleOutput, false, &fontInfoEX );
 }
 

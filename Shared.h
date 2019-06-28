@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,27.06.2019</changed>
+/// <changed>ʆϒʅ,29.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -11,12 +11,6 @@
 
 #ifndef SHARED_H
 #define SHARED_H
-
-
-//void colourInserter ( const COORD& );
-//void colourInserter ( const std::string&, const WORD& );
-//void colourInserter ( const std::string&, const COORD& );
-//void colourInserter ( const std::string&, const WORD&, const COORD& );
 
 
 class Inserter

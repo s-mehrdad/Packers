@@ -4,7 +4,7 @@
 /// </summary>
 /// <returns></returns>
 /// <created>ʆϒʅ,02.10.2018</created>
-/// <changed>ʆϒʅ,20.06.2019</changed>
+/// <changed>ʆϒʅ,29.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -49,9 +49,10 @@
 #define B_bWHITE                0xF0
     // octal (first 15 hexadecimal numbers are for colours)
     // numbers after the 15 are for backgrounds
-    // more numbers also possible which
-    //  reminds of old systems without proper graphic driver
-    //  0: Black // 1: Blue  //  2 : Green  //  3 : Cyan  //  4 : Red  //  5 : Purple  //  6 : Yellow  //  7 : White  //  8 : bright black  //  9 : Bright blue  //  10 : Bright green  //  11 : Bright cyan  //  12 : Bright red  //  13 : Bright purple  //  14 : Bright yellow  //  15 : Bright white
+    // more numbers are also possible which brings the situation to old systems without proper graphic driver! :)
+    //  0: Black -- 1: Blue  --  2 : Green  --  3 : Cyan  --  4 : Red  --  5 : Purple  --  6 : Yellow
+    //  7 : White  --  8 : bright black  --  9 : Bright blue --  10 : Bright green  --  11 : Bright cyan 
+    //  12 : Bright red  --  13 : Bright purple  --  14 : Bright yellow  --  15 : Bright white
 
 
 void ConsoleFont ( const LPCWSTR& fontName );

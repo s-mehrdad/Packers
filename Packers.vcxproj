@@ -197,7 +197,6 @@
     <ClInclude Include="Shared.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="Tale.h" />
-    <ClInclude Include="Surround.h" />
     <ClInclude Include="Z_OldCodes.h" />
   </ItemGroup>
   <ItemGroup>
@@ -211,7 +210,6 @@
     <ClCompile Include="Packer.cpp" />
     <ClCompile Include="Packers.cpp" />
     <ClCompile Include="Shared.cpp" />
-    <ClCompile Include="Surround.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Packers.rc" />

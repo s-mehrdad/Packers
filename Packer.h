@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,27.06.2019</changed>
+/// <changed>ʆϒʅ,29.06.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -50,51 +50,6 @@ public:
 
   static unsigned short count;
 };
-
-
-//class Packer
-//{
-//private:
-//  bool direction;
-//public:
-//  std::string character { u8"☻" };
-//  unsigned char id;
-//  Packer* address;
-//  COORD position;
-//  unsigned short baseState;
-//  WORD baseMotivation;
-//  unsigned short lastAspiration;
-//  struct actions
-//  {
-//    unsigned short delay;
-//    std::string current { };
-//    actions ()
-//    {
-//      delay = 2000;
-//      current = "NULL";
-//    }
-//    actions ( unsigned short speed, unsigned char id ) : delay ( speed )
-//    {
-//      std::string signs [4] { u8" ", u8"☻", u8"☺", u8"." };
-//      current = signs [id];
-//    }
-//    bool operator< ( const actions& a ) const
-//    {
-//      return ( delay < a.delay );
-//    }
-//  }_action [4];
-//  Packer ( unsigned char );
-//  void baseSetter ( void );
-//  bool& get ( void );
-//
-//  static unsigned char count;
-//  static unsigned char aspirationsSeeds [32];
-//  static unsigned char aspirations [32];
-//  static void aspirationsSetter ( void );
-//  //TODO add a possible aspiration renew-er for packers (possibly called from surround)
-//  //TODO add a possible motivation renew-er for packers (possibly called from surround)
-//
-//};
 
 
 #endif // !PACKER_H
