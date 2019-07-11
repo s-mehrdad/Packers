@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,11.07.2019</changed>
 // ********************************************************************************
 
 // Packers.h : Include file for standard system include files,
@@ -57,6 +57,7 @@
 extern bool runningOne;
 extern bool runningTwo;
 extern unsigned char menuState;
+extern bool involved;
 
 
 #endif //PACKERS_H

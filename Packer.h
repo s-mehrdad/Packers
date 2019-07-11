@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,11.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -40,7 +40,7 @@ private:
   unsigned char mood;
   //unsigned char advancement;
 public:
-  Packer ( unsigned char );
+  Packer ( const unsigned char&, const bool& );
   const unsigned char& getId ( void );
   const Actions& getProcess ( const unsigned char& );
   COORD& getPosition ( void );
@@ -48,7 +48,7 @@ public:
   const WORD& getMotivation ( void );
   const unsigned char& getAspiration ( void );
 
-  static unsigned short count;
+  static unsigned char count;
 };
 
 

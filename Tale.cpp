@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,27.06.2019</changed>
+/// <changed>ʆϒʅ,12.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -25,15 +25,31 @@ Narrator::Narrator ()
 {
   title = u8"The Narrator";
   colour = F_YELLOW;
-  sentences [0] = u8"It is not sure, what the giant sees up there!";
-  sentences [1] = u8"Supercomputer still dates on load process of stone age!";
-  sentences [2] = u8"So the next scene is foreseen to let us wait a little!";
-  startPoint = { SCREEN_W - 60, SCREEN_H - 10 };
+  sceneOne [0] = u8"It is not sure, what the giant sees up there!";
+  sceneOne [1] = u8"Supercomputer still dates on load process of stone age!";
+  sceneOne [2] = u8"Thus the next scene is foreseen to let us wait a little!";
+  sceneTwo [0] = "It is already years since the first Packer put feet on the earth.";
+  sceneTwo [1] = "The evolution started and jet at stone age as obvious above they continue to pack!";
+  dAmSentences [0] = "I feel your enthusiasm to involve yourself, jet are you sure, whether you survive in stone age?!";
+  dAmSentences [1] = "The last one tried to decorate too much, it ended up nasty in stone age! :)";
+  dAmSentences [2] = "Oh yeah, tools and decorations are always appreciated!";
+  startPoint = { SCREEN_W - 60, SCREEN_H - 8 };
+};
 
+
+void Narrator::insertion ( const unsigned short& arg )
+{
+  // guide of passed argument code:
+  // first digit: the id of the object
+  // second digit: the sphere of the sentence
+  // third digit: the id of the sentence
+
+  // first scene:
+  COORD temp { startPoint };
   for ( unsigned char i = 0; i < 3; i++ )
   {
-    colourInserter ( sentences [i], colour, startPoint );
-    startPoint.Y += 1;
+    colourInserter ( sceneOne [i], colour, temp );
+    temp.Y += 1;
   }
 };
 

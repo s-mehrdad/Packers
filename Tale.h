@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,12.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -31,10 +31,13 @@ class Narrator : public Inserter
 private:
   std::string title;
   WORD colour;
-  std::string sentences [3];
+  std::string sceneOne [3];
+  std::string sceneTwo [2];
+  std::string dAmSentences [3];
   COORD startPoint;
 public:
   Narrator ();
+  void insertion ( const unsigned short& );
 };
 
 

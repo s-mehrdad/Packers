@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,11.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -46,6 +46,7 @@ void Inserter::colourInserter ( const std::string& str, const WORD& colour, cons
 void Inserter::clear ()
 {
   COORD temp { 0,0 };
+  COORD zero { 0,0 };
   std::string strTemp { "" };
   for ( unsigned char i = 0; i < SCREEN_W; i++ )
   {
@@ -54,6 +55,7 @@ void Inserter::clear ()
   colourInserter ( strTemp, temp );
   for ( unsigned char i = 0; i < SCREEN_H; i++ )
     std::cout << strTemp;
+  colourInserter ( zero );
 }
 COORD Inserter::lastInsertStartPosition { 0,0 };
 

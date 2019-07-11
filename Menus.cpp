@@ -48,8 +48,8 @@ void dangerAreaMenu::switcher ()
     coordinate.X -= 1;
     for ( unsigned char i = 0; i <= 3; i++ )
     {
-      coordinate.Y += 1;
       colourInserter ( "                       ", coordinate );
+      coordinate.Y += 1;
     }
     set = false;
   }

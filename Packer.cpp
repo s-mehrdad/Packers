@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,11.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -13,8 +13,10 @@
 #include "Console.h"
 
 
-Packer::Packer ( unsigned char quickReSeed )
+Packer::Packer ( const unsigned char& quickReSeed, const bool& involved )
 {
+  if ( involved == true ) {} else {}
+
   // rand seed provider + quick reseeding
   std::time_t currentTime { std::chrono::system_clock::to_time_t ( std::chrono::system_clock::now () ) };
   std::time_t* currentTime_ptr { &currentTime };
@@ -136,7 +138,7 @@ Packer::Packer ( unsigned char quickReSeed )
 };
 
 
-unsigned short Packer::count { 0 };
+unsigned char Packer::count { 0 };
 //unsigned char Packer::aspirationsSeeds [32] { 0 };
 //unsigned char Packer::aspirations [32] { 10 };
 
