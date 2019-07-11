@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,23.06.2019</changed>
+/// <changed>ʆϒʅ,11.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -33,7 +33,7 @@ public:
 };
 
 
-class ageMenu :public Inserter
+class agesMenu :public Inserter
 {
 private:
   std::string title;
@@ -43,13 +43,13 @@ private:
   bool set { false };
   COORD startPoints [2];
 public:
-  ageMenu ();
+  agesMenu ();
   void switcher ();
   void switchSet ( const unsigned char&, const bool& );
 };
 
 
-class characterMenu :public Inserter
+class charactersMenu :public Inserter
 {
 private:
   std::string title;
@@ -59,7 +59,24 @@ private:
   bool set { false };
   COORD startPoints [2];
 public:
-  characterMenu ();
+  charactersMenu ();
+  void switcher ();
+  void switchSet ( const unsigned char&, const bool& );
+};
+
+
+class motivationsMenu :public Inserter
+{
+private:
+  std::string title;
+  std::string options [6];
+  WORD colours [6];
+  std::string selectionSign;
+  unsigned char selected;
+  bool set { false };
+  COORD startPoints [2];
+public:
+  motivationsMenu ();
   void switcher ();
   void switchSet ( const unsigned char&, const bool& );
 };
