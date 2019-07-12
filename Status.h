@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,27.06.2019</changed>
+/// <changed>ʆϒʅ,13.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -36,7 +36,7 @@ private:
 public:
   Status ( const unsigned char& );
   void get ( const unsigned short& );
-  void setter ();
+  void setter ( const unsigned char& );
 };
 
 

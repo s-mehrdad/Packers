@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,11.07.2019</changed>
+/// <changed>ʆϒʅ,13.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -46,6 +46,7 @@ public:
   agesMenu ();
   void switcher ();
   void switchSet ( const unsigned char&, const bool& );
+  const unsigned char& get ();
 };
 
 
@@ -62,6 +63,7 @@ public:
   charactersMenu ();
   void switcher ();
   void switchSet ( const unsigned char&, const bool& );
+  const unsigned char& get ();
 };
 
 
@@ -79,6 +81,7 @@ public:
   motivationsMenu ();
   void switcher ();
   void switchSet ( const unsigned char&, const bool& );
+  const unsigned char& get ();
 };
 
 

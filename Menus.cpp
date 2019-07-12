@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,11.07.2019</changed>
+/// <changed>ʆϒʅ,13.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -161,12 +161,18 @@ void agesMenu::switchSet ( const unsigned char& choice, const bool& confirm )
 };
 
 
+const unsigned char& agesMenu::get ()
+{
+  return selected;
+}
+
+
 charactersMenu::charactersMenu ()
 {
   title = u8"Character Choices:";
   // two character re-presenter should be enough for the ambitious packers! :)
-  options [0] = u8"☺";
-  options [1] = u8"☻";
+  options [0] = u8"☻";
+  options [1] = u8"☺";
   selectionSign = u8"->";
   selected = 0;
   set = false;
@@ -232,6 +238,12 @@ void charactersMenu::switchSet ( const unsigned char& choice, const bool& confir
     // Todo aware the narrator! :)
   }
 };
+
+
+const unsigned char& charactersMenu::get ()
+{
+  return selected;
+}
 
 
 motivationsMenu::motivationsMenu ()
@@ -370,3 +382,9 @@ void motivationsMenu::switchSet ( const unsigned char& choice, const bool& confi
   }
 
 };
+
+
+const unsigned char& motivationsMenu::get ()
+{
+  return selected;
+}

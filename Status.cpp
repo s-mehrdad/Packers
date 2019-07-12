@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,13.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -109,7 +109,12 @@ void Status::get ( const unsigned short& arg )
 }
 
 
-void Status::setter ()
+void Status::setter ( const unsigned char& input )
 {
   //TODO add: a set of state setter
+  // update complete the state setter
+  COORD coordinate { otherPoints [1] };
+  coordinate.Y += 1;
+  colourInserter ( u8"            ", F_bBLUE, coordinate );
+  colourInserter ( agesStrings [input], F_bBLUE, coordinate );
 };
