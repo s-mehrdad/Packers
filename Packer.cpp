@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.07.2019</changed>
+/// <changed>ʆϒʅ,15.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -14,10 +14,10 @@
 
 
 Actions::Actions () { action = "NULL"; delay = 2000; };
-Actions::Actions ( std::string str, unsigned short shr )
+Actions::Actions ( const std::string& prmOne, const unsigned short& prmTwo )
 {
-  action = str;
-  delay = shr;
+  action = prmOne;
+  delay = prmTwo;
 };
 
 
@@ -188,8 +188,8 @@ const unsigned char& Packer::getAspiration ( void )
 
 void Packer::involve ( const unsigned short& instance )
 {
-  unsigned char temp;
-  temp = ( instance + 1 ) / 10;
+  unsigned char temp { 0 };
+  temp = ( instance / 10 ) + 1;
   switch ( temp )
   {
     case 1:
@@ -199,7 +199,7 @@ void Packer::involve ( const unsigned short& instance )
       process [1] = { u8"☺", DELAY_TWO };
       break;
   }
-  temp = ( instance + 1 ) % 10;
+  temp = ( instance % 10 ) + 1;
   switch ( temp )
   {
     case 1:

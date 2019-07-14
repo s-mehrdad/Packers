@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.07.2019</changed>
+/// <changed>ʆϒʅ,14.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -68,17 +68,13 @@ void dangerAreaMenu::switchSet ( const unsigned char& choice, const bool& confir
   {
     colourInserter ( u8"  ", F_bRED, coordinate );
     selected = chosen;
+    // Todo aware the narrator! :)
     coordinate = startPoints [1];
     coordinate.Y += chosen;
     colourInserter ( selectionSign, F_bRED, coordinate );
   } else
   {
-    if ( chosen == 0 )
-    {
-      coordinate.X += 2;
-      colourInserter ( options [0], F_bRED, coordinate );
-    }
-    // Todo aware the narrator! :)
+
   }
 };
 
@@ -154,9 +150,10 @@ void agesMenu::switchSet ( const unsigned char& choice, const bool& confirm )
     coordinate.Y += chosen;
     colourInserter ( selectionSign, F_bRED, coordinate );
     selected = chosen;
+    // Todo aware the narrator! :)
   } else
   {
-    // Todo aware the narrator! :)
+
   }
 };
 
@@ -233,9 +230,10 @@ void charactersMenu::switchSet ( const unsigned char& choice, const bool& confir
       coordinate.X += 7;
     colourInserter ( selectionSign, F_bRED, coordinate );
     selected = chosen;
+    // Todo aware the narrator! :)
   } else
   {
-    // Todo aware the narrator! :)
+
   }
 };
 
@@ -339,9 +337,10 @@ void motivationsMenu::switchSet ( const unsigned char& choice, const bool& confi
       }
       colourInserter ( selectionSign, F_bRED, coordinate );
       selected = chosen;
+      // Todo aware the narrator, mentioning that the jump was bigger! :)
     } else
     {
-      // Todo aware the narrator, mentioning that the jump was bigger! :)
+
     }
   } else
   {
@@ -375,9 +374,10 @@ void motivationsMenu::switchSet ( const unsigned char& choice, const bool& confi
       }
       colourInserter ( selectionSign, F_bRED, coordinate );
       selected = chosen;
+      // Todo aware the narrator! :)
     } else
     {
-      // Todo aware the narrator! :)
+
     }
   }
 

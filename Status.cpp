@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.07.2019</changed>
+/// <changed>ʆϒʅ,15.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -23,7 +23,7 @@ Status::Status ( const unsigned char& mode )
   otherString [1] = u8"age:";
   otherString [2] = u8"resources->";
   otherString [3] = u8"healthy:";
-  otherString [4] = u8"renewed:";
+  otherString [4] = u8"renewing:";
   otherString [5] = u8"vanished:";
   otherString [6] = u8"packages->";
   otherString [7] = u8"have:";

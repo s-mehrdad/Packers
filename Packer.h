@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.07.2019</changed>
+/// <changed>ʆϒʅ,15.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -21,7 +21,7 @@ struct Actions
   std::string action;
   unsigned short delay;
   Actions ();
-  Actions ( std::string, unsigned short );
+  Actions ( const std::string&, const unsigned short& );
 };
 
 

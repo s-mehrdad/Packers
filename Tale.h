@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,12.07.2019</changed>
+/// <changed>ʆϒʅ,15.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -16,28 +16,22 @@
 #define TALE_H
 
 
-class Tale : public Inserter
-{
-private:
-  std::string title;
-  WORD colour;
-public:
-  Tale ();
-};
-
-
 class Narrator : public Inserter
 {
 private:
   std::string title;
   WORD colour;
-  std::string sceneOne [3];
-  std::string sceneTwo [2];
-  std::string dAmSentences [3];
+  std::string scenes [3][3];
+  unsigned char currentScene;
+  std::string firstMenuSentences [4];
+  std::string secondMenuSentences [7];
   COORD startPoint;
+  //bool inserted;
+  //unsigned char counter;
 public:
   Narrator ();
   void insertion ( const unsigned short& );
+  const unsigned char& get ( void );
 };
 
 
