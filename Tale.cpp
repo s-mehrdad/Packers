@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,15.07.2019</changed>
+/// <changed>ʆϒʅ,16.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -17,7 +17,8 @@ Narrator::Narrator ()
 {
   //xx TODO add: funny story of the game! :)
   title = u8"The Narrator";
-  colour = F_YELLOW;
+  colours [0] = F_YELLOW;
+  colours [1] = F_bWHITE;
   scenes [0][0] = u8"It is not sure, what the giant sees up there!";
   scenes [0][1] = u8"Supercomputer still dates on load process of stone age!";
   scenes [0][2] = u8"Thus the next scene is foreseen to let us wait a little!";
@@ -29,8 +30,8 @@ Narrator::Narrator ()
   scenes [2][2] = u8"the packing process is obvious above!";
   currentScene = 1;
   firstMenuSentences [0] = u8"I feel your enthusiasm to involve yourself,";
-  firstMenuSentences [1] = u8"jet are you sure, whether you survive in stone age?!";
-  firstMenuSentences [2] = u8"Undecorated involvement is still involvement...";
+  firstMenuSentences [1] = u8"jet are you sure, whether you survive in stone age?! :)";
+  firstMenuSentences [2] = u8"Well, undecorated involvement is still involvement...";
   firstMenuSentences [3] = u8"Oh yeah, tools and decorations are always appreciated!";
   secondMenuSentences [0] = u8"Stones and wands are available!";
   secondMenuSentences [1] = u8"The last one tried to decorate too much,";
@@ -40,7 +41,8 @@ Narrator::Narrator ()
   secondMenuSentences [4] = u8"At least a little class after so many years!";
   secondMenuSentences [5] = u8"Yeah, decoration empty handed is still decoration!";
   secondMenuSentences [6] = u8"Pay attention to your nose, decoration isn't important!";
-  startPoint = { SCREEN_W - 60, SCREEN_H - 8 };
+  startPoints [0] = { SCREEN_W - 60, SCREEN_H - 10 };
+  startPoints [1] = { SCREEN_W - 60, SCREEN_H - 6 };
 };
 
 
@@ -52,28 +54,52 @@ void Narrator::insertion ( const unsigned short& instance )
 
   unsigned char tempOne { 0 };
   unsigned char tempTwo { 0 };
-  tempOne = ( instance / 10 );
-  tempTwo = ( instance % 10 );
-  COORD point { startPoint };
+  unsigned char tempThree { 0 };
+  tempOne = ( instance / 100 );
+  tempTwo = ( ( instance % 100 ) / 10 );
+  tempThree = ( ( instance % 100 ) % 10 );
+  COORD pointOne { startPoints [0] };
+  COORD pointTwo { startPoints [1] };
   switch ( tempOne )
   {
     case 0:
-      for ( unsigned char i = 0; i < 4; i++ )
+      for ( unsigned char i = 0; i < 6; i++ )
       {
-        colourInserter ( u8"                                                          ", point );
-        point.Y += 1;
+        colourInserter ( u8"                                                          ", pointOne );
+        pointOne.Y += 1;
       }
       break;
     case 1:
       // scenes:
       for ( unsigned char i = 0; i < 3; i++ )
       {
-        colourInserter ( scenes [tempTwo][i], colour, point );
-        point.Y += 1;
+        colourInserter ( scenes [tempTwo][i], colours [0], pointOne );
+        pointOne.Y += 1;
       }
       currentScene = tempTwo;
       break;
     case 2:
+      // menus:
+      if ( tempTwo == 1 )
+      {
+        if ( tempThree == 0 )
+        {
+          int rnd { 0 };
+          rnd = ( rand () % 2 + 1 );
+          switch ( rnd )
+          {
+            case 1:
+              colourInserter ( firstMenuSentences [0], colours [1], pointTwo );
+              pointTwo.Y += 1;
+              colourInserter ( firstMenuSentences [1], colours [1], pointTwo );
+              break;
+            case 2:
+              colourInserter ( firstMenuSentences [2], colours [1], pointTwo );
+              break;
+          }
+        } else
+          colourInserter ( firstMenuSentences [3], colours [1], pointTwo );
+      }
       break;
   }
 };

@@ -21,20 +21,21 @@ Actions::Actions ( const std::string& prmOne, const unsigned short& prmTwo )
 };
 
 
-Packer::Packer ( const unsigned char& quickReSeed )
+Packer::Packer ()
 {
+  // the count of active packers
+  count++;
+
   // rand seed provider + quick reseeding
   std::time_t currentTime { std::chrono::system_clock::to_time_t ( std::chrono::system_clock::now () ) };
   std::time_t* currentTime_ptr { &currentTime };
-  srand ( static_cast<unsigned int>( time ( currentTime_ptr ) + quickReSeed * 1.123456789 ) );
+  srand ( static_cast<unsigned int>( time ( currentTime_ptr ) + count * 1.123456789 ) );
   int rnd { 0 };
 
-
-  id = quickReSeed - 1;
+  id = count;
   address = this;
   faces [0] = u8"☻";
   faces [1] = u8"☺";
-
 
   //TODO different packer types can be added
   // random face + actions
@@ -54,14 +55,12 @@ Packer::Packer ( const unsigned char& quickReSeed )
   process [2] = { u8".",DELAY_THREE };
   process [3] = { u8" ",DELAY_FOUR };
 
-
   // random start position
   do
   {
     position.X = rand () % ( ( SCREEN_W - 18 ) - 3 ) + 3;
     position.Y = rand () % ( ( SCREEN_H - 12 ) - 3 ) + 3;
   } while ( position.X % 2 == 0 || position.Y % 2 == 0 );
-
 
   // random direction
   rnd = ( rand () % 1000 + 1 );
@@ -72,7 +71,6 @@ Packer::Packer ( const unsigned char& quickReSeed )
   {
     direction = false;
   }
-
 
   // random motivation
   rnd = ( rand () % 6 + 1 );
@@ -98,7 +96,6 @@ Packer::Packer ( const unsigned char& quickReSeed )
       break;
   }
 
-
   // making packer's aspirations ready... :)
   // Todo add: current position consideration
   rnd = rand () % 4 + 1;
@@ -118,7 +115,6 @@ Packer::Packer ( const unsigned char& quickReSeed )
       break;
   }
 
-
   // random state
   //TODO changed (part of smart pants of packers :) )
   rnd = ( rand () % 3 + 1 );
@@ -134,11 +130,6 @@ Packer::Packer ( const unsigned char& quickReSeed )
       mood = 30; // tired
       break;
   }
-
-
-  // the count of active packers
-  count++;
-
 
   colourInserter ( *currentFace, motivation, position );
 };

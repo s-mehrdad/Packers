@@ -40,7 +40,7 @@ private:
   unsigned char mood;
   //unsigned char advancement;
 public:
-  Packer ( const unsigned char& );
+  Packer ();
   const unsigned char& getId ( void );
   const Actions& getProcess ( const unsigned char& );
   COORD& getPosition ( void );

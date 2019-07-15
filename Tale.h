@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,15.07.2019</changed>
+/// <changed>ʆϒʅ,16.07.2019</changed>
 // ********************************************************************************
 
 #pragma once
@@ -20,12 +20,12 @@ class Narrator : public Inserter
 {
 private:
   std::string title;
-  WORD colour;
+  WORD colours [2];
   std::string scenes [3][3];
   unsigned char currentScene;
   std::string firstMenuSentences [4];
   std::string secondMenuSentences [7];
-  COORD startPoint;
+  COORD startPoints [2];
   //bool inserted;
   //unsigned char counter;
 public:
