@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,14.07.2019</changed>
+/// <changed>ʆϒʅ,16.07.2019</changed>
 // ********************************************************************************
 
 //#include "pch.h"
@@ -150,7 +150,29 @@ void agesMenu::switchSet ( const unsigned char& choice, const bool& confirm )
     coordinate.Y += chosen;
     colourInserter ( selectionSign, F_bRED, coordinate );
     selected = chosen;
-    // Todo aware the narrator! :)
+    switch ( chosen )
+    {
+      case 0:
+        theNarrator.insertion ( 2 );
+        theNarrator.insertion ( 220 );
+        break;
+      case 1:
+        theNarrator.insertion ( 2 );
+        theNarrator.insertion ( 221 );
+        break;
+      case 2:
+        theNarrator.insertion ( 2 );
+        theNarrator.insertion ( 222 );
+        break;
+      case 3:
+        theNarrator.insertion ( 2 );
+        theNarrator.insertion ( 223 );
+        break;
+      case 4:
+        theNarrator.insertion ( 2 );
+        theNarrator.insertion ( 224 );
+        break;
+    }
   } else
   {
 

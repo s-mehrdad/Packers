@@ -24,7 +24,7 @@ private:
   std::string scenes [3][3];
   unsigned char currentScene;
   std::string firstMenuSentences [4];
-  std::string secondMenuSentences [7];
+  std::string secondMenuSentences [8];
   COORD startPoints [2];
   //bool inserted;
   //unsigned char counter;

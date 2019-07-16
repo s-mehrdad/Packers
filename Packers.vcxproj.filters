@@ -93,16 +93,19 @@
     <Image Include="ScreenShot_2.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ScreenShot_4.jpg">
+    <Image Include="ScreenShot_6.jpg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ScreenShot_5.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ScreenShot_3-2.jpg">
+    <Image Include="ScreenShot_4.jpg">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="ScreenShot_3-3.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ScreenShot_3-2.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

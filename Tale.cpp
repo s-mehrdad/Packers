@@ -38,9 +38,9 @@ Narrator::Narrator ()
   secondMenuSentences [2] = u8"it ended up nasty in stone age! :)";
   secondMenuSentences [3] = u8"The age is still nasty,";
   secondMenuSentences [4] = u8"decoration isn't jet above strength. :)";
-  secondMenuSentences [4] = u8"At least a little class after so many years!";
-  secondMenuSentences [5] = u8"Yeah, decoration empty handed is still decoration!";
-  secondMenuSentences [6] = u8"Pay attention to your nose, decoration isn't important!";
+  secondMenuSentences [5] = u8"At least a little class after so many years!";
+  secondMenuSentences [6] = u8"Yeah, decoration empty handed is still decoration!";
+  secondMenuSentences [7] = u8"Pay attention to your nose, decoration isn't important!";
   startPoints [0] = { SCREEN_W - 60, SCREEN_H - 10 };
   startPoints [1] = { SCREEN_W - 60, SCREEN_H - 6 };
 };
@@ -49,59 +49,106 @@ Narrator::Narrator ()
 void Narrator::insertion ( const unsigned short& instance )
 {
   // guide of passed argument code:
-  // first digit: the sphere of the sentence
-  // second digit: the id of the sentence
+  // 1: clear four first line
+  // 2: clear two last line
+  // first digit: element
+  // second digit: sphere
+  // third digit: sentence
 
-  unsigned char tempOne { 0 };
-  unsigned char tempTwo { 0 };
-  unsigned char tempThree { 0 };
-  tempOne = ( instance / 100 );
-  tempTwo = ( ( instance % 100 ) / 10 );
-  tempThree = ( ( instance % 100 ) % 10 );
   COORD pointOne { startPoints [0] };
   COORD pointTwo { startPoints [1] };
-  switch ( tempOne )
+  if ( instance == 1 )
   {
-    case 0:
-      for ( unsigned char i = 0; i < 6; i++ )
+    for ( unsigned char i = 0; i < 4; i++ )
+    {
+      colourInserter ( u8"                                                          ", pointOne );
+      pointOne.Y += 1;
+    }
+  } else
+    if ( instance == 2 )
+    {
+      pointOne.Y += 4;
+      for ( unsigned char i = 0; i < 2; i++ )
       {
         colourInserter ( u8"                                                          ", pointOne );
         pointOne.Y += 1;
       }
-      break;
-    case 1:
-      // scenes:
-      for ( unsigned char i = 0; i < 3; i++ )
+    } else
+    {
+      unsigned char tempOne { 0 };
+      unsigned char tempTwo { 0 };
+      unsigned char tempThree { 0 };
+      tempOne = ( instance / 100 );
+      tempTwo = ( ( instance % 100 ) / 10 );
+      tempThree = ( ( instance % 100 ) % 10 );
+      int rnd { 0 };
+
+      switch ( tempOne )
       {
-        colourInserter ( scenes [tempTwo][i], colours [0], pointOne );
-        pointOne.Y += 1;
-      }
-      currentScene = tempTwo;
-      break;
-    case 2:
-      // menus:
-      if ( tempTwo == 1 )
-      {
-        if ( tempThree == 0 )
-        {
-          int rnd { 0 };
-          rnd = ( rand () % 2 + 1 );
-          switch ( rnd )
+        case 1:
+          // scenes:
+          for ( unsigned char i = 0; i < 3; i++ )
           {
-            case 1:
-              colourInserter ( firstMenuSentences [0], colours [1], pointTwo );
-              pointTwo.Y += 1;
-              colourInserter ( firstMenuSentences [1], colours [1], pointTwo );
-              break;
-            case 2:
-              colourInserter ( firstMenuSentences [2], colours [1], pointTwo );
-              break;
+            colourInserter ( scenes [tempTwo][i], colours [0], pointOne );
+            pointOne.Y += 1;
           }
-        } else
-          colourInserter ( firstMenuSentences [3], colours [1], pointTwo );
+          currentScene = tempTwo;
+          break;
+        case 2:
+          // menus:
+          if ( tempTwo == 1 )
+          {
+            if ( tempThree == 0 )
+            {
+              rnd = ( rand () % 2 + 1 );
+              switch ( rnd )
+              {
+                case 1:
+                  colourInserter ( firstMenuSentences [0], colours [1], pointTwo );
+                  pointTwo.Y += 1;
+                  colourInserter ( firstMenuSentences [1], colours [1], pointTwo );
+                  break;
+                case 2:
+                  colourInserter ( firstMenuSentences [2], colours [1], pointTwo );
+                  break;
+              }
+            } else
+              colourInserter ( firstMenuSentences [3], colours [1], pointTwo );
+          } else
+            if ( tempTwo == 2 )
+            {
+              switch ( tempThree )
+              {
+                case 0:
+                  rnd = ( rand () % 2 + 1 );
+                  if ( rnd == 1 )
+                    colourInserter ( secondMenuSentences [0], colours [1], pointTwo );
+                  else
+                  {
+                    colourInserter ( secondMenuSentences [1], colours [1], pointTwo );
+                    pointTwo.Y += 1;
+                    colourInserter ( secondMenuSentences [2], colours [1], pointTwo );
+                  }
+                  break;
+                case 1:
+                  colourInserter ( secondMenuSentences [3], colours [1], pointTwo );
+                  pointTwo.Y += 1;
+                  colourInserter ( secondMenuSentences [4], colours [1], pointTwo );
+                  break;
+                case 2:
+                  colourInserter ( secondMenuSentences [5], colours [1], pointTwo );
+                  break;
+                case 3:
+                  colourInserter ( secondMenuSentences [6], colours [1], pointTwo );
+                  break;
+                case 4:
+                  colourInserter ( secondMenuSentences [7], colours [1], pointTwo );
+                  break;
+              }
+            }
+          break;
       }
-      break;
-  }
+    }
 };
 
 

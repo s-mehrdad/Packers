@@ -221,6 +221,7 @@
     <Image Include="ScreenShot_3-3.jpg" />
     <Image Include="ScreenShot_4.jpg" />
     <Image Include="ScreenShot_5.jpg" />
+    <Image Include="ScreenShot_6.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="aGiant" />
