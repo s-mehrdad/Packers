@@ -3,11 +3,8 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,24.06.2019</changed>
+/// <changed>ʆϒʅ,24.07.2019</changed>
 // ********************************************************************************
-
-#pragma once
-
 
 #ifndef INFOBARS_H
 #define INFOBARS_H

@@ -3,11 +3,8 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,24.07.2019</changed>
 // ********************************************************************************
-
-#pragma once
-
 
 #ifndef SHARED_H
 #define SHARED_H

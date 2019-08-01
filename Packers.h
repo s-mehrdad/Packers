@@ -3,17 +3,15 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,15.07.2019</changed>
+/// <changed>ʆϒʅ,24.07.2019</changed>
 // ********************************************************************************
-
-// Packers.h : Include file for standard system include files,
-// or project specific include files.
-
-#pragma once
-
 
 #ifndef PACKERS_H
 #define PACKERS_H
+
+#if WIN32
+#define WIN32_LEAN_AND_MEAN // rarely-used stuff exclusion
+#endif // WIN32
 
 
 #include <iostream>
