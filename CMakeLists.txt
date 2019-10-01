@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,28.07.2019</changed>
+#/ <changed>ʆϒʅ,21.08.2019</changed>
 # *******************************************************************************************
 
 # CMakeList.txt : CMake project for Packers, include source and define
@@ -36,7 +36,6 @@ list(APPEND HEADER_FILES
           Packer.h
           Shared.h
           Status.h
-          Surround.h
           Tale.h
 )
 
@@ -49,7 +48,6 @@ list(APPEND SOURCE_FILES
           Packer.cpp
           Shared.cpp
           Status.cpp
-          Surround.cpp
           Tale.cpp
 )
 
