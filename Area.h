@@ -3,14 +3,14 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
-
-#include "Shared.h"
-
 
 #ifndef AREA_H
 #define AREA_H
+
+
+#include "Shared.h"
 
 
 class Area : public Inserter

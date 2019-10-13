@@ -3,11 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
 #ifndef PACKERS_H
 #define PACKERS_H
+
 
 #if WIN32
 #define WIN32_LEAN_AND_MEAN // rarely-used stuff exclusion
@@ -27,13 +28,14 @@
 #include "Tale.h"
 
 
-#define FONT_SIZEa              15
-#define FONT_SIZEb              15
-//#define FONT_NAME               L"Consolas"
-#define FONT_NAME               L"Lucida Console"
+#define FONT_SIZEa              18
+#define FONT_SIZEb              18
+#define FONT_NAME               L"Consolas"
+//#define FONT_NAME               L"Lucida Console"
+//#define FONT_NAME               L"Courier New"
 #define SCREEN_L                5
 #define SCREEN_T                5
-#define SCREEN_H                45 // use odd values
+#define SCREEN_H                41 // use odd values
 //? danger:
 //! if you choose the next value less than 100, you are on your own, since the packers don't have enough to chew! :)
 #define SCREEN_W                111 // additionally use odd values

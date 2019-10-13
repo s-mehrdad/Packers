@@ -3,13 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,15.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
 #include "Status.h"
-#include "Shared.h"
 #include "Console.h"
 
 
@@ -61,41 +59,41 @@ Status::Status ( const unsigned char& mode )
   COORD coordinate { otherPoints [0] };
   colourInserter ( otherString [0], F_bPURPLE, coordinate );
   coordinate.X += 9;
-  colourInserter ( std::to_string ( packersState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( packersState ), F_CYAN, coordinate );
 
   coordinate = otherPoints [1];
   colourInserter ( otherString [1], F_bPURPLE, coordinate );
   coordinate.Y += 1;
-  colourInserter ( agesStrings [agesIdentifier], F_bBLUE, coordinate );
+  colourInserter ( agesStrings [agesIdentifier], F_CYAN, coordinate );
 
   colourInserter ( otherString [2], F_bWHITE, otherPoints [2] );
   coordinate = otherPoints [3];
-  colourInserter ( otherString [3], F_bGREEN, coordinate );
+  colourInserter ( otherString [3], F_GREEN, coordinate );
   coordinate.X += 3;
   coordinate.Y += 1;
-  colourInserter ( std::to_string ( healthyState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( healthyState ), F_CYAN, coordinate );
   coordinate = otherPoints [4];
   colourInserter ( otherString [4], F_YELLOW, coordinate );
   coordinate.X += 3;
   coordinate.Y += 1;
-  colourInserter ( std::to_string ( renewedState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( renewedState ), F_CYAN, coordinate );
   coordinate = otherPoints [5];
-  colourInserter ( otherString [5], F_RED, coordinate );
+  colourInserter ( otherString [5], F_bRED, coordinate );
   coordinate.X += 3;
   coordinate.Y += 1;
-  colourInserter ( std::to_string ( vanishedState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( vanishedState ), F_CYAN, coordinate );
 
   colourInserter ( otherString [6], F_bWHITE, otherPoints [6] );
   coordinate = otherPoints [7];
   colourInserter ( otherString [7], F_bPURPLE, coordinate );
   coordinate.X += 3;
   coordinate.Y += 1;
-  colourInserter ( std::to_string ( haveState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( haveState ), F_CYAN, coordinate );
   coordinate = otherPoints [8];
   colourInserter ( otherString [8], F_bPURPLE, coordinate );
   coordinate.X += 3;
   coordinate.Y += 1;
-  colourInserter ( std::to_string ( needState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( needState ), F_CYAN, coordinate );
   //TODO add: random need setter
 };
 
@@ -105,7 +103,7 @@ void Status::get ( const unsigned short& arg )
   COORD coordinate { otherPoints [0] };
   coordinate.X += 9;
   packersState = arg;
-  colourInserter ( std::to_string ( packersState ), F_bBLUE, coordinate );
+  colourInserter ( std::to_string ( packersState ), F_CYAN, coordinate );
 }
 
 
@@ -115,6 +113,6 @@ void Status::setter ( const unsigned char& input )
   // update complete the state setter
   COORD coordinate { otherPoints [1] };
   coordinate.Y += 1;
-  colourInserter ( u8"            ", F_bBLUE, coordinate );
-  colourInserter ( agesStrings [input], F_bBLUE, coordinate );
+  colourInserter ( u8"            ", F_CYAN, coordinate );
+  colourInserter ( agesStrings [input], F_CYAN, coordinate );
 };

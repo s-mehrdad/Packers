@@ -3,13 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
 #include "Area.h"
-#include "Shared.h"
 #include "Console.h"
 
 
@@ -21,13 +19,13 @@ Area::Area ( unsigned char mode ) :age ( mode )
   edges [1] = u8"╚"; // Unicode: "┗"
   edges [2] = u8"╝"; // Unicode: "┛"
   edges [3] = u8"╗"; // Unicode: "┓"
-  colourW = F_bBLUE;
+  colourW = F_CYAN;
   rows = SCREEN_H - 12;
   columns = SCREEN_W - 18;
   resources [0] = u8"♠";
   resources [1] = u8"♣";
   resources [2] = u8"♦";
-  colourH = F_bGREEN;
+  colourH = F_GREEN;
   colourR = F_YELLOW;
   colourV = F_bRED;
 

@@ -3,14 +3,14 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
-
-#include "Shared.h"
-
 
 #ifndef PACKER_H
 #define PACKER_H
+
+
+#include "Shared.h"
 
 
 struct Actions
