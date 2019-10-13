@@ -3,12 +3,9 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,21.08.2019</changed>
+#/ <changed>ʆϒʅ,13.10.2019</changed>
 # *******************************************************************************************
 
-# CMakeList.txt : CMake project for Packers, include source and define
-# project specific logic here.
-#
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 set(TARGET_NAME Packers)
@@ -22,10 +19,12 @@ project(${PROJECT_NAME}
           LANGUAGES CXX
 )
 
-list(APPEND RESOURCES
-          ${TARGET_NAME}.rc
-          resource.h
-)
+if(MSVC)
+  list(APPEND RESOURCES
+    ${TARGET_NAME}.rc
+    resource.h
+    )
+endif(MSVC)
 
 list(APPEND HEADER_FILES
           Packers.h
@@ -55,7 +54,14 @@ if(WIN32)
           list(APPEND SOURCE_FILES ${HEADER_FILES})
 endif()
 
-# Add source to this project's executable.
 add_executable(${TARGET_NAME} ${SOURCE_FILES} ${RESOURCES})
 
-# TODO: Add tests and install targets if needed.
+if(MINGW)
+  add_custom_command(TARGET ${TARGET_NAME} PRE_BUILD
+    COMMAND cmake -E copy_if_different
+    ${CMAKE_PREFIX_PATH}/bin/libgcc_s_seh-1.dll
+    ${CMAKE_PREFIX_PATH}/bin/libstdc++-6.dll
+    ${CMAKE_PREFIX_PATH}/bin/libwinpthread-1.dll
+    $<TARGET_FILE_DIR:${TARGET_NAME}>
+    )
+endif(MINGW)

@@ -3,13 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,16.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
 #include "Tale.h"
-#include "Shared.h"
 #include "Console.h"
 
 
@@ -200,8 +198,8 @@ Giant::Giant ()
   theGiant [36] = u8"   ;;                    ;;;;;  ;;;;";
   theGiant [37] = u8"   ;;                   ;;;;;  ;;;;";
   colourOne = F_bWHITE;
-  colourTwo = F_bBLUE;
-  colourThree = F_RED;
+  colourTwo = F_CYAN;
+  colourThree = F_bRED;
   sentances [0] = u8"\"Look at these new puny two legs creatures!\"";
   sentances [1] = u8"\"Look how they dance and chew away!\"";
   startPoints [0] = { 3, SCREEN_H - 35 };

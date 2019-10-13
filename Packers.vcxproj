@@ -215,21 +215,24 @@
     <ResourceCompile Include="Packers.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ScreenShot.jpg" />
-    <Image Include="ScreenShot_2.jpg" />
-    <Image Include="ScreenShot_3-2.jpg" />
-    <Image Include="ScreenShot_3-3.jpg" />
-    <Image Include="ScreenShot_4.jpg" />
-    <Image Include="ScreenShot_5.jpg" />
-    <Image Include="ScreenShot_6.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
     <None Include="aGiant" />
     <None Include="Packers.aps" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="screenshots\ScreenShot.jpg" />
+    <Image Include="screenshots\ScreenShot_2.jpg" />
+    <Image Include="screenshots\ScreenShot_3-2.jpg" />
+    <Image Include="screenshots\ScreenShot_3-3.jpg" />
+    <Image Include="screenshots\ScreenShot_4.jpg" />
+    <Image Include="screenshots\ScreenShot_5.jpg" />
+    <Image Include="screenshots\ScreenShot_6.jpg" />
+    <Image Include="screenshots\ScreenShot_7.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

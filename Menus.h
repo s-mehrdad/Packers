@@ -3,14 +3,14 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
-
-#include "Shared.h"
-
 
 #ifndef MENUS_H
 #define MENUS_H
+
+
+#include "Shared.h"
 
 
 class dangerAreaMenu :public Inserter

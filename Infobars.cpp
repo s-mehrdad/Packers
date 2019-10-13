@@ -3,10 +3,9 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
 #include "Infobars.h"
 #include "Console.h"
@@ -18,7 +17,7 @@ titleBar::titleBar ()
   startPoint = { ( ( SCREEN_W / 2 ) - 9 ) - ( 76 / 2 ), 0 };
 
   // output
-  colourInserter ( titleSentence, F_bBLUE, startPoint );
+  colourInserter ( titleSentence, F_CYAN, startPoint );
 };
 
 
@@ -39,7 +38,7 @@ guideBar::guideBar ()
   for ( char i = 0; i < 3; i++ )
   {
     if ( i == 0 )
-      colourInserter ( signs [i], F_bGREEN, coordinate );
+      colourInserter ( signs [i], F_GREEN, coordinate );
     else
       if ( i == 1 )
       {
@@ -51,6 +50,6 @@ guideBar::guideBar ()
         colourInserter ( signs [i], F_bWHITE, coordinate );
       }
       coordinate.X += 2;
-      colourInserter ( guides [i], F_bBLUE, coordinate );
+      colourInserter ( guides [i], F_CYAN, coordinate );
   }
 };

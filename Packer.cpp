@@ -3,13 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,15.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
 #include "Packer.h"
-#include "Shared.h"
 #include "Console.h"
 
 
@@ -77,22 +75,22 @@ Packer::Packer ()
   switch ( rnd )
   {
     case 1:
-      motivation = F_BLUE; // independent-chewer
+      motivation = F_bCYAN; // independent-chewer
       break;
     case 2:
-      motivation = F_GREEN; // green-national-chewer
+      motivation = F_bGREEN; // green-national-chewer
       break;
     case 3:
-      motivation = F_RED; // red-national-chewer
+      motivation = F_bRED; // red-national-chewer
       break;
     case 4:
-      motivation = F_PURPLE; // not-know-chewer
+      motivation = F_bPURPLE; // not-know-chewer
       break;
     case 5:
-      motivation = F_YELLOW; // free-chewer
+      motivation = F_bYELLOW; // free-chewer
       break;
     case 6:
-      motivation = F_WHITE; // neutral-chewer
+      motivation = F_bWHITE; // neutral-chewer
       break;
   }
 
@@ -194,22 +192,22 @@ void Packer::involve ( const unsigned short& instance )
   switch ( temp )
   {
     case 1:
-      motivation = F_BLUE;
+      motivation = F_bCYAN;
       break;
     case 2:
-      motivation = F_GREEN;
+      motivation = F_bGREEN;
       break;
     case 3:
-      motivation = F_RED;
+      motivation = F_bRED;
       break;
     case 4:
-      motivation = F_PURPLE;
+      motivation = F_bPURPLE;
       break;
     case 5:
-      motivation = F_YELLOW;
+      motivation = F_bYELLOW;
       break;
     case 6:
-      motivation = F_WHITE;
+      motivation = F_bWHITE;
       break;
   }
 };

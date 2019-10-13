@@ -3,16 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.12.2018</created>
-/// <changed>ʆϒʅ,14.04.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
+#include "Z_OldCodes.h"
 
-
-#include <mutex>
-#include <condition_variable>
-#include <algorithm>
 
 std::mutex MuTeX;
 std::condition_variable conditionVariable;

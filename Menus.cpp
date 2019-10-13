@@ -3,10 +3,9 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,16.07.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-//#include "pch.h"
 #include "Packers.h"
 #include "Menus.h"
 #include "Console.h"
@@ -275,12 +274,12 @@ motivationsMenu::motivationsMenu ()
   options [3] = u8"  Not know how";
   options [4] = u8"  Free";
   options [5] = u8"  Neutral";
-  colours [0] = F_BLUE;
-  colours [1] = F_GREEN;
-  colours [2] = F_RED;
-  colours [3] = F_PURPLE;
-  colours [4] = F_YELLOW;
-  colours [5] = F_WHITE;
+  colours [0] = F_bCYAN;
+  colours [1] = F_bGREEN;
+  colours [2] = F_bRED;
+  colours [3] = F_bPURPLE;
+  colours [4] = F_bYELLOW;
+  colours [5] = F_bWHITE;
   selectionSign = u8"->";
   unsigned short selected { 0 };
   bool set { false };

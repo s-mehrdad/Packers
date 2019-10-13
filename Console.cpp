@@ -2,13 +2,10 @@
 /// <summary>
 /// the searched and confronted ways for manipulation of Windows's console screen by the code itself in runtime.
 /// </summary>
-/// <returns></returns>
 /// <created>ʆϒʅ,02.10.2018</created>
-/// <changed>ʆϒʅ,29.06.2019</changed>
+/// <changed>ʆϒʅ,13.10.2019</changed>
 // ********************************************************************************
 
-
-//#include "pch.h"
 #include "Packers.h"
 #include "Console.h"
 
