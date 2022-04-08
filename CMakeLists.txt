@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,13.10.2019</changed>
+#/ <changed>ʆϒʅ,05.12.2021</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -11,6 +11,12 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 set(TARGET_NAME Packers)
 
 set(PROJECT_NAME ${TARGET_NAME})
+
+#if(${CMAKE_SIZEOF_VOID_P} EQUAL "8")
+#  set(CMAKE_GENERATOR_PLATFORM "x64")
+#else()
+#  set(CMAKE_GENERATOR_PLATFORM "x86")
+#endif()
 
 project(${PROJECT_NAME}
           VERSION 1.0.0.1

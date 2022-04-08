@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,08.12.2021</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -31,12 +31,12 @@ Narrator::Narrator ()
   firstMenuSentences [1] = u8"jet are you sure, whether you survive in stone age?! :)";
   firstMenuSentences [2] = u8"Well, undecorated involvement is still involvement...";
   firstMenuSentences [3] = u8"Oh yeah, tools and decorations are always appreciated!";
-  secondMenuSentences [0] = u8"Stones and wands are available!";
+  secondMenuSentences [0] = u8"Stones and clubs are available!";
   secondMenuSentences [1] = u8"The last one tried to decorate too much,";
   secondMenuSentences [2] = u8"it ended up nasty in stone age! :)";
   secondMenuSentences [3] = u8"The age is still nasty,";
   secondMenuSentences [4] = u8"decoration isn't jet above strength. :)";
-  secondMenuSentences [5] = u8"At least a little class after so many years!";
+  secondMenuSentences [5] = u8"At least a little fashion after so many years!";
   secondMenuSentences [6] = u8"Yeah, decoration empty handed is still decoration!";
   secondMenuSentences [7] = u8"Pay attention to your nose, decoration isn't important!";
   startPoints [0] = { SCREEN_W - 60, SCREEN_H - 10 };
@@ -55,18 +55,18 @@ void Narrator::insertion ( const unsigned short& instance )
 
   COORD pointOne { startPoints [0] };
   COORD pointTwo { startPoints [1] };
-  if ( instance == 1 )
+  if (instance == 1)
   {
-    for ( unsigned char i = 0; i < 4; i++ )
+    for (unsigned char i = 0; i < 4; i++)
     {
       colourInserter ( u8"                                                          ", pointOne );
       pointOne.Y += 1;
     }
   } else
-    if ( instance == 2 )
+    if (instance == 2)
     {
       pointOne.Y += 4;
-      for ( unsigned char i = 0; i < 2; i++ )
+      for (unsigned char i = 0; i < 2; i++)
       {
         colourInserter ( u8"                                                          ", pointOne );
         pointOne.Y += 1;
@@ -76,16 +76,16 @@ void Narrator::insertion ( const unsigned short& instance )
       unsigned char tempOne { 0 };
       unsigned char tempTwo { 0 };
       unsigned char tempThree { 0 };
-      tempOne = ( instance / 100 );
-      tempTwo = ( ( instance % 100 ) / 10 );
-      tempThree = ( ( instance % 100 ) % 10 );
+      tempOne = (instance / 100);
+      tempTwo = ((instance % 100) / 10);
+      tempThree = ((instance % 100) % 10);
       int rnd { 0 };
 
-      switch ( tempOne )
+      switch (tempOne)
       {
         case 1:
           // scenes:
-          for ( unsigned char i = 0; i < 3; i++ )
+          for (unsigned char i = 0; i < 3; i++)
           {
             colourInserter ( scenes [tempTwo][i], colours [0], pointOne );
             pointOne.Y += 1;
@@ -94,12 +94,12 @@ void Narrator::insertion ( const unsigned short& instance )
           break;
         case 2:
           // menus:
-          if ( tempTwo == 1 )
+          if (tempTwo == 1)
           {
-            if ( tempThree == 0 )
+            if (tempThree == 0)
             {
-              rnd = ( rand () % 2 + 1 );
-              switch ( rnd )
+              rnd = (rand () % 2 + 1);
+              switch (rnd)
               {
                 case 1:
                   colourInserter ( firstMenuSentences [0], colours [1], pointTwo );
@@ -113,13 +113,13 @@ void Narrator::insertion ( const unsigned short& instance )
             } else
               colourInserter ( firstMenuSentences [3], colours [1], pointTwo );
           } else
-            if ( tempTwo == 2 )
+            if (tempTwo == 2)
             {
-              switch ( tempThree )
+              switch (tempThree)
               {
                 case 0:
-                  rnd = ( rand () % 2 + 1 );
-                  if ( rnd == 1 )
+                  rnd = (rand () % 2 + 1);
+                  if (rnd == 1)
                     colourInserter ( secondMenuSentences [0], colours [1], pointTwo );
                   else
                   {
@@ -202,15 +202,15 @@ Giant::Giant ()
   colourThree = F_bRED;
   sentances [0] = u8"\"Look at these new puny two legs creatures!\"";
   sentances [1] = u8"\"Look how they dance and chew away!\"";
-  startPoints [0] = { 3, SCREEN_H - 35 };
-  startPoints [1] = { 50, SCREEN_H - 40 };
+  startPoints [0] = { 3, SCREEN_H - 37 };
+  startPoints [1] = { 50, SCREEN_H - 39 };
 
 
   COORD tempOne ( startPoints [0] );
   COORD tempTwo ( tempOne );
-  for ( size_t i = 0; i < 38; i++ )
+  for (size_t i = 0; i < 38; i++)
   {
-    if ( i == 4 )
+    if (i == 4)
     {
       tempOne.Y -= 1;
       tempTwo.Y = tempOne.Y;
@@ -219,21 +219,21 @@ Giant::Giant ()
       tempTwo.X = tempOne.X + 26;
       colourInserter ( theGiant [i], colourTwo, tempTwo );
     } else
-      if ( i == 6 )
+      if (i == 6)
       {
         tempOne.Y -= 1;
         tempTwo.Y = tempOne.Y;
         tempTwo.X = tempOne.X + 24;
         colourInserter ( theGiant [i], colourTwo, tempTwo );
       } else
-        if ( i == 8 )
+        if (i == 8)
         {
           tempOne.Y -= 1;
           tempTwo.Y = tempOne.Y;
           tempTwo.X = tempOne.X + 23;
           colourInserter ( theGiant [i], colourTwo, tempTwo );
         } else
-          if ( i == 14 )
+          if (i == 14)
           {
             tempOne.Y -= 1;
             tempTwo.Y = tempOne.Y;
@@ -248,7 +248,7 @@ Giant::Giant ()
   tempThree.Y += 2;
   colourInserter ( tempThree );
   std::string str { "" };
-  for ( char element : sentances [0] )
+  for (char element : sentances [0])
   {
     str += element;
     colourInserter ( str, colourOne );
@@ -258,7 +258,7 @@ Giant::Giant ()
   tempThree = startPoints [1];
   tempThree.Y += 3;
   colourInserter ( tempThree );
-  for ( char element : sentances [1] )
+  for (char element : sentances [1])
   {
     str += element;
     colourInserter ( str, colourOne );

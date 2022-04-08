@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,07.12.2021</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -47,12 +47,12 @@ void Inserter::clear ()
   COORD temp { 0,0 };
   COORD zero { 0,0 };
   std::string strTemp { "" };
-  for ( unsigned char i = 0; i < SCREEN_W; i++ )
+  for (unsigned char i = 0; i <= SCREEN_W; i++)
   {
     strTemp += " ";
   }
   colourInserter ( strTemp, temp );
-  for ( unsigned char i = 0; i < SCREEN_H; i++ )
+  for (unsigned char i = 0; i <= SCREEN_H + (SCREEN_H / 3); i++)
     std::cout << strTemp;
   colourInserter ( zero );
 }
@@ -64,7 +64,7 @@ Loading::Loading ( const unsigned char& mode )
   // set
   std::string str { "LOADING# " };
   unsigned char i { 0 };
-  for ( char element : str )
+  for (char element : str)
   {
     characters [i] = element;
     ++i;
@@ -85,13 +85,13 @@ Loading::Loading ( const unsigned char& mode )
 void Loading::inserter ()
 {
   COORD position { startPoint };
-  for ( unsigned char i = 0; i < 7; i++ )
+  for (unsigned char i = 0; i < 7; i++)
   {
     colourInserter ( characters [i], colourOne, position );
     std::this_thread::sleep_for ( std::chrono::milliseconds ( 100 * speed ) );
     position.X += 1;
   }
-  for ( unsigned char i = 1; i <= 3; i++ )
+  for (unsigned char i = 1; i <= 3; i++)
   {
     colourInserter ( characters [7], colourTwo, position );
     std::this_thread::sleep_for ( std::chrono::milliseconds ( 150 * speed ) );
