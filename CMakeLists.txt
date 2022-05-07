@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,05.12.2021</changed>
+#/ <changed>ʆϒʅ,05.03.2022</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -21,7 +21,7 @@ set(PROJECT_NAME ${TARGET_NAME})
 project(${PROJECT_NAME}
           VERSION 1.0.0.1
           DESCRIPTION "Packers Game in Console"
-          HOMEPAGE_URL "https://github.com/BirdSofts/Packers"
+          HOMEPAGE_URL "https://github.com/s-mehrdad/Packers"
           LANGUAGES CXX
 )
 
