@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,05.03.2022</changed>
+#/ <changed>ʆϒʅ,11.06.2022</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -42,6 +42,7 @@ list(APPEND HEADER_FILES
           Shared.h
           Status.h
           Tale.h
+          View.h
 )
 
 list(APPEND SOURCE_FILES
@@ -54,6 +55,7 @@ list(APPEND SOURCE_FILES
           Shared.cpp
           Status.cpp
           Tale.cpp
+          View.cpp
 )
 
 if(WIN32)

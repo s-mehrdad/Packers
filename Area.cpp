@@ -3,12 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Area.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 Area::Area ( unsigned char mode ) :age ( mode )
@@ -30,50 +30,50 @@ Area::Area ( unsigned char mode ) :age ( mode )
   colourV = F_bRED;
 
   // area
-  COORD position;
-  for ( int y = 1; y <= rows; y++ )
+  coordinateType position;
+  for (int y = 1; y <= rows; y++)
   {
-    for ( int x = 1; x <= columns; x++ )
+    for (int x = 1; x <= columns; x++)
     {
-      position.X = x;
-      position.Y = y;
+      position.x = x;
+      position.y = y;
       colourInserter ( position );
 
       // first horizontal wall
-      if ( y == 1 && x != columns )
+      if (y == 1 && x != columns)
       {
 
         // left top edge
-        if ( y == 1 && x == 1 )
+        if (y == 1 && x == 1)
           colourInserter ( edges [0], colourW );
         colourInserter ( wallH, colourW );
       }
 
       // right top edge
-      if ( y == 1 && x == columns )
+      if (y == 1 && x == columns)
         colourInserter ( edges [3], colourW );
 
       // left bottom edge
-      if ( y == rows && x == 1 )
+      if (y == rows && x == 1)
         colourInserter ( edges [1], colourW );
 
       // second horizontal wall
-      if ( y == rows && x != columns )
+      if (y == rows && x != columns)
         colourInserter ( wallH, colourW );
       else
         // right bottom edge
-        if ( y == rows && x == columns )
+        if (y == rows && x == columns)
           colourInserter ( edges [2], colourW );
         else
 
           // vertical walls
-          if ( x == 1 || x == columns )
-            if ( y != 1 )
+          if (x == 1 || x == columns)
+            if (y != 1)
               colourInserter ( wallV, colourW );
 
       // packs
-      if ( y != 1 && y != rows && y % 2 == 0 )
-        if ( x != 1 && x != columns && x % 2 == 0 )
+      if (y != 1 && y != rows && y % 2 == 0)
+        if (x != 1 && x != columns && x % 2 == 0)
           colourInserter ( resources [1], colourH );
       std::cout << '\n';
     }
@@ -81,76 +81,84 @@ Area::Area ( unsigned char mode ) :age ( mode )
 };
 
 
-void Area::setter ( const unsigned short& state, const COORD& position )
+void Area::setter ( const unsigned short& state, const coordinateType& position )
 {
   //TODO to be added: other resource colours + reconstruction
   int wish { state };
   wish /= 10;
 
-  switch ( wish )
+  switch (wish)
   {
     case 1:
-      if ( position.X - 1 > 2 )
+      if (position.x - 1 > 2)
       {
-        colourInserter ( { position.X - 1, position.Y - 1 } );
+        coordinateType temp { position.x - 1, position.y - 1 };
+        colourInserter ( temp );
         colourInserter ( u8"♣", F_YELLOW );
-        //stateArray [position.Y - 1][position.X - 1] = currentState;
+        //stateArray [position.y - 1][position.x - 1] = currentState;
       } else
-        if ( position.X + 1 < columns )
+        if (position.x + 1 < columns)
         {
-          colourInserter ( { position.X + 1, position.Y - 1 } );
+          coordinateType temp { position.x + 1, position.y - 1 };
+          colourInserter ( temp );
           colourInserter ( u8"♣", F_YELLOW );
-          //stateArray [position.Y - 1][position.X + 1] = currentState;
+          //stateArray [position.y - 1][position.x + 1] = currentState;
         }
       break;
     case 2:
-      if ( position.Y - 1 > 2 )
+      if (position.y - 1 > 2)
       {
-        colourInserter ( { position.X - 1, position.Y - 1 } );
+        coordinateType temp { position.x - 1, position.y - 1 };
+        colourInserter ( temp );
         colourInserter ( u8"♣", F_YELLOW );
-        //stateArray [position.Y - 1][position.X - 1] = currentState;
+        //stateArray [position.y - 1][position.x - 1] = currentState;
       } else
-        if ( position.Y + 1 < rows )
+        if (position.y + 1 < rows)
         {
-          colourInserter ( { position.X - 1, position.Y + 1 } );
+          coordinateType temp { position.x - 1, position.y + 1 };
+          colourInserter ( temp );
           colourInserter ( u8"♣", F_YELLOW );
-          //stateArray [position.Y + 1][position.X - 1] = currentState;
+          //stateArray [position.y + 1][position.x - 1] = currentState;
         }
       break;
     case 3:
-      if ( position.X - 1 > 2 )
+      if (position.x - 1 > 2)
       {
-        colourInserter ( { position.X - 1, position.Y + 1 } );
+        coordinateType temp { position.x - 1, position.y + 1 };
+        colourInserter ( temp );
         colourInserter ( u8"♣", F_YELLOW );
-        //stateArray [position.Y + 1][position.X - 1] = currentState;
+        //stateArray [position.y + 1][position.x - 1] = currentState;
       } else
-        if ( position.X + 1 < columns )
+        if (position.x + 1 < columns)
         {
-          colourInserter ( { position.X + 1, position.Y + 1 } );
+          coordinateType temp { position.x + 1, position.y + 1 };
+          colourInserter ( temp );
           colourInserter ( u8"♣", F_YELLOW );
-          //stateArray [position.Y + 1][position.X + 1] = currentState;
+          //stateArray [position.y + 1][position.x + 1] = currentState;
         }
       break;
     case 4:
-      if ( position.Y - 1 > 2 )
+      if (position.y - 1 > 2)
       {
-        colourInserter ( { position.X + 1, position.Y - 1 } );
+        coordinateType temp { position.x + 1, position.y - 1 };
+        colourInserter ( temp );
         colourInserter ( u8"♣", F_YELLOW );
-        //stateArray [position.Y - 1][position.X + 1] = currentState;
+        //stateArray [position.y - 1][position.x + 1] = currentState;
       } else
-        if ( position.Y + 1 < rows )
+        if (position.y + 1 < rows)
         {
-          colourInserter ( { position.X + 1, position.Y + 1 } );
+          coordinateType temp { position.x + 1, position.y + 1 };
+          colourInserter ( temp );
           colourInserter ( u8"♣", F_YELLOW );
-          //stateArray [position.Y + 1][position.X + 1] = currentState;
+          //stateArray [position.y + 1][position.x + 1] = currentState;
         }
       break;
   }
 };
 
 
-const COORD Area::get ()
+const coordinateType Area::get ()
 {
-  COORD frame { columns, rows };
+  coordinateType frame { columns, rows };
   return frame;
 };

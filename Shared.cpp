@@ -3,12 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,07.12.2021</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Shared.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 Inserter::Inserter ()
@@ -16,10 +16,10 @@ Inserter::Inserter ()
   consoleOutput = GetStdHandle ( STD_OUTPUT_HANDLE );
   screenBinfoEX = {};
 };
-void Inserter::colourInserter ( const COORD& pos )
+void Inserter::colourInserter ( const coordinateType& pos )
 {
   lastInsertStartPosition = pos;
-  SetConsoleCursorPosition ( consoleOutput, pos );
+  SetConsoleCursorPosition ( consoleOutput, COORD {pos.x,pos.y} );
 };
 void Inserter::colourInserter ( const std::string& str, const WORD& colour )
 {
@@ -27,25 +27,25 @@ void Inserter::colourInserter ( const std::string& str, const WORD& colour )
   SetConsoleTextAttribute ( consoleOutput, colour );
   std::cout << str;
 };
-void Inserter::colourInserter ( const std::string& str, const COORD& pos )
+void Inserter::colourInserter ( const std::string& str, const coordinateType& pos )
 {
   lastInsertStartPosition = pos;
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-  SetConsoleCursorPosition ( consoleOutput, pos );
+  SetConsoleCursorPosition ( consoleOutput, COORD {pos.x,pos.y});
   std::cout << str;
 };
-void Inserter::colourInserter ( const std::string& str, const WORD& colour, const COORD& pos )
+void Inserter::colourInserter ( const std::string& str, const WORD& colour, const coordinateType& pos )
 {
   lastInsertStartPosition = pos;
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-  SetConsoleCursorPosition ( consoleOutput, pos );
+  SetConsoleCursorPosition ( consoleOutput, COORD {pos.x,pos.y});
   SetConsoleTextAttribute ( consoleOutput, colour );
   std::cout << str;
 };
 void Inserter::clear ()
 {
-  COORD temp { 0,0 };
-  COORD zero { 0,0 };
+  coordinateType temp { 0,0 };
+  coordinateType zero { 0,0 };
   std::string strTemp { "" };
   for (unsigned char i = 0; i <= SCREEN_W; i++)
   {
@@ -56,7 +56,7 @@ void Inserter::clear ()
     std::cout << strTemp;
   colourInserter ( zero );
 }
-COORD Inserter::lastInsertStartPosition { 0,0 };
+coordinateType Inserter::lastInsertStartPosition { 0,0 };
 
 
 Loading::Loading ( const unsigned char& mode )
@@ -84,12 +84,12 @@ Loading::Loading ( const unsigned char& mode )
 };
 void Loading::inserter ()
 {
-  COORD position { startPoint };
+  coordinateType position { startPoint };
   for (unsigned char i = 0; i < 7; i++)
   {
     colourInserter ( characters [i], colourOne, position );
     std::this_thread::sleep_for ( std::chrono::milliseconds ( 100 * speed ) );
-    position.X += 1;
+    position.x += 1;
   }
   for (unsigned char i = 1; i <= 3; i++)
   {

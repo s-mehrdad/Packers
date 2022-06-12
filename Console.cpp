@@ -3,7 +3,7 @@
 /// the searched and confronted ways for manipulation of Windows's console screen by the code itself in runtime.
 /// </summary>
 /// <created>ʆϒʅ,02.10.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -24,17 +24,17 @@ void ConsoleFont ( const LPCWSTR& fontName )
   fontInfoEX.cbSize = sizeof ( fontInfoEX ); // getting the right size (important for many structures in the windows API)
   GetCurrentConsoleFontEx ( consoleOutput, false, &fontInfoEX );
   lstrcpyW ( fontInfoEX.FaceName, fontName ); // copies a specific number of characters from a source string to a buffer
-                                              // in this case the properties of the wished font to the suitable field
+  // in this case the properties of the wished font to the suitable field
   SetCurrentConsoleFontEx ( consoleOutput, false, &fontInfoEX );
 }
 
 
-void ConsoleFontSize ( const COORD& fontSize )
+void ConsoleFontSize ( const coordinateType& fontSize )
 {
   fontInfoEX.cbSize = sizeof ( fontInfoEX ); // getting the right size (important for many structures in the windows API)
   GetCurrentConsoleFontEx ( consoleOutput, false, &fontInfoEX );
-  fontInfoEX.dwFontSize.X = fontSize.X; // for not true type fonts
-  fontInfoEX.dwFontSize.Y = fontSize.Y; // Y is enough for the size of true type fonts
+  fontInfoEX.dwFontSize.X = fontSize.x; // for not true type fonts
+  fontInfoEX.dwFontSize.Y = fontSize.y; // Y is enough for the size of true type fonts
   SetCurrentConsoleFontEx ( consoleOutput, false, &fontInfoEX );
 }
 
@@ -45,28 +45,28 @@ void ConsoleFontColour ( const WORD& fontColour )
 }
 
 
-void ConsoleScreenPosition ( const COORD& screenPosition )
+void ConsoleScreenPosition ( const coordinateType& screenPosition )
 {
-  // draw the window from the coordinate argument
+  // draw the window from the coordinateTypeinate argument
   // and ignore the new width, height in pixels (cx, cy) i.e. (0, 0) by setting the SWP_NOSIZE flag
   // for other flags check MSDN
-  SetWindowPos ( consoleWindow, HWND_TOP, screenPosition.X, screenPosition.Y, 0, 0, SWP_NOSIZE );
+  SetWindowPos ( consoleWindow, HWND_TOP, screenPosition.y, screenPosition.y, 0, 0, SWP_NOSIZE );
 }
 
 
-void ConsoleScreenSize ( const COORD& ColRowCount )
+void ConsoleScreenSize ( const coordinateType& ColRowCount )
 {
   // setting the new console screen size in pixels:
   // converting needed columns and rows numbers to needed screen size in pixel (the numbers are reckoned by trying different numbers)
   RECT consoleScreen;
   GetWindowRect ( consoleWindow, &consoleScreen );
-  MoveWindow ( consoleWindow, consoleScreen.top, consoleScreen.left, static_cast<int> ( ColRowCount.X * 9.3 ), ColRowCount.Y * 22, true );
+  MoveWindow ( consoleWindow, consoleScreen.top, consoleScreen.left, static_cast<int> (ColRowCount.x * 9.3), ColRowCount.y * 22, true );
   screenBinfoEX.cbSize = sizeof ( screenBinfoEX ); // getting the right size (important for many structures in the windows API)
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
   screenBinfoEX.srWindow.Left = 0; // width 0 to
-  screenBinfoEX.srWindow.Right = ColRowCount.X; // the number of columns (doesn't work: need legacy console tick)
+  screenBinfoEX.srWindow.Right = ColRowCount.x; // the number of columns (doesn't work: need legacy console tick)
   screenBinfoEX.srWindow.Top = 0; // height 0 to
-  screenBinfoEX.srWindow.Bottom = ColRowCount.Y; // the number of rows
+  screenBinfoEX.srWindow.Bottom = ColRowCount.y; // the number of rows
   SetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
   SetConsoleWindowInfo ( consoleOutput, false, &screenBinfoEX.srWindow );
 }
@@ -77,9 +77,9 @@ void ConsoleScreenColour ( const COLORREF& BGcolour )
   screenBinfoEX.cbSize = sizeof ( screenBinfoEX ); // getting the right size (important for many structures in the windows API)
   GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
   //screenBinfoEX.srWindow.Left = 0; // width 0 to
-  //screenBinfoEX.srWindow.Right = ColRowCount.X; // the number of columns (doesn't work: need legacy console tick)
+  //screenBinfoEX.srWindow.Right = ColRowCount.x; // the number of columns (doesn't work: need legacy console tick)
   //screenBinfoEX.srWindow.Top = 0; // height 0 to
-  //screenBinfoEX.srWindow.Bottom = ColRowCount.Y; // the number of rows
+  //screenBinfoEX.srWindow.Bottom = ColRowCount.y; // the number of rows
   screenBinfoEX.ColorTable [0] = BGcolour; // background colour
   SetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
   SetConsoleWindowInfo ( consoleOutput, false, &screenBinfoEX.srWindow );

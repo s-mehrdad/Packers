@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Shared.h"
@@ -22,7 +22,7 @@ private:
   unsigned char currentScene;
   std::string firstMenuSentences [4];
   std::string secondMenuSentences [8];
-  COORD startPoints [2];
+  coordinateType startPoints [2];
   //bool inserted;
   //unsigned char counter;
 public:
@@ -41,7 +41,7 @@ private:
   WORD colourTwo;
   WORD colourThree;
   std::string sentances [2];
-  COORD startPoints [2];
+  coordinateType startPoints [2];
 public:
   Giant ();
 };

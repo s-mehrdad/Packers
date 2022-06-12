@@ -3,12 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Status.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 Status::Status ( const unsigned char& mode )
@@ -56,54 +56,54 @@ Status::Status ( const unsigned char& mode )
   // statusBar
   colourInserter ( title, F_bWHITE, pointTitle );
 
-  COORD coordinate { otherPoints [0] };
-  colourInserter ( otherString [0], F_bPURPLE, coordinate );
-  coordinate.X += 9;
-  colourInserter ( std::to_string ( packersState ), F_CYAN, coordinate );
+  coordinateType coordinateTypeinate { otherPoints [0] };
+  colourInserter ( otherString [0], F_bPURPLE, coordinateTypeinate );
+  coordinateTypeinate.x += 9;
+  colourInserter ( std::to_string ( packersState ), F_CYAN, coordinateTypeinate );
 
-  coordinate = otherPoints [1];
-  colourInserter ( otherString [1], F_bPURPLE, coordinate );
-  coordinate.Y += 1;
-  colourInserter ( agesStrings [agesIdentifier], F_CYAN, coordinate );
+  coordinateTypeinate = otherPoints [1];
+  colourInserter ( otherString [1], F_bPURPLE, coordinateTypeinate );
+  coordinateTypeinate.y += 1;
+  colourInserter ( agesStrings [agesIdentifier], F_CYAN, coordinateTypeinate );
 
   colourInserter ( otherString [2], F_bWHITE, otherPoints [2] );
-  coordinate = otherPoints [3];
-  colourInserter ( otherString [3], F_GREEN, coordinate );
-  coordinate.X += 3;
-  coordinate.Y += 1;
-  colourInserter ( std::to_string ( healthyState ), F_CYAN, coordinate );
-  coordinate = otherPoints [4];
-  colourInserter ( otherString [4], F_YELLOW, coordinate );
-  coordinate.X += 3;
-  coordinate.Y += 1;
-  colourInserter ( std::to_string ( renewedState ), F_CYAN, coordinate );
-  coordinate = otherPoints [5];
-  colourInserter ( otherString [5], F_bRED, coordinate );
-  coordinate.X += 3;
-  coordinate.Y += 1;
-  colourInserter ( std::to_string ( vanishedState ), F_CYAN, coordinate );
+  coordinateTypeinate = otherPoints [3];
+  colourInserter ( otherString [3], F_GREEN, coordinateTypeinate );
+  coordinateTypeinate.x += 3;
+  coordinateTypeinate.y += 1;
+  colourInserter ( std::to_string ( healthyState ), F_CYAN, coordinateTypeinate );
+  coordinateTypeinate = otherPoints [4];
+  colourInserter ( otherString [4], F_YELLOW, coordinateTypeinate );
+  coordinateTypeinate.x += 3;
+  coordinateTypeinate.y += 1;
+  colourInserter ( std::to_string ( renewedState ), F_CYAN, coordinateTypeinate );
+  coordinateTypeinate = otherPoints [5];
+  colourInserter ( otherString [5], F_bRED, coordinateTypeinate );
+  coordinateTypeinate.x += 3;
+  coordinateTypeinate.y += 1;
+  colourInserter ( std::to_string ( vanishedState ), F_CYAN, coordinateTypeinate );
 
   colourInserter ( otherString [6], F_bWHITE, otherPoints [6] );
-  coordinate = otherPoints [7];
-  colourInserter ( otherString [7], F_bPURPLE, coordinate );
-  coordinate.X += 3;
-  coordinate.Y += 1;
-  colourInserter ( std::to_string ( haveState ), F_CYAN, coordinate );
-  coordinate = otherPoints [8];
-  colourInserter ( otherString [8], F_bPURPLE, coordinate );
-  coordinate.X += 3;
-  coordinate.Y += 1;
-  colourInserter ( std::to_string ( needState ), F_CYAN, coordinate );
+  coordinateTypeinate = otherPoints [7];
+  colourInserter ( otherString [7], F_bPURPLE, coordinateTypeinate );
+  coordinateTypeinate.x += 3;
+  coordinateTypeinate.y += 1;
+  colourInserter ( std::to_string ( haveState ), F_CYAN, coordinateTypeinate );
+  coordinateTypeinate = otherPoints [8];
+  colourInserter ( otherString [8], F_bPURPLE, coordinateTypeinate );
+  coordinateTypeinate.x += 3;
+  coordinateTypeinate.y += 1;
+  colourInserter ( std::to_string ( needState ), F_CYAN, coordinateTypeinate );
   //TODO add: random need setter
 };
 
 
 void Status::get ( const unsigned short& arg )
 {
-  COORD coordinate { otherPoints [0] };
-  coordinate.X += 9;
+  coordinateType coordinateTypeinate { otherPoints [0] };
+  coordinateTypeinate.x += 9;
   packersState = arg;
-  colourInserter ( std::to_string ( packersState ), F_CYAN, coordinate );
+  colourInserter ( std::to_string ( packersState ), F_CYAN, coordinateTypeinate );
 }
 
 
@@ -111,8 +111,8 @@ void Status::setter ( const unsigned char& input )
 {
   //TODO add: a set of state setter
   // update complete the state setter
-  COORD coordinate { otherPoints [1] };
-  coordinate.Y += 1;
-  colourInserter ( u8"            ", F_CYAN, coordinate );
-  colourInserter ( agesStrings [input], F_CYAN, coordinate );
+  coordinateType coordinateTypeinate { otherPoints [1] };
+  coordinateTypeinate.y += 1;
+  colourInserter ( u8"            ", F_CYAN, coordinateTypeinate );
+  colourInserter ( agesStrings [input], F_CYAN, coordinateTypeinate );
 };

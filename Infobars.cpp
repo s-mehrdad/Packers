@@ -3,12 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Infobars.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 titleBar::titleBar ()
@@ -32,24 +32,24 @@ guideBar::guideBar ()
   guides [2] = u8" ready packages";
 
   // output
-  COORD coordinate { startPoint };
+  coordinateType coordinateTypeinate { startPoint };
 
   // guideBar
   for ( char i = 0; i < 3; i++ )
   {
     if ( i == 0 )
-      colourInserter ( signs [i], F_GREEN, coordinate );
+      colourInserter ( signs [i], F_GREEN, coordinateTypeinate );
     else
       if ( i == 1 )
       {
-        coordinate.X = ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2;
-        colourInserter ( signs [i], F_bWHITE, coordinate );
+        coordinateTypeinate.x = ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2;
+        colourInserter ( signs [i], F_bWHITE, coordinateTypeinate );
       } else
       {
-        coordinate.X = ( ( SCREEN_W - 26 ) - 17 );
-        colourInserter ( signs [i], F_bWHITE, coordinate );
+        coordinateTypeinate.x = ( ( SCREEN_W - 26 ) - 17 );
+        colourInserter ( signs [i], F_bWHITE, coordinateTypeinate );
       }
-      coordinate.X += 2;
-      colourInserter ( guides [i], F_CYAN, coordinate );
+      coordinateTypeinate.x += 2;
+      colourInserter ( guides [i], F_CYAN, coordinateTypeinate );
   }
 };

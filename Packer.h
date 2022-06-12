@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #ifndef PACKER_H
@@ -30,7 +30,7 @@ private:
   std::string faces [2];
   std::string* currentFace; // Todo for use in the tale
   Actions process [4];
-  COORD position;
+  coordinateType position;
   bool direction;
   WORD motivation;
   unsigned char aspiration;
@@ -40,7 +40,7 @@ public:
   Packer ();
   const unsigned char& getId ( void );
   const Actions& getProcess ( const unsigned char& );
-  COORD& getPosition ( void );
+  coordinateType& getPosition ( void );
   bool& getDirection ( void );
   const WORD& getMotivation ( void );
   const unsigned char& getAspiration ( void );

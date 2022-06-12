@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #ifndef AREA_H
@@ -29,8 +29,8 @@ private:
   WORD colourV;
 public:
   Area ( unsigned char );
-  void setter ( const unsigned short&, const COORD& );
-  const COORD get ( void );
+  void setter ( const unsigned short&, const coordinateType& );
+  const coordinateType get ( void );
 
   //static unsigned char stateArray [rows][columns]; // dynamic needed
 };

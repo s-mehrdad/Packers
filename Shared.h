@@ -3,27 +3,37 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #ifndef SHARED_H
 #define SHARED_H
 
 
-class Inserter
+#include "View.h"
+
+
+typedef struct Position
+{
+  short x;
+  short y;
+} coordinateType;
+
+
+class Inserter :public View
 {
 private:
   HANDLE consoleOutput;
   CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEX;
 public:
   Inserter ();
-  void colourInserter ( const COORD& );
+  void colourInserter ( const coordinateType& );
   void colourInserter ( const std::string&, const WORD& );
-  void colourInserter ( const std::string&, const COORD& );
-  void colourInserter ( const std::string&, const WORD&, const COORD& );
+  void colourInserter ( const std::string&, const coordinateType& );
+  void colourInserter ( const std::string&, const WORD&, const coordinateType& );
   void clear ();
 
-  static COORD lastInsertStartPosition;
+  static coordinateType lastInsertStartPosition;
 };
 
 
@@ -36,7 +46,7 @@ private:
   WORD colourOne;
   WORD colourTwo;
   WORD colourThree;
-  COORD startPoint;
+  coordinateType startPoint;
   unsigned char speed;
 public:
   Loading ( const unsigned char& );

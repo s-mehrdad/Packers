@@ -3,7 +3,7 @@
 /// the searched and confronted ways for manipulation of Windows's console screen by the code itself in runtime.
 /// </summary>
 /// <created>ʆϒʅ,02.10.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #ifndef CONSOLE_H
@@ -52,10 +52,10 @@
 
 
 void ConsoleFont ( const LPCWSTR& fontName );
-void ConsoleFontSize ( const COORD& fontSize );
+void ConsoleFontSize ( const coordinateType& fontSize );
 void ConsoleFontColour ( const WORD& fontColour );
-void ConsoleScreenPosition ( const COORD& screenPosition );
-void ConsoleScreenSize ( const COORD& ColRowCount );
+void ConsoleScreenPosition ( const coordinateType& screenPosition );
+void ConsoleScreenSize ( const coordinateType& ColRowCount );
 void ConsoleScreenColour ( const COLORREF& BGcolour );
 void ConsoleCursorState ( const bool& CursorVisibility );
 void ColourCouter ( const std::string& strCharacter, const WORD& Colour );

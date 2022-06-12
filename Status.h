@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,24.07.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #ifndef STATUS_H
@@ -18,10 +18,10 @@ class Status :public Inserter
 private:
   std::string state;
   std::string title;
-  COORD pointState;
-  COORD pointTitle;
+  coordinateType pointState;
+  coordinateType pointTitle;
   std::string otherString [9];
-  COORD otherPoints [9];
+  coordinateType otherPoints [9];
   unsigned short packersState;
   unsigned char agesIdentifier;
   std::string agesStrings [5];

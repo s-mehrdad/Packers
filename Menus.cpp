@@ -3,12 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Menus.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 dangerAreaMenu::dangerAreaMenu ()
@@ -28,27 +28,27 @@ dangerAreaMenu::dangerAreaMenu ()
 
 void dangerAreaMenu::switcher ()
 {
-  COORD coordinate { startPoints [0] };
+  coordinateType coordinateTypeinate { startPoints [0] };
 
   // dangerAreaMenu
   if ( set == false )
   {
-    colourInserter ( title, F_bWHITE, coordinate );
-    coordinate.Y += 1;
+    colourInserter ( title, F_bWHITE, coordinateTypeinate );
+    coordinateTypeinate.y += 1;
     for ( char i = 0; i < 3; i++ )
     {
-      colourInserter ( options [i], F_bWHITE, coordinate );
-      coordinate.Y += 1;
+      colourInserter ( options [i], F_bWHITE, coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     colourInserter ( selectionSign, F_bRED, startPoints [1] );
     set = true;
   } else
   {
-    coordinate.X -= 1;
+    coordinateTypeinate.x -= 1;
     for ( unsigned char i = 0; i <= 3; i++ )
     {
-      colourInserter ( "                       ", coordinate );
-      coordinate.Y += 1;
+      colourInserter ( "                       ", coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     set = false;
   }
@@ -57,20 +57,20 @@ void dangerAreaMenu::switcher ()
 
 void dangerAreaMenu::switchSet ( const unsigned char& choice, const bool& confirm )
 {
-  COORD coordinate { 0, 0 };
+  coordinateType coordinateTypeinate { 0, 0 };
   unsigned int chosen { static_cast<unsigned int>( choice % 10 ) };
 
   // events of danger area choices
-  coordinate = startPoints [1];
-  coordinate.Y += selected;
+  coordinateTypeinate = startPoints [1];
+  coordinateTypeinate.y += selected;
   if ( confirm == false )
   {
-    colourInserter ( u8"  ", F_bRED, coordinate );
+    colourInserter ( u8"  ", F_bRED, coordinateTypeinate );
     selected = chosen;
     // Todo aware the narrator! :)
-    coordinate = startPoints [1];
-    coordinate.Y += chosen;
-    colourInserter ( selectionSign, F_bRED, coordinate );
+    coordinateTypeinate = startPoints [1];
+    coordinateTypeinate.y += chosen;
+    colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
   } else
   {
 
@@ -102,32 +102,32 @@ agesMenu::agesMenu ()
 
 void agesMenu::switcher ()
 {
-  COORD coordinate { startPoints [0] };
+  coordinateType coordinateTypeinate { startPoints [0] };
 
   // agesMenu
   if ( set == false )
   {
-    colourInserter ( title, F_bWHITE, coordinate );
-    coordinate.Y += 1;
+    colourInserter ( title, F_bWHITE, coordinateTypeinate );
+    coordinateTypeinate.y += 1;
     for ( unsigned char i = 0; i < 5; i++ )
     {
       WORD tmpColour { F_bWHITE };
       if ( i == selected )
         tmpColour = F_bRED;
-      colourInserter ( options [i], tmpColour, coordinate );
-      coordinate.Y += 1;
+      colourInserter ( options [i], tmpColour, coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     selected = 0;
-    coordinate = startPoints [1];
-    colourInserter ( selectionSign, F_bRED, coordinate );
+    coordinateTypeinate = startPoints [1];
+    colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
     set = true;
   } else
   {
-    coordinate.X -= 1;
+    coordinateTypeinate.x -= 1;
     for ( unsigned char i = 0; i <= 5; i++ )
     {
-      colourInserter ( "                                           ", coordinate );
-      coordinate.Y += 1;
+      colourInserter ( "                                           ", coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     set = false;
   }
@@ -136,18 +136,18 @@ void agesMenu::switcher ()
 
 void agesMenu::switchSet ( const unsigned char& choice, const bool& confirm )
 {
-  COORD coordinate { 0, 0 };
+  coordinateType coordinateTypeinate { 0, 0 };
   unsigned int chosen { static_cast<unsigned int>( choice % 10 ) };
 
   // events of age choices
-  coordinate = startPoints [1];
-  coordinate.Y += selected;
+  coordinateTypeinate = startPoints [1];
+  coordinateTypeinate.y += selected;
   if ( confirm == false )
   {
-    colourInserter ( u8"  ", F_bRED, coordinate );
-    coordinate = startPoints [1];
-    coordinate.Y += chosen;
-    colourInserter ( selectionSign, F_bRED, coordinate );
+    colourInserter ( u8"  ", F_bRED, coordinateTypeinate );
+    coordinateTypeinate = startPoints [1];
+    coordinateTypeinate.y += chosen;
+    colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
     selected = chosen;
     switch ( chosen )
     {
@@ -201,33 +201,33 @@ charactersMenu::charactersMenu ()
 
 void charactersMenu::switcher ()
 {
-  COORD coordinate { startPoints [0] };
+  coordinateType coordinateTypeinate { startPoints [0] };
 
   // charactersMenu
   if ( set == false )
   {
-    colourInserter ( title, F_bWHITE, coordinate );
-    coordinate.X += 5;
-    coordinate.Y += 1;
+    colourInserter ( title, F_bWHITE, coordinateTypeinate );
+    coordinateTypeinate.x += 5;
+    coordinateTypeinate.y += 1;
     for ( unsigned char i = 0; i < 2; i++ )
     {
       WORD tmpColour { F_bWHITE };
       if ( i == selected )
         tmpColour = F_bRED;
       if ( i == 1 )
-        coordinate.X += 7;
-      colourInserter ( options [i], tmpColour, coordinate );
+        coordinateTypeinate.x += 7;
+      colourInserter ( options [i], tmpColour, coordinateTypeinate );
     }
     selected = 0;
     colourInserter ( selectionSign, F_bRED, startPoints [1] );
     set = true;
   } else
   {
-    coordinate.X -= 1;
+    coordinateTypeinate.x -= 1;
     for ( unsigned char i = 0; i <= 1; i++ )
     {
-      colourInserter ( "                    ", coordinate );
-      coordinate.Y += 1;
+      colourInserter ( "                    ", coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     set = false;
   }
@@ -236,20 +236,20 @@ void charactersMenu::switcher ()
 
 void charactersMenu::switchSet ( const unsigned char& choice, const bool& confirm )
 {
-  COORD coordinate { 0, 0 };
+  coordinateType coordinateTypeinate { 0, 0 };
   unsigned int chosen { static_cast<unsigned int>( choice % 10 ) };
 
   // events of character choices
-  coordinate = startPoints [1];
+  coordinateTypeinate = startPoints [1];
   if ( selected == 1 )
-    coordinate.X += 7;
+    coordinateTypeinate.x += 7;
   if ( confirm == false )
   {
-    colourInserter ( u8"  ", F_bRED, coordinate );
-    coordinate = startPoints [1];
+    colourInserter ( u8"  ", F_bRED, coordinateTypeinate );
+    coordinateTypeinate = startPoints [1];
     if ( chosen == 1 )
-      coordinate.X += 7;
-    colourInserter ( selectionSign, F_bRED, coordinate );
+      coordinateTypeinate.x += 7;
+    colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
     selected = chosen;
     // Todo aware the narrator! :)
   } else
@@ -290,13 +290,13 @@ motivationsMenu::motivationsMenu ()
 
 void motivationsMenu::switcher ()
 {
-  COORD coordinate { startPoints [0] };
+  coordinateType coordinateTypeinate { startPoints [0] };
 
   // motivationsMenu
   if ( set == false )
   {
-    colourInserter ( title, F_bWHITE, coordinate );
-    coordinate.Y += 1;
+    colourInserter ( title, F_bWHITE, coordinateTypeinate );
+    coordinateTypeinate.y += 1;
     for ( unsigned char i = 0; i < 6; i++ )
     {
       WORD tmpColour { colours [i] };
@@ -304,23 +304,23 @@ void motivationsMenu::switcher ()
         tmpColour = B_CYAN | colours [i];
       if ( i == 3 )
       {
-        coordinate.X += 23;
-        coordinate.Y -= 3;
+        coordinateTypeinate.x += 23;
+        coordinateTypeinate.y -= 3;
       }
-      colourInserter ( options [i], tmpColour, coordinate );
-      coordinate.Y += 1;
+      colourInserter ( options [i], tmpColour, coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     selected = 0;
-    coordinate = startPoints [1];
-    colourInserter ( selectionSign, F_bRED, coordinate );
+    coordinateTypeinate = startPoints [1];
+    colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
     set = true;
   } else
   {
-    coordinate.X -= 1;
+    coordinateTypeinate.x -= 1;
     for ( unsigned char i = 0; i <= 5; i++ )
     {
-      colourInserter ( "                                        ", coordinate );
-      coordinate.Y += 1;
+      colourInserter ( "                                        ", coordinateTypeinate );
+      coordinateTypeinate.y += 1;
     }
     set = false;
   }
@@ -329,34 +329,34 @@ void motivationsMenu::switcher ()
 
 void motivationsMenu::switchSet ( const unsigned char& choice, const bool& confirm )
 {
-  COORD coordinate { 0, 0 };
+  coordinateType coordinateTypeinate { 0, 0 };
   unsigned int chosen { static_cast<unsigned int>( choice % 10 ) };
 
   // events of motivation choices
-  coordinate = startPoints [1];
-  coordinate.Y += selected;
+  coordinateTypeinate = startPoints [1];
+  coordinateTypeinate.y += selected;
   if ( selected > 2 )
   {
-    coordinate.X += 23;
-    coordinate.Y -= 3;
+    coordinateTypeinate.x += 23;
+    coordinateTypeinate.y -= 3;
   }
   if ( ( ( selected - chosen ) == 3 ) || ( ( chosen - selected ) == 3 ) )
   {
     if ( confirm == false )
     {
-      colourInserter ( u8"  ", F_bRED, coordinate );
-      coordinate.X = startPoints [1].X;
+      colourInserter ( u8"  ", F_bRED, coordinateTypeinate );
+      coordinateTypeinate.x = startPoints [1].x;
       if ( selected < chosen )
       {
-        coordinate.X += 23;
+        coordinateTypeinate.x += 23;
 
       }
       if ( selected > chosen )
       {
-        //coordinate.X -= 23;
+        //coordinateTypeinate.x -= 23;
 
       }
-      colourInserter ( selectionSign, F_bRED, coordinate );
+      colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
       selected = chosen;
       // Todo aware the narrator, mentioning that the jump was bigger! :)
     } else
@@ -367,33 +367,33 @@ void motivationsMenu::switchSet ( const unsigned char& choice, const bool& confi
   {
     if ( confirm == false )
     {
-      colourInserter ( u8"  ", F_bRED, coordinate );
-      coordinate = startPoints [1];
-      coordinate.Y += chosen;
+      colourInserter ( u8"  ", F_bRED, coordinateTypeinate );
+      coordinateTypeinate = startPoints [1];
+      coordinateTypeinate.y += chosen;
       if ( ( selected >= 2 ) && ( chosen != 1 ) )
       {
-        coordinate.X += 23;
+        coordinateTypeinate.x += 23;
         if ( ( selected != 5 ) && ( chosen != 0 ) )
-          coordinate.Y -= 3;
+          coordinateTypeinate.y -= 3;
         if ( ( selected == 5 ) && ( chosen == 4 ) )
-          coordinate.Y -= 3;
+          coordinateTypeinate.y -= 3;
         if ( ( selected == 3 ) && ( chosen == 2 ) )
         {
-          coordinate.X -= 23;
-          coordinate.Y += 3;
+          coordinateTypeinate.x -= 23;
+          coordinateTypeinate.y += 3;
         }
 
       }
       if ( ( selected == 5 ) && ( chosen == 0 ) )
       {
-        coordinate.X -= 23;
+        coordinateTypeinate.x -= 23;
       }
       if ( ( selected == 0 ) && ( chosen == 5 ) )
       {
-        coordinate.X += 23;
-        coordinate.Y -= 3;
+        coordinateTypeinate.x += 23;
+        coordinateTypeinate.y -= 3;
       }
-      colourInserter ( selectionSign, F_bRED, coordinate );
+      colourInserter ( selectionSign, F_bRED, coordinateTypeinate );
       selected = chosen;
       // Todo aware the narrator! :)
     } else

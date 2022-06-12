@@ -3,12 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,08.12.2021</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Tale.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 Narrator::Narrator ()
@@ -53,23 +53,23 @@ void Narrator::insertion ( const unsigned short& instance )
   // second digit: sphere
   // third digit: sentence
 
-  COORD pointOne { startPoints [0] };
-  COORD pointTwo { startPoints [1] };
+  coordinateType pointOne { startPoints [0] };
+  coordinateType pointTwo { startPoints [1] };
   if (instance == 1)
   {
     for (unsigned char i = 0; i < 4; i++)
     {
       colourInserter ( u8"                                                          ", pointOne );
-      pointOne.Y += 1;
+      pointOne.y += 1;
     }
   } else
     if (instance == 2)
     {
-      pointOne.Y += 4;
+      pointOne.y += 4;
       for (unsigned char i = 0; i < 2; i++)
       {
         colourInserter ( u8"                                                          ", pointOne );
-        pointOne.Y += 1;
+        pointOne.y += 1;
       }
     } else
     {
@@ -88,7 +88,7 @@ void Narrator::insertion ( const unsigned short& instance )
           for (unsigned char i = 0; i < 3; i++)
           {
             colourInserter ( scenes [tempTwo][i], colours [0], pointOne );
-            pointOne.Y += 1;
+            pointOne.y += 1;
           }
           currentScene = tempTwo;
           break;
@@ -103,7 +103,7 @@ void Narrator::insertion ( const unsigned short& instance )
               {
                 case 1:
                   colourInserter ( firstMenuSentences [0], colours [1], pointTwo );
-                  pointTwo.Y += 1;
+                  pointTwo.y += 1;
                   colourInserter ( firstMenuSentences [1], colours [1], pointTwo );
                   break;
                 case 2:
@@ -124,13 +124,13 @@ void Narrator::insertion ( const unsigned short& instance )
                   else
                   {
                     colourInserter ( secondMenuSentences [1], colours [1], pointTwo );
-                    pointTwo.Y += 1;
+                    pointTwo.y += 1;
                     colourInserter ( secondMenuSentences [2], colours [1], pointTwo );
                   }
                   break;
                 case 1:
                   colourInserter ( secondMenuSentences [3], colours [1], pointTwo );
-                  pointTwo.Y += 1;
+                  pointTwo.y += 1;
                   colourInserter ( secondMenuSentences [4], colours [1], pointTwo );
                   break;
                 case 2:
@@ -206,46 +206,46 @@ Giant::Giant ()
   startPoints [1] = { 50, SCREEN_H - 39 };
 
 
-  COORD tempOne ( startPoints [0] );
-  COORD tempTwo ( tempOne );
+  coordinateType tempOne ( startPoints [0] );
+  coordinateType tempTwo ( tempOne );
   for (size_t i = 0; i < 38; i++)
   {
     if (i == 4)
     {
-      tempOne.Y -= 1;
-      tempTwo.Y = tempOne.Y;
-      tempTwo.X = tempOne.X + 23;
+      tempOne.y -= 1;
+      tempTwo.y = tempOne.y;
+      tempTwo.x = tempOne.x + 23;
       colourInserter ( theGiant [i], colourTwo, tempTwo );
-      tempTwo.X = tempOne.X + 26;
+      tempTwo.x = tempOne.x + 26;
       colourInserter ( theGiant [i], colourTwo, tempTwo );
     } else
       if (i == 6)
       {
-        tempOne.Y -= 1;
-        tempTwo.Y = tempOne.Y;
-        tempTwo.X = tempOne.X + 24;
+        tempOne.y -= 1;
+        tempTwo.y = tempOne.y;
+        tempTwo.x = tempOne.x + 24;
         colourInserter ( theGiant [i], colourTwo, tempTwo );
       } else
         if (i == 8)
         {
-          tempOne.Y -= 1;
-          tempTwo.Y = tempOne.Y;
-          tempTwo.X = tempOne.X + 23;
+          tempOne.y -= 1;
+          tempTwo.y = tempOne.y;
+          tempTwo.x = tempOne.x + 23;
           colourInserter ( theGiant [i], colourTwo, tempTwo );
         } else
           if (i == 14)
           {
-            tempOne.Y -= 1;
-            tempTwo.Y = tempOne.Y;
-            tempTwo.X = tempOne.X + 27;
+            tempOne.y -= 1;
+            tempTwo.y = tempOne.y;
+            tempTwo.x = tempOne.x + 27;
             colourInserter ( theGiant [i], colourThree, tempTwo );
           } else
             colourInserter ( theGiant [i], colourOne, tempOne );
-          tempOne.Y += 1;
+          tempOne.y += 1;
   }
-  COORD tempThree ( startPoints [1] );
+  coordinateType tempThree ( startPoints [1] );
   colourInserter ( title, colourTwo, tempThree );
-  tempThree.Y += 2;
+  tempThree.y += 2;
   colourInserter ( tempThree );
   std::string str { "" };
   for (char element : sentances [0])
@@ -256,7 +256,7 @@ Giant::Giant ()
     std::this_thread::sleep_for ( std::chrono::milliseconds ( 50 ) );
   }
   tempThree = startPoints [1];
-  tempThree.Y += 3;
+  tempThree.y += 3;
   colourInserter ( tempThree );
   for (char element : sentances [1])
   {

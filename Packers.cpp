@@ -10,7 +10,7 @@
 // The characters can represent the human's character simply and honestly! ^.^
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -22,7 +22,11 @@
 #include "Tale.h"
 #include "Shared.h"
 #include "Console.h"
+#include "View.h"
 
+
+//viewConsoleWindowPub = GetConsoleWindow ();
+//viewConsoleOutputPub = GetStdHandle ( STD_OUTPUT_HANDLE );
 
 bool runningOne { true };
 bool runningTwo { true };
@@ -35,21 +39,27 @@ int main ()
 #pragma region ConsoleAdjustments
   // Console.h
   // font
-  ConsoleFont ( FONT_NAME );
-  ConsoleFontSize ( { FONT_SIZEa, FONT_SIZEb } );
-  ConsoleFontColour ( F_bPURPLE );
-  // screen
-  ConsoleScreenPosition ( { SCREEN_L,SCREEN_T } );
-  ConsoleScreenSize ( { SCREEN_W,SCREEN_H } );
-  ConsoleScreenColour ( BACKGROUND_COLOUR );
+  //ConsoleFont ( FONT_NAME );
+  //ConsoleFontSize ( { FONT_SIZEx, FONT_SIZEy } );
+  //ConsoleFontColour ( F_bPURPLE );
+  //// screen
+  //ConsoleScreenPosition ( { SCREEN_L,SCREEN_T } );
+  //ConsoleScreenSize ( { SCREEN_W,SCREEN_H } );
+  //ConsoleScreenColour ( BACKGROUND_COLOUR );
   // codec
-  UINT consoleOutputCPstorage;
-  consoleOutputCPstorage = GetConsoleOutputCP ();
-  SetConsoleOutputCP ( CP_UTF8 );
+  //UINT consoleOutputCPstorage;
+  //consoleOutputCPstorage = GetConsoleOutputCP ();
+  //SetConsoleOutputCP ( CP_UTF8 );
   // cursor
-  ConsoleCursorState ( false );
+  //ConsoleCursorState ( false );
 #pragma endregion
 
+
+  //View.h
+  View screen;
+  screen.setView ( CP_UTF8, true );
+  screen.setScreen ( SCREEN_W, SCREEN_H, SCREEN_L, SCREEN_T );
+  screen.setFont ( FONT_NAME, FONT_SIZEx, FONT_SIZEy, F_bPURPLE );
 
   // Shared.h
   Inserter insert;
@@ -74,20 +84,20 @@ int main ()
   // Packer.h
   // packers list
   Packer* allPackersList []
-  { new ( std::nothrow ) Packer (),
-  new ( std::nothrow )Packer (),
-  new ( std::nothrow )Packer (),
-  new ( std::nothrow )Packer (),
-  new ( std::nothrow )Packer (),
-  new ( std::nothrow )Packer (),
-  new ( std::nothrow )Packer (),
-  new ( std::nothrow )Packer (), };
+  { new (std::nothrow) Packer (),
+  new (std::nothrow)Packer (),
+  new (std::nothrow)Packer (),
+  new (std::nothrow)Packer (),
+  new (std::nothrow)Packer (),
+  new (std::nothrow)Packer (),
+  new (std::nothrow)Packer (),
+  new (std::nothrow)Packer (), };
   Packer* involvedOne { nullptr };
 
 #pragma endregion
 
 
-  if ( allPackersList != nullptr )
+  if (allPackersList != nullptr)
   {
 
     // Status.h
@@ -114,11 +124,11 @@ int main ()
       // 20 to 24 represents the options of agesMenu
       // 30 to 31 represents the options of charactersMenu
       // 40 to 46 represents the options of motivationsMenu
-      if ( ( counter % 1000000 ) == 0 )
+      if ((counter % 1000000) == 0)
       {
-        if ( GetAsyncKeyState ( VK_DOWN ) )
+        if (GetAsyncKeyState ( VK_DOWN ))
         {
-          switch ( menuState )
+          switch (menuState)
           {
             case 10:
             case 11:
@@ -155,9 +165,9 @@ int main ()
           }
         }
 
-        if ( GetAsyncKeyState ( VK_UP ) )
+        if (GetAsyncKeyState ( VK_UP ))
         {
-          switch ( menuState )
+          switch (menuState)
           {
             case 10:
               menuState += 2;
@@ -194,14 +204,14 @@ int main ()
           }
         }
 
-        if ( GetAsyncKeyState ( VK_LEFT ) )
+        if (GetAsyncKeyState ( VK_LEFT ))
         {
-          if ( involved == true )
+          if (involved == true)
           {
-            if ( involvedOne->getPosition ().X > 3 )
+            if (involvedOne->getPosition ().x > 3)
             {
               insert.colourInserter ( involvedOne->getProcess ( 0 ).action, involvedOne->getMotivation (), involvedOne->getPosition () );
-              involvedOne->getPosition ().X -= 2;
+              involvedOne->getPosition ().x -= 2;
               involvedOne->getDirection () = false;
               //! inserting packer's ids (debug purposes)
               //if ( involvedOne->getProcess ( 1 ).delay != DELAY_ONE )
@@ -215,7 +225,7 @@ int main ()
             }
           } else
           {
-            switch ( menuState )
+            switch (menuState)
             {
               case 30:
                 menuState += 1;
@@ -241,14 +251,14 @@ int main ()
           }
         }
 
-        if ( GetAsyncKeyState ( VK_RIGHT ) )
+        if (GetAsyncKeyState ( VK_RIGHT ))
         {
-          if ( involved == true )
+          if (involved == true)
           {
-            if ( involvedOne->getPosition ().X <= ( areaOne.get ().X - 3 ) )
+            if (involvedOne->getPosition ().x <= (areaOne.get ().x - 3))
             {
               insert.colourInserter ( involvedOne->getProcess ( 0 ).action, involvedOne->getMotivation (), involvedOne->getPosition () );
-              involvedOne->getPosition ().X += 2;
+              involvedOne->getPosition ().x += 2;
               involvedOne->getDirection () = true;
               //! inserting packer's ids (debug purposes)
               //if ( involvedOne->getProcess ( 1 ).delay != DELAY_ONE )
@@ -262,7 +272,7 @@ int main ()
             //}
           } else
           {
-            switch ( menuState )
+            switch (menuState)
             {
               case 30:
                 menuState += 1;
@@ -288,18 +298,18 @@ int main ()
           }
         }
 
-        if ( GetAsyncKeyState ( VK_RETURN ) )
+        if (GetAsyncKeyState ( VK_RETURN ))
         {
-          switch ( menuState )
+          switch (menuState)
           {
             case 10:
               //xx Todo FYI, user may doubtfully get involved in demo too! :)
               //xx Todo a possible dream is also a dream! :) as if the programmer has more than two hands!
               // Edit: lets try it! :)
-              if ( involvedOne == nullptr )
+              if (involvedOne == nullptr)
               {
-                involvedOne = new ( std::nothrow ) Packer ();
-                involvedOne->involve ( ( menuThree.get () * 10 ) + menuFour.get () );
+                involvedOne = new (std::nothrow) Packer ();
+                involvedOne->involve ( (menuThree.get () * 10) + menuFour.get () );
               }
               state.get ( Packer::count );
               involved = true;
@@ -357,8 +367,8 @@ int main ()
               menuOne.get () = 0;
               // Todo aware the narrator! :)
               menuOne.switcher ();
-              if ( involvedOne != nullptr )
-                involvedOne->involve ( ( menuThree.get () * 10 ) + menuFour.get () );
+              if (involvedOne != nullptr)
+                involvedOne->involve ( (menuThree.get () * 10) + menuFour.get () );
               break;
           }
         }
@@ -366,7 +376,7 @@ int main ()
         {
           //xx Todo providing the ability so the involved one could escape her/his mess! :)
           // edit: solution for time being:
-          if ( GetAsyncKeyState ( VK_ESCAPE ) && ( menuState == 0 ) )
+          if (GetAsyncKeyState ( VK_ESCAPE ) && (menuState == 0))
           {
             involved = false;
             insert.colourInserter ( involvedOne->getProcess ( 0 ).action, involvedOne->getMotivation (), involvedOne->getPosition () );
@@ -381,17 +391,17 @@ int main ()
         }
       }
 #pragma endregion
-      if ( ( counter % 1000000 ) == 0 )
+      if ((counter % 1000000) == 0)
       {
         unsigned char count { 0 };
-        if ( ( involved == false ) && ( involvedOne == nullptr ) )
+        if ((involved == false) && (involvedOne == nullptr))
           count = Packer::count;
         else
           count = Packer::count - 1;
 
         //TODO add: more smarty pants packers! :)
         //TODO add: change made by packers in their surround
-        for ( int i = 0; i < count; i++ )
+        for (int i = 0; i < count; i++)
         {
           //! inserting packer's ids (debug purposes)
           //if ( allPackersList [i]->getProcess ( index ).delay != DELAY_ONE )
@@ -399,21 +409,21 @@ int main ()
           //else
           insert.colourInserter ( allPackersList [i]->getProcess ( index ).action, allPackersList [i]->getMotivation (), allPackersList [i]->getPosition () );
 
-          if ( allPackersList [i]->getProcess ( index ).delay == DELAY_ONE )
+          if (allPackersList [i]->getProcess ( index ).delay == DELAY_ONE)
           {
-            if ( allPackersList [i]->getDirection () == true )
+            if (allPackersList [i]->getDirection () == true)
             {
-              if ( allPackersList [i]->getPosition ().X <= ( areaOne.get ().X - 3 ) )
-                allPackersList [i]->getPosition ().X += 2;
+              if (allPackersList [i]->getPosition ().x <= (areaOne.get ().x - 3))
+                allPackersList [i]->getPosition ().x += 2;
               else
                 allPackersList [i]->getDirection () = false;
             } else
-              if ( allPackersList [i]->getPosition ().X > 3 )
-                allPackersList [i]->getPosition ().X -= 2;
+              if (allPackersList [i]->getPosition ().x > 3)
+                allPackersList [i]->getPosition ().x -= 2;
               else
                 allPackersList [i]->getDirection () = true;
           }
-          if ( allPackersList [i]->getProcess ( index ).delay == DELAY_THREE )
+          if (allPackersList [i]->getProcess ( index ).delay == DELAY_THREE)
           {
             areaOne.setter ( allPackersList [i]->getAspiration (), allPackersList [i]->getPosition () );
           }
@@ -421,31 +431,33 @@ int main ()
         }
         std::this_thread::sleep_for ( std::chrono::milliseconds ( temp ) );
         index++;
-        if ( index > 3 )
+        if (index > 3)
           index = 0;
       }
 
       counter++;
-      if ( counter == 50000000 )
+      if (counter == 50000000)
         theNarrator.insertion ( 110 );
-      if ( counter == 100000000 )
+      if (counter == 100000000)
       {
         theNarrator.insertion ( 1 );
         theNarrator.insertion ( 120 );
       }
 
-      if ( counter == 2000000000 )
+      if (counter == 2000000000)
         counter = 1000;
 
-      if ( runningOne == false )
+      if (runningOne == false)
       {
         // Note packers send their regards! :)
         runningTwo = false;
         loader.clear ();
       }
-    } while ( runningTwo );
+    } while (runningTwo);
   }
 
   // back to system default
-  SetConsoleOutputCP ( consoleOutputCPstorage );
+  //SetConsoleOutputCP ( consoleOutputCPstorage );
+
+  screen.release ();
 }

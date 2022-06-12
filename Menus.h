@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.10.2019</changed>
+/// <changed>ʆϒʅ,11.06.2022</changed>
 // ********************************************************************************
 
 #ifndef MENUS_H
@@ -21,7 +21,7 @@ private:
   std::string selectionSign;
   unsigned char selected;
   bool set { false };
-  COORD startPoints [2];
+  coordinateType startPoints [2];
 public:
   dangerAreaMenu ();
   void switcher ();
@@ -38,7 +38,7 @@ private:
   std::string selectionSign;
   unsigned char selected;
   bool set { false };
-  COORD startPoints [2];
+  coordinateType startPoints [2];
 public:
   agesMenu ();
   void switcher ();
@@ -55,7 +55,7 @@ private:
   std::string selectionSign;
   unsigned char selected;
   bool set { false };
-  COORD startPoints [2];
+  coordinateType startPoints [2];
 public:
   charactersMenu ();
   void switcher ();
@@ -73,7 +73,7 @@ private:
   std::string selectionSign;
   unsigned char selected;
   bool set { false };
-  COORD startPoints [2];
+  coordinateType startPoints [2];
 public:
   motivationsMenu ();
   void switcher ();
