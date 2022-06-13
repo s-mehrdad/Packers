@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -157,7 +157,7 @@ void Area::setter ( const unsigned short& state, const coordinateType& position 
 };
 
 
-const coordinateType Area::get ()
+const coordinateType Area::getDimension ()
 {
   coordinateType frame { columns, rows };
   return frame;

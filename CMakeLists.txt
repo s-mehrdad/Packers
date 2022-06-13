@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,11.06.2022</changed>
+#/ <changed>ʆϒʅ,13.06.2022</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -35,7 +35,6 @@ endif(MSVC)
 list(APPEND HEADER_FILES
           Packers.h
           Area.h
-          Console.h
           Infobars.h
           Menus.h
           Packer.h
@@ -48,7 +47,6 @@ list(APPEND HEADER_FILES
 list(APPEND SOURCE_FILES
           Packers.cpp
           Area.cpp
-          Console.cpp
           Infobars.cpp
           Menus.cpp
           Packer.cpp

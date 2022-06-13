@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #ifndef AREA_H
@@ -30,7 +30,8 @@ private:
 public:
   Area ( unsigned char );
   void setter ( const unsigned short&, const coordinateType& );
-  const coordinateType get ( void );
+  const coordinateType getDimension ( void ); //area's dimension
+  //const getDimension
 
   //static unsigned char stateArray [rows][columns]; // dynamic needed
 };

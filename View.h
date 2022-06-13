@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,09.06.2022</created>
-/// <changed>ʆϒʅ,12.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #ifndef VIEW_H
@@ -51,6 +51,8 @@ public:
   void setView ( unsigned int codec, bool cursor );
   void setFont ( std::wstring fontName, unsigned char fontX, unsigned char fontY, unsigned short colour );
   static CODEPAGE_ENUMPROC CALLBACK calledProc ( LPWSTR );
+  const HANDLE* getConsoleOutput ();
+  const HWND* getConsoleWindow ();
   void release ();
 };
 

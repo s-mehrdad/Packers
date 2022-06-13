@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #ifndef STATUS_H
@@ -31,9 +31,9 @@ private:
   unsigned int haveState;
   unsigned int needState;
 public:
-  Status ( const unsigned char& );
-  void get ( const unsigned short& );
-  void setter ( const unsigned char& );
+  Status ( const unsigned char& startAge, coordinateType areaGrid ); //parameters: game's start age and area dimension
+  void get ( const unsigned short& packersCount );
+  void setter ( const unsigned char& selectedAge );
 };
 
 

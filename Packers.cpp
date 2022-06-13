@@ -10,7 +10,7 @@
 // The characters can represent the human's character simply and honestly! ^.^
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -21,7 +21,7 @@
 #include "Status.h"
 #include "Tale.h"
 #include "Shared.h"
-#include "Console.h"
+//#include "Console.h"
 #include "View.h"
 
 
@@ -64,17 +64,22 @@ int main ()
   // Shared.h
   Inserter insert;
   insert.clear ();
+
   // Tale.h
   Giant theGiant;
   theNarrator.insertion ( 100 );
+
   // Shared.h
   Loading loader ( LOAD_ONE );
   loader.clear ();
-  // Infobars.h
-  titleBar title;
-  guideBar guide;
+
   // Area.h
   Area areaOne ( 0 );
+
+  // Infobars.h
+  titleBar title ( areaOne.getDimension () );
+  guideBar guide ( areaOne.getDimension () );
+
   // Shared.h
   loader.setter ( LOAD_ONE );
 
@@ -101,14 +106,14 @@ int main ()
   {
 
     // Status.h
-    Status state ( 0 );
+    Status state ( 0, areaOne.getDimension () );
     state.get ( Packer::count );
 
     // Menus.h
-    dangerAreaMenu menuOne;
-    agesMenu menuTwo;
-    charactersMenu menuThree;
-    motivationsMenu menuFour;
+    dangerAreaMenu menuOne ( areaOne.getDimension () );
+    agesMenu menuTwo ( areaOne.getDimension () );
+    charactersMenu menuThree ( areaOne.getDimension () );
+    motivationsMenu menuFour ( areaOne.getDimension () );
 
 
     // platform game engine:
@@ -255,7 +260,7 @@ int main ()
         {
           if (involved == true)
           {
-            if (involvedOne->getPosition ().x <= (areaOne.get ().x - 3))
+            if (involvedOne->getPosition ().x <= (areaOne.getDimension ().x - 3))
             {
               insert.colourInserter ( involvedOne->getProcess ( 0 ).action, involvedOne->getMotivation (), involvedOne->getPosition () );
               involvedOne->getPosition ().x += 2;
@@ -413,7 +418,7 @@ int main ()
           {
             if (allPackersList [i]->getDirection () == true)
             {
-              if (allPackersList [i]->getPosition ().x <= (areaOne.get ().x - 3))
+              if (allPackersList [i]->getPosition ().x <= (areaOne.getDimension ().x - 3))
                 allPackersList [i]->getPosition ().x += 2;
               else
                 allPackersList [i]->getDirection () = false;

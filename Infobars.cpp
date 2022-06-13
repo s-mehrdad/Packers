@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -11,19 +11,19 @@
 //#include "Console.h"
 
 
-titleBar::titleBar ()
+titleBar::titleBar ( coordinateType area )
 {
   titleSentence = u8"Feel free to way in as a packer toward becoming an advanced packer! ♥♥♥♥♥ :)";
-  startPoint = { ( ( SCREEN_W / 2 ) - 9 ) - ( 76 / 2 ), 0 };
+  startPoint = { short ( (area.x / 2) - ((titleSentence.size () - 5) / 2) ), 0 }; // center it! :)
 
   // output
   colourInserter ( titleSentence, F_CYAN, startPoint );
 };
 
 
-guideBar::guideBar ()
+guideBar::guideBar ( coordinateType area )
 {
-  startPoint = { 10, SCREEN_H - 3 };
+  startPoint = { 10, short ( area.y + 9 ) };
   signs [0] = u8"♣:";
   signs [1] = u8"☻:";
   signs [2] = u8".:";
@@ -32,24 +32,24 @@ guideBar::guideBar ()
   guides [2] = u8" ready packages";
 
   // output
-  coordinateType coordinateTypeinate { startPoint };
+  coordinateType coordinate { startPoint };
 
   // guideBar
-  for ( char i = 0; i < 3; i++ )
+  for (char i = 0; i < 3; i++)
   {
-    if ( i == 0 )
-      colourInserter ( signs [i], F_GREEN, coordinateTypeinate );
+    if (i == 0)
+      colourInserter ( signs [i], F_GREEN, coordinate );
     else
-      if ( i == 1 )
+      if (i == 1)
       {
-        coordinateTypeinate.x = ( ( ( SCREEN_W - 18 ) / 2 ) - 9 ) + 2;
-        colourInserter ( signs [i], F_bWHITE, coordinateTypeinate );
+        coordinate.x = (((SCREEN_W - 18) / 2) - 9) + 2;
+        colourInserter ( signs [i], F_bWHITE, coordinate );
       } else
       {
-        coordinateTypeinate.x = ( ( SCREEN_W - 26 ) - 17 );
-        colourInserter ( signs [i], F_bWHITE, coordinateTypeinate );
+        coordinate.x = ((SCREEN_W - 26) - 17);
+        colourInserter ( signs [i], F_bWHITE, coordinate );
       }
-      coordinateTypeinate.x += 2;
-      colourInserter ( guides [i], F_CYAN, coordinateTypeinate );
+      coordinate.x += 2;
+      colourInserter ( guides [i], F_CYAN, coordinate );
   }
 };

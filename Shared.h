@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #ifndef SHARED_H
@@ -23,8 +23,8 @@ typedef struct Position
 class Inserter :public View
 {
 private:
-  HANDLE consoleOutput;
-  CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEX;
+  //HANDLE consoleOutput;
+  //CONSOLE_SCREEN_BUFFER_INFOEX screenBinfoEX;
 public:
   Inserter ();
   void colourInserter ( const coordinateType& );

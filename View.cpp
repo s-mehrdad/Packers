@@ -3,13 +3,13 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,09.06.2022</created>
-/// <changed>ʆϒʅ,12.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 
 #include "Packers.h"
 #include "View.h"
-#include "Console.h"
+//#include "Console.h"
 
 
 View::View ()
@@ -57,7 +57,7 @@ void View::setScreen ( short width, short height, short left, short top )
                     FORMAT_MESSAGE_FROM_SYSTEM |
                     FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
                     errorCode, 0, (LPTSTR) &errorMsg, 0, 0 );
-    MessageBox ( 0, (LPCTSTR) errorMsg, L"Error", MB_OK );
+    //MessageBox ( 0, (LPCTSTR) errorMsg, L"Error", MB_OK );
 
   }
 
@@ -120,14 +120,12 @@ void View::setFont ( std::wstring fontName, unsigned char fontX, unsigned char f
 
   result = GetCurrentConsoleFontEx ( viewConsoleOutput, FALSE, &consoleFontInfo );
 
-  WCHAR a [] { L"Consolas" };
-  std::wstring b { L"Consolas" };
 
   if (1)
   {
 
     consoleFontInfo.cbSize = sizeof ( consoleFontInfo );
-    consoleFontInfo.dwFontSize = COORD { fontX, fontY };
+    consoleFontInfo.dwFontSize = COORD { 0, fontY };
 
     for (unsigned char i = 0; i < 9; i++)
     {
@@ -176,6 +174,18 @@ CODEPAGE_ENUMPROC CALLBACK View::calledProc ( LPWSTR codedObj )
   //CODEPAGE_ENUMPROCW a { codedObj };
   //typedef BOOL (CALLBACK* CODEPAGE_ENUMPROCW)(LPWSTR);
   return (CODEPAGE_ENUMPROC) true;
+};
+
+
+const HANDLE* View::getConsoleOutput ()
+{
+  return &viewConsoleOutput;
+};
+
+
+const HWND* View::getConsoleWindow ()
+{
+  return &viewConsoleWindow;
 };
 
 

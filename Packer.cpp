@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -56,8 +56,8 @@ Packer::Packer ()
   // random start position
   do
   {
-    position.x = rand () % ( ( SCREEN_W - 18 ) - 3 ) + 3;
-    position.y = rand () % ( ( SCREEN_H - 12 ) - 3 ) + 3;
+    position.x = rand () % ( ( SCREEN_W - 10 ) - 3 ) + 3;
+    position.y = rand () % ( ( SCREEN_H - 20 ) - 3 ) + 3;
   } while ( position.x % 2 == 0 || position.y % 2 == 0 );
 
   // random direction

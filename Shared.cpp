@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -13,35 +13,42 @@
 
 Inserter::Inserter ()
 {
-  consoleOutput = GetStdHandle ( STD_OUTPUT_HANDLE );
-  screenBinfoEX = {};
+  //*consoleOutput () = GetStdHandle ( STD_OUTPUT_HANDLE );
+  //screenBinfoEX = {};
 };
+
+
 void Inserter::colourInserter ( const coordinateType& pos )
 {
   lastInsertStartPosition = pos;
-  SetConsoleCursorPosition ( consoleOutput, COORD {pos.x,pos.y} );
+  SetConsoleCursorPosition ( *getConsoleOutput (), COORD { pos.x,pos.y } );
 };
+
+
 void Inserter::colourInserter ( const std::string& str, const WORD& colour )
 {
-  GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-  SetConsoleTextAttribute ( consoleOutput, colour );
+  SetConsoleTextAttribute ( *getConsoleOutput (), colour );
   std::cout << str;
 };
+
+
 void Inserter::colourInserter ( const std::string& str, const coordinateType& pos )
 {
   lastInsertStartPosition = pos;
-  GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-  SetConsoleCursorPosition ( consoleOutput, COORD {pos.x,pos.y});
+  SetConsoleCursorPosition ( *getConsoleOutput (), COORD { pos.x,pos.y } );
   std::cout << str;
 };
+
+
 void Inserter::colourInserter ( const std::string& str, const WORD& colour, const coordinateType& pos )
 {
   lastInsertStartPosition = pos;
-  GetConsoleScreenBufferInfoEx ( consoleOutput, &screenBinfoEX );
-  SetConsoleCursorPosition ( consoleOutput, COORD {pos.x,pos.y});
-  SetConsoleTextAttribute ( consoleOutput, colour );
+  SetConsoleCursorPosition ( *getConsoleOutput (), COORD { pos.x,pos.y } );
+  SetConsoleTextAttribute ( *getConsoleOutput (), colour );
   std::cout << str;
 };
+
+
 void Inserter::clear ()
 {
   coordinateType temp { 0,0 };
@@ -82,6 +89,8 @@ Loading::Loading ( const unsigned char& mode )
   //std::thread tOne ( inserter );
   //tOne.join ();
 };
+
+
 void Loading::inserter ()
 {
   coordinateType position { startPoint };
@@ -101,6 +110,8 @@ void Loading::inserter ()
   std::this_thread::sleep_for ( std::chrono::milliseconds ( 200 * speed ) );
   colourInserter ( copywrite, colourThree, startPoint );
 };
+
+
 void Loading::setter ( const unsigned char& mode )
 {
   speed = mode;

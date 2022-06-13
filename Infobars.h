@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,13.06.2022</changed>
 // ********************************************************************************
 
 #ifndef INFOBARS_H
@@ -19,7 +19,7 @@ private:
   std::string titleSentence;
   coordinateType startPoint;
 public:
-  titleBar ();
+  titleBar ( coordinateType areaGrid ); //parameter: area dimension
 };
 
 
@@ -30,7 +30,7 @@ private:
   std::string guides [3];
   coordinateType startPoint;
 public:
-  guideBar ();
+  guideBar ( coordinateType areaGrid ); //parameter: area dimension
 };
 
 
