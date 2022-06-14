@@ -10,7 +10,7 @@
 // The characters can represent the human's character simply and honestly! ^.^
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -20,13 +20,10 @@
 #include "Packer.h"
 #include "Status.h"
 #include "Tale.h"
-#include "Shared.h"
-//#include "Console.h"
 #include "View.h"
+#include "GameElements.h"
+#include "Shared.h"
 
-
-//viewConsoleWindowPub = GetConsoleWindow ();
-//viewConsoleOutputPub = GetStdHandle ( STD_OUTPUT_HANDLE );
 
 bool runningOne { true };
 bool runningTwo { true };
@@ -36,24 +33,6 @@ Narrator theNarrator;
 
 int main ()
 {
-#pragma region ConsoleAdjustments
-  // Console.h
-  // font
-  //ConsoleFont ( FONT_NAME );
-  //ConsoleFontSize ( { FONT_SIZEx, FONT_SIZEy } );
-  //ConsoleFontColour ( F_bPURPLE );
-  //// screen
-  //ConsoleScreenPosition ( { SCREEN_L,SCREEN_T } );
-  //ConsoleScreenSize ( { SCREEN_W,SCREEN_H } );
-  //ConsoleScreenColour ( BACKGROUND_COLOUR );
-  // codec
-  //UINT consoleOutputCPstorage;
-  //consoleOutputCPstorage = GetConsoleOutputCP ();
-  //SetConsoleOutputCP ( CP_UTF8 );
-  // cursor
-  //ConsoleCursorState ( false );
-#pragma endregion
-
 
   //View.h
   View screen;
@@ -65,6 +44,8 @@ int main ()
   Inserter insert;
   insert.clear ();
 
+  GameElements gameElements;
+
   // Tale.h
   Giant theGiant;
   theNarrator.insertion ( 100 );
@@ -74,7 +55,10 @@ int main ()
   loader.clear ();
 
   // Area.h
-  Area areaOne ( 0 );
+  Area areaOne ( 0, "areaOne" );
+  gameElements.set ( &areaOne );
+  gameElements.get ().draw ();
+
 
   // Infobars.h
   titleBar title ( areaOne.getDimension () );
@@ -101,6 +85,9 @@ int main ()
 
 #pragma endregion
 
+  //1.contain all and genetic
+
+  /*2.independent container*/ //! no redraw
 
   if (allPackersList != nullptr)
   {
@@ -465,4 +452,5 @@ int main ()
   //SetConsoleOutputCP ( consoleOutputCPstorage );
 
   screen.release ();
+
 }

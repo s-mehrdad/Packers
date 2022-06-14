@@ -3,12 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Infobars.h"
-//#include "Console.h"
 
 
 titleBar::titleBar ( coordinateType area )

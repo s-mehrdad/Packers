@@ -3,16 +3,26 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Area.h"
-//#include "Console.h"
 
 
-Area::Area ( unsigned char mode ) :age ( mode )
+Area::Area ( unsigned char mode, std::string name ) :
+  age ( mode ),
+  GameElement::GameElement ( 0, "", 0, { 0,0 }, 0, "" )
 {
+
+  setGetElementId () = 1;
+  setGetElementName () = name;
+  setGetsceneNumber () = 2;
+  setGetElementStartPoint () = { 1,1 };
+  setGetElementRow () = { 1 };
+  setGetElementName () = "left";
+
+
   wallH = u8"═"; // Unicode: "━"
   wallV = u8"║"; // Unicode: "┃"
   edges [0] = u8"╔"; // Unicode: "┏"
@@ -28,6 +38,12 @@ Area::Area ( unsigned char mode ) :age ( mode )
   colourH = F_GREEN;
   colourR = F_YELLOW;
   colourV = F_bRED;
+
+};
+
+
+void Area::draw ()
+{
 
   // area
   coordinateType position;
@@ -157,7 +173,7 @@ void Area::setter ( const unsigned short& state, const coordinateType& position 
 };
 
 
-const coordinateType Area::getDimension ()
+const coordinateType Area::getDimension ( void )
 {
   coordinateType frame { columns, rows };
   return frame;

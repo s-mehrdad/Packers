@@ -3,13 +3,12 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,09.06.2022</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 
 #include "Packers.h"
 #include "View.h"
-//#include "Console.h"
 
 
 View::View ()
@@ -35,19 +34,14 @@ void View::setScreen ( short width, short height, short left, short top )
   DWORD errorCode { 0x0 };
   LPCVOID errorMsg {};
 
-
   result = GetConsoleScreenBufferInfoEx ( viewConsoleOutput, &consoleScreenInfoEx );
 
   result = SetWindowPos ( viewConsoleWindow, HWND_TOP,
                           left, top, width * 9.3,
                           height * 22, SWP_NOMOVE | SWP_NOSIZE );
 
-  //result = MoveWindow ( viewConsoleWindow, left, top, width * 9.3, height * 22, true );
-
   if (result)
   {
-
-
 
   } else
   {
@@ -61,13 +55,11 @@ void View::setScreen ( short width, short height, short left, short top )
 
   }
 
-
   SMALL_RECT rect {};
   rect.Left = left;
   rect.Top = top;
   rect.Bottom = height * 22;
   rect.Right = width * 9.3;
-
 
   consoleScreenInfoEx.bFullscreenSupported = false;
   //consoleScreenInfoEx.cbSize = sizeof ( consoleScreenInfoEx );
@@ -88,6 +80,7 @@ void View::setScreen ( short width, short height, short left, short top )
 
   result = SetConsoleWindowInfo ( viewConsoleOutput, true, &rect );
 
+  //result = MoveWindow ( viewConsoleWindow, left, top, width * 9.3, height * 22, true );
 
 };
 

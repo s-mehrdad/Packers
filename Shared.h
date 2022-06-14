@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.10.2018</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #ifndef SHARED_H
@@ -13,11 +13,18 @@
 #include "View.h"
 
 
-typedef struct Position
+typedef struct CoordinateType
 {
   short x;
   short y;
 } coordinateType;
+
+
+//typedef struct PositionType
+//{
+//  short top;
+//  short left;
+//} positionType;
 
 
 class Inserter :public View

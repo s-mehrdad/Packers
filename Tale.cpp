@@ -3,12 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,11.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Tale.h"
-//#include "Console.h"
 
 
 Narrator::Narrator ()
@@ -162,10 +161,10 @@ Giant::Giant ()
   theGiant [0] = u8"                      ;;;;;;";
   theGiant [1] = u8"                     ;;;;;;;;";
   theGiant [2] = u8"                     ;;;;;;;;";
-  theGiant [3] = u8"                     ;;■;;■;;";
-  theGiant [4] = u8"■";
-  theGiant [5] = u8"                     ;;;▌▐;;;";
-  theGiant [6] = u8"▌▐";
+  theGiant [3] = u8"                     ;;▄;;▄;;";
+  theGiant [4] = u8"▄";
+  theGiant [5] = u8"                     ;;;▃▃;;;";
+  theGiant [6] = u8"▃▃";
   theGiant [7] = u8"                     ;;▄▄▄▄;;";
   theGiant [8] = u8"▄▄▄▄";
   theGiant [9] = u8"                      ;;;;;;";

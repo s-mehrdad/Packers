@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Area.h" />
+    <ClInclude Include="GameElements.h" />
     <ClInclude Include="Infobars.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Packer.h" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
+    <ClCompile Include="GameElements.cpp" />
     <ClCompile Include="Infobars.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Status.cpp" />

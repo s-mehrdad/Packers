@@ -3,12 +3,11 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Packer.h"
-//#include "Console.h"
 
 
 Actions::Actions () { action = "NULL"; delay = 2000; };
@@ -56,8 +55,8 @@ Packer::Packer ()
   // random start position
   do
   {
-    position.x = rand () % ( ( SCREEN_W - 10 ) - 3 ) + 3;
-    position.y = rand () % ( ( SCREEN_H - 20 ) - 3 ) + 3;
+    position.x = rand () % ( ( SCREEN_W - 48 ) - 3 ) + 3;
+    position.y = rand () % ( ( SCREEN_H - 30 ) - 3 ) + 3;
   } while ( position.x % 2 == 0 || position.y % 2 == 0 );
 
   // random direction

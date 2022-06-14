@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #ifndef AREA_H
@@ -11,9 +11,10 @@
 
 
 #include "Shared.h"
+#include "GameElements.h"
 
 
-class Area : public Inserter
+class Area : public GameElement, Inserter
 {
 private:
   unsigned char age;
@@ -28,10 +29,10 @@ private:
   WORD colourR;
   WORD colourV;
 public:
-  Area ( unsigned char );
+  Area ( unsigned char ageMode, std::string elementName );
+  void draw ( void );
   void setter ( const unsigned short&, const coordinateType& );
   const coordinateType getDimension ( void ); //area's dimension
-  //const getDimension
 
   //static unsigned char stateArray [rows][columns]; // dynamic needed
 };

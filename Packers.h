@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,14.06.2022</changed>
 // ********************************************************************************
 
 #ifndef PACKERS_H
@@ -23,9 +23,7 @@
 #include <string>
 #include <conio.h>
 #include <windows.h>
-#include <WinNls.h>
-#include <winnt.h>
-#include <cstdlib>
+//#include <cstdlib>
 #include <ctime>
 #include <thread>
 #include <chrono>
@@ -34,8 +32,8 @@
 #include "Tale.h"
 
 
-#define FONT_SIZEx              16
-#define FONT_SIZEy              20
+#define FONT_SIZEx              18
+#define FONT_SIZEy              22
 #define FONT_NAME               L"NSimSun"
 //#define FONT_NAME               L"Consolas"
 //#define FONT_NAME               L"Lucida Console"
@@ -58,49 +56,46 @@
 //? danger: too much quickness gives them the chance chewing the future of this generation too!
 //!? avoid equal values
 #define DELAY_ONE               101
-#define DELAY_TWO               201
-#define DELAY_THREE             202
+#define DELAY_TWO               401
+#define DELAY_THREE             302
 #define DELAY_FOUR              102
 
 
 // colour system
-#define F_BLACK                 0x00
-#define F_BLUE                  0x01
-#define F_GREEN                 0x02
-#define F_CYAN                  0x03
-#define F_RED                   0x04
-#define F_PURPLE                0x05
-#define F_YELLOW                0x06
-#define F_WHITE                 0x07
-#define F_bBLACK                0x08
-#define F_bBLUE                 0X09
-#define F_bGREEN                0x0A
-#define F_bCYAN                 0x0B
-#define F_bRED                  0x0C
-#define F_bPURPLE               0x0D
-#define F_bYELLOW               0x0E
-#define F_bWHITE                0x0F
+#define F_BLACK                 0x0000
+#define F_BLUE                  0x0001
+#define F_GREEN                 0x0002
+#define F_CYAN                  0x0003
+#define F_RED                   0x0004
+#define F_PURPLE                0x0005
+#define F_YELLOW                0x0006
+#define F_WHITE                 0x0007
+#define F_bBLACK                0x0008
+#define F_bBLUE                 0X0009
+#define F_bGREEN                0x000A
+#define F_bCYAN                 0x000B
+#define F_bRED                  0x000C
+#define F_bPURPLE               0x000D
+#define F_bYELLOW               0x000E
+#define F_bWHITE                0x000F
 
-#define B_BLACK                 0x00
-#define B_BLUE                  0x10
-#define B_GREEN                 0x20
-#define B_CYAN                  0x30
-#define B_RED                   0x40
-#define B_PURPLE                0x50
-#define B_YELLOW                0x60
-#define B_WHITE                 0x70
-#define B_bBLACK                0x80
-#define B_bBLUE                 0X90
-#define B_bGREEN                0xA0
-#define B_bCYAN                 0xB0
-#define B_bRED                  0xC0
-#define B_bPURPLE               0xD0
-#define B_bYELLOW               0xE0
-#define B_bWHITE                0xF0
+#define B_BLACK                 0x0000
+#define B_BLUE                  0x0010
+#define B_GREEN                 0x0020
+#define B_CYAN                  0x0030
+#define B_RED                   0x0040
+#define B_PURPLE                0x0050
+#define B_YELLOW                0x0060
+#define B_WHITE                 0x0070
+#define B_bBLACK                0x0080
+#define B_bBLUE                 0X0090
+#define B_bGREEN                0x00A0
+#define B_bCYAN                 0x00B0
+#define B_bRED                  0x00C0
+#define B_bPURPLE               0x00D0
+#define B_bYELLOW               0x00E0
+#define B_bWHITE                0x00F0
 
-
-//extern HWND viewConsoleWindowPub;
-//extern HANDLE viewConsoleOutputPub;
 
 extern bool runningOne;
 extern bool runningTwo;
