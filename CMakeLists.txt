@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,14.06.2022</changed>
+#/ <changed>ʆϒʅ,18.06.2022</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -43,6 +43,7 @@ list(APPEND HEADER_FILES
           Tale.h
           View.h
           GameElements.h
+          Input.h
 )
 
 list(APPEND SOURCE_FILES
@@ -56,6 +57,7 @@ list(APPEND SOURCE_FILES
           Tale.cpp
           View.cpp
           GameElements.cpp
+          Input.cpp
 )
 
 if(WIN32)

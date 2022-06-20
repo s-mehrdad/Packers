@@ -128,6 +128,7 @@
     <ClInclude Include="Area.h" />
     <ClInclude Include="GameElements.h" />
     <ClInclude Include="Infobars.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Packer.h" />
     <ClInclude Include="Packers.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="GameElements.cpp" />
     <ClCompile Include="Infobars.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Tale.cpp" />

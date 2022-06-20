@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,14.06.2022</changed>
+/// <changed>ʆϒʅ,20.06.2022</changed>
 // ********************************************************************************
 
 #ifndef PACKERS_H
@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include <string>
+//#include <codecvt>
 #include <conio.h>
 #include <windows.h>
 //#include <cstdlib>
@@ -32,18 +33,19 @@
 #include "Tale.h"
 
 
-#define FONT_SIZEx              18
-#define FONT_SIZEy              22
-#define FONT_NAME               L"NSimSun"
-//#define FONT_NAME               L"Consolas"
-//#define FONT_NAME               L"Lucida Console"
-//#define FONT_NAME               L"Courier New"
+#define FONT_SIZEx              22
+#define FONT_SIZEy              28
+#define FONT_NAME               "Lucida Console"
+//#define FONT_NAME               "Courier New"
+//#define FONT_NAME               "Consolas"
+//#define FONT_NAME               "NSimSun"
+//#define FONT_NAME               "Raster Fonts"
 #define SCREEN_L                2
 #define SCREEN_T                2
 #define SCREEN_H                41 // use odd values
 //? danger:
 //! if you choose the next value less than 100, you are on your own, since the packers don't have enough to chew! :)
-#define SCREEN_W                111 // additionally use odd values
+#define SCREEN_W                107 // additionally use odd values
 #define BACKGROUND_COLOUR       RGB (50,50,50)
 
 
@@ -101,7 +103,7 @@ extern bool runningOne;
 extern bool runningTwo;
 extern unsigned char menuState;
 extern bool involved;
-extern Narrator theNarrator;
+extern TheNarrator theNarrator;
 
 
 #endif //PACKERS_H

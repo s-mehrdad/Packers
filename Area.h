@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,14.06.2022</changed>
+/// <changed>ʆϒʅ,20.06.2022</changed>
 // ********************************************************************************
 
 #ifndef AREA_H
@@ -14,27 +14,34 @@
 #include "GameElements.h"
 
 
-class Area : public GameElement, Inserter
+class TheArea : public GameElement, Inserter
 {
 private:
-  unsigned char age;
-  std::string wallH;
-  std::string wallV;
-  std::string edges [4];
-  WORD colourW;
-  short rows;
-  short columns;
-  std::string resources [3];
-  WORD colourH;
-  WORD colourR;
-  WORD colourV;
+    short elementID;
+    std::string elementName;
+    short firstInScene;
+    unsigned char currentAge;
+    std::string horizontalWall;
+    std::string verticalWall;
+    std::string edges [4];
+    WORD wallColour;
+    short rows;
+    short columns;
+    coordinateType startPoints [2];
+    std::string resources [3];
+    WORD healthyColour;
+    WORD renewedColour;
+    WORD vanishedColour;
+    short inRow;
+    std::string floatedTo;
 public:
-  Area ( unsigned char ageMode, std::string elementName );
-  void draw ( void );
-  void setter ( const unsigned short&, const coordinateType& );
-  const coordinateType getDimension ( void ); //area's dimension
+    TheArea ( unsigned char ageArgument, std::string elementName );
+    void setBase ( void );
+    void draw ( void );
+    void setter ( const unsigned short&, const coordinateType& );
+    const coordinateType& getDimension ( void ); //area's dimension
 
-  //static unsigned char stateArray [rows][columns]; // dynamic needed
+    //static unsigned char stateArray [rows][columns]; // dynamic needed
 };
 
 

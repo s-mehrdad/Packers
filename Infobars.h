@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,13.06.2022</changed>
+/// <changed>ʆϒʅ,20.06.2022</changed>
 // ********************************************************************************
 
 #ifndef INFOBARS_H
@@ -13,24 +13,39 @@
 #include "Shared.h"
 
 
-class titleBar :public Inserter
+class TheTitleBar :public GameElement, Inserter
 {
 private:
-  std::string titleSentence;
-  coordinateType startPoint;
+    short elementID;
+    std::string elementName;
+    short firstInScene;
+    std::string titleSentence;
+    coordinateType startPoints [2];
+    short inRow;
+    std::string floatedTo;
 public:
-  titleBar ( coordinateType areaGrid ); //parameter: area dimension
+    TheTitleBar ( coordinateType areaGrid, std::string elementName ); //parameter: area dimension
+    void setBase ( void );
+    void draw ( void );
 };
 
 
-class guideBar :public Inserter
+class TheGuideBar :public GameElement, Inserter
 {
 private:
-  std::string signs [3];
-  std::string guides [3];
-  coordinateType startPoint;
+    short elementID;
+    std::string elementName;
+    short firstInScene;
+    std::string titleSentence;
+    std::string signs [3];
+    std::string guides [3];
+    coordinateType startPoints [2];
+    short inRow;
+    std::string floatedTo;
 public:
-  guideBar ( coordinateType areaGrid ); //parameter: area dimension
+    TheGuideBar ( coordinateType areaGrid, std::string elementName ); //parameter: area dimension
+    void setBase ( void );
+    void draw ( void );
 };
 
 
