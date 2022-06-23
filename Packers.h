@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,20.06.2022</changed>
+/// <changed>ʆϒʅ,23.06.2022</changed>
 // ********************************************************************************
 
 #ifndef PACKERS_H
@@ -33,19 +33,20 @@
 #include "Tale.h"
 
 
-#define FONT_SIZEx              22
-#define FONT_SIZEy              28
+#define FONT_SIZEx              16
+#define FONT_SIZEy              20
 #define FONT_NAME               "Lucida Console"
+//#define FONT_NAME               "Cascadia Code Light"
 //#define FONT_NAME               "Courier New"
 //#define FONT_NAME               "Consolas"
 //#define FONT_NAME               "NSimSun"
 //#define FONT_NAME               "Raster Fonts"
 #define SCREEN_L                2
 #define SCREEN_T                2
-#define SCREEN_H                41 // use odd values
+#define SCREEN_H                50
 //? danger:
+#define SCREEN_W                100
 //! if you choose the next value less than 100, you are on your own, since the packers don't have enough to chew! :)
-#define SCREEN_W                107 // additionally use odd values
 #define BACKGROUND_COLOUR       RGB (50,50,50)
 
 

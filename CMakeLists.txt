@@ -3,7 +3,7 @@
 #/ 
 #/ </summary>
 #/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,18.06.2022</changed>
+#/ <changed>ʆϒʅ,23.06.2022</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -19,7 +19,7 @@ set(PROJECT_NAME ${TARGET_NAME})
 #endif()
 
 project(${PROJECT_NAME}
-          VERSION 1.0.0.1
+          VERSION 1.0.1.0
           DESCRIPTION "Packers Game in Console"
           HOMEPAGE_URL "https://github.com/s-mehrdad/Packers"
           LANGUAGES CXX
@@ -34,30 +34,30 @@ endif(MSVC)
 
 list(APPEND HEADER_FILES
           Packers.h
+          View.h
+          Input.h
+          GameElements.h
           Area.h
+          Packer.h
           Infobars.h
           Menus.h
-          Packer.h
-          Shared.h
           Status.h
           Tale.h
-          View.h
-          GameElements.h
-          Input.h
+          Shared.h
 )
 
 list(APPEND SOURCE_FILES
           Packers.cpp
+          View.cpp
+          Input.cpp
+          GameElements.cpp
           Area.cpp
+          Packer.cpp
           Infobars.cpp
           Menus.cpp
-          Packer.cpp
-          Shared.cpp
           Status.cpp
           Tale.cpp
-          View.cpp
-          GameElements.cpp
-          Input.cpp
+          Shared.cpp
 )
 
 if(WIN32)

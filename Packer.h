@@ -3,7 +3,7 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,20.06.2022</changed>
+/// <changed>ʆϒʅ,23.06.2022</changed>
 // ********************************************************************************
 
 #ifndef PACKER_H
@@ -17,8 +17,8 @@ struct Actions
 {
     std::string action;
     unsigned short delay;
-    Actions ();
-    Actions ( const std::string&, const unsigned short& );
+    Actions();
+    Actions(const std::string&, const unsigned short&);
 };
 
 
@@ -27,9 +27,9 @@ class Packer :public Inserter
 private:
     unsigned char id;
     Packer* address;
-    std::string faces [2];
+    std::string faces[2];
     std::string* currentFace; // Todo for use in the tale
-    Actions process [4];
+    Actions process[4];
     coordinateType position;
     bool direction;
     WORD motivation;
@@ -37,14 +37,14 @@ private:
     unsigned char mood;
     //unsigned char advancement;
 public:
-    Packer ();
-    const unsigned char& getId ( void );
-    const Actions& getProcess ( const unsigned char& );
-    coordinateType& getPosition ( void );
-    bool& getDirection ( void );
-    const WORD& getMotivation ( void );
-    const unsigned char& getAspiration ( void );
-    void involve ( const unsigned short& );
+    Packer(coordinateType areaGrid);
+    const unsigned char& getId(void);
+    const Actions& getProcess(const unsigned char&);
+    coordinateType& getPosition(void);
+    bool& getDirection(void);
+    const WORD& getMotivation(void);
+    const unsigned char& getAspiration(void);
+    void involve(const unsigned short&);
 
     static unsigned char count;
 };

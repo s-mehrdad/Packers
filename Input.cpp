@@ -3,31 +3,34 @@
 /// 
 /// </summary>
 /// <created>ʆϒʅ,18.06.2022</created>
-/// <changed>ʆϒʅ,20.06.2022</changed>
+/// <changed>ʆϒʅ,23.06.2022</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "Input.h"
 
 
-TheInput::TheInput ( void )
+TheInput::TheInput(void)
 {
 
-    inputConsoleOutput = getConsoleOutput ();
+    inputConsoleOutput = getConsoleOutput();
     cmodeStoreage = 0x0;
 
-    BOOL result { 0 };
+    process = false;
 
-    result = GetConsoleMode ( *inputConsoleOutput, &cmodeStoreage );
+    BOOL result{ 0 };
+
+    result = GetConsoleMode(*inputConsoleOutput, &cmodeStoreage);
 
     //result = SetConsoleMode ( *inputConsoleOutput, cmodeStoreage | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT );
 
-    if ( result )
+    if (result)
     {
 
 
 
-    } else
+    }
+    else
     {
 
         //error
@@ -37,45 +40,49 @@ TheInput::TheInput ( void )
 };
 
 
-void TheInput::inputProcessInput ( void )
+void TheInput::inputProcessInput(void)
 {
 
-    INPUT_RECORD inputBufferArray [128] { 0 };
-    DWORD inputBufferRead { 0 };
+    INPUT_RECORD inputBufferArray[128]{ 0 };
+    DWORD inputBufferRead{ 0 };
 
     WINDOWINFO consoleWindow;
-    consoleWindow.cbSize = sizeof ( WINDOWINFO );
+    consoleWindow.cbSize = sizeof(WINDOWINFO);
 
-    BOOL result { 0 };
-    result = GetWindowInfo ( *getConsoleWindow (), &consoleWindow );
+    BOOL result{ 0 };
+    result = GetWindowInfo(*getConsoleWindow(), &consoleWindow);
     //result = ReadConsoleInputW ( *getConsoleOutput (), inputBufferArray, 128, &inputBufferRead );
 
-    if ( consoleWindow.dwWindowStatus == WS_ACTIVECAPTION )
+    if (consoleWindow.dwWindowStatus == WS_ACTIVECAPTION)
     {
-        //runningOne = false;
+        process = true;
+    }
+    else
+    {
+        process = false;
     }
 
-    if ( !inputBufferRead )
+    if (!inputBufferRead)
     {
         inputBufferRead = 128;
     }
 
-    if ( inputBufferRead )
+    if (inputBufferRead)
     {
 
 
-        for ( DWORD i = 0; i < inputBufferRead; i++ )
+        for (DWORD i = 0; i < inputBufferRead; i++)
         {
-            switch ( inputBufferArray [i].EventType )
+            switch (inputBufferArray[i].EventType)
             {
             case KEY_EVENT:
-                processKeyboard ();
+                processKeyboard();
                 break;
             case MOUSE_EVENT:
-                processMouse ();
+                processMouse();
                 break;
             case WINDOW_BUFFER_SIZE_EVENT:
-                processViewResize ();
+                processViewResize();
                 break;
             case FOCUS_EVENT: // windows APIs internal events
             case MENU_EVENT:
@@ -83,7 +90,8 @@ void TheInput::inputProcessInput ( void )
                 break;
             }
         }
-    } else
+    }
+    else
     {
         //process error
     }
@@ -91,7 +99,7 @@ void TheInput::inputProcessInput ( void )
 };
 
 
-void TheInput::processKeyboard ()
+void TheInput::processKeyboard()
 {
 
 
@@ -99,21 +107,29 @@ void TheInput::processKeyboard ()
 };
 
 
-void TheInput::processMouse ()
+void TheInput::processMouse()
 {
 
 };
 
 
-void TheInput::processViewResize ()
+void TheInput::processViewResize()
 {
 
 };
 
 
-void TheInput::release ( void )
+const bool& TheInput::getProcess(void)
 {
 
-    SetConsoleMode ( *inputConsoleOutput, cmodeStoreage );
+    return process;
+
+};
+
+
+void TheInput::release(void)
+{
+
+    SetConsoleMode(*inputConsoleOutput, cmodeStoreage);
 
 };
