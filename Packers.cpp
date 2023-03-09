@@ -1,16 +1,20 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// nerd Snow's sayings!
-/// Programming is patience and practical practice.
-/// A needed thing needs to get its done upon itself! :)
+/// Packers.cpp
+/// Packers
+// nerd Snow's sayings!
+// Programming is patience and practical practice.
+// A needed thing needs to get its done upon itself! :)
 // I still remember the begin of this project, as I created the first interface of the program,
 // I thought I probably need another platform to create all the funny characters, the famous packers obviously, again,
 // then at some point afterward I came to decision,
 // that I am exactly at the right way to create probably a new platform for games by using just characters.
 // The characters can represent the human's character simply and honestly! ^.^
+/// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
-/// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 29.09.2018</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -30,14 +34,17 @@ bool runningOne{ true };
 bool runningTwo{ true };
 unsigned char menuState{ 10 };
 bool involved{ false };
-TheNarrator theNarrator(u8"theNarrator");
+TheNarrator theNarrator("theNarrator");
 
 int main()
 {
 
     //View.h
     View screen;
+#ifdef _WIN32
     screen.setView(CP_UTF8, true);
+#elifdef __APPLE__
+#endif
     screen.setScreen(SCREEN_W, SCREEN_H, SCREEN_L, SCREEN_T);
     screen.setFont(FONT_NAME, FONT_SIZEx, FONT_SIZEy, F_bPURPLE);
 
@@ -51,14 +58,15 @@ int main()
     GameElements gameElements;
 
     // Area.h
-    TheArea areaOne(0, u8"areaOne");
+    TheArea areaOne(0, "areaOne");
     gameElements.set(&areaOne);
+    // todo: add start points in near almost never :| future!
     coordinateType areaDimension{ areaOne.getDimension() };
 
     // Tale.h
     theNarrator.setArea(areaDimension);
 
-    TheGiant theGiant(u8"theGiant", areaDimension);
+    TheGiant theGiant("theGiant", areaDimension);
     gameElements.set(&theGiant);
     gameElements.get(*theGiant.setGetElementId()).draw();
     //theGiant.draw ();
@@ -76,10 +84,10 @@ int main()
 
 
     // Infobars.h
-    TheTitleBar theTitleBar(areaDimension, u8"theTitleBar");
+    TheTitleBar theTitleBar(areaDimension, "theTitleBar");
     gameElements.set(&theTitleBar);
     gameElements.get(*theTitleBar.setGetElementId()).draw();
-    TheGuideBar theGuideBar(areaDimension, u8"theGuideBar");
+    TheGuideBar theGuideBar(areaDimension, "theGuideBar");
     gameElements.set(&theGuideBar);
     gameElements.get(*theGuideBar.setGetElementId()).draw();
 
@@ -113,7 +121,8 @@ int main()
 
         // Status.h
         Status state(0, areaDimension);
-        state.get(Packer::count);
+        state.set(Packer::count);
+        state.setPaackersState();
 
         // Menus.h
         dangerAreaMenu menuOne(areaDimension);
@@ -137,12 +146,16 @@ int main()
             // 40 to 46 represents the options of motivationsMenu
             if ((counter % 1000000) == 0)
             {
-                theInput.inputProcessInput();
+                theInput.processInput();
 
                 if (theInput.getProcess())
                 {
 
+#ifdef _WIN32
                     if (GetAsyncKeyState(VK_DOWN))
+#elifdef __APPLE__
+                        if (0)
+#endif
                     {
                         switch (menuState)
                         {
@@ -181,7 +194,11 @@ int main()
                         }
                     }
 
+#ifdef _WIN32
                     if (GetAsyncKeyState(VK_UP))
+#elifdef __APPLE__
+                        if (0)
+#endif
                     {
                         switch (menuState)
                         {
@@ -219,8 +236,12 @@ int main()
                             break;
                         }
                     }
-
+                    
+#ifdef _WIN32
                     if (GetAsyncKeyState(VK_LEFT))
+#elifdef __APPLE__
+                        if (0)
+#endif
                     {
                         if (involved == true)
                         {
@@ -269,7 +290,11 @@ int main()
                         }
                     }
 
+#ifdef _WIN32
                     if (GetAsyncKeyState(VK_RIGHT))
+#elifdef __APPLE__
+                        if (0)
+#endif
                     {
                         if (involved == true)
                         {
@@ -318,7 +343,11 @@ int main()
                         }
                     }
 
+#ifdef _WIN32
                     if (GetAsyncKeyState(VK_RETURN))
+#elifdef __APPLE__
+                        if (0)
+#endif
                     {
                         switch (menuState)
                         {
@@ -331,7 +360,7 @@ int main()
                                 involvedOne = new (std::nothrow) Packer(areaDimension);
                                 involvedOne->involve((menuThree.get() * 10) + menuFour.get());
                             }
-                            state.get(Packer::count);
+                            state.set(Packer::count + 1);
                             involved = true;
                             theNarrator.draw(210);
                             //! inserting packer's ids (debug purposes)
@@ -392,11 +421,15 @@ int main()
 
                     //xx Todo providing the ability so the involved one could escape her/his mess! :)
                     // edit: solution for time being:
-                    if (GetAsyncKeyState(VK_ESCAPE) && (menuState == 0))
+#ifdef _WIN32
+                        if (GetAsyncKeyState(VK_ESCAPE) && (menuState == 0))
+#elifdef __APPLE__
+                        if (0)
+#endif
                     {
                         involved = false;
                         insert.colourInserter(involvedOne->getProcess(0).action, involvedOne->getMotivation(), involvedOne->getPosition());
-                        state.get(Packer::count - 1);
+                        state.set(Packer::count - 1);
                         menuState = 10;
                         theNarrator.draw(2);
                         menuOne.switcher(false);

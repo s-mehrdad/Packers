@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// View.cpp
+/// Packers
+/// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
-/// <created>ʆϒʅ,09.06.2022</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 09.06.2022</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 
@@ -13,6 +16,8 @@
 
 View::View()
 {
+
+#ifdef _WIN32
     LPDWORD mode{};
     viewConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     //BOOL result = GetConsoleMode ( viewConsoleOutput, mode );
@@ -22,14 +27,18 @@ View::View()
     //consoleScreenInfoEx = {};
     //consoleFontInfo = {};
     //consoleCursorInfo = {};
+#elifdef __APPLE__
+#endif
 
     setView(0, false);
+
 };
 
 
 void View::setScreen(short width, short height, short left, short top)
 {
 
+#ifdef _WIN32
     BOOL result{ 0 };
     DWORD errorCode{ 0x0 };
     LPCVOID errorMsg{};
@@ -54,7 +63,7 @@ void View::setScreen(short width, short height, short left, short top)
             FORMAT_MESSAGE_FROM_SYSTEM |
             FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
             errorCode, 0, (LPTSTR)&errorMsg, 0, 0);
-        //MessageBox ( 0, (LPCTSTR) errorMsg, u8"Error", MB_OK );
+        //MessageBox ( 0, (LPCTSTR) errorMsg, "Error", MB_OK );
 
     }
 
@@ -91,16 +100,22 @@ void View::setScreen(short width, short height, short left, short top)
 
     //result = MoveWindow ( viewConsoleWindow, left, top, width * 5, height * 10, true );
 
+#elifdef __APPLE__
+    std::cout << "\x1b[3;" << std::to_string(top) << ";" << std::to_string(left) << "t";
+    std::cout << "\x1b[8;" << std::to_string(height) << ";" << std::to_string(width) << "t";
+#endif
+
 };
 
 
 void View::setView(unsigned int codec, bool cursor)
 {
-    aa = new caller();
+
+//    aa = new caller();
     //place = *aa->place;
     //EnumSystemCodePages ( (CODEPAGE_ENUMPROC) caller::calls ( codeSystems ), CP_INSTALLED );
 
-
+#ifdef _WIN32
     GetCPInfoEx(cpStorage, 0, &cpInfoEx);
     cpStorage = GetConsoleOutputCP();
     SetConsoleOutputCP(codec);
@@ -109,13 +124,20 @@ void View::setView(unsigned int codec, bool cursor)
     consoleCursorInfo.bVisible = cursor;
     consoleCursorInfo.dwSize = POINTER_DEVICE_TYPE_INTEGRATED_PEN;
     SetConsoleCursorInfo(viewConsoleOutput, &consoleCursorInfo);
+#elifdef __APPLE__
+#endif
 
 };
 
 
+#ifdef _WIN32
 void View::setFont(std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
+#elifdef __APPLE__
+void View::setFont(std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour)
+#endif
 {
 
+#ifdef _WIN32
     BOOL result{ 0 };
     DWORD errorCode{ 0x0 };
     LPCVOID errorMsg{};
@@ -160,14 +182,18 @@ void View::setFont(std::string fontName, unsigned char fontX, unsigned char font
             FORMAT_MESSAGE_FROM_SYSTEM |
             FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
             errorCode, 0, (LPTSTR)&errorMsg, 0, 0);
-        //MessageBox ( 0, (LPCTSTR) errorMsg, u8"Error", MB_OK );
+        //MessageBox ( 0, (LPCTSTR) errorMsg, "Error", MB_OK );
 
     }
 
+#elifdef __APPLE__
+    std::cout << E_cursorOFF;
+#endif
 
 };
 
 
+#ifdef _WIN32
 CODEPAGE_ENUMPROC CALLBACK View::calledProc(LPWSTR codedObj)
 {
     if (codedObj)
@@ -175,7 +201,8 @@ CODEPAGE_ENUMPROC CALLBACK View::calledProc(LPWSTR codedObj)
         //
     }
     //CODEPAGE_ENUMPROCW a { codedObj };
-    //typedef BOOL (CALLBACK* CODEPAGE_ENUMPROCW)(LPWSTR);
+    //typedef BOOL (
+    CK* CODEPAGE_ENUMPROCW)(LPWSTR);
     return (CODEPAGE_ENUMPROC)true;
 };
 
@@ -190,11 +217,16 @@ const HWND* View::getConsoleWindow()
 {
     return &viewConsoleWindow;
 };
+#elifdef __APPLE__
+#endif
 
 
 void View::release()
 {
 
+#ifdef _WIN32
     SetConsoleOutputCP(cpStorage);
+#elifdef __APPLE__
+#endif
 
 };

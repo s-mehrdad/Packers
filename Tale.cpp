@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Tale.cpp
+/// Packers
+/// created by Mehrdad Soleimanimajd on 01.04.2019
 /// </summary>
-/// <created>ʆϒʅ,01.04.2019</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 01.04.2019</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -20,39 +23,39 @@ TheNarrator::TheNarrator(std::string name) :GameElement::GameElement()
     firstInScene = 1;
     currentScene = 1;
     //xx TODO add: funny story of the game! :)
-    title = u8"The Narrator";
+    title = "The Narrator";
     colours[0] = F_YELLOW;
     colours[1] = F_bWHITE;
 
-    scenes[0][0] = u8"It is not sure, what the giant sees";
-    scenes[0][1] = u8"up there! Supercomputer still dates on ";
-    scenes[0][2] = u8"load process of stone age! Thus the next";
-    scenes[0][3] = u8"scene is foreseen to let us wait a little!";
-    scenes[1][0] = u8"The spot pointed by the giant is ";
-    scenes[1][1] = u8"interesting. He lives at a planet full of";
-    scenes[1][2] = u8"little creatures. Their history written";
-    scenes[1][3] = u8"in stone script is full of hunger.";
-    scenes[2][0] = u8"Years after the first Packer presence";
-    scenes[2][1] = u8"on earth, yet at stone age, at the teeth ";
-    scenes[2][2] = u8"of continuous evolution,";
-    scenes[2][3] = u8"the packing process is obvious above!";
-    firstMenuSentences[0] = u8"I feel your enthusiasm for an involvement,";
-    firstMenuSentences[1] = u8"yet whether you survive in stone age?! :)";
-    firstMenuSentences[2] = u8"Well, undecorated involvement";
-    firstMenuSentences[3] = u8"is also involvement...";
-    firstMenuSentences[4] = u8"Indeed, tools and decorations are ";
-    firstMenuSentences[5] = u8"always well appreciated!";
-    secondMenuSentences[0] = u8"Stones and clubs are available!";
-    secondMenuSentences[1] = u8"The last one tried to decorate too much,";
-    secondMenuSentences[2] = u8"it ended up nasty in stone age! :)";
-    secondMenuSentences[3] = u8"The age is still nasty,";
-    secondMenuSentences[4] = u8"decoration isn't yet above strength. :)";
-    secondMenuSentences[5] = u8"A little fashion after so many years!";
-    secondMenuSentences[6] = u8"Yeah, empty handed decoration! WOW :)";
-    secondMenuSentences[7] = u8"Pay attention to your nose, ";
-    secondMenuSentences[8] = u8"knowing decoration isn't important!";
+    scenes[0][0] = "It is not sure, what the giant sees";
+    scenes[0][1] = "up there! Supercomputer still dates on ";
+    scenes[0][2] = "load process of stone age! Thus the next";
+    scenes[0][3] = "scene is foreseen to let us wait a little!";
+    scenes[1][0] = "The spot pointed by the giant is ";
+    scenes[1][1] = "interesting. He lives at a planet full of";
+    scenes[1][2] = "little creatures. Their history written";
+    scenes[1][3] = "in stone script is full of hunger.";
+    scenes[2][0] = "Years after the first Packer presence";
+    scenes[2][1] = "on earth, yet at stone age, at the teeth ";
+    scenes[2][2] = "of continuous evolution,";
+    scenes[2][3] = "the packing process is obvious above!";
+    firstMenuSentences[0] = "I feel your enthusiasm for an involvement,";
+    firstMenuSentences[1] = "yet whether you survive in stone age?! :)";
+    firstMenuSentences[2] = "Well, undecorated involvement";
+    firstMenuSentences[3] = "is also involvement...";
+    firstMenuSentences[4] = "Indeed, tools and decorations are ";
+    firstMenuSentences[5] = "always well appreciated!";
+    secondMenuSentences[0] = "Stones and clubs are available!";
+    secondMenuSentences[1] = "The last one tried to decorate too much,";
+    secondMenuSentences[2] = "it ended up nasty in stone age! :)";
+    secondMenuSentences[3] = "The age is still nasty,";
+    secondMenuSentences[4] = "decoration isn't yet above strength. :)";
+    secondMenuSentences[5] = "A little fashion after so many years!";
+    secondMenuSentences[6] = "Yeah, empty handed decoration! WOW :)";
+    secondMenuSentences[7] = "Pay attention to your nose, ";
+    secondMenuSentences[8] = "knowing decoration isn't important!";
     inRow = 0;
-    floatedTo = u8"different";
+    floatedTo = "different";
 
 };
 
@@ -102,7 +105,7 @@ void TheNarrator::draw(const unsigned short& instance)
     {
         for (unsigned char i = 0; i < 4; i++)
         {
-            colourInserter(u8"                                           ", pointOne);
+            colourInserter("                                           ", pointOne);
             pointOne.y += 1;
         }
     }
@@ -112,7 +115,7 @@ void TheNarrator::draw(const unsigned short& instance)
             pointOne.y += 5;
             for (unsigned char i = 0; i < 2; i++)
             {
-                colourInserter(u8"                                           ", pointOne);
+                colourInserter("                                           ", pointOne);
                 pointOne.y += 1;
             }
         }
@@ -211,50 +214,50 @@ TheGiant::TheGiant(std::string name, coordinateType area) :GameElement::GameElem
 
     setBase();
 
-    title = u8"A giant:";
-    theGiant[0] = u8"                      ;;;;;;";
-    theGiant[1] = u8"                     ;;;;;;;;";
-    theGiant[2] = u8"                     ;;;;;;;;";
-    theGiant[3] = u8"▄";
-    theGiant[4] = u8"                     ;;▄;;▄;;";
-    theGiant[5] = u8"▃▃";
-    theGiant[6] = u8"                     ;;;▃▃;;;";
-    theGiant[7] = u8"▄▄▄▄";
-    theGiant[8] = u8"                     ;;▄▄▄▄;;";
-    theGiant[9] = u8"                      ;;;;;;";
-    theGiant[10] = u8"                 ;;;;;;;;;;;;;;;                  ;;";
-    theGiant[11] = u8"                 ;;;;;;;;;;;;;;;;          ;;  ;;;;";
-    theGiant[12] = u8"                ;;;;;;;;;;;;;;;;;;        ;;;;;;;";
-    theGiant[13] = u8"♥";
-    theGiant[14] = u8";;             ;;;;;;;;;;;;♥;;;;;;;       ;;;;";
-    theGiant[15] = u8" ;;           ;;;;;;;;;;;;;;;;;;;;;;    ;;;;";
-    theGiant[16] = u8"  ;;         ;;;; ;;;;;;;;;;;;;; ;;;;; ;;;;";
-    theGiant[17] = u8"  ;;        ;;;;  ;;;;;;;;;;;;;;   ;;;;;;;";
-    theGiant[18] = u8"   ;;      ;;;;   ;;;;;;;;;;;;;;     ;;;";
-    theGiant[19] = u8"   ;;     ;;;;    ;;;;;;;;;;;;;;";
-    theGiant[20] = u8"   ;;    ;;;;      ;;;;;;;;;;;;;";
-    theGiant[21] = u8"   ;;  ;;;;        ;;;;;;;;;;;;;";
-    theGiant[22] = u8"  ;;; ;;;;         ;;;;;;;;;;;;;";
-    theGiant[23] = u8"  ;;;;;;           ;;;;;;;;;;;;;";
-    theGiant[24] = u8"  ;;;;              ;;;;;;;;;;;;";
-    theGiant[25] = u8"   ;;               ;;;;;;;;;;;;";
-    theGiant[26] = u8"   ;;               ;;;;; ;;;;;;";
-    theGiant[27] = u8"   ;;               ;;;;;  ;;;;;";
-    theGiant[28] = u8"   ;;               ;;;;;  ;;;;;";
-    theGiant[29] = u8"   ;;               ;;;;;; ;;;;;";
-    theGiant[30] = u8"   ;;                ;;;;;;;;;;;";
-    theGiant[31] = u8"   ;;                 ;;;;;;;;;;";
-    theGiant[32] = u8"   ;;                    ;;;;;;;;";
-    theGiant[33] = u8"   ;;                     ;;;;;;;;;;;";
-    theGiant[34] = u8"   ;;                     ;;;;; ;;;;;;;";
-    theGiant[35] = u8"   ;;                     ;;;;   ;;;;;";
-    theGiant[36] = u8"   ;;                    ;;;;;  ;;;;";
-    theGiant[37] = u8"   ;;                   ;;;;;  ;;;;";
+    title = "A giant:";
+    theGiant[0] = "                      ;;;;;;";
+    theGiant[1] = "                     ;;;;;;;;";
+    theGiant[2] = "                     ;;;;;;;;";
+    theGiant[3] = "▄";
+    theGiant[4] = "                     ;;▄;;▄;;";
+    theGiant[5] = "▃▃";
+    theGiant[6] = "                     ;;;▃▃;;;";
+    theGiant[7] = "▄▄▄▄";
+    theGiant[8] = "                     ;;▄▄▄▄;;";
+    theGiant[9] = "                      ;;;;;;";
+    theGiant[10] = "                 ;;;;;;;;;;;;;;;                  ;;";
+    theGiant[11] = "                 ;;;;;;;;;;;;;;;;          ;;  ;;;;";
+    theGiant[12] = "                ;;;;;;;;;;;;;;;;;;        ;;;;;;;";
+    theGiant[13] = "♥";
+    theGiant[14] = ";;             ;;;;;;;;;;;;♥;;;;;;;       ;;;;";
+    theGiant[15] = " ;;           ;;;;;;;;;;;;;;;;;;;;;;    ;;;;";
+    theGiant[16] = "  ;;         ;;;; ;;;;;;;;;;;;;; ;;;;; ;;;;";
+    theGiant[17] = "  ;;        ;;;;  ;;;;;;;;;;;;;;   ;;;;;;;";
+    theGiant[18] = "   ;;      ;;;;   ;;;;;;;;;;;;;;     ;;;";
+    theGiant[19] = "   ;;     ;;;;    ;;;;;;;;;;;;;;";
+    theGiant[20] = "   ;;    ;;;;      ;;;;;;;;;;;;;";
+    theGiant[21] = "   ;;  ;;;;        ;;;;;;;;;;;;;";
+    theGiant[22] = "  ;;; ;;;;         ;;;;;;;;;;;;;";
+    theGiant[23] = "  ;;;;;;           ;;;;;;;;;;;;;";
+    theGiant[24] = "  ;;;;              ;;;;;;;;;;;;";
+    theGiant[25] = "   ;;               ;;;;;;;;;;;;";
+    theGiant[26] = "   ;;               ;;;;; ;;;;;;";
+    theGiant[27] = "   ;;               ;;;;;  ;;;;;";
+    theGiant[28] = "   ;;               ;;;;;  ;;;;;";
+    theGiant[29] = "   ;;               ;;;;;; ;;;;;";
+    theGiant[30] = "   ;;                ;;;;;;;;;;;";
+    theGiant[31] = "   ;;                 ;;;;;;;;;;";
+    theGiant[32] = "   ;;                    ;;;;;;;;";
+    theGiant[33] = "   ;;                     ;;;;;;;;;;;";
+    theGiant[34] = "   ;;                     ;;;;; ;;;;;;;";
+    theGiant[35] = "   ;;                     ;;;;   ;;;;;";
+    theGiant[36] = "   ;;                    ;;;;;  ;;;;";
+    theGiant[37] = "   ;;                   ;;;;;  ;;;;";
     colourOne = F_bWHITE;
     colourTwo = F_CYAN;
     colourThree = F_bRED;
-    sentances[0] = u8"\"Look at these new puny two legs creatures!\"";
-    sentances[1] = u8"\"Look how they dance and chew away!\"";
+    sentances[0] = "\"Look at these new puny two legs creatures!\"";
+    sentances[1] = "\"Look how they dance and chew away!\"";
     startPoints[0] = { 2, short(area.y + 10) };
     startPoints[1] = { short(area.x - 30), short(area.y - 24) };
 
@@ -322,12 +325,12 @@ void TheGiant::draw(void)
     colourInserter(title, colourTwo, tempThree);
     tempThree.y += 2;
     colourInserter(tempThree);
-    std::string str{ u8"" };
+    std::string str{ "" };
     for (char element : sentances[0])
     {
         str += element;
         colourInserter(str, colourOne);
-        str = u8"";
+        str = "";
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     tempThree = startPoints[1];
@@ -337,7 +340,7 @@ void TheGiant::draw(void)
     {
         str += element;
         colourInserter(str, colourOne);
-        str = u8"";
+        str = "";
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 

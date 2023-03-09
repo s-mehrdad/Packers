@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Packers.h
+/// Packers
+/// created by Mehrdad Soleimanimajd on 13.04.2019
 /// </summary>
-/// <created>ʆϒʅ,13.04.2019</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 13.04.2019</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #ifndef PACKERS_H
@@ -14,7 +17,7 @@
 #endif
 
 
-#if WIN32
+#ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN // rarely-used stuff exclusion
 #endif // WIN32
 
@@ -22,8 +25,15 @@
 #include <iostream>
 #include <string>
 //#include <codecvt>
+#ifdef _WIN32
 #include <conio.h>
 #include <windows.h>
+#elifdef __APPLE__
+#include <termios.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#endif
 //#include <cstdlib>
 #include <ctime>
 #include <thread>
@@ -64,6 +74,7 @@
 #define DELAY_FOUR              102
 
 
+#ifdef _WIN32
 // colour system
 #define F_BLACK                 0x0000
 #define F_BLUE                  0x0001
@@ -99,6 +110,48 @@
 #define B_bYELLOW               0x00E0
 #define B_bWHITE                0x00F0
 
+#elifdef __APPLE__
+// ANSI escape sequences
+// F: forground, B: background, b: bright
+//#define F_BLACK(prm)            "\033["+std::to_string(prm)+"m"
+#define F_BLACK                 "\033[30m"
+#define F_RED                   "\033[31m"
+#define F_GREEN                 "\033[32m"
+#define F_YELLOW                "\033[33m"
+#define F_BLUE                  "\033[34m"
+#define F_PURPLE                "\033[35m"
+#define F_CYAN                  "\033[36m"
+#define F_WHITE                 "\033[37m"
+#define F_bBLACK                "\033[90m"
+#define F_bRED                  "\033[91m"
+#define F_bGREEN                "\033[92m"
+#define F_bYELLOW               "\033[93m"
+#define F_bBLUE                 "\033[94m"
+#define F_bPURPLE               "\033[95m"
+#define F_bCYAN                 "\033[96m"
+#define F_bWHITE                "\033[97m"
+
+#define B_BLACK                 "\033[40m"
+#define B_RED                   "\033[41m"
+#define B_GREEN                 "\033[42m"
+#define B_BLUE                  "\033[43m"
+#define B_YELLOW                "\033[44m"
+#define B_PURPLE                "\033[45m"
+#define B_CYAN                  "\033[46m"
+#define B_WHITE                 "\033[47m"
+#define B_bBLACK                "\033[100m"
+#define B_bRED                  "\033[101m"
+#define B_bGREEN                "\033[102m"
+#define B_bYELLOW               "\033[103m"
+#define B_bBLUE                 "\033[104m"
+#define B_bPURPLE               "\033[105m"
+#define B_bCYAN                 "\033[106m"
+#define B_bWHITE                "\033[107m"
+
+
+#define E_cursorON              "\033[?25h"
+#define E_cursorOFF             "\033[?25l"
+#endif
 
 extern bool runningOne;
 extern bool runningTwo;

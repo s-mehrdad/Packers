@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Infobars.cpp
+/// Packers
+/// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
-/// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 20.06.2019</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -17,11 +20,11 @@ TheTitleBar::TheTitleBar(coordinateType area, std::string name)
     elementID = 0;
     elementName = name;
     firstInScene = 2;
-    titleSentence = u8"Feel free to way in toward becoming an advanced packer! ♥♥♥♥♥ :)";
+    titleSentence = "Feel free to way in toward becoming an advanced packer! ♥♥♥♥♥ :)";
     startPoints[0] = { short((area.x / 2) - ((titleSentence.size() - 5) / 2)) + 2, 0 }; // center it! :)
     startPoints[1] = { short(titleSentence.size() - 10), 0 }; // end of it.
     inRow = 1;
-    floatedTo = u8"center";
+    floatedTo = "center";
 
 };
 
@@ -54,16 +57,16 @@ TheGuideBar::TheGuideBar(coordinateType area, std::string name)
     elementID = 0;
     elementName = name;
     firstInScene = 2;
-    signs[0] = u8"♣:";
-    signs[1] = u8"☻:";
-    signs[2] = u8".:";
-    guides[0] = u8" healthy resources";
-    guides[1] = u8" beloved packers";
-    guides[2] = u8" ready packages";
+    signs[0] = "♣:";
+    signs[1] = "☻:";
+    signs[2] = ".:";
+    guides[0] = " healthy resources";
+    guides[1] = " beloved packers";
+    guides[2] = " ready packages";
     startPoints[0] = { 2, short(area.y + 9) };
     startPoints[1] = { short(guides[0].size() + guides[1].size() + guides[2].size() + 2), short(area.y + 11) };
     inRow = 4;
-    floatedTo = u8"center";
+    floatedTo = "center";
 
 };
 

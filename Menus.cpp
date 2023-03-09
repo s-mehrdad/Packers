@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Menus.cpp
+/// Packers
+/// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
-/// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 20.06.2019</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -29,11 +32,11 @@ coordinateType* pMenus::getSetStartPoints()
 
 dangerAreaMenu::dangerAreaMenu(coordinateType area) :pMenus::pMenus(area)
 {
-    title = u8"Danger area:";
-    options[0] = u8"  Involve me!";
-    options[1] = u8"  Let me furnish! :)";
-    options[2] = u8"  Let's hit the road!";
-    selectionSign = u8"->";
+    title = "Danger area:";
+    options[0] = "  Involve me!";
+    options[1] = "  Let me furnish! :)";
+    options[2] = "  Let's hit the road!";
+    selectionSign = "->";
     selected = 0;
     set = false;
     switcher(false);
@@ -53,7 +56,7 @@ void dangerAreaMenu::switcher(bool involved)
         for (char i = 0; i < 3; i++)
         {
             //coordinateOne.x -= 3;
-            colourInserter(u8"                                           ", coordinateOne);
+            colourInserter("                                           ", coordinateOne);
             //coordinateOne.x += 3;
             colourInserter(options[i], F_bWHITE, coordinateOne);
             coordinateOne.y += 1;
@@ -67,20 +70,20 @@ void dangerAreaMenu::switcher(bool involved)
         if (involved)
         {
             //coordinateOne.x -= 3;
-            colourInserter(u8"                                           ", coordinateOne);
+            colourInserter("                                           ", coordinateOne);
             for (unsigned char i = 0; i < 3; i++)
             {
                 coordinateOne.y += 1;
                 switch (i)
                 {
                 case 0:
-                    colourInserter(u8"For now you can be just a nature lover! ^.^", coordinateOne);
+                    colourInserter("For now you can be just a nature lover! ^.^", coordinateOne);
                     break;
                 case 1:
-                    colourInserter(u8"This is a demo representing the idea. ^,^", coordinateOne);
+                    colourInserter("This is a demo representing the idea. ^,^", coordinateOne);
                     break;
                 case 2:
-                    colourInserter(u8"Please press ESC to end your try.", coordinateOne);
+                    colourInserter("Please press ESC to end your try.", coordinateOne);
                     break;
                 }
             }
@@ -90,7 +93,7 @@ void dangerAreaMenu::switcher(bool involved)
             coordinateOne.x -= 1;
             for (unsigned char i = 0; i <= 3; i++)
             {
-                colourInserter(u8"                                           ", coordinateOne);
+                colourInserter("                                           ", coordinateOne);
                 coordinateOne.y += 1;
             }
 
@@ -111,7 +114,7 @@ void dangerAreaMenu::switchSet(const unsigned char& choice, const bool& confirm)
     coordinate.x -= 2;
     if (confirm == false)
     {
-        colourInserter(u8"  ", F_bRED, coordinate);
+        colourInserter("  ", F_bRED, coordinate);
         selected = chosen;
         // Todo aware the narrator! :)
         coordinate = *(getSetStartPoints() + 1);
@@ -134,13 +137,13 @@ unsigned char& dangerAreaMenu::get()
 
 agesMenu::agesMenu(coordinateType area) :pMenus::pMenus(area)
 {
-    title = u8"Packing speed:";
-    options[0] = u8"  Stone age.";
-    options[1] = u8"  Middle age...";
-    options[2] = u8"  Advanced age.........";
-    options[3] = u8"  Hollow age.      . .            .";
-    options[4] = u8"  Dirty age (packers of packers contest!)";
-    selectionSign = u8"->";
+    title = "Packing speed:";
+    options[0] = "  Stone age.";
+    options[1] = "  Middle age...";
+    options[2] = "  Advanced age.........";
+    options[3] = "  Hollow age.      . .            .";
+    options[4] = "  Dirty age (packers of packers contest!)";
+    selectionSign = "->";
     unsigned short selected{ 0 };
     bool set{ false };
 };
@@ -157,7 +160,11 @@ void agesMenu::switcher()
         coordinate.y += 1;
         for (unsigned char i = 0; i < 5; i++)
         {
+#ifdef _WIN32
             WORD tmpColour{ F_bWHITE };
+#elifdef __APPLE__
+            std::string tmpColour{ F_bWHITE };
+#endif
             if (i == selected)
                 tmpColour = F_bRED;
             colourInserter(options[i], tmpColour, coordinate);
@@ -174,7 +181,7 @@ void agesMenu::switcher()
         coordinate.x -= 1;
         for (unsigned char i = 0; i <= 5; i++)
         {
-            colourInserter(u8"                                           ", coordinate);
+            colourInserter("                                           ", coordinate);
             coordinate.y += 1;
         }
         set = false;
@@ -193,7 +200,7 @@ void agesMenu::switchSet(const unsigned char& choice, const bool& confirm)
     coordinate.x -= 2;
     if (confirm == false)
     {
-        colourInserter(u8"  ", F_bRED, coordinate);
+        colourInserter("  ", F_bRED, coordinate);
         coordinate = *(getSetStartPoints() + 1);
         coordinate.y += chosen;
         coordinate.x -= 2;
@@ -238,11 +245,11 @@ const unsigned char& agesMenu::get()
 
 charactersMenu::charactersMenu(coordinateType area) :pMenus::pMenus(area)
 {
-    title = u8"Character Choices:";
+    title = "Character Choices:";
     // two character re-presenter should be enough for the ambitious packers! :)
-    options[0] = u8"☻";
-    options[1] = u8"☺";
-    selectionSign = u8"->";
+    options[0] = "☻";
+    options[1] = "☺";
+    selectionSign = "->";
     selected = 0;
     set = false;
     //*getSetStartPoints () = { 5, SCREEN_H - 10 };;
@@ -262,7 +269,11 @@ void charactersMenu::switcher()
         coordinateOne.y += 1;
         for (unsigned char i = 0; i < 2; i++)
         {
+#ifdef _WIN32
             WORD tmpColour{ F_bWHITE };
+#elifdef __APPLE__
+            std::string tmpColour{ F_bWHITE };
+#endif
             if (i == selected)
                 tmpColour = F_bRED;
             if (i == 1)
@@ -280,7 +291,7 @@ void charactersMenu::switcher()
         coordinateOne.x -= 1;
         for (unsigned char i = 0; i <= 1; i++)
         {
-            colourInserter(u8"                    ", coordinateOne);
+            colourInserter("                    ", coordinateOne);
             coordinateOne.y += 1;
         }
         set = false;
@@ -300,7 +311,7 @@ void charactersMenu::switchSet(const unsigned char& choice, const bool& confirm)
         coordinate.x += 7;
     if (confirm == false)
     {
-        colourInserter(u8"  ", F_bRED, coordinate);
+        colourInserter("  ", F_bRED, coordinate);
         coordinate = *(getSetStartPoints() + 1);
         coordinate.x -= 2;
         if (chosen == 1)
@@ -324,20 +335,20 @@ const unsigned char& charactersMenu::get()
 
 motivationsMenu::motivationsMenu(coordinateType area) :pMenus::pMenus(area)
 {
-    title = u8"A shiny colour is wished!:";
-    options[0] = u8"  Independent";
-    options[1] = u8"  Green nationalist";
-    options[2] = u8"  Red nationalist";
-    options[3] = u8"  Not know how";
-    options[4] = u8"  Free";
-    options[5] = u8"  Neutral";
+    title = "A shiny colour is wished!:";
+    options[0] = "  Independent";
+    options[1] = "  Green nationalist";
+    options[2] = "  Red nationalist";
+    options[3] = "  Not know how";
+    options[4] = "  Free";
+    options[5] = "  Neutral";
     colours[0] = F_bCYAN;
     colours[1] = F_bGREEN;
     colours[2] = F_bRED;
     colours[3] = F_bPURPLE;
     colours[4] = F_bYELLOW;
     colours[5] = F_bWHITE;
-    selectionSign = u8"->";
+    selectionSign = "->";
     unsigned short selected{ 0 };
     bool set{ false };
     //*getSetStartPoints () = { 5, SCREEN_H - 10 };
@@ -356,9 +367,17 @@ void motivationsMenu::switcher()
         coordinate.y += 1;
         for (unsigned char i = 0; i < 6; i++)
         {
+#ifdef _WIN32
             WORD tmpColour{ colours[i] };
+#elifdef __APPLE__
+            std::string tmpColour{ colours[i] };
+#endif
             if (i == selected)
+#ifdef _WIN32
                 tmpColour = B_CYAN | colours[i];
+#elifdef __APPLE__
+            // todo
+#endif
             if (i == 3)
             {
                 coordinate.x += 23;
@@ -378,7 +397,7 @@ void motivationsMenu::switcher()
         coordinate.x -= 1;
         for (unsigned char i = 0; i <= 5; i++)
         {
-            colourInserter(u8"                                        ", coordinate);
+            colourInserter("                                        ", coordinate);
             coordinate.y += 1;
         }
         set = false;
@@ -404,7 +423,7 @@ void motivationsMenu::switchSet(const unsigned char& choice, const bool& confirm
     {
         if (confirm == false)
         {
-            colourInserter(u8"  ", F_bRED, coordinate);
+            colourInserter("  ", F_bRED, coordinate);
             coordinate.x = (getSetStartPoints() + 1)->x;
             coordinate.x -= 2;
             if (selected < chosen)
@@ -430,7 +449,7 @@ void motivationsMenu::switchSet(const unsigned char& choice, const bool& confirm
     {
         if (confirm == false)
         {
-            colourInserter(u8"  ", F_bRED, coordinate);
+            colourInserter("  ", F_bRED, coordinate);
             coordinate = *(getSetStartPoints() + 1);
             coordinate.y += chosen;
             coordinate.x -= 2;

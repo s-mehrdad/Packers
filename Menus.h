@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Menus.h
+/// Packers
+/// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
-/// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 20.06.2019</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #ifndef MENUS_H
@@ -80,7 +83,11 @@ class motivationsMenu :public pMenus, Inserter
 private:
     std::string title;
     std::string options[6];
+#ifdef _WIN32
     WORD colours[6];
+#elifdef __APPLE__
+    std::string colours[6];
+#endif
     std::string selectionSign;
     unsigned char selected;
     bool set{ false };

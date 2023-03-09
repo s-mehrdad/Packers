@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Packer.h
+/// Packers
+/// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
-/// <created>ʆϒʅ,29.09.2018</created>
-/// <changed>ʆϒʅ,23.06.2022</changed>
+/// <created>ʆϒʅ, 29.09.2018</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #ifndef PACKER_H
@@ -32,7 +35,11 @@ private:
     Actions process[4];
     coordinateType position;
     bool direction;
+#ifdef _WIN32
     WORD motivation;
+#elifdef __APPLE__
+    std::string motivation;
+#endif
     unsigned char aspiration;
     unsigned char mood;
     //unsigned char advancement;
@@ -42,7 +49,11 @@ public:
     const Actions& getProcess(const unsigned char&);
     coordinateType& getPosition(void);
     bool& getDirection(void);
+#ifdef _WIN32
     const WORD& getMotivation(void);
+#elifdef __APPLE__
+    const std::string& getMotivation(void);
+#endif
     const unsigned char& getAspiration(void);
     void involve(const unsigned short&);
 

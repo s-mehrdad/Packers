@@ -1,9 +1,12 @@
-﻿// ********************************************************************************
+
+// ********************************************************************************
 /// <summary>
-/// 
+/// Status.h
+/// Packers
+/// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
-/// <created>ʆϒʅ,20.06.2019</created>
-/// <changed>ʆϒʅ,20.06.2022</changed>
+/// <created>ʆϒʅ, 20.06.2019</created>
+/// <changed>ʆϒʅ, 09.03.2023</changed>
 // ********************************************************************************
 
 #ifndef STATUS_H
@@ -32,7 +35,9 @@ private:
     unsigned int needState;
 public:
     Status ( const unsigned char& startAge, coordinateType areaGrid ); //parameters: game's start age and area dimension
-    void get ( const unsigned short& packersCount );
+    void set ( const unsigned short& packersCount );
+    const unsigned short& get ( void );
+    void setPaackersState ( void );
     void setter ( const unsigned char& selectedAge );
 };
 

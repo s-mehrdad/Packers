@@ -1,9 +1,12 @@
-﻿# *******************************************************************************************
+
+# *******************************************************************************************
 #/ <summary>
-#/ 
+#/ CMakeLists.txt
+#/ Packers
+#/ created by Mehrdad Soleimanimajd on 13.04.2019
 #/ </summary>
-#/ <created>ʆϒʅ,13.04.2019</created>
-#/ <changed>ʆϒʅ,23.06.2022</changed>
+#/ <created>ʆϒʅ, 13.04.2019</created>
+#/ <changed>ʆϒʅ, 09.03.2023</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -33,31 +36,31 @@ if(MSVC)
 endif(MSVC)
 
 list(APPEND HEADER_FILES
-          Packers.h
-          View.h
-          Input.h
-          GameElements.h
           Area.h
-          Packer.h
+          GameElements.h
           Infobars.h
+          Input.h
           Menus.h
+          Packer.h
+          Packers.h
+          Shared.h
           Status.h
           Tale.h
-          Shared.h
+          View.h
 )
 
 list(APPEND SOURCE_FILES
-          Packers.cpp
-          View.cpp
-          Input.cpp
-          GameElements.cpp
           Area.cpp
-          Packer.cpp
+          GameElements.cpp
           Infobars.cpp
+          Input.cpp
           Menus.cpp
+          Packer.cpp
+          Packers.cpp
+          Shared.cpp
           Status.cpp
           Tale.cpp
-          Shared.cpp
+          View.cpp
 )
 
 if(WIN32)
