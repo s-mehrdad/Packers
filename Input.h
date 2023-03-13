@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 18.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 18.06.2022</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 12.03.2023</changed>
 // ********************************************************************************
 
 #ifndef INPUT_H
@@ -14,6 +14,11 @@
 
 
 #include "View.h"
+
+
+enum class keyboardKeys {
+    Return, Up, Down, Left, Right, Esc, None
+};
 
 
 class TheInput : public View, Inserter
@@ -25,6 +30,7 @@ private:
 #elifdef __APPLE__
     struct termios orig_termios;
 #endif
+    keyboardKeys pressedKey;
     bool process;
     
     void processKeyboard();
@@ -34,6 +40,7 @@ public:
     TheInput();
     void processInput();
     const bool& getProcess(void);
+    const keyboardKeys& getPressedKey(void);
     void release(void);
 };
 

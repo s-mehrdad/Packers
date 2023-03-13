@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 13.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -359,6 +359,11 @@ motivationsMenu::motivationsMenu(coordinateType area) :pMenus::pMenus(area)
 void motivationsMenu::switcher()
 {
     coordinateType coordinate{ *getSetStartPoints() };
+#ifdef _WIN32
+    WORD tmpColour{ 0 };
+#elifdef __APPLE__
+    std::string tmpColour{ "" };
+#endif
 
     // motivationsMenu
     if (set == false)
@@ -367,17 +372,21 @@ void motivationsMenu::switcher()
         coordinate.y += 1;
         for (unsigned char i = 0; i < 6; i++)
         {
-#ifdef _WIN32
-            WORD tmpColour{ colours[i] };
-#elifdef __APPLE__
-            std::string tmpColour{ colours[i] };
-#endif
             if (i == selected)
+            {
 #ifdef _WIN32
-                tmpColour = B_CYAN | colours[i];
+                tmpColour = B_bCYAN | colours[i];
 #elifdef __APPLE__
-            // todo
+                tmpColour = B_bCYAN + colours[i];
 #endif
+            } else
+            {
+#ifdef _WIN32
+                tmpColour = colours[i];
+#elifdef __APPLE__
+                tmpColour = B_BLACK + colours[i];
+#endif
+            }
             if (i == 3)
             {
                 coordinate.x += 23;

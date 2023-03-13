@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 13.10.2018
 /// </summary>
 /// <created>ʆϒʅ, 13.10.2018</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 11.03.2023</changed>
 // ********************************************************************************
 
 #ifndef SHARED_H
@@ -41,19 +41,21 @@ private:
 public:
     Inserter();
     void colourInserter(const coordinateType& coord);
+    void colourInserter(const std::string& str, const coordinateType& pos);
+    
 #ifdef _WIN32
     void colourInserter(const std::string& str, const WORD& colour);
+    void colourInserter(const char& chr, const WORD& colour, const coordinateType& pos);
+    void colourInserter(const std::string& str, const WORD& colour, const coordinateType& pos);
+
 #elifdef __APPLE__
     void colourInserter(const std::string& str, const std::string& colour);
-#endif
-    void colourInserter(const std::string& str, const coordinateType& pos);
-#ifdef _WIN32
-    void colourInserter(const std::string& str, const WORD& colour, const coordinateType& pos);
-#elifdef __APPLE__
+    void colourInserter(const char& chr, const std::string& colour, const coordinateType& pos);
     void colourInserter(const std::string& str, const std::string& colour, const coordinateType& pos);
 #endif
+    
     void clear();
-
+    
     static coordinateType lastInsertStartPosition;
 };
 

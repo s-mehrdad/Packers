@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 13.10.2018
 /// </summary>
 /// <created>ʆϒʅ, 13.10.2018</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 11.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -15,13 +15,13 @@
 
 Inserter::Inserter()
 {
-
+    
 #ifdef _WIN32
     insertConsoleOutput = getConsoleOutput();
     //screenBinfoEX = {};
 #elifdef __APPLE__
 #endif
-
+    
 };
 
 
@@ -34,21 +34,6 @@ void Inserter::colourInserter(const coordinateType& pos)
     std::cout << "\x1b[" << std::to_string(pos.y) << ";" << std::to_string(pos.x) << "H";
 #endif
 };
-
-
-#ifdef _WIN32
-void Inserter::colourInserter(const std::string& str, const WORD& colour)
-{
-    SetConsoleTextAttribute(*insertConsoleOutput, colour);
-    std::cout << str;
-};
-#elifdef __APPLE__
-void Inserter::colourInserter(const std::string& str, const std::string& colour)
-{
-    std::cout << colour;
-    std::cout << str;
-};
-#endif
 
 
 void Inserter::colourInserter(const std::string& str, const coordinateType& pos)
@@ -65,6 +50,22 @@ void Inserter::colourInserter(const std::string& str, const coordinateType& pos)
 
 
 #ifdef _WIN32
+void Inserter::colourInserter(const std::string& str, const WORD& colour)
+{
+    SetConsoleTextAttribute(*insertConsoleOutput, colour);
+    std::cout << str;
+};
+
+
+void Inserter::colourInserter(const char& chr, const WORD& colour, const coordinateType& pos)
+{
+    lastInsertStartPosition = pos;
+    SetConsoleCursorPosition(*insertConsoleOutput, COORD{ pos.x,pos.y });
+    SetConsoleTextAttribute(*insertConsoleOutput, colour);
+    std::cout << chr;
+};
+
+
 void Inserter::colourInserter(const std::string& str, const WORD& colour, const coordinateType& pos)
 {
     lastInsertStartPosition = pos;
@@ -72,7 +73,25 @@ void Inserter::colourInserter(const std::string& str, const WORD& colour, const 
     SetConsoleTextAttribute(*insertConsoleOutput, colour);
     std::cout << str;
 };
+
+
 #elifdef __APPLE__
+void Inserter::colourInserter(const std::string& str, const std::string& colour)
+{
+    std::cout << colour;
+    std::cout << str;
+};
+
+
+void Inserter::colourInserter(const char& chr, const std::string& colour, const coordinateType& pos)
+{
+    lastInsertStartPosition = pos;
+    std::cout << "\x1b[" << std::to_string(pos.y) << ";" << std::to_string(pos.x) << "H";
+    std::cout << colour;
+    std::cout << chr;
+};
+
+
 void Inserter::colourInserter(const std::string& str, const std::string& colour, const coordinateType& pos)
 {
     lastInsertStartPosition = pos;
@@ -102,7 +121,7 @@ void Inserter::clear()
     }
     for (unsigned char i = 0; i <= SCREEN_H; i++)
     {
-//        colourInserter(strTemp, temp);
+        //        colourInserter(strTemp, temp);
         colourInserter(strTemp, B_BLACK, temp);
         temp.y++;
     }
@@ -142,7 +161,7 @@ Loading::Loading(const unsigned char& mode, coordinateType area)
 #endif
     startPoint = { short(area.x + 6), short(area.y + 9) };
     speed = mode;
-
+    
     // cout
     inserter();
     //std::thread tOne ( inserter );

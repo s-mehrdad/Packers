@@ -14,7 +14,7 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 13.03.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
@@ -144,7 +144,7 @@ int main()
             // 20 to 24 represents the options of agesMenu
             // 30 to 31 represents the options of charactersMenu
             // 40 to 46 represents the options of motivationsMenu
-            if ((counter % 1000000) == 0)
+            if ((counter % 1000) == 0)
             {
                 theInput.processInput();
 
@@ -154,7 +154,7 @@ int main()
 #ifdef _WIN32
                     if (GetAsyncKeyState(VK_DOWN))
 #elifdef __APPLE__
-                        if (0)
+                    if (theInput.getPressedKey()==keyboardKeys::Down)
 #endif
                     {
                         switch (menuState)
@@ -197,7 +197,7 @@ int main()
 #ifdef _WIN32
                     if (GetAsyncKeyState(VK_UP))
 #elifdef __APPLE__
-                        if (0)
+                    if (theInput.getPressedKey()==keyboardKeys::Up)
 #endif
                     {
                         switch (menuState)
@@ -240,7 +240,7 @@ int main()
 #ifdef _WIN32
                     if (GetAsyncKeyState(VK_LEFT))
 #elifdef __APPLE__
-                        if (0)
+                    if (theInput.getPressedKey()==keyboardKeys::Left)
 #endif
                     {
                         if (involved == true)
@@ -293,7 +293,7 @@ int main()
 #ifdef _WIN32
                     if (GetAsyncKeyState(VK_RIGHT))
 #elifdef __APPLE__
-                        if (0)
+                    if (theInput.getPressedKey()==keyboardKeys::Right)
 #endif
                     {
                         if (involved == true)
@@ -346,7 +346,7 @@ int main()
 #ifdef _WIN32
                     if (GetAsyncKeyState(VK_RETURN))
 #elifdef __APPLE__
-                        if (0)
+                    if (theInput.getPressedKey()==keyboardKeys::Return)
 #endif
                     {
                         switch (menuState)
@@ -424,7 +424,7 @@ int main()
 #ifdef _WIN32
                         if (GetAsyncKeyState(VK_ESCAPE) && (menuState == 0))
 #elifdef __APPLE__
-                        if (0)
+                        if ((theInput.getPressedKey()==keyboardKeys::Esc) && (menuState == 0))
 #endif
                     {
                         involved = false;
