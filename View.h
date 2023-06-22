@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 09.06.2022</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 22.06.2023</changed>
 // ********************************************************************************
 
 #ifndef VIEW_H
@@ -37,10 +37,13 @@ class View
 private:
 #ifdef _WIN32
     CODEPAGE_ENUMPROC CALLBACK place;
-//    caller* aa;
+    //    caller* aa;
     LPWSTR codeSystems;
     //int test_;
+    HANDLE viewConsoleInput;
     HANDLE viewConsoleOutput;
+    DWORD consoleInMode;
+    DWORD consoleOutMode;
     HWND viewConsoleWindow;
     CONSOLE_SCREEN_BUFFER_INFO consoleScreenInfo;
     CONSOLE_SCREEN_BUFFER_INFOEX consoleScreenInfoEx;
@@ -48,24 +51,27 @@ private:
     CONSOLE_CURSOR_INFO consoleCursorInfo;
     UINT cpStorage;
     CPINFOEX cpInfoEx;
-#elifdef __APPLE__
-#endif
+#else ifdef __APPLE__
+#endif // _WIN32
+    bool initialized;
 
 public:
     View (); //construct needed console window properties
-    void setScreen ( short width, short height, short left, short top );
-    void setView ( unsigned int codec, bool cursor );
+    void setScreen (short width, short height, short left, short top);
+    void setView (unsigned int codec, bool cursor);
 #ifdef _WIN32
-    void setFont ( std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour );
-#elifdef __APPLE__
-    void setFont ( std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour );
-#endif
+    void setFont (std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour);
+#else ifdef __APPLE__
+    void setFont (std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour);
+#endif // _WIN32
 #ifdef _WIN32
-    static CODEPAGE_ENUMPROC CALLBACK calledProc ( LPWSTR );
+    static CODEPAGE_ENUMPROC CALLBACK calledProc (LPWSTR);
+    const HANDLE* getConsoleInput ();
     const HANDLE* getConsoleOutput ();
     const HWND* getConsoleWindow ();
-#elifdef __APPLE__
-#endif
+    const bool& isInitialized ();
+#else ifdef __APPLE__
+#endif // _WIN32
     void release ();
 };
 

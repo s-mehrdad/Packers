@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 13.04.2019
 /// </summary>
 /// <created>ʆϒʅ, 13.04.2019</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 22.06.2023</changed>
 // ********************************************************************************
 
 #ifndef PACKERS_H
@@ -14,7 +14,7 @@
 
 #ifndef UNICODE
 #define UNICODE
-#endif
+#endif // UNICODE
 
 
 #ifdef _WIN32
@@ -28,34 +28,36 @@
 #ifdef _WIN32
 #include <conio.h>
 #include <windows.h>
-#elifdef __APPLE__
+#else ifdef __APPLE__
 #include <termios.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/uio.h>
-#endif
+#endif // _WIN32
 //#include <cstdlib>
 #include <ctime>
 #include <thread>
 #include <chrono>
+#include <atomic>
 #include <list>
+#include <stdexcept>
 
 #include "Tale.h"
 
 
-#define FONT_SIZEx              16
-#define FONT_SIZEy              20
-#define FONT_NAME               "Lucida Console"
+#define FONT_SIZEx              10
+#define FONT_SIZEy              18
+//#define FONT_NAME               "Lucida Console"
 //#define FONT_NAME               "Cascadia Code Light"
 //#define FONT_NAME               "Courier New"
-//#define FONT_NAME               "Consolas"
+#define FONT_NAME               "Consolas"
 //#define FONT_NAME               "NSimSun"
 //#define FONT_NAME               "Raster Fonts"
 #define SCREEN_L                2
 #define SCREEN_T                2
-#define SCREEN_H                50
+#define SCREEN_H                44
 //? danger:
-#define SCREEN_W                100
+#define SCREEN_W                90
 //! if you choose the next value less than 100, you are on your own, since the packers don't have enough to chew! :)
 #define BACKGROUND_COLOUR       RGB (50,50,50)
 
@@ -110,7 +112,7 @@
 #define B_bYELLOW               0x00E0
 #define B_bWHITE                0x00F0
 
-#elifdef __APPLE__
+#else ifdef __APPLE__
 // ANSI escape sequences
 // F: forground, B: background, b: bright
 //#define F_BLACK(prm)            "\033["+std::to_string(prm)+"m"
@@ -151,7 +153,7 @@
 
 #define E_cursorON              "\033[?25h"
 #define E_cursorOFF             "\033[?25l"
-#endif
+#endif // _WIN32
 
 extern bool runningOne;
 extern bool runningTwo;

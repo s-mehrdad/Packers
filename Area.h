@@ -1,4 +1,4 @@
-    
+
 // ********************************************************************************
 /// <summary>
 /// Area.h
@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 22.06.2023</changed>
 // ********************************************************************************
 
 #ifndef AREA_H
@@ -27,32 +27,36 @@ private:
     std::string horizontalWall;
     std::string verticalWall;
     std::string edges [4];
+
 #ifdef _WIN32
     WORD wallColour;
-#elifdef __APPLE__
+#else ifdef __APPLE__
     std::string wallColour;
-#endif
+#endif // _WIN32
+
     short rows;
     short columns;
     coordinateType startPoints [2];
     std::string resources [3];
+
 #ifdef _WIN32
     WORD healthyColour;
     WORD renewedColour;
     WORD vanishedColour;
-#elifdef __APPLE__
+#else ifdef __APPLE__
     std::string healthyColour;
     std::string renewedColour;
-    std::string vanishedColour;
-#endif
+std:s:string vanishedColour;
+#endif // _WIN32
+
     short inRow;
     std::string floatedTo;
 public:
-    TheArea ( unsigned char ageArgument, std::string elementName );
-    void setBase ( void );
-    void draw ( void );
-    void setter ( const unsigned short&, const coordinateType& );
-    const coordinateType& getDimension ( void ); //area's dimension
+    TheArea (unsigned char ageArgument, std::string elementName);
+    void setBase (void);
+    void draw (void);
+    void setter (const unsigned short&, const coordinateType&);
+    const coordinateType& getDimension (void); //area's dimension
 
     //static unsigned char stateArray [rows][columns]; // dynamic needed
 };

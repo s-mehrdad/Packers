@@ -6,19 +6,21 @@
 /// created by Mehrdad Soleimanimajd on 14.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 14.06.2022</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 22.06.2023</changed>
 // ********************************************************************************
 
 #include "Packers.h"
 #include "GameElements.h"
 
 
-GameElement::GameElement ( void )
+GameElement::GameElement (void)
 {
 
     elementID = nullptr;
     elementName = nullptr;
+
     sceneNumber = nullptr;
+
     elementStartPoint = nullptr;
     elementRow = nullptr;
     elementFloat = nullptr;
@@ -26,55 +28,71 @@ GameElement::GameElement ( void )
 };
 
 
-GameElement* GameElement::setGet ( void )
+GameElement* GameElement::setGet (void)
 {
+
     return this;
+
 };
 
 
-void GameElement::setElementId ( short& id )
+void GameElement::setElementId (short& id)
 {
+
     *elementID = id;
+
 };
 
 
-short*& GameElement::setGetElementId ( void )
+short*& GameElement::setGetElementId (void)
 {
+
     return elementID;
+
 };
 
 
-std::string*& GameElement::setGetElementName ( void )
+std::string*& GameElement::setGetElementName (void)
 {
+
     return elementName;
+
 };
 
 
-short*& GameElement::setGetsceneNumber ( void )
+short*& GameElement::setGetsceneNumber (void)
 {
+
     return sceneNumber;
+
 };
 
 
-coordinateType*& GameElement::setGetElementStartPoint ( void )
+coordinateType*& GameElement::setGetElementStartPoint (void)
 {
+
     return elementStartPoint;
+
 };
 
 
-short*& GameElement::setGetElementRow ( void )
+short*& GameElement::setGetElementRow (void)
 {
+
     return elementRow;
+
 };
 
 
-std::string*& GameElement::setGetElementFloat ( void )
+std::string*& GameElement::setGetElementFloat (void)
 {
+
     return elementFloat;
+
 };
 
 
-void GameElement::release ( void )
+void GameElement::release (void)
 {
 
     elementID = nullptr;
@@ -87,10 +105,10 @@ void GameElement::release ( void )
 };
 
 
-GameElements::GameElements ( void )
+GameElements::GameElements (void)
 {
 
-    for ( char i = 0; i < 20; i++ )
+    for (char i = 0; i < 20; i++)
     {
         gameElements [i] = nullptr;
     }
@@ -103,10 +121,10 @@ GameElements::GameElements ( void )
 };
 
 
-void GameElements::release ( void )
+void GameElements::release (void)
 {
 
-    for ( short i = 0; i < elementsCount - 1; i++ )
+    for (short i = 0; i < elementsCount - 1; i++)
     {
         gameElements [i] = nullptr;
     }
@@ -114,17 +132,19 @@ void GameElements::release ( void )
 };
 
 
-void GameElements::set ( GameElement* element )
+void GameElements::set (GameElement* element)
 {
 
     gameElements [elementsCount] = element;
-    element->setElementId ( elementsCount );
+    element->setElementId (elementsCount);
     elementsCount++;
 
 };
 
 
-GameElement& GameElements::get ( short& id )
+GameElement& GameElements::get (short& id)
 {
+
     return *gameElements [id];
+
 };

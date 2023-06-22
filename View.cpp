@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 09.06.2022</created>
-/// <changed>ʆϒʅ, 09.03.2023</changed>
+/// <changed>ʆϒʅ, 22.06.2023</changed>
 // ********************************************************************************
 
 
@@ -14,55 +14,123 @@
 #include "View.h"
 
 
-View::View()
+View::View ()
 {
 
+    try
+    {
+
+        viewConsoleInput = nullptr;
+        viewConsoleOutput = nullptr;
+
+        consoleInMode = 0;
+        consoleOutMode = 0;
+
 #ifdef _WIN32
-    LPDWORD mode{};
-    viewConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    //BOOL result = GetConsoleMode ( viewConsoleOutput, mode );
-    viewConsoleWindow = GetConsoleWindow();
+        BOOL result;
+        viewConsoleInput = GetStdHandle (STD_INPUT_HANDLE);
+        if (viewConsoleInput != INVALID_HANDLE_VALUE)
+        {
+            result = GetConsoleMode (viewConsoleInput, &consoleInMode);
 
-    //consoleScreenInfo = {};
-    //consoleScreenInfoEx = {};
-    //consoleFontInfo = {};
-    //consoleCursorInfo = {};
-#elifdef __APPLE__
-#endif
+            if (result == true)
+            {
+                viewConsoleOutput = GetStdHandle (STD_OUTPUT_HANDLE);
 
-    setView(0, false);
+                if (viewConsoleOutput != INVALID_HANDLE_VALUE)
+                {
+                    result = GetConsoleMode (viewConsoleOutput, &consoleOutMode);
+
+                    if (result == true)
+                    {
+                        initialized = true;
+                    } else
+                    {
+                        initialized = false;
+                        return;
+                    }
+
+                } else
+                {
+                    initialized = false;
+                    return;
+                }
+            } else
+            {
+                initialized = false;
+                return;
+            }
+        } else
+        {
+            initialized = false;
+            return;
+        }
+
+
+        DWORD modeOutput = consoleOutMode | (ENABLE_VIRTUAL_TERMINAL_INPUT | DISABLE_NEWLINE_AUTO_RETURN);
+        DWORD modeInput = consoleInMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+
+        // if (SetConsoleMode (viewConsoleInput, modeInput)) {
+        //     if (SetConsoleMode (viewConsoleOutput, modeOutput)) {
+        //         initialized = true;
+        //     } else {
+        //         modeOutput = ENABLE_VIRTUAL_TERMINAL_PROCESSING | consoleOutMode;
+        //         if (SetConsoleMode (viewConsoleOutput, modeOutput)) {
+        //             initialized = true;
+        //         } else {
+        //             initialized = false;
+        //             return;
+        //         }
+        //     }
+        // } else {
+        //     initialized = false;
+        //     return;
+        // }
+
+        consoleScreenInfo = {};
+        consoleScreenInfoEx = {};
+        consoleFontInfo = {};
+        consoleCursorInfo = {};
+#else ifdef __APPLE__
+#endif // _WIN32
+
+        setView (0, false);
+
+    } catch (const std::exception& err)
+    {
+        initialized = false;
+    }
 
 };
 
 
-void View::setScreen(short width, short height, short left, short top)
+void View::setScreen (short width, short height, short left, short top)
 {
 
 #ifdef _WIN32
-    BOOL result{ 0 };
-    DWORD errorCode{ 0x0 };
-    LPCVOID errorMsg{};
+    BOOL result {0};
+    DWORD errorCode {0x0};
+    LPCVOID errorMsg {};
 
 
-    result = SetWindowPos(viewConsoleWindow, HWND_TOP,
-        left, top, width * 13,
-        height * 20, SWP_SHOWWINDOW);
+    result = SetWindowPos (viewConsoleWindow, HWND_TOP,
+                           left, top, width * 13,
+                           height * 20, SWP_SHOWWINDOW);
 
-    result = GetConsoleScreenBufferInfoEx(viewConsoleOutput, &consoleScreenInfoEx);
+    result = GetConsoleScreenBufferInfoEx (viewConsoleOutput, &consoleScreenInfoEx);
 
 
     if (result)
     {
 
-    }
-    else
+    } else
     {
 
-        errorCode = GetLastError();
-        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-            FORMAT_MESSAGE_FROM_SYSTEM |
-            FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
-            errorCode, 0, (LPTSTR)&errorMsg, 0, 0);
+        errorCode = GetLastError ();
+        FormatMessage (FORMAT_MESSAGE_ALLOCATE_BUFFER |
+                       FORMAT_MESSAGE_FROM_SYSTEM |
+                       FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
+                       errorCode, 0, (LPTSTR) &errorMsg, 0, 0);
         //MessageBox ( 0, (LPCTSTR) errorMsg, "Error", MB_OK );
 
     }
@@ -100,101 +168,100 @@ void View::setScreen(short width, short height, short left, short top)
 
     //result = MoveWindow ( viewConsoleWindow, left, top, width * 5, height * 10, true );
 
-#elifdef __APPLE__
-    std::cout << "\x1b[3;" << std::to_string(top) << ";" << std::to_string(left) << "t";
-    std::cout << "\x1b[8;" << std::to_string(height) << ";" << std::to_string(width) << "t";
-#endif
+#else ifdef __APPLE__
+    std::cout << "\x1b[3;" << std::to_string (top) << ";" << std::to_string (left) << "t";
+    std::cout << "\x1b[8;" << std::to_string (height) << ";" << std::to_string (width) << "t";
+#endif // _WIN32
 
 };
 
 
-void View::setView(unsigned int codec, bool cursor)
+void View::setView (unsigned int codec, bool cursor)
 {
 
-//    aa = new caller();
-    //place = *aa->place;
-    //EnumSystemCodePages ( (CODEPAGE_ENUMPROC) caller::calls ( codeSystems ), CP_INSTALLED );
+    //    aa = new caller();
+        //place = *aa->place;
+        //EnumSystemCodePages ( (CODEPAGE_ENUMPROC) caller::calls ( codeSystems ), CP_INSTALLED );
 
 #ifdef _WIN32
-    GetCPInfoEx(cpStorage, 0, &cpInfoEx);
-    cpStorage = GetConsoleOutputCP();
-    SetConsoleOutputCP(codec);
+    GetCPInfoEx (cpStorage, 0, &cpInfoEx);
+    cpStorage = GetConsoleOutputCP ();
+    SetConsoleOutputCP (codec);
 
-    GetConsoleCursorInfo(viewConsoleOutput, &consoleCursorInfo);
+    GetConsoleCursorInfo (viewConsoleOutput, &consoleCursorInfo);
     consoleCursorInfo.bVisible = cursor;
     consoleCursorInfo.dwSize = POINTER_DEVICE_TYPE_INTEGRATED_PEN;
-    SetConsoleCursorInfo(viewConsoleOutput, &consoleCursorInfo);
-#elifdef __APPLE__
-#endif
+    SetConsoleCursorInfo (viewConsoleOutput, &consoleCursorInfo);
+#else ifdef __APPLE__
+#endif // _WIN32
 
 };
 
 
 #ifdef _WIN32
-void View::setFont(std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
-#elifdef __APPLE__
-void View::setFont(std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour)
-#endif
+void View::setFont (std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
+#else ifdef __APPLE__
+void View::setFont (std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour)
+#endif // _WIN32
 {
 
 #ifdef _WIN32
-    BOOL result{ 0 };
-    DWORD errorCode{ 0x0 };
-    LPCVOID errorMsg{};
+    BOOL result {0};
+    DWORD errorCode {0x0};
+    LPCVOID errorMsg {};
 
-    result = GetCurrentConsoleFontEx(viewConsoleOutput, FALSE, &consoleFontInfo);
+    result = GetCurrentConsoleFontEx (viewConsoleOutput, FALSE, &consoleFontInfo);
 
 
     if (1)
     {
 
-        consoleFontInfo.cbSize = sizeof(consoleFontInfo);
-        consoleFontInfo.dwFontSize = COORD{ fontX, fontY };
+        consoleFontInfo.cbSize = sizeof (consoleFontInfo);
+        consoleFontInfo.dwFontSize = COORD {fontX, fontY};
 
-        for (unsigned char i = 0; i <= fontName.size(); i++)
+        for (unsigned char i = 0; i <= fontName.size (); i++)
         {
-            consoleFontInfo.FaceName[i] = fontName[i];
+            consoleFontInfo.FaceName [i] = fontName [i];
             //b.pop_back ();
         }
 
         consoleFontInfo.FontWeight = 100;
 
-        result = SetCurrentConsoleFontEx(viewConsoleOutput, FALSE, &consoleFontInfo);
+        result = SetCurrentConsoleFontEx (viewConsoleOutput, FALSE, &consoleFontInfo);
 
 
         if (result)
         {
-            result = SetConsoleTextAttribute(viewConsoleOutput, colour);
+            result = SetConsoleTextAttribute (viewConsoleOutput, colour);
         }
 
 
-    }
-    else
+    } else
     {
 
-        CONSOLE_FONT_INFO a{};
-        result = GetCurrentConsoleFont(viewConsoleOutput, FALSE, &a);
-        COORD t{};
-        t = GetConsoleFontSize(viewConsoleOutput, a.nFont);
+        CONSOLE_FONT_INFO a {};
+        result = GetCurrentConsoleFont (viewConsoleOutput, FALSE, &a);
+        COORD t {};
+        t = GetConsoleFontSize (viewConsoleOutput, a.nFont);
 
-        errorCode = GetLastError();
-        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
-            FORMAT_MESSAGE_FROM_SYSTEM |
-            FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
-            errorCode, 0, (LPTSTR)&errorMsg, 0, 0);
+        errorCode = GetLastError ();
+        FormatMessage (FORMAT_MESSAGE_ALLOCATE_BUFFER |
+                       FORMAT_MESSAGE_FROM_SYSTEM |
+                       FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
+                       errorCode, 0, (LPTSTR) &errorMsg, 0, 0);
         //MessageBox ( 0, (LPCTSTR) errorMsg, "Error", MB_OK );
 
     }
 
-#elifdef __APPLE__
+#else ifdef __APPLE__
     std::cout << E_cursorOFF;
-#endif
+#endif // _WIN32
 
 };
 
 
 #ifdef _WIN32
-CODEPAGE_ENUMPROC CALLBACK View::calledProc(LPWSTR codedObj)
+CODEPAGE_ENUMPROC CALLBACK View::calledProc (LPWSTR codedObj)
 {
     if (codedObj)
     {
@@ -202,31 +269,54 @@ CODEPAGE_ENUMPROC CALLBACK View::calledProc(LPWSTR codedObj)
     }
     //CODEPAGE_ENUMPROCW a { codedObj };
     //typedef BOOL (
-    CK* CODEPAGE_ENUMPROCW)(LPWSTR);
-    return (CODEPAGE_ENUMPROC)true;
+    //CK* CODEPAGE_ENUMPROCW)(LPWSTR);
+    return (CODEPAGE_ENUMPROC) true;
+
 };
 
 
-const HANDLE* View::getConsoleOutput()
+const HANDLE* View::getConsoleInput ()
+{
+    return &viewConsoleInput;
+
+};
+
+
+const HANDLE* View::getConsoleOutput ()
 {
     return &viewConsoleOutput;
+
 };
 
-
-const HWND* View::getConsoleWindow()
+const HWND* View::getConsoleWindow ()
 {
     return &viewConsoleWindow;
+
 };
-#elifdef __APPLE__
-#endif
+
+const bool& View::isInitialized ()
+{
+    return initialized;
+
+};
+#else ifdef __APPLE__
+#endif // _WIN32
 
 
-void View::release()
+void View::release ()
 {
 
 #ifdef _WIN32
-    SetConsoleOutputCP(cpStorage);
-#elifdef __APPLE__
-#endif
+    SetConsoleOutputCP (cpStorage);
+    // if (SetConsoleMode (viewConsoleOutput, consoleOutMode)) {
+    //     if (SetConsoleMode (viewConsoleOutput, consoleInMode)) {
+    //         initialized = false;
+    //         initialized = false;
+    //     } else {
+    //         // throw or log
+    //     }
+    // }
+#else ifdef __APPLE__
+#endif // _WIN32
 
 };

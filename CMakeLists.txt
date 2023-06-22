@@ -6,7 +6,7 @@
 #/ created by Mehrdad Soleimanimajd on 13.04.2019
 #/ </summary>
 #/ <created>ʆϒʅ, 13.04.2019</created>
-#/ <changed>ʆϒʅ, 09.03.2023</changed>
+#/ <changed>ʆϒʅ, 22.06.2023</changed>
 # *******************************************************************************************
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -22,7 +22,7 @@ set(PROJECT_NAME ${TARGET_NAME})
 #endif()
 
 project(${PROJECT_NAME}
-          VERSION 1.0.1.0
+          VERSION 1.0.4.0
           DESCRIPTION "Packers Game in Console"
           HOMEPAGE_URL "https://github.com/s-mehrdad/Packers"
           LANGUAGES CXX

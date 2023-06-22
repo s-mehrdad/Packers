@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 18.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 18.06.2022</created>
-/// <changed>ʆϒʅ, 12.03.2023</changed>
+/// <changed>ʆϒʅ, 22.06.2023</changed>
 // ********************************************************************************
 
 #ifndef INPUT_H
@@ -16,7 +16,32 @@
 #include "View.h"
 
 
-enum class keyboardKeys {
+//#ifdef _WIN32
+// not defined in windows console header
+//#pragma comment (lib, "kernel32.lib")
+
+//extern "C" int __cdecl ReadConsoleInputInfoExA (HANDLE, PINPUT_RECORD, DWORD, LPDWORD, USHORT);
+//#ifndef CONSOLE_READ_NOREMOVE
+//#define CONSOLE_READ_NOREMOVE       0x0001
+//#endif // !CONSOLE_READ_NOREMOVE
+//#ifndef CONSOLE_READ_NOWAIT
+//#define CONSOLE_READ_NOWAIT         0x0002
+//#endif // !CONSOLE_READ_NOREMOVE
+//BOOL WINAPI ReadConsoleInputExA (_In_ HANDLE hConsoleInput,
+//                                 _Out_writes_ (nLenght) PINPUT_RECORD lpBuffer,
+//                                 _In_ DWORD nlength,
+//                                 _Out_ LPDWORD lpNumberOfEventsRead,
+//                                 _In_ USHORT wFlags);
+//BOOL WINAPI ReadConsoleInputExW (_In_ HANDLE hConsoleInput,
+//                                 _Out_writes_ (nLenght) PINPUT_RECORD lpBuffer,
+//                                 _In_ DWORD nlength,
+//                                 _Out_ LPDWORD lpNumberOfEventsRead,
+//                                 _In_ USHORT wFlags);
+//#endif // _WIN32
+
+
+enum class keyboardKeys
+{
     Return, Up, Down, Left, Right, Esc, None
 };
 
@@ -25,23 +50,38 @@ class TheInput : public View, Inserter
 {
 private:
 #ifdef _WIN32
-    const HANDLE* inputConsoleOutput;
-    DWORD cmodeStoreage;
-#elifdef __APPLE__
+    DWORD currentConsoleMode;
+    const HANDLE* consoleInput;
+    const HANDLE* consoleOutput;
+
+    KEY_EVENT_RECORD pressedKeyRecord;
+    std::thread* readBufferRef;
+    bool readBufferFlag;
+    bool lockEngine;
+#else ifdef __APPLE__
     struct termios orig_termios;
-#endif
+#endif // _WIN32
+
     keyboardKeys pressedKey;
-    bool process;
-    
-    void processKeyboard();
-    void processMouse();
-    void processViewResize();
+    bool initialized;
+    //bool process;
+
+    void readBufferEngine (void);
+    void processKeyboard (void);
+    void processMouse (void);
+    void processViewResize (void);
 public:
-    TheInput();
-    void processInput();
-    const bool& getProcess(void);
-    const keyboardKeys& getPressedKey(void);
-    void release(void);
+    TheInput ();
+    void processInput (void);
+    const bool& getInitialized (void);
+    const bool const getProccessedKey (keyboardKeys validateKey);
+    void release (void);
+
+#ifdef _WIN32
+    using View::getConsoleInput;
+    using View::getConsoleOutput;
+    //using View::getConsoleWindow;
+#endif // _WIN32
 };
 
 

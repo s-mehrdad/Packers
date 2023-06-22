@@ -137,7 +137,6 @@
     <ClInclude Include="Status.h" />
     <ClInclude Include="Tale.h" />
     <ClInclude Include="View.h" />
-    <ClInclude Include="Z_OldCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
@@ -148,7 +147,6 @@
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Tale.cpp" />
     <ClCompile Include="View.cpp" />
-    <ClCompile Include="Z_OldCodes.cpp" />
     <ClCompile Include="Packer.cpp" />
     <ClCompile Include="Packers.cpp" />
     <ClCompile Include="Shared.cpp" />
