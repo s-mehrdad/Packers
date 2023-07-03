@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Shared.h
 /// Packers
 /// created by Mehrdad Soleimanimajd on 13.10.2018
 /// </summary>
 /// <created>ʆϒʅ, 13.10.2018</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #ifndef SHARED_H
 #define SHARED_H
@@ -41,19 +41,19 @@ private:
 public:
     Inserter ();
     void colourInserter (const coordinateType& coord);
-    void colourInserter (const std::string& str, const coordinateType& pos);
+    void colourInserter (const std::wstring& str, const coordinateType& pos);
 
 #ifdef _WIN32
-    void colourInserter (const std::string& str, const WORD& colour);
-    void colourInserter (const char& chr, const WORD& colour, const coordinateType& pos);
-    void colourInserter (const std::string& str, const WORD& colour, const coordinateType& pos);
+    void colourInserter (const std::wstring& str, const WORD& colour);
+    void colourInserter (const wchar_t& chr, const WORD& colour, const coordinateType& pos);
+    void colourInserter (const std::wstring& str, const WORD& colour, const coordinateType& pos);
 
     using View::getConsoleOutput;
 
 #else ifdef __APPLE__
-    void colourInserter (const std::string& str, const std::string& colour);
-    void colourInserter (const char& chr, const std::string& colour, const coordinateType& pos);
-    void colourInserter (const std::string& str, const std::string& colour, const coordinateType& pos);
+    void colourInserter (const std::wstring& str, const std::wstring& colour);
+    void colourInserter (const wchar_t& chr, const std::wstring& colour, const coordinateType& pos);
+    void colourInserter (const std::wstring& str, const std::wstring& colour, const coordinateType& pos);
 #endif // _WIN32
 
     void clear ();
@@ -67,16 +67,16 @@ class Loading :public Inserter
 {
 private:
     //struct loadingBar;
-    std::string characters [9];
-    std::string copyWrite;
+    std::wstring characters [9];
+    std::wstring copyWrite;
 #ifdef _WIN32
     WORD colourOne;
     WORD colourTwo;
     WORD colourThree;
 #else ifdef __APPLE__
-    std::string colourOne;
-    std::string colourTwo;
-    std::string colourThree;
+    std::wstring colourOne;
+    std::wstring colourTwo;
+    std::wstring colourThree;
 #endif // _WIN32
     coordinateType startPoint;
     unsigned char speed;

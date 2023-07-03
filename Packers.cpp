@@ -1,5 +1,5 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Packers.cpp
 /// Packers
@@ -14,8 +14,8 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "Area.h"
@@ -34,7 +34,7 @@ bool runningOne {true};
 bool runningTwo {true};
 unsigned char menuState {10};
 bool involved {false};
-TheNarrator theNarrator ("theNarrator");
+TheNarrator theNarrator (L"theNarrator");
 
 int main ()
 {
@@ -63,15 +63,15 @@ int main ()
         GameElements gameElements;
 
         // Area.h
-        TheArea areaOne (0, "areaOne");
+        TheArea areaOne (0, L"areaOne");
         gameElements.set (&areaOne);
-        // todo: add start points in near almost never :| future!
+        // TODO: add start points in near almost never :| future!
         coordinateType areaDimension {areaOne.getDimension ()};
 
         // Tale.h
         theNarrator.setArea (areaDimension);
 
-        TheGiant theGiant ("theGiant", areaDimension);
+        TheGiant theGiant (L"theGiant", areaDimension);
         gameElements.set (&theGiant);
         gameElements.get (*theGiant.setGetElementId ()).draw ();
         //theGiant.draw ();
@@ -89,10 +89,10 @@ int main ()
 
 
         // Infobars.h
-        TheTitleBar theTitleBar (areaDimension, "theTitleBar");
+        TheTitleBar theTitleBar (areaDimension, L"theTitleBar");
         gameElements.set (&theTitleBar);
         gameElements.get (*theTitleBar.setGetElementId ()).draw ();
-        TheGuideBar theGuideBar (areaDimension, "theGuideBar");
+        TheGuideBar theGuideBar (areaDimension, L"theGuideBar");
         gameElements.set (&theGuideBar);
         gameElements.get (*theGuideBar.setGetElementId ()).draw ();
 
@@ -127,7 +127,7 @@ int main ()
             // Status.h
             Status state (0, areaDimension);
             state.set (Packer::count);
-            state.setPaackersState ();
+            state.setPackersState ();
 
             // Menus.h
             dangerAreaMenu menuOne (areaDimension);
@@ -335,8 +335,8 @@ int main ()
                             switch (menuState)
                             {
                                 case 10:
-                                    //xx Todo FYI, user may doubtfully get involved in demo too! :)
-                                    //xx Todo a possible dream is also a dream! :) as if the programmer has more than two hands!
+                                    //xx TODO FYI, user may doubtfully get involved in demo too! :)
+                                    //xx TODO a possible dream is also a dream! :) as if the programmer has more than two hands!
                                     // Edit: lets try it! :)
                                     if (involvedOne == nullptr)
                                     {
@@ -381,7 +381,7 @@ int main ()
                                     //menuThree.switchSet ( menuState, true );
                                     menuState = 40;
                                     menuThree.switcher ();
-                                    // Todo aware the narrator! :)
+                                    // TODO aware the narrator! :)
                                     menuFour.switcher ();
                                     break;
                                 case 40:
@@ -394,7 +394,7 @@ int main ()
                                     menuState = 10;
                                     menuFour.switcher ();
                                     menuOne.get () = 0;
-                                    // Todo aware the narrator! :)
+                                    // TODO aware the narrator! :)
                                     menuOne.switcher (false);
                                     if (involvedOne != nullptr)
                                         involvedOne->involve ((menuThree.get () * 10) + menuFour.get ());
@@ -402,7 +402,7 @@ int main ()
                             }
                         }
 
-                        //xx Todo providing the ability so the involved one could escape her/his mess! :)
+                        //xx TODO providing the ability so the involved one could escape her/his mess! :)
                         // edit: solution for time being:
 
                         if ((theInput.getProccessedKey (keyboardKeys::Esc)) && (menuState == 0))

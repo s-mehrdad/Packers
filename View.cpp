@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// View.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 09.06.2022</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 
 #include "Packers.h"
@@ -20,13 +20,13 @@ View::View ()
     try
     {
 
+#ifdef _WIN32
         viewConsoleInput = nullptr;
         viewConsoleOutput = nullptr;
 
         consoleInMode = 0;
         consoleOutMode = 0;
 
-#ifdef _WIN32
         BOOL result;
         viewConsoleInput = GetStdHandle (STD_INPUT_HANDLE);
         if (viewConsoleInput != INVALID_HANDLE_VALUE)
@@ -169,8 +169,8 @@ void View::setScreen (short width, short height, short left, short top)
     //result = MoveWindow ( viewConsoleWindow, left, top, width * 5, height * 10, true );
 
 #else ifdef __APPLE__
-    std::cout << "\x1b[3;" << std::to_string (top) << ";" << std::to_string (left) << "t";
-    std::cout << "\x1b[8;" << std::to_string (height) << ";" << std::to_string (width) << "t";
+    std::wcout << "\x1b[3;" << std::to_string (top) << ";" << std::to_string (left) << "t";
+    std::wcout << "\x1b[8;" << std::to_string (height) << ";" << std::to_string (width) << "t";
 #endif // _WIN32
 
 };
@@ -199,9 +199,9 @@ void View::setView (unsigned int codec, bool cursor)
 
 
 #ifdef _WIN32
-void View::setFont (std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
+void View::setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
 #else ifdef __APPLE__
-void View::setFont (std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour)
+void View::setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, std::wstring colour)
 #endif // _WIN32
 {
 
@@ -254,7 +254,7 @@ void View::setFont (std::string fontName, unsigned char fontX, unsigned char fon
     }
 
 #else ifdef __APPLE__
-    std::cout << E_cursorOFF;
+    std::wcout << E_cursorOFF;
 #endif // _WIN32
 
 };
@@ -294,13 +294,17 @@ const HWND* View::getConsoleWindow ()
 
 };
 
+
+#else ifdef __APPLE__
+#endif // _WIN32
+
+
 const bool& View::isInitialized ()
 {
+
     return initialized;
 
 };
-#else ifdef __APPLE__
-#endif // _WIN32
 
 
 void View::release ()

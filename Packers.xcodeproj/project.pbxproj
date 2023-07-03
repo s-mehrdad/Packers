@@ -50,7 +50,6 @@
 		E81587AE29AFE2A70058A982 /* Status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Status.cpp; sourceTree = "<group>"; };
 		E81587B029AFE2A70058A982 /* Area.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Area.cpp; sourceTree = "<group>"; };
 		E81587B129AFE2A70058A982 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E81587B229AFE2A70058A982 /* CMakeSettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CMakeSettings.json; sourceTree = "<group>"; };
 		E81587B329AFE2A70058A982 /* aGiant */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aGiant; sourceTree = "<group>"; };
 		E81587B429AFE2A70058A982 /* Menus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menus.cpp; sourceTree = "<group>"; };
 		E81587B629AFE2A80058A982 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -60,9 +59,7 @@
 		E81587BA29AFE2A80058A982 /* Shared.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shared.cpp; sourceTree = "<group>"; };
 		E81587BB29AFE2A80058A982 /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
 		E81587BC29AFE2A80058A982 /* Tale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tale.h; sourceTree = "<group>"; };
-		E81587BD29AFE2A80058A982 /* Z_OldCodes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Z_OldCodes.cpp; sourceTree = "<group>"; };
 		E81587BE29AFE2A90058A982 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
-		E81587BF29AFE2A90058A982 /* Z_OldCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Z_OldCodes.h; sourceTree = "<group>"; };
 		E81587C029AFE2A90058A982 /* Infobars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Infobars.h; sourceTree = "<group>"; };
 		E81587C129AFE2A90058A982 /* Packers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packers.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,7 +82,6 @@
 				E81587B029AFE2A70058A982 /* Area.cpp */,
 				E81587B829AFE2A80058A982 /* Area.h */,
 				E81587B629AFE2A80058A982 /* CMakeLists.txt */,
-				E81587B229AFE2A70058A982 /* CMakeSettings.json */,
 				E81587A329AFE2A50058A982 /* GameElements.cpp */,
 				E81587A129AFE2A50058A982 /* GameElements.h */,
 				E81587A729AFE2A60058A982 /* Infobars.cpp */,
@@ -109,8 +105,6 @@
 				E81587BC29AFE2A80058A982 /* Tale.h */,
 				E81587BE29AFE2A90058A982 /* View.cpp */,
 				E81587BB29AFE2A80058A982 /* View.h */,
-				E81587BD29AFE2A80058A982 /* Z_OldCodes.cpp */,
-				E81587BF29AFE2A90058A982 /* Z_OldCodes.h */,
 				E815879629AFDDF20058A982 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -186,7 +180,6 @@
 				E81587C629AFE2A90058A982 /* Area.cpp in Sources */,
 				E81587C229AFE2A90058A982 /* GameElements.cpp in Sources */,
 				E81587C829AFE2A90058A982 /* Input.cpp in Sources */,
-				E81587CB29AFE2A90058A982 /* Z_OldCodes.cpp in Sources */,
 				E81587CA29AFE2A90058A982 /* Shared.cpp in Sources */,
 				E81587C429AFE2A90058A982 /* Infobars.cpp in Sources */,
 				E81587C729AFE2A90058A982 /* Menus.cpp in Sources */,
@@ -248,7 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -300,7 +293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -1,19 +1,19 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Infobars.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "Infobars.h"
 
 
-TheTitleBar::TheTitleBar (coordinateType area, std::string name)
+TheTitleBar::TheTitleBar (coordinateType area, std::wstring name)
 {
 
     setBase ();
@@ -21,12 +21,12 @@ TheTitleBar::TheTitleBar (coordinateType area, std::string name)
     elementName = name;
 
     firstInScene = 2;
-    titleSentence = "Feel free to way in toward becoming an advanced packer! ♥♥♥♥♥ :)";
+    titleSentence = L"Feel free to way in toward becoming an advanced packer! ♥♥♥♥♥ :)";
 
     startPoints [0] = {short ((area.x / 2) - ((titleSentence.size () - 5) / 2)) + 2, 0}; // center it! :)
     startPoints [1] = {short (titleSentence.size () - 10), 0}; // end of it.
     inRow = 1;
-    floatedTo = "center";
+    floatedTo = L"center";
 
 };
 
@@ -52,7 +52,7 @@ void TheTitleBar::draw (void)
 };
 
 
-TheGuideBar::TheGuideBar (coordinateType area, std::string name)
+TheGuideBar::TheGuideBar (coordinateType area, std::wstring name)
 {
 
     setBase ();
@@ -61,17 +61,17 @@ TheGuideBar::TheGuideBar (coordinateType area, std::string name)
 
     firstInScene = 2;
 
-    signs [0] = "♣:";
-    signs [1] = "☻:";
-    signs [2] = ".:";
-    guides [0] = " healthy resources";
-    guides [1] = " beloved packers";
-    guides [2] = " ready packages";
+    signs [0] = L"♣:";
+    signs [1] = L"☻:";
+    signs [2] = L".:";
+    guides [0] = L" healthy resources";
+    guides [1] = L" beloved packers";
+    guides [2] = L" ready packages";
 
     startPoints [0] = {2, short (area.y + 9)};
     startPoints [1] = {short (guides [0].size () + guides [1].size () + guides [2].size () + 2), short (area.y + 11)};
     inRow = 4;
-    floatedTo = "center";
+    floatedTo = L"center";
 
 };
 

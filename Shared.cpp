@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Shared.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 13.10.2018
 /// </summary>
 /// <created>ʆϒʅ, 13.10.2018</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "Shared.h"
@@ -32,87 +32,87 @@ void Inserter::colourInserter (const coordinateType& pos)
 #ifdef _WIN32
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
 #else ifdef __APPLE__
-    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
 #endif // _WIN32
 
 };
 
 
-void Inserter::colourInserter (const std::string& str, const coordinateType& pos)
+void Inserter::colourInserter (const std::wstring& str, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
 #ifdef _WIN32
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
-    std::cout << str;
+    std::wcout << str;
 #else ifdef __APPLE__
-    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
-    std::cout << str;
+    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::wcout << str;
 #endif // _WIN32
 
 };
 
 
 #ifdef _WIN32
-void Inserter::colourInserter (const std::string& str, const WORD& colour)
+void Inserter::colourInserter (const std::wstring& str, const WORD& colour)
 {
 
-    SetConsoleTextAttribute (*consoleOutput, colour);
-    std::cout << str;
+    SetConsoleTextAttribute (*consoleOutput, colour /*| B_GREEN*/);
+    std::wcout << str;
 
 };
 
 
-void Inserter::colourInserter (const char& chr, const WORD& colour, const coordinateType& pos)
+void Inserter::colourInserter (const wchar_t& chr, const WORD& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
-    SetConsoleTextAttribute (*consoleOutput, colour);
-    std::cout << chr;
+    SetConsoleTextAttribute (*consoleOutput, colour /*| B_GREEN*/);
+    std::wcout << chr;
 
 };
 
 
-void Inserter::colourInserter (const std::string& str, const WORD& colour, const coordinateType& pos)
+void Inserter::colourInserter (const std::wstring& str, const WORD& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
-    SetConsoleTextAttribute (*consoleOutput, colour);
-    std::cout << str;
+    SetConsoleTextAttribute (*consoleOutput, colour /*| B_GREEN*/);
+    std::wcout << str;
 
 };
 
 
 #else ifdef __APPLE__
-void Inserter::colourInserter (const std::string& str, const std::string& colour)
+void Inserter::colourInserter (const std::wstring& str, const std::wstring& colour)
 {
 
-    std::cout << colour;
-    std::cout << str;
+    std::wcout << colour;
+    std::wcout << str;
 
 };
 
 
-void Inserter::colourInserter (const char& chr, const std::string& colour, const coordinateType& pos)
+void Inserter::colourInserter (const wchar_t& chr, const std::wstring& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
-    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
-    std::cout << colour;
-    std::cout << chr;
+    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::wcout << colour;
+    std::wcout << chr;
 
 };
 
 
-void Inserter::colourInserter (const std::string& str, const std::string& colour, const coordinateType& pos)
+void Inserter::colourInserter (const std::wstring& str, const std::wstring& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
-    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
-    std::cout << colour;
-    std::cout << str;
+    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::wcout << colour;
+    std::wcout << str;
 
 };
 #endif // _WIN32
@@ -125,17 +125,17 @@ void Inserter::clear ()
     coordinateType zero {0,0};
 
     //#ifdef _WIN32
-    std::string strTemp {""};
+    std::wstring strTemp {L""};
     //#else ifdef __APPLE__
-    //    std::string strTemp {""};
+    //    std::wstring strTemp {""};
     //#endif // _WIN32
 
     for (unsigned char i = 0; i <= SCREEN_W; i += 10)
     {
 #ifdef _WIN32
-        strTemp += "           ";
+        strTemp += L"           ";
 #else ifdef __APPLE__
-        strTemp += "           ";
+        strTemp += L"           ";
 #endif // _WIN32
     }
 
@@ -146,7 +146,7 @@ void Inserter::clear ()
         temp.y++;
     }
     //for ( unsigned char i = 0; i <= SCREEN_H + ( SCREEN_H / 3 ); i++ )
-    //    std::cout << strTemp;
+    //    std::wcout << strTemp;
     colourInserter (zero);
 
 }
@@ -158,9 +158,9 @@ Loading::Loading (const unsigned char& mode, coordinateType area)
 
     // set
 #ifdef _WIN32
-    std::string str {"LOADING# "};
+    std::wstring str {L"LOADING# "};
 #else ifdef __APPLE__
-    std::string str {"LOADING# "};
+    std::wstring str {"LOADING# "};
 #endif // _WIN32
     unsigned char i {0};
     for (char element : str)
@@ -169,14 +169,14 @@ Loading::Loading (const unsigned char& mode, coordinateType area)
         ++i;
     }
 #ifdef _WIN32
-    copyWrite = "  ©: ʆϒʅ"; // usable in true type fonts
-    copyWrite = "  ©: }Y{";
+    copyWrite = L"  ©: ʆϒʅ"; // usable in true type fonts
+    copyWrite = L"  ©: }Y{";
     colourOne = B_bBLUE | F_bWHITE;
     colourTwo = B_BLACK | F_bGREEN;
     colourThree = B_BLACK | F_bWHITE;
 #else ifdef __APPLE__
-    copywrite = "  ©: ʆϒʅ"; // usable in true type fonts
-    copywrite = "  ©: }Y{";
+    copyWrite = L"  ©: ʆϒʅ"; // usable in true type fonts
+    copyWrite = L"  ©: }Y{";
     colourOne = B_bBLUE;
     colourTwo = B_BLACK;
     colourThree = B_BLACK;

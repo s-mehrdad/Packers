@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// View.h
 /// Packers
 /// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 09.06.2022</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #ifndef VIEW_H
 #define VIEW_H
@@ -59,19 +59,22 @@ public:
     View (); //construct needed console window properties
     void setScreen (short width, short height, short left, short top);
     void setView (unsigned int codec, bool cursor);
+    const bool& isInitialized ();
+
 #ifdef _WIN32
-    void setFont (std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour);
+    void setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, unsigned short colour);
 #else ifdef __APPLE__
-    void setFont (std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour);
+    void setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, std::wstring colour);
 #endif // _WIN32
+
 #ifdef _WIN32
     static CODEPAGE_ENUMPROC CALLBACK calledProc (LPWSTR);
     const HANDLE* getConsoleInput ();
     const HANDLE* getConsoleOutput ();
     const HWND* getConsoleWindow ();
-    const bool& isInitialized ();
 #else ifdef __APPLE__
 #endif // _WIN32
+
     void release ();
 };
 

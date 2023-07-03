@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// GameElements.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 14.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 14.06.2022</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "GameElements.h"
@@ -52,7 +52,7 @@ short*& GameElement::setGetElementId (void)
 };
 
 
-std::string*& GameElement::setGetElementName (void)
+std::wstring*& GameElement::setGetElementName (void)
 {
 
     return elementName;
@@ -84,7 +84,7 @@ short*& GameElement::setGetElementRow (void)
 };
 
 
-std::string*& GameElement::setGetElementFloat (void)
+std::wstring*& GameElement::setGetElementFloat (void)
 {
 
     return elementFloat;

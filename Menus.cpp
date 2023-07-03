@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Menus.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "Menus.h"
@@ -37,11 +37,11 @@ coordinateType* pMenus::getSetStartPoints ()
 dangerAreaMenu::dangerAreaMenu (coordinateType area) :pMenus::pMenus (area)
 {
 
-    title = "Danger area:";
-    options [0] = "  Involve me!";
-    options [1] = "  Let me furnish! :)";
-    options [2] = "  Let's hit the road!";
-    selectionSign = "->";
+    title = L"Danger area:";
+    options [0] = L"  Involve me!";
+    options [1] = L"  Let me furnish! :)";
+    options [2] = L"  Let's hit the road!";
+    selectionSign = L"->";
     selected = 0;
     set = false;
     switcher (false);
@@ -63,7 +63,7 @@ void dangerAreaMenu::switcher (bool involved)
         for (char i = 0; i < 3; i++)
         {
             //coordinateOne.x -= 3;
-            colourInserter ("                                           ", coordinateOne);
+            colourInserter (L"                                           ", coordinateOne);
             //coordinateOne.x += 3;
             colourInserter (options [i], F_bWHITE, coordinateOne);
             coordinateOne.y += 1;
@@ -76,20 +76,20 @@ void dangerAreaMenu::switcher (bool involved)
         if (involved)
         {
             //coordinateOne.x -= 3;
-            colourInserter ("                                           ", coordinateOne);
+            colourInserter (L"                                           ", coordinateOne);
             for (unsigned char i = 0; i < 3; i++)
             {
                 coordinateOne.y += 1;
                 switch (i)
                 {
                     case 0:
-                        colourInserter ("For now you can be just a nature lover! ^.^", coordinateOne);
+                        colourInserter (L"For now you can be just a nature lover! ^.^", coordinateOne);
                         break;
                     case 1:
-                        colourInserter ("This is a demo representing the idea. ^,^", coordinateOne);
+                        colourInserter (L"This is a demo representing the idea. ^,^", coordinateOne);
                         break;
                     case 2:
-                        colourInserter ("Please press ESC to end your try.", coordinateOne);
+                        colourInserter (L"Please press ESC to end your try.", coordinateOne);
                         break;
                 }
             }
@@ -98,7 +98,7 @@ void dangerAreaMenu::switcher (bool involved)
             coordinateOne.x -= 1;
             for (unsigned char i = 0; i <= 3; i++)
             {
-                colourInserter ("                                           ", coordinateOne);
+                colourInserter (L"                                           ", coordinateOne);
                 coordinateOne.y += 1;
             }
 
@@ -121,9 +121,9 @@ void dangerAreaMenu::switchSet (const unsigned char& choice, const bool& confirm
     coordinate.x -= 2;
     if (confirm == false)
     {
-        colourInserter ("  ", F_bRED, coordinate);
+        colourInserter (L"  ", F_bRED, coordinate);
         selected = chosen;
-        // Todo aware the narrator! :)
+        // TODO aware the narrator! :)
         coordinate = *(getSetStartPoints () + 1);
         coordinate.y += chosen;
         coordinate.x -= 2;
@@ -146,13 +146,13 @@ unsigned char& dangerAreaMenu::get ()
 agesMenu::agesMenu (coordinateType area) :pMenus::pMenus (area)
 {
 
-    title = "Packing speed:";
-    options [0] = "  Stone age.";
-    options [1] = "  Middle age...";
-    options [2] = "  Advanced age.........";
-    options [3] = "  Hollow age.      . .            .";
-    options [4] = "  Dirty age (packers of packers contest!)";
-    selectionSign = "->";
+    title = L"Packing speed:";
+    options [0] = L"  Stone age.";
+    options [1] = L"  Middle age...";
+    options [2] = L"  Advanced age.........";
+    options [3] = L"  Hollow age.      . .            .";
+    options [4] = L"  Dirty age (packers of packers contest!)";
+    selectionSign = L"->";
     unsigned short selected {0};
     bool set {false};
 
@@ -174,7 +174,7 @@ void agesMenu::switcher ()
 #ifdef _WIN32
             WORD tmpColour {F_bWHITE};
 #else ifdef __APPLE__
-            std::string tmpColour {F_bWHITE};
+            std::wstring tmpColour {F_bWHITE};
 #endif
             if (i == selected)
                 tmpColour = F_bRED;
@@ -191,7 +191,7 @@ void agesMenu::switcher ()
         coordinate.x -= 1;
         for (unsigned char i = 0; i <= 5; i++)
         {
-            colourInserter ("                                           ", coordinate);
+            colourInserter (L"                                           ", coordinate);
             coordinate.y += 1;
         }
         set = false;
@@ -212,7 +212,7 @@ void agesMenu::switchSet (const unsigned char& choice, const bool& confirm)
     coordinate.x -= 2;
     if (confirm == false)
     {
-        colourInserter ("  ", F_bRED, coordinate);
+        colourInserter (L"  ", F_bRED, coordinate);
         coordinate = *(getSetStartPoints () + 1);
         coordinate.y += chosen;
         coordinate.x -= 2;
@@ -259,11 +259,11 @@ const unsigned char& agesMenu::get ()
 charactersMenu::charactersMenu (coordinateType area) :pMenus::pMenus (area)
 {
 
-    title = "Character Choices:";
+    title = L"Character Choices:";
     // two character re-presenter should be enough for the ambitious packers! :)
-    options [0] = "☻";
-    options [1] = "☺";
-    selectionSign = "->";
+    options [0] = L"☻";
+    options [1] = L"☺";
+    selectionSign = L"->";
     selected = 0;
     set = false;
     //*getSetStartPoints () = { 5, SCREEN_H - 10 };;
@@ -288,7 +288,7 @@ void charactersMenu::switcher ()
 #ifdef _WIN32
             WORD tmpColour {F_bWHITE};
 #else ifdef __APPLE__
-            std::string tmpColour {F_bWHITE};
+            std::wstring tmpColour {F_bWHITE};
 #endif
             if (i == selected)
                 tmpColour = F_bRED;
@@ -306,7 +306,7 @@ void charactersMenu::switcher ()
         coordinateOne.x -= 1;
         for (unsigned char i = 0; i <= 1; i++)
         {
-            colourInserter ("                    ", coordinateOne);
+            colourInserter (L"                    ", coordinateOne);
             coordinateOne.y += 1;
         }
         set = false;
@@ -328,14 +328,14 @@ void charactersMenu::switchSet (const unsigned char& choice, const bool& confirm
         coordinate.x += 7;
     if (confirm == false)
     {
-        colourInserter ("  ", F_bRED, coordinate);
+        colourInserter (L"  ", F_bRED, coordinate);
         coordinate = *(getSetStartPoints () + 1);
         coordinate.x -= 2;
         if (chosen == 1)
             coordinate.x += 7;
         colourInserter (selectionSign, F_bRED, coordinate);
         selected = chosen;
-        // Todo aware the narrator! :)
+        // TODO aware the narrator! :)
     } else
     {
 
@@ -354,20 +354,20 @@ const unsigned char& charactersMenu::get ()
 motivationsMenu::motivationsMenu (coordinateType area) :pMenus::pMenus (area)
 {
 
-    title = "A shiny colour is wished!:";
-    options [0] = "  Independent";
-    options [1] = "  Green nationalist";
-    options [2] = "  Red nationalist";
-    options [3] = "  Not know how";
-    options [4] = "  Free";
-    options [5] = "  Neutral";
+    title = L"A shiny colour is wished!:";
+    options [0] = L"  Independent";
+    options [1] = L"  Green nationalist";
+    options [2] = L"  Red nationalist";
+    options [3] = L"  Not know how";
+    options [4] = L"  Free";
+    options [5] = L"  Neutral";
     colours [0] = F_bCYAN;
     colours [1] = F_bGREEN;
     colours [2] = F_bRED;
     colours [3] = F_bPURPLE;
     colours [4] = F_bYELLOW;
     colours [5] = F_bWHITE;
-    selectionSign = "->";
+    selectionSign = L"->";
     unsigned short selected {0};
     bool set {false};
     //*getSetStartPoints () = { 5, SCREEN_H - 10 };
@@ -383,7 +383,7 @@ void motivationsMenu::switcher ()
 #ifdef _WIN32
     WORD tmpColour {0};
 #else ifdef __APPLE__
-    std::string tmpColour {""};
+    std::wstring tmpColour {""};
 #endif
 
     // motivationsMenu
@@ -426,7 +426,7 @@ void motivationsMenu::switcher ()
         coordinate.x -= 1;
         for (unsigned char i = 0; i <= 5; i++)
         {
-            colourInserter ("                                        ", coordinate);
+            colourInserter (L"                                        ", coordinate);
             coordinate.y += 1;
         }
         set = false;
@@ -454,7 +454,7 @@ void motivationsMenu::switchSet (const unsigned char& choice, const bool& confir
     {
         if (confirm == false)
         {
-            colourInserter ("  ", F_bRED, coordinate);
+            colourInserter (L"  ", F_bRED, coordinate);
             coordinate.x = (getSetStartPoints () + 1)->x;
             coordinate.x -= 2;
             if (selected < chosen)
@@ -469,7 +469,7 @@ void motivationsMenu::switchSet (const unsigned char& choice, const bool& confir
             }
             colourInserter (selectionSign, F_bRED, coordinate);
             selected = chosen;
-            // Todo aware the narrator, mentioning that the jump was bigger! :)
+            // TODO aware the narrator, mentioning that the jump was bigger! :)
         } else
         {
 
@@ -478,7 +478,7 @@ void motivationsMenu::switchSet (const unsigned char& choice, const bool& confir
     {
         if (confirm == false)
         {
-            colourInserter ("  ", F_bRED, coordinate);
+            colourInserter (L"  ", F_bRED, coordinate);
             coordinate = *(getSetStartPoints () + 1);
             coordinate.y += chosen;
             coordinate.x -= 2;
@@ -507,7 +507,7 @@ void motivationsMenu::switchSet (const unsigned char& choice, const bool& confir
             }
             colourInserter (selectionSign, F_bRED, coordinate);
             selected = chosen;
-            // Todo aware the narrator! :)
+            // TODO aware the narrator! :)
         } else
         {
 

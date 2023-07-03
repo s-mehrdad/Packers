@@ -1,19 +1,19 @@
 ﻿
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Area.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "Area.h"
 
 
-TheArea::TheArea (unsigned char age, std::string name) :currentAge (age),
+TheArea::TheArea (unsigned char age, std::wstring name) :currentAge (age),
 GameElement::GameElement ()
 {
 
@@ -24,12 +24,12 @@ GameElement::GameElement ()
 
     firstInScene = 2;
 
-    horizontalWall = "?"; // Unicode: "?"
-    verticalWall = "?"; // Unicode: "?"
-    edges [0] = "?"; // Unicode: "?"
-    edges [1] = "?"; // Unicode: "?"
-    edges [2] = "?"; // Unicode: "?"
-    edges [3] = "?"; // Unicode: "?"
+    horizontalWall = L"═"; // notUnicode: "?"
+    verticalWall = L"║"; // notUnicode: "?"
+    edges [0] = L"╔"; // notUnicode: "?"
+    edges [1] = L"╚"; // notUnicode: "?"
+    edges [2] = L"╝"; // notUnicode: "?"
+    edges [3] = L"╗"; // notUnicode: "?"
 
     wallColour = F_CYAN;
     rows = SCREEN_H - 10;
@@ -42,15 +42,15 @@ GameElement::GameElement ()
     startPoints [0] = {1, 1};
     startPoints [1] = {columns, rows};
 
-    resources [0] = "?";
-    resources [1] = "?";
-    resources [2] = "?";
+    resources [0] = L"♠";
+    resources [1] = L"♣";
+    resources [2] = L"♦";
     healthyColour = F_GREEN;
     renewedColour = F_YELLOW;
     vanishedColour = F_bRED;
 
     inRow = 2;
-    floatedTo = "left";
+    floatedTo = L"left";
 
 };
 
@@ -74,9 +74,11 @@ void TheArea::draw ()
     // area
     coordinateType position;
     //setGetElementStartPoint () = &position;
-    for (int y = startPoints [0].y; y <= rows; y++)
+    int x {0};
+    int y {0};
+    for (y = startPoints [0].y; y <= rows; y++)
     {
-        for (int x = startPoints [0].x; x <= columns; x++)
+        for (x = startPoints [0].x; x <= columns; x++)
         {
             position.x = x;
             position.y = y;
@@ -120,7 +122,7 @@ void TheArea::draw ()
             if (y != startPoints [0].y && y != rows && y % 2 == 0)
                 if (x != startPoints [0].x && x != columns && x % 2 == 0)
                     colourInserter (resources [1], healthyColour);
-            std::cout << '\n';
+            std::wcout << '\n';
         }
     }
 
@@ -141,14 +143,14 @@ void TheArea::setter (const unsigned short& state, const coordinateType& positio
             {
                 coordinateType temp {position.x - 1, position.y - 1};
                 colourInserter (temp);
-                colourInserter ("?", F_YELLOW);
+                colourInserter (L"?", F_YELLOW);
                 //stateArray [position.y - 1][position.x - 1] = currentState;
             } else
                 if (position.x + 1 < columns)
                 {
                     coordinateType temp {position.x + 1, position.y - 1};
                     colourInserter (temp);
-                    colourInserter ("?", F_YELLOW);
+                    colourInserter (L"?", F_YELLOW);
                     //stateArray [position.y - 1][position.x + 1] = currentState;
                 }
             break;
@@ -157,14 +159,14 @@ void TheArea::setter (const unsigned short& state, const coordinateType& positio
             {
                 coordinateType temp {position.x - 1, position.y - 1};
                 colourInserter (temp);
-                colourInserter ("?", F_YELLOW);
+                colourInserter (L"?", F_YELLOW);
                 //stateArray [position.y - 1][position.x - 1] = currentState;
             } else
                 if (position.y + 1 < rows)
                 {
                     coordinateType temp {position.x - 1, position.y + 1};
                     colourInserter (temp);
-                    colourInserter ("?", F_YELLOW);
+                    colourInserter (L"?", F_YELLOW);
                     //stateArray [position.y + 1][position.x - 1] = currentState;
                 }
             break;
@@ -173,14 +175,14 @@ void TheArea::setter (const unsigned short& state, const coordinateType& positio
             {
                 coordinateType temp {position.x - 1, position.y + 1};
                 colourInserter (temp);
-                colourInserter ("?", F_YELLOW);
+                colourInserter (L"?", F_YELLOW);
                 //stateArray [position.y + 1][position.x - 1] = currentState;
             } else
                 if (position.x + 1 < columns)
                 {
                     coordinateType temp {position.x + 1, position.y + 1};
                     colourInserter (temp);
-                    colourInserter ("?", F_YELLOW);
+                    colourInserter (L"?", F_YELLOW);
                     //stateArray [position.y + 1][position.x + 1] = currentState;
                 }
             break;
@@ -189,14 +191,14 @@ void TheArea::setter (const unsigned short& state, const coordinateType& positio
             {
                 coordinateType temp {position.x + 1, position.y - 1};
                 colourInserter (temp);
-                colourInserter ("?", F_YELLOW);
+                colourInserter (L"?", F_YELLOW);
                 //stateArray [position.y - 1][position.x + 1] = currentState;
             } else
                 if (position.y + 1 < rows)
                 {
                     coordinateType temp {position.x + 1, position.y + 1};
                     colourInserter (temp);
-                    colourInserter ("?", F_YELLOW);
+                    colourInserter (L"?", F_YELLOW);
                     //stateArray [position.y + 1][position.x + 1] = currentState;
                 }
             break;

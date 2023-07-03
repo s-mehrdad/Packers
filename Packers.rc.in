@@ -1,0 +1,98 @@
+﻿
+// ===========================================================================
+/// <summary>
+/// CplusPlus.rc
+/// CplusPlus
+/// created by Mehrdad Soleimanimajd on 11.04.2018
+/// </summary>
+/// <created>ʆϒʅ, 11.04.2018</created>
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
+
+// references:
+// https://docs.microsoft.com/en-us/windows/desktop/menurc/versioninfo-resource
+// https://stackoverflow.com/questions/6693100/how-to-generate-windows-dll-versioning-information-with-cmake
+// https://github.com/halex2005/CMakeHelpers/
+
+
+// #include <resource.h>
+#include <winres.h>
+#include <winver.h>
+#include <windows.h>
+
+
+#define VER_COMPANYNAME                 @VerCompanyName@
+#define VER_COMPANYNAME_STR             "@VerCompanyName@"
+
+#define VER_FILEDESCRIPTION             @VerFileDescription@
+#define VER_FILEDESCRIPTION_STR         "@VerFileDescription@"
+
+#define VER_FILEVERSION                 @VerFileVersion@
+#define VER_FILEVERSION_STR             "@VerFileVersion@\0"
+
+#define VER_INTERNALNAME                @VerInternalName@
+#define VER_INTERNALNAME_STR            "@VerInternalName@"
+
+#define VER_LEGALCOPYRIGHT              @VerLegalCopyright@
+#define VER_LEGALCOPYRIGHT_STR          "@VerLegalCopyright@"
+
+#define VER_LEGALTRADEMARKS1            @VerLegalTrademarks1@
+#define VER_LEGALTRADEMARKS1_STR        "@VerLegalTrademarks1@"
+
+#define VER_LEGALTRADEMARKS2            @VerLegalTrademarks2@
+#define VER_LEGALTRADEMARKS2_STR        "@VerLegalTrademarks2@"
+
+#define VER_ORIGINALFILENAME            @VerOriginalFileName@
+#define VER_ORIGINALFILENAME_STR        "@VerOriginalFileName@"
+
+#define VER_PRODUCTNAME                 @VerProductName@
+#define VER_PRODUCTNAME_STR             "@VerProductName@"
+
+#define VER_PRODUCTVERSION              @VerProductVersion@
+#define VER_PRODUCTVERSION_STR          "@VerProductVersion@\0"
+
+#ifndef DEBUG
+#define VER_DEBUG                   0
+#else
+#define VER_DEBUG                   VS_FF_DEBUG
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VER_FILEVERSION
+PRODUCTVERSION  VER_PRODUCTVERSION
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+//FILEFLAGS       (VER_PRIVATEBUILD|VER_PRERELEASE|VER_DEBUG)
+FILEOS          VOS__WINDOWS32
+FILETYPE        @VerProjectType@
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName",      VER_COMPANYNAME_STR
+            VALUE "FileDescription",  VER_FILEDESCRIPTION_STR
+            VALUE "FileVersion",      VER_FILEVERSION_STR
+            VALUE "InternalName",     VER_INTERNALNAME_STR
+            VALUE "LegalCopyright",   VER_LEGALCOPYRIGHT_STR
+            VALUE "LegalTrademarks1", VER_LEGALTRADEMARKS1_STR
+            VALUE "LegalTrademarks2", VER_LEGALTRADEMARKS2_STR
+            VALUE "OriginalFilename", VER_ORIGINALFILENAME_STR
+            VALUE "ProductName",      VER_PRODUCTNAME_STR
+            VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        /* The following line should only be modified for localized versions.     */
+        /* It consists of any number of WORD,WORD pairs, with each pair           */
+        /* describing a language,codepage combination supported by the file.      */
+        /*                                                                        */
+        /* For example, a file might have values "0x409,1252" indicating that it  */
+        /* supports English language (0x409) in the Windows ANSI codepage (1252). */
+
+        VALUE "Translation", 0x409, 1252
+
+    END
+END

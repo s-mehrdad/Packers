@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// GameElements.h
 /// Packers
 /// created by Mehrdad Soleimanimajd on 14.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 14.06.2022</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #ifndef GAMEELEMENTS_H
 #define GAMEELEMENTS_H
@@ -20,23 +20,23 @@ class GameElement
 {
 private:
     short* elementID;
-    std::string* elementName;
+    std::wstring* elementName;
 
     short* sceneNumber;
 
     coordinateType* elementStartPoint;
     short* elementRow;
-    std::string* elementFloat; //left, center, right, stretchedH, stretchedV, different
+    std::wstring* elementFloat; //left, center, right, stretchedH, stretchedV, different
 public:
     GameElement (void);
     GameElement* setGet (void);
     void setElementId (short& elementID);
     short*& setGetElementId (void);
-    std::string*& setGetElementName (void);
+    std::wstring*& setGetElementName (void);
     short*& setGetsceneNumber (void);
     coordinateType*& setGetElementStartPoint (void);
     short*& setGetElementRow (void);
-    std::string*& setGetElementFloat (void);
+    std::wstring*& setGetElementFloat (void);
     void release (void);
 
     virtual void draw (void) {};

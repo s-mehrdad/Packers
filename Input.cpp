@@ -1,13 +1,13 @@
 
-// ********************************************************************************
+// ===========================================================================
 /// <summary>
 /// Input.cpp
 /// Packers
 /// created by Mehrdad Soleimanimajd on 18.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 18.06.2022</created>
-/// <changed>ʆϒʅ, 22.06.2023</changed>
-// ********************************************************************************
+/// <changed>ʆϒʅ, 03.07.2023</changed>
+// ===========================================================================
 
 #include "Packers.h"
 #include "Input.h"
@@ -71,7 +71,7 @@ TheInput::TheInput (void)
         {
 
         }
-};
+    };
 #endif // _WIN32
     //process = true;
 
@@ -191,7 +191,7 @@ void TheInput::processKeyboard (void)
     char numberOfBytes {0};
     int readBytes {0};
     char readSequence [8] {'0'};
-    std::string readSequenceRaw {""};
+    std::wstring readSequenceRaw {L""};
     coordinateType pos {SCREEN_W - 25,SCREEN_H};
     coordinateType tempPos {pos};
 
@@ -212,7 +212,7 @@ void TheInput::processKeyboard (void)
         if (numberOfBytes == -1)
         {
 #else ifdef __APPLE__
-        if ((numberOfBytes = read (STDIN_FILENO, &c, 1)) == -1)
+        if ((numberOfBytes = read (STDIN_FILENO, &readCharacter, 1)) == -1)
         {
 #endif // _WIN32
 
@@ -223,51 +223,51 @@ void TheInput::processKeyboard (void)
 
             if (numberOfBytes != 0)
             {
-                readSequenceRaw += std::to_string (readCharacter) + " ";
+                readSequenceRaw += std::to_wstring (readCharacter) + L" ";
                 readSequence [i] = readCharacter;
                 readBytes += numberOfBytes;
                 if (readBytes == 1)
                 {
                     tempPos.y = pos.y - 8;
                     //debug
-                    colourInserter ("     ", tempPos);
+                    colourInserter (L"     ", tempPos);
                     for (int i = readBytes - 1; i <= 9; i++)
                     {
                         tempPos.y = pos.y - i;
-                        colourInserter ("                    ", tempPos);
+                        colourInserter (L"                    ", tempPos);
                     }
                 }
                 tempPos.y = pos.y - i;
                 switch (readCharacter)
                 {
                     case 0x07:
-                        colourInserter ("\\a", F_CYAN, tempPos);
+                        colourInserter (L"\\a", F_CYAN, tempPos);
                         break;
                     case 0x08:
-                        colourInserter ("\\b", F_CYAN, tempPos);
+                        colourInserter (L"\\b", F_CYAN, tempPos);
                         break;
                     case 0x09:
-                        colourInserter ("\\t", F_CYAN, tempPos);
+                        colourInserter (L"\\t", F_CYAN, tempPos);
                         break;
                     case 0x0a:
-                        colourInserter ("\\n", F_CYAN, tempPos);
+                        colourInserter (L"\\n", F_CYAN, tempPos);
                         pressedKey = keyboardKeys::Return;
                         break;
                     case 0x0b:
-                        colourInserter ("\\v", F_CYAN, tempPos);
+                        colourInserter (L"\\v", F_CYAN, tempPos);
                         break;
                     case 0x0c:
-                        colourInserter ("\\f", F_CYAN, tempPos);
+                        colourInserter (L"\\f", F_CYAN, tempPos);
                         break;
                     case 0x0d:
-                        colourInserter ("\\r", F_CYAN, tempPos);
+                        colourInserter (L"\\r", F_CYAN, tempPos);
                         pressedKey = keyboardKeys::Return;
                         break;
                     case 0x1b:
-                        colourInserter ("\\e", F_CYAN, tempPos);
+                        colourInserter (L"\\e", F_CYAN, tempPos);
                         break;
                     case 0x7F:
-                        colourInserter ("\\Delete character", F_CYAN, tempPos);
+                        colourInserter (L"\\Delete character", F_CYAN, tempPos);
                         break;
 
                     default:
@@ -281,12 +281,12 @@ void TheInput::processKeyboard (void)
             }
         }
     }
-    if ((readSequenceRaw != "") && (readBytes != 0))
+    if ((readSequenceRaw != L"") && (readBytes != 0))
     {
         tempPos.y = pos.y - 9;
         colourInserter (readSequenceRaw, F_bRED, tempPos);
         tempPos.y = pos.y - 8;
-        colourInserter (std::to_string (readBytes), F_YELLOW, {SCREEN_W - 25,SCREEN_H - 8});
+        colourInserter (std::to_wstring (readBytes), F_YELLOW, {SCREEN_W - 25,SCREEN_H - 8});
     }
     switch (readSequence [7])
     {
