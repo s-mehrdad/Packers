@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 13.04.2019
 /// </summary>
 /// <created>ʆϒʅ, 13.04.2019</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef PACKERS_H
@@ -50,7 +50,7 @@
 //#define FONT_NAME               "Lucida Console"
 //#define FONT_NAME               "Cascadia Code Light"
 //#define FONT_NAME               "Courier New"
-#define FONT_NAME               L"Consolas"
+#define FONT_NAME               "Consolas"
 //#define FONT_NAME               "NSimSun"
 //#define FONT_NAME               "Raster Fonts"
 #define SCREEN_L                2

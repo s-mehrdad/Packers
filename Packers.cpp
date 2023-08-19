@@ -14,7 +14,7 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #include "Packers.h"
@@ -34,7 +34,7 @@ bool runningOne {true};
 bool runningTwo {true};
 unsigned char menuState {10};
 bool involved {false};
-TheNarrator theNarrator (L"theNarrator");
+TheNarrator theNarrator ("theNarrator");
 
 int main ()
 {
@@ -63,7 +63,7 @@ int main ()
         GameElements gameElements;
 
         // Area.h
-        TheArea areaOne (0, L"areaOne");
+        TheArea areaOne (0, "areaOne");
         gameElements.set (&areaOne);
         // TODO: add start points in near almost never :| future!
         coordinateType areaDimension {areaOne.getDimension ()};
@@ -71,7 +71,7 @@ int main ()
         // Tale.h
         theNarrator.setArea (areaDimension);
 
-        TheGiant theGiant (L"theGiant", areaDimension);
+        TheGiant theGiant ("theGiant", areaDimension);
         gameElements.set (&theGiant);
         gameElements.get (*theGiant.setGetElementId ()).draw ();
         //theGiant.draw ();
@@ -88,11 +88,12 @@ int main ()
         gameElements.get (*areaOne.setGetElementId ()).draw ();
 
 
+
         // Infobars.h
-        TheTitleBar theTitleBar (areaDimension, L"theTitleBar");
+        TheTitleBar theTitleBar (areaDimension, "   theTitleBar");
         gameElements.set (&theTitleBar);
         gameElements.get (*theTitleBar.setGetElementId ()).draw ();
-        TheGuideBar theGuideBar (areaDimension, L"theGuideBar");
+        TheGuideBar theGuideBar (areaDimension, "theGuideBar");
         gameElements.set (&theGuideBar);
         gameElements.get (*theGuideBar.setGetElementId ()).draw ();
 

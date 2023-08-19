@@ -6,15 +6,15 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #include "Packers.h"
 #include "Packer.h"
 
 
-Actions::Actions () { action = L"NULL"; delay = 2000; };
-Actions::Actions (const std::wstring& prmOne, const unsigned short& prmTwo)
+Actions::Actions () { action = "NULL"; delay = 2000; };
+Actions::Actions (const std::string& prmOne, const unsigned short& prmTwo)
 {
 
     action = prmOne;
@@ -37,8 +37,8 @@ Packer::Packer (coordinateType area)
 
     id = count;
     address = this;
-    faces [0] = L"☻";
-    faces [1] = L"☺";
+    faces [0] = "☻";
+    faces [1] = "☺";
 
     //TODO different packer types can be added
     // random face + actions
@@ -54,9 +54,9 @@ Packer::Packer (coordinateType area)
             process [1] = {faces [1],DELAY_TWO};
             break;
     }
-    process [0] = {L" ",DELAY_ONE};
-    process [2] = {L".",DELAY_THREE};
-    process [3] = {L" ",DELAY_FOUR};
+    process [0] = {" ",DELAY_ONE};
+    process [2] = {".",DELAY_THREE};
+    process [3] = {" ",DELAY_FOUR};
 
     // random start position
     do
@@ -178,7 +178,7 @@ bool& Packer::getDirection (void)
 #ifdef _WIN32
 const WORD& Packer::getMotivation (void)
 #else ifdef __APPLE__
-const std::wstring& Packer::getMotivation (void)
+const std::string& Packer::getMotivation (void)
 #endif
 {
     return motivation;
@@ -203,10 +203,10 @@ void Packer::involve (const unsigned short& instance)
     switch (temp)
     {
         case 1:
-            process [1] = {L"☻", DELAY_TWO};
+            process [1] = {"☻", DELAY_TWO};
             break;
         case 2:
-            process [1] = {L"☺", DELAY_TWO};
+            process [1] = {"☺", DELAY_TWO};
             break;
     }
     temp = (instance % 10) + 1;

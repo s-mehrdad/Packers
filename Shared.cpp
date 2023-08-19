@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 13.10.2018
 /// </summary>
 /// <created>ʆϒʅ, 13.10.2018</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #include "Packers.h"
@@ -32,33 +32,33 @@ void Inserter::colourInserter (const coordinateType& pos)
 #ifdef _WIN32
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
 #else ifdef __APPLE__
-    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
 #endif // _WIN32
 
 };
 
 
-void Inserter::colourInserter (const std::wstring& str, const coordinateType& pos)
+void Inserter::colourInserter (const std::string& str, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
 #ifdef _WIN32
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
-    std::wcout << str;
+    std::cout << str;
 #else ifdef __APPLE__
-    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
-    std::wcout << str;
+    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::cout << str;
 #endif // _WIN32
 
 };
 
 
 #ifdef _WIN32
-void Inserter::colourInserter (const std::wstring& str, const WORD& colour)
+void Inserter::colourInserter (const std::string& str, const WORD& colour)
 {
 
     SetConsoleTextAttribute (*consoleOutput, colour /*| B_GREEN*/);
-    std::wcout << str;
+    std::cout << str;
 
 };
 
@@ -69,50 +69,50 @@ void Inserter::colourInserter (const wchar_t& chr, const WORD& colour, const coo
     lastInsertStartPosition = pos;
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
     SetConsoleTextAttribute (*consoleOutput, colour /*| B_GREEN*/);
-    std::wcout << chr;
+    std::cout << chr;
 
 };
 
 
-void Inserter::colourInserter (const std::wstring& str, const WORD& colour, const coordinateType& pos)
+void Inserter::colourInserter (const std::string& str, const WORD& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
     SetConsoleCursorPosition (*consoleOutput, COORD {static_cast<short>(pos.x), static_cast<short>(pos.y)});
     SetConsoleTextAttribute (*consoleOutput, colour /*| B_GREEN*/);
-    std::wcout << str;
+    std::cout << str;
 
 };
 
 
 #else ifdef __APPLE__
-void Inserter::colourInserter (const std::wstring& str, const std::wstring& colour)
+void Inserter::colourInserter (const std::string& str, const std::string& colour)
 {
 
-    std::wcout << colour;
-    std::wcout << str;
+    std::cout << colour;
+    std::cout << str;
 
 };
 
 
-void Inserter::colourInserter (const wchar_t& chr, const std::wstring& colour, const coordinateType& pos)
+void Inserter::colourInserter (const wchar_t& chr, const std::string& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
-    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
-    std::wcout << colour;
-    std::wcout << chr;
+    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::cout << colour;
+    std::cout << chr;
 
 };
 
 
-void Inserter::colourInserter (const std::wstring& str, const std::wstring& colour, const coordinateType& pos)
+void Inserter::colourInserter (const std::string& str, const std::string& colour, const coordinateType& pos)
 {
 
     lastInsertStartPosition = pos;
-    std::wcout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
-    std::wcout << colour;
-    std::wcout << str;
+    std::cout << "\x1b[" << std::to_string (pos.y) << ";" << std::to_string (pos.x) << "H";
+    std::cout << colour;
+    std::cout << str;
 
 };
 #endif // _WIN32
@@ -125,28 +125,28 @@ void Inserter::clear ()
     coordinateType zero {0,0};
 
     //#ifdef _WIN32
-    std::wstring strTemp {L""};
+    std::string strTemp {""};
     //#else ifdef __APPLE__
-    //    std::wstring strTemp {""};
+    //    std::string strTemp {""};
     //#endif // _WIN32
 
-    for (unsigned char i = 0; i <= SCREEN_W; i += 10)
+    for (int i = 0; i <= SCREEN_W; i += 10)
     {
 #ifdef _WIN32
-        strTemp += L"           ";
+        strTemp += "           ";
 #else ifdef __APPLE__
-        strTemp += L"           ";
+        strTemp += "           ";
 #endif // _WIN32
     }
 
-    for (unsigned char i = 0; i <= SCREEN_H; i++)
+    for (int i = 0; i <= SCREEN_H; i++)
     {
         //        colourInserter(strTemp, temp);
         colourInserter (strTemp, B_BLACK, temp);
         temp.y++;
     }
-    //for ( unsigned char i = 0; i <= SCREEN_H + ( SCREEN_H / 3 ); i++ )
-    //    std::wcout << strTemp;
+    //for ( int i = 0; i <= SCREEN_H + ( SCREEN_H / 3 ); i++ )
+    //    std::cout << strTemp;
     colourInserter (zero);
 
 }
@@ -158,25 +158,25 @@ Loading::Loading (const unsigned char& mode, coordinateType area)
 
     // set
 #ifdef _WIN32
-    std::wstring str {L"LOADING# "};
+    std::string str {"LOADING# "};
 #else ifdef __APPLE__
-    std::wstring str {"LOADING# "};
+    std::string str {"LOADING# "};
 #endif // _WIN32
     unsigned char i {0};
-    for (char element : str)
+    for (int element : str)
     {
         characters [i] = element;
         ++i;
     }
 #ifdef _WIN32
-    copyWrite = L"  ©: ʆϒʅ"; // usable in true type fonts
-    copyWrite = L"  ©: }Y{";
+    copyWrite = "  ©: ʆϒʅ"; // usable in true type fonts
+    copyWrite = "  ©: }Y{";
     colourOne = B_bBLUE | F_bWHITE;
     colourTwo = B_BLACK | F_bGREEN;
     colourThree = B_BLACK | F_bWHITE;
 #else ifdef __APPLE__
-    copyWrite = L"  ©: ʆϒʅ"; // usable in true type fonts
-    copyWrite = L"  ©: }Y{";
+    copyWrite = "  ©: ʆϒʅ"; // usable in true type fonts
+    copyWrite = "  ©: }Y{";
     colourOne = B_bBLUE;
     colourTwo = B_BLACK;
     colourThree = B_BLACK;
@@ -196,13 +196,13 @@ void Loading::inserter ()
 {
 
     coordinateType position {startPoint};
-    for (unsigned char i = 0; i < 7; i++)
+    for (int i = 0; i < 7; i++)
     {
         colourInserter (characters [i], colourOne, position);
         std::this_thread::sleep_for (std::chrono::milliseconds (100 * speed));
         position.x += 1;
     }
-    for (unsigned char i = 1; i <= 3; i++)
+    for (int i = 1; i <= 3; i++)
     {
         colourInserter (characters [7], colourTwo, position);
         std::this_thread::sleep_for (std::chrono::milliseconds (150 * speed));

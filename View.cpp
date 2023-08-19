@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 09.06.2022</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 
@@ -149,7 +149,7 @@ void View::setScreen (short width, short height, short left, short top)
 
     //consoleScreenInfoEx.ColorTable [0] = { 0x006368C2 };
     //consoleScreenInfoEx.ColorTable [0] = RGB ( 99, 104, 194 );
-    //for (char i = 1; i < 16; i++)
+    //for (int i = 1; i < 16; i++)
     //{
     //  consoleScreenInfoEx.ColorTable [i] = { 0x00000000 };
     //}
@@ -169,8 +169,8 @@ void View::setScreen (short width, short height, short left, short top)
     //result = MoveWindow ( viewConsoleWindow, left, top, width * 5, height * 10, true );
 
 #else ifdef __APPLE__
-    std::wcout << "\x1b[3;" << std::to_string (top) << ";" << std::to_string (left) << "t";
-    std::wcout << "\x1b[8;" << std::to_string (height) << ";" << std::to_string (width) << "t";
+    std::cout << "\x1b[3;" << std::to_string (top) << ";" << std::to_string (left) << "t";
+    std::cout << "\x1b[8;" << std::to_string (height) << ";" << std::to_string (width) << "t";
 #endif // _WIN32
 
 };
@@ -199,9 +199,9 @@ void View::setView (unsigned int codec, bool cursor)
 
 
 #ifdef _WIN32
-void View::setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
+void View::setFont (std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour)
 #else ifdef __APPLE__
-void View::setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, std::wstring colour)
+void View::setFont (std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour)
 #endif // _WIN32
 {
 
@@ -219,7 +219,7 @@ void View::setFont (std::wstring fontName, unsigned char fontX, unsigned char fo
         consoleFontInfo.cbSize = sizeof (consoleFontInfo);
         consoleFontInfo.dwFontSize = COORD {fontX, fontY};
 
-        for (unsigned char i = 0; i <= fontName.size (); i++)
+        for (int i = 0; i <= fontName.size (); i++)
         {
             consoleFontInfo.FaceName [i] = fontName [i];
             //b.pop_back ();
@@ -254,7 +254,7 @@ void View::setFont (std::wstring fontName, unsigned char fontX, unsigned char fo
     }
 
 #else ifdef __APPLE__
-    std::wcout << E_cursorOFF;
+    std::cout << E_cursorOFF;
 #endif // _WIN32
 
 };

@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef PACKER_H
@@ -18,10 +18,10 @@
 
 struct Actions
 {
-    std::wstring action;
+    std::string action;
     unsigned short delay;
     Actions ();
-    Actions (const std::wstring&, const unsigned short&);
+    Actions (const std::string&, const unsigned short&);
 
 };
 
@@ -31,15 +31,15 @@ class Packer :public Inserter
 private:
     unsigned char id;
     Packer* address;
-    std::wstring faces [2];
-    std::wstring* currentFace; // TODO for use in the tale
+    std::string faces [2];
+    std::string* currentFace; // TODO for use in the tale
     Actions process [4];
     coordinateType position;
     bool direction;
 #ifdef _WIN32
     WORD motivation;
 #else ifdef __APPLE__
-    std::wstring motivation;
+    std::string motivation;
 #endif
     unsigned char aspiration;
     unsigned char mood;
@@ -53,7 +53,7 @@ public:
 #ifdef _WIN32
     const WORD& getMotivation (void);
 #else ifdef __APPLE__
-    const std::wstring& getMotivation (void);
+    const std::string& getMotivation (void);
 #endif
     const unsigned char& getAspiration (void);
     void involve (const unsigned short&);

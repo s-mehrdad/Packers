@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef INFOBARS_H
@@ -20,16 +20,16 @@ class TheTitleBar :public GameElement, Inserter
 {
 private:
     short elementID;
-    std::wstring elementName;
+    std::string elementName;
 
     short firstInScene;
-    std::wstring titleSentence;
+    std::string titleSentence;
 
     coordinateType startPoints [2];
     short inRow;
-    std::wstring floatedTo;
+    std::string floatedTo;
 public:
-    TheTitleBar (coordinateType areaGrid, std::wstring elementName); //parameter: area dimension
+    TheTitleBar (coordinateType areaGrid, std::string elementName); //parameter: area dimension
     void setBase (void);
     void draw (void);
 };
@@ -39,18 +39,18 @@ class TheGuideBar :public GameElement, Inserter
 {
 private:
     short elementID;
-    std::wstring elementName;
+    std::string elementName;
 
     short firstInScene;
 
-    std::wstring signs [3];
-    std::wstring guides [3];
+    std::string signs [3];
+    std::string guides [3];
 
     coordinateType startPoints [2];
     short inRow;
-    std::wstring floatedTo;
+    std::string floatedTo;
 public:
-    TheGuideBar (coordinateType areaGrid, std::wstring elementName); //parameter: area dimension
+    TheGuideBar (coordinateType areaGrid, std::string elementName); //parameter: area dimension
     void setBase (void);
     void draw (void);
 };

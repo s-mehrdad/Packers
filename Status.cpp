@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #include "Packers.h"
@@ -16,21 +16,21 @@
 Status::Status (const unsigned char& age, coordinateType area)
 {
 
-    state = L".: demo ^.^ :.";
-    title = L"status ^,^";
+    state = ".: demo ^.^ :.";
+    title = "status ^,^";
 
     pointState = {short (area.x + 2), 1};
     pointTitle = {short (area.x + 2), 3};
 
-    otherString [0] = L"packers:";
-    otherString [1] = L"age:";
-    otherString [2] = L"resources->";
-    otherString [3] = L"healthy:";
-    otherString [4] = L"renewing:";
-    otherString [5] = L"vanished:";
-    otherString [6] = L"packages->";
-    otherString [7] = L"have:";
-    otherString [8] = L"need:";
+    otherString [0] = "packers:";
+    otherString [1] = "age:";
+    otherString [2] = "resources->";
+    otherString [3] = "healthy:";
+    otherString [4] = "renewing:";
+    otherString [5] = "vanished:";
+    otherString [6] = "packages->";
+    otherString [7] = "have:";
+    otherString [8] = "need:";
     otherPoints [0] = {short (area.x + 4), 5};
     otherPoints [1] = {short (area.x + 4), 7};
     otherPoints [2] = {short (area.x + 4), 10};
@@ -43,11 +43,11 @@ Status::Status (const unsigned char& age, coordinateType area)
 
     packersState = 0;
     agesIdentifier = age;
-    agesStrings [0] = L"   Stone";
-    agesStrings [1] = L"   Middle";
-    agesStrings [2] = L"   Advanced";
-    agesStrings [3] = L"   Hollow";
-    agesStrings [4] = L"   Dirty";
+    agesStrings [0] = "   Stone";
+    agesStrings [1] = "   Middle";
+    agesStrings [2] = "   Advanced";
+    agesStrings [3] = "   Hollow";
+    agesStrings [4] = "   Dirty";
 
     healthyState = 0;
     renewedState = 0;
@@ -67,7 +67,7 @@ Status::Status (const unsigned char& age, coordinateType area)
     coordinateType coordinate {otherPoints [0]};
     colourInserter (otherString [0], F_bPURPLE, coordinate);
     coordinate.x += 9;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
 
     coordinate = otherPoints [1];
     colourInserter (otherString [1], F_bPURPLE, coordinate);
@@ -79,29 +79,29 @@ Status::Status (const unsigned char& age, coordinateType area)
     colourInserter (otherString [3], F_GREEN, coordinate);
     coordinate.x += 3;
     coordinate.y += 1;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
     coordinate = otherPoints [4];
     colourInserter (otherString [4], F_YELLOW, coordinate);
     coordinate.x += 3;
     coordinate.y += 1;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
     coordinate = otherPoints [5];
     colourInserter (otherString [5], F_bRED, coordinate);
     coordinate.x += 3;
     coordinate.y += 1;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
 
     colourInserter (otherString [6], F_bWHITE, otherPoints [6]);
     coordinate = otherPoints [7];
     colourInserter (otherString [7], F_bPURPLE, coordinate);
     coordinate.x += 3;
     coordinate.y += 1;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
     coordinate = otherPoints [8];
     colourInserter (otherString [8], F_bPURPLE, coordinate);
     coordinate.x += 3;
     coordinate.y += 1;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
     //TODO add: random need setter
 };
 
@@ -112,7 +112,7 @@ void Status::set (const unsigned short& count)
     coordinateType coordinate {otherPoints [0]};
     coordinate.x += 9;
     packersState = count;
-    colourInserter (L"", F_CYAN, coordinate);
+    colourInserter ("", F_CYAN, coordinate);
 
 }
 
@@ -132,7 +132,7 @@ void Status::setter (const unsigned char& age)
     // update complete the state setter
     coordinateType coordinate {otherPoints [1]};
     coordinate.y += 1;
-    colourInserter (L"            ", F_CYAN, coordinate);
+    colourInserter ("            ", F_CYAN, coordinate);
     colourInserter (agesStrings [age], F_CYAN, coordinate);
 
 };
@@ -143,6 +143,6 @@ void Status::setPackersState (void)
 
     coordinateType coordinate {otherPoints [0]};
     coordinate.x += 9;
-    colourInserter (std::to_wstring (packersState), F_CYAN, coordinate);
+    colourInserter (std::to_string (packersState), F_CYAN, coordinate);
 
 }

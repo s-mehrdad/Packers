@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 14.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 14.06.2022</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #include "Packers.h"
@@ -52,7 +52,7 @@ short*& GameElement::setGetElementId (void)
 };
 
 
-std::wstring*& GameElement::setGetElementName (void)
+std::string*& GameElement::setGetElementName (void)
 {
 
     return elementName;
@@ -60,7 +60,7 @@ std::wstring*& GameElement::setGetElementName (void)
 };
 
 
-short*& GameElement::setGetsceneNumber (void)
+short*& GameElement::setGetSceneNumber (void)
 {
 
     return sceneNumber;
@@ -84,7 +84,7 @@ short*& GameElement::setGetElementRow (void)
 };
 
 
-std::wstring*& GameElement::setGetElementFloat (void)
+std::string*& GameElement::setGetElementFloat (void)
 {
 
     return elementFloat;
@@ -108,7 +108,7 @@ void GameElement::release (void)
 GameElements::GameElements (void)
 {
 
-    for (char i = 0; i < 20; i++)
+    for (int i = 0; i < 20; i++)
     {
         gameElements [i] = nullptr;
     }
@@ -124,7 +124,7 @@ GameElements::GameElements (void)
 void GameElements::release (void)
 {
 
-    for (short i = 0; i < elementsCount - 1; i++)
+    for (int i = 0; i < elementsCount - 1; i++)
     {
         gameElements [i] = nullptr;
     }

@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 29.09.2018
 /// </summary>
 /// <created>ʆϒʅ, 29.09.2018</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef AREA_H
@@ -21,38 +21,38 @@ class TheArea : public GameElement, Inserter
 {
 private:
     short elementID;
-    std::wstring elementName;
+    std::string elementName;
     short firstInScene;
     unsigned char currentAge;
-    std::wstring horizontalWall;
-    std::wstring verticalWall;
-    std::wstring edges [4];
+    std::string horizontalWall;
+    std::string verticalWall;
+    std::string edges [4];
 
 #ifdef _WIN32
     WORD wallColour;
 #else ifdef __APPLE__
-    std::wstring wallColour;
+    std::string wallColour;
 #endif // _WIN32
 
     short rows;
     short columns;
     coordinateType startPoints [2];
-    std::wstring resources [3];
+    std::string resources [3];
 
 #ifdef _WIN32
     WORD healthyColour;
     WORD renewedColour;
     WORD vanishedColour;
 #else ifdef __APPLE__
-    std::wstring healthyColour;
-    std::wstring renewedColour;
+    std::string healthyColour;
+    std::string renewedColour;
     std::string vanishedColour;
 #endif // _WIN32
 
     short inRow;
-    std::wstring floatedTo;
+    std::string floatedTo;
 public:
-    TheArea (unsigned char ageArgument, std::wstring elementName);
+    TheArea (unsigned char ageArgument, std::string elementName);
     void setBase (void);
     void draw (void);
     void setter (const unsigned short&, const coordinateType&);

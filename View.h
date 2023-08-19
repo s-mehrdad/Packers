@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 09.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 09.06.2022</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef VIEW_H
@@ -62,9 +62,9 @@ public:
     const bool& isInitialized ();
 
 #ifdef _WIN32
-    void setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, unsigned short colour);
+    void setFont (std::string fontName, unsigned char fontX, unsigned char fontY, unsigned short colour);
 #else ifdef __APPLE__
-    void setFont (std::wstring fontName, unsigned char fontX, unsigned char fontY, std::wstring colour);
+    void setFont (std::string fontName, unsigned char fontX, unsigned char fontY, std::string colour);
 #endif // _WIN32
 
 #ifdef _WIN32

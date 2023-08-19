@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef MENUS_H
@@ -35,9 +35,9 @@ public:
 class dangerAreaMenu :public pMenus, Inserter
 {
 private:
-    std::wstring title;
-    std::wstring options [3];
-    std::wstring selectionSign;
+    std::string title;
+    std::string options [3];
+    std::string selectionSign;
     unsigned char selected;
     bool set {false};
     //coordinateType startPoints [2];
@@ -53,9 +53,9 @@ public:
 class agesMenu :public pMenus, Inserter
 {
 private:
-    std::wstring title;
-    std::wstring options [5];
-    std::wstring selectionSign;
+    std::string title;
+    std::string options [5];
+    std::string selectionSign;
     unsigned char selected;
     bool set {false};
     //coordinateType startPoints [2];
@@ -71,9 +71,9 @@ public:
 class charactersMenu :public pMenus, Inserter
 {
 private:
-    std::wstring title;
-    std::wstring options [2];
-    std::wstring selectionSign;
+    std::string title;
+    std::string options [2];
+    std::string selectionSign;
     unsigned char selected;
     bool set {false};
     //coordinateType startPoints [2];
@@ -89,14 +89,14 @@ public:
 class motivationsMenu :public pMenus, Inserter
 {
 private:
-    std::wstring title;
-    std::wstring options [6];
+    std::string title;
+    std::string options [6];
 #ifdef _WIN32
     WORD colours [6];
 #else ifdef __APPLE__
-    std::wstring colours [6];
+    std::string colours [6];
 #endif
-    std::wstring selectionSign;
+    std::string selectionSign;
     unsigned char selected;
     bool set {false};
     //coordinateType startPoints [2];

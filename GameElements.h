@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 14.06.2022
 /// </summary>
 /// <created>ʆϒʅ, 14.06.2022</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef GAMEELEMENTS_H
@@ -20,23 +20,23 @@ class GameElement
 {
 private:
     short* elementID;
-    std::wstring* elementName;
+    std::string* elementName;
 
     short* sceneNumber;
 
     coordinateType* elementStartPoint;
     short* elementRow;
-    std::wstring* elementFloat; //left, center, right, stretchedH, stretchedV, different
+    std::string* elementFloat; //left, center, right, stretchedH, stretchedV, different
 public:
     GameElement (void);
     GameElement* setGet (void);
     void setElementId (short& elementID);
     short*& setGetElementId (void);
-    std::wstring*& setGetElementName (void);
-    short*& setGetsceneNumber (void);
+    std::string*& setGetElementName (void);
+    short*& setGetSceneNumber (void);
     coordinateType*& setGetElementStartPoint (void);
     short*& setGetElementRow (void);
-    std::wstring*& setGetElementFloat (void);
+    std::string*& setGetElementFloat (void);
     void release (void);
 
     virtual void draw (void) {};

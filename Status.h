@@ -6,7 +6,7 @@
 /// created by Mehrdad Soleimanimajd on 20.06.2019
 /// </summary>
 /// <created>ʆϒʅ, 20.06.2019</created>
-/// <changed>ʆϒʅ, 03.07.2023</changed>
+/// <changed>ʆϒʅ, 19.08.2023</changed>
 // ===========================================================================
 
 #ifndef STATUS_H
@@ -19,18 +19,18 @@
 class Status :public Inserter
 {
 private:
-    std::wstring state;
-    std::wstring title;
+    std::string state;
+    std::string title;
 
     coordinateType pointState;
     coordinateType pointTitle;
 
-    std::wstring otherString [9];
+    std::string otherString [9];
     coordinateType otherPoints [9];
 
     unsigned short packersState;
     unsigned char agesIdentifier;
-    std::wstring agesStrings [5];
+    std::string agesStrings [5];
 
     unsigned int healthyState;
     unsigned int renewedState;
