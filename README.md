@@ -10,17 +10,19 @@ The game is developed using just characters maybe touching the humans's characte
 
 # Getting Started
 1.	Installation process:
-Can be compiled.
-Both Visual Studio and Qt Creator (MinGW compiler under Windows) IDEs have been tested.
+Can be compiled on Windows, MacOs and Linux
+Both Visual Studio and Qt Creator (MinGW compiler under Windows) IDEs have been tested. MacOs Xcode and Cmake under MacOs platform has been used to build too.
 
 2.	Software dependencies:
 Dependent on Windows APIs
+And platform independent ANSI escape characters and APIs.
 
 3.	Latest releases:
-Still no release, just coding and debugging
+First version of Demo is released on 24th of June 2022.
 
 4.	API references
 Windows's console: screen, colour and font manipulations APIs.
+Platform independent ANSI coloring and terminal APIs.
 
 # Build and Test
 If you are a beginner, use Visual Studio or know what you are doing.
@@ -38,4 +40,4 @@ Compile using CMake.
 I appreciate any contribution from anyone, who sees that the project deserves his precious time.
 
 # Copyright
-This is not a freeware and the idea itself, the source code and the literature within is copyrighted. The Source code only can just be used for teaching purposes and in limited ways. For any other uses the creator's written permission and acknowledgment is obligatory.
+Refer to license file provided within SOFTWARE itself.
